@@ -335,7 +335,7 @@ for selinuxvariant in %{selinux_variants}; do
 	%{_sbindir}/semodule -s ${selinuxvariant} -i %{_datadir}/selinux/${selinuxvariant}/bitcore.pp &> /dev/null || :
 done
 %{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 40332
-%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 40333
+%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 8555
 %{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 140332
 %{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 140333
 %{_sbindir}/fixfiles -R bitcore-server restore &> /dev/null || :
@@ -354,7 +354,7 @@ fi
 if [ $1 -eq 0 ]; then
 	if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
 	%{_sbindir}/semanage port -d -p tcp 40332
-	%{_sbindir}/semanage port -d -p tcp 40333
+	%{_sbindir}/semanage port -d -p tcp 8555
 	%{_sbindir}/semanage port -d -p tcp 140332
 	%{_sbindir}/semanage port -d -p tcp 140333
 	for selinuxvariant in %{selinux_variants}; do
