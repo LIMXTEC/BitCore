@@ -1,47 +1,113 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+*.tar.gz
 
-# Folder config file
-Desktop.ini
+*.exe
+src/bitcore
+src/bitcored
+src/bitcore-cli
+src/bitcore-tx
+src/test/test_bitcore
+src/test/test_bitcore_fuzzy
+src/qt/test/test_bitcore-qt
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# autoreconf
+Makefile.in
+aclocal.m4
+autom4te.cache/
+build-aux/config.guess
+build-aux/config.sub
+build-aux/depcomp
+build-aux/install-sh
+build-aux/ltmain.sh
+build-aux/m4/libtool.m4
+build-aux/m4/lt~obsolete.m4
+build-aux/m4/ltoptions.m4
+build-aux/m4/ltsugar.m4
+build-aux/m4/ltversion.m4
+build-aux/missing
+build-aux/compile
+build-aux/test-driver
+config.log
+config.status
+configure
+libtool
+src/config/bitcore-config.h
+src/config/bitcore-config.h.in
+src/config/stamp-h1
+share/setup.nsi
+share/qt/Info.plist
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+src/univalue/gen
 
-# Windows shortcuts
-*.lnk
+src/qt/*.moc
+src/qt/moc_*.cpp
+src/qt/forms/ui_*.h
 
-# =========================
-# Operating System Files
-# =========================
+src/qt/test/moc*.cpp
 
-# OSX
-# =========================
+.deps
+.dirstamp
+.libs
+.*.swp
+*.*~*
+*.bak
+*.rej
+*.orig
+*.pyc
+*.o
+*.o-*
+!*.patch
+*.a
+*.pb.cc
+*.pb.h
 
+*.log
+*.trs
+*.dmg
+
+*.json.h
+*.raw.h
+
+#libtool object files
+*.lo
+*.la
+
+# Compilation and Qt preprocessor part
+*.qm
+Makefile
+bitcore-qt
+BitCore-Qt.app
+
+# Unit-tests
+Makefile.test
+bitcore-qt_test
+src/test/buildenv.py
+
+# Resources cpp
+qrc_*.cpp
+
+# Mac specific
 .DS_Store
-.AppleDouble
-.LSOverride
+build
 
-# Thumbnails
-._*
+#lcov
+*.gcno
+*.gcda
+/*.info
+test_bitcore.coverage/
+total.coverage/
+coverage_percent.txt
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+#build tests
+linux-coverage-build
+linux-build
+win32-build
+qa/pull-tester/tests_config.py
+qa/cache/*
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+!src/leveldb*/Makefile
+!depends/Makefile
+
+/doc/doxygen/
+
+libbitcoreconsensus.pc
+contrib/devtools/split-debug.sh

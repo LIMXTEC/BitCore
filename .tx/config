@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[bitcore.qt-translation-014x]
+file_filter = src/qt/locale/bitcore_<lang>.ts
+source_file = src/qt/locale/bitcore_en.ts
+source_lang = en

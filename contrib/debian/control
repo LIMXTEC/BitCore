@@ -1,0 +1,67 @@
+Source: bitcore
+Section: utils
+Priority: optional
+Maintainer: Jonas Smedegaard +ADw-dr+AEA-jones.dk+AD4-
+Uploaders: Micah Anderson +ADw-micah+AEA-debian.org+AD4-
+Build-Depends: debhelper,
+ devscripts,
+ automake,
+ libtool,
+ bash-completion,
+ libboost-system-dev (+AD4APg- 1.35) +AHw- libboost-system1.35-dev,
+ libdb4.8dev,
+ libssl-dev,
+ pkg-config,
+ libminiupnpc8-dev +AHw- libminiupnpc-dev (+AD4APg- 1.6),
+ libboost-filesystem-dev (+AD4APg- 1.35) +AHw- libboost-filesystem1.35-dev,
+ libboost-program-options-dev (+AD4APg- 1.35) +AHw- libboost-program-options1.35-dev,
+ libboost-thread-dev (+AD4APg- 1.35) +AHw- libboost-thread1.35-dev,
+ libboost-test-dev (+AD4APg- 1.35) +AHw- libboost-test1.35-dev,
+ qt4-qmake,
+ libqt4-dev,
+ libqrencode-dev,
+ libprotobuf-dev, protobuf-compiler,
+ python
+Standards-Version: 3.9.2
+Homepage: https://bitcorecore.org/
+Vcs-Git: git://github.com/bitcore/bitcore.git
+Vcs-Browser: https://github.com/bitcore-project/bitcore-core
+
+Package: bitcored
+Architecture: any
+Depends: +ACQAew-shlibs:Depends+AH0-, +ACQAew-misc:Depends+AH0-
+Description: peer-to-peer network based digital currency - daemon
+ BitCore is an experimental new digital currency that enables instant
+ payments to anyone, anywhere in the world. BitCore uses peer-to-peer
+ technology to operate with no central authority: managing transactions
+ and issuing money are carried out collectively by the network. BitCore Core
+ is the name of the open source software which enables the use of this currency.
+ .
+ This package provides the daemon, bitcored, and the CLI tool
+ bitcore-cli to interact with the daemon.
+
+Package: bitcore-qt
+Architecture: any
+Depends: +ACQAew-shlibs:Depends+AH0-, +ACQAew-misc:Depends+AH0-
+Description: peer-to-peer network based digital currency - Qt GUI
+ BitCore is an experimental new digital currency that enables instant
+ payments to anyone, anywhere in the world. BitCore uses peer-to-peer
+ technology to operate with no central authority: managing transactions
+ and issuing money are carried out collectively by the network. BitCore Core
+ is the name of the open source software which enables the use of this currency.
+ .
+ This package provides BitCore-Qt, a GUI for BitCore based on Qt.
+
+Package: bitcore-tx
+Architecture: any
+Depends: +ACQAew-shlibs:Depends+AH0-, +ACQAew-misc:Depends+AH0-
+Description: peer-to-peer digital currency - standalone transaction tool
+ BitCore is an experimental new digital currency that enables instant
+ payments to anyone, anywhere in the world. BitCore uses peer-to-peer
+ technology to operate with no central authority: managing transactions
+ and issuing money are carried out collectively by the network. BitCore Core
+ is the name of the open source software which enables the use of this currency.
+ .
+ This package provides bitcore-tx, a command-line transaction creation
+ tool which can be used without a bitcore daemon.  Some means of
+ exchanging minimal transaction data with peers is still required.
