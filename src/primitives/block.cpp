@@ -19,7 +19,7 @@ uint256 CBlockHeader::GetHash() const
 
 uint256 CBlockHeader::GetPoWHash() const
 {
-		if(GetBlockTime() >= 1473444000) // BitCore PoW Hardfork, Friday, 09-Sep-16 18:00:00 UTC
+		if(GetBlockTime() >= 1493251200) //04/27/2017 @ 12:00am (UTC)
 		{
 				return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // BitCore TimeTravel
 		}
