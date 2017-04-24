@@ -131,7 +131,7 @@ public:
         pchMessageStart[1] = 0xbe;
         pchMessageStart[2] = 0xb4;
         pchMessageStart[3] = 0xd9;
-        nDefaultPort = 8333;
+        nDefaultPort = 8555;
         nPruneAfterHeight = 100000;
 		//Time Nonce ?
 		// genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 50 * COIN); // BitCore 1492973331, 3716037
