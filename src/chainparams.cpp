@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The BitCore Core developers
-// Distributed under the MIT software license, see the accompanying
+// Distributed under  the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "chainparams.h"
@@ -49,7 +49,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  *   vMerkleTree: 4a5e1e
  */
  
- /*
+ /**
 amond-MAC-B3 23/Apr/2017" -t 1492973331
 04ffff001d010438506f77657264652062792042697473656e642d4575726f7065636f696e2d4469616d6f6e642d4d41432d42332032332f4170722f32303137
 algorithm: scrypt
@@ -121,7 +121,7 @@ public:
         consensus.nMinimumChainWork = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x604148281e5c4b7f2487e5d03cd60d8e6f69411d613f6448034508cea52e9574"); //416569
+        consensus.defaultAssumeValid = uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb"); //416569
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -141,9 +141,9 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x1669526520b4e037738825c5f09c01c8f6ef6a3a5ee552e65e6d0141507987c7"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-		vSeeds.push_back(CDNSSeedData("188.68.52.172", "188.68.52.172", true));
-		vSeeds.push_back(CDNSSeedData("37.120.186.85", "37.120.186.85", true));
-		vSeeds.push_back(CDNSSeedData("37.120.190.76", "37.120.190.76", true));
+		vSeeds.push_back(CDNSSeedData("188.68.52.172", "188.68.52.172"));
+		vSeeds.push_back(CDNSSeedData("37.120.186.85", "37.120.186.85"));
+		vSeeds.push_back(CDNSSeedData("37.120.190.76", "37.120.190.76"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -214,7 +214,7 @@ public:
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000039fa7a2354aa8");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x604148281e5c4b7f2487e5d03cd60d8e6f69411d613f6448034508cea52e9574"); //416569
+        consensus.defaultAssumeValid = uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb"); //2
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
