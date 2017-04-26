@@ -1,6 +1,6 @@
 BitCore Core version 0.9.0 is now available from:
 
-  https://bitcore.org/bin/0.9.0/
+  http://bitcore.cc/bin/0.9.0/
 
 This is a new major version release, bringing both new features and
 bug fixes.

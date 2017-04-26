@@ -5,7 +5,7 @@ Setup
 ---------------------
 BitCore Core is the original BitCore client and it builds the backbone of the network. However, it downloads and stores the entire history of BitCore transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
-To download BitCore Core, visit [bitcore.org](https://bitcore.org).
+To download BitCore Core, visit [bitcore.org](http://bitcore.cc).
 
 Running
 ---------------------
