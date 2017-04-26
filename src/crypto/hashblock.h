@@ -13,7 +13,7 @@
 #include "sph_shavite.h"
 #include "sph_simd.h"
 #include "sph_echo.h"
-#include "util.h"
+//#include "util.h"
 #include <algorithm>    // std::next_permutation
 
 #ifndef QT_NO_DEBUG
