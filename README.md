@@ -3,7 +3,7 @@ BitCore Core integration/staging tree
 
 [![Build Status](https://travis-ci.org/bitcore-project/bitcore.svg?branch=master)](https://travis-ci.org/bitcore-project/bitcore)
 
-https://bitcore.org
+https://bitcore.cc
 
 What is BitCore?
 ----------------
