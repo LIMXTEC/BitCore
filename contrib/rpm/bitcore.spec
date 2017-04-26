@@ -20,8 +20,8 @@ Summary:	Peer to Peer Cryptographic Currency
 
 Group:		Applications/System
 License:	MIT
-URL:		http://bitcore.cc/
-Source0:	http://bitcore.cc/bin/bitcore-core-%{version}/bitcore-%{version}.tar.gz
+URL:		https://bitcore.org/
+Source0:	https://bitcore.org/bin/bitcore-core-%{version}/bitcore-%{version}.tar.gz
 Source1:	http://download.oracle.com/berkeley-db/db-%{bdbv}.NC.tar.gz
 
 Source10:	https://raw.githubusercontent.com/bitcore/bitcore/v%{version}/contrib/debian/examples/bitcore.conf

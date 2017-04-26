@@ -22,7 +22,7 @@ TMPFILE="hashes.tmp"
 
 SIGNATUREFILENAME="SHA256SUMS.asc"
 RCSUBDIR="test"
-BASEDIR="http://bitcore.cc/bin/"
+BASEDIR="https://bitcore.org/bin/"
 VERSIONPREFIX="bitcore-core-"
 RCVERSIONSTRING="rc"
 

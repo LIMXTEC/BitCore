@@ -1,6 +1,6 @@
 BitCore Core version 0.13.1 is now available from:
 
-  <http://bitcore.cc/bin/bitcore-core-0.13.1/>
+  <https://bitcore.org/bin/bitcore-core-0.13.1/>
 
 This is a new minor version release, including activation parameters for the
 segwit softfork, various bugfixes and performance improvements, as well as

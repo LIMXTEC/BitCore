@@ -1,6 +1,6 @@
 BitCore Core version 0.9.2 is now available from:
 
-  http://bitcore.cc/bin/0.9.2/
+  https://bitcore.org/bin/0.9.2/
 
 This is a new minor version release, bringing mostly bug fixes and some minor
 improvements. OpenSSL has been updated because of a security issue (CVE-2014-0224).

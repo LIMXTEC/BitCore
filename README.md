@@ -3,7 +3,7 @@ BitCore Core integration/staging tree
 
 [![Build Status](https://travis-ci.org/bitcore-project/bitcore.svg?branch=master)](https://travis-ci.org/bitcore-project/bitcore)
 
-http://bitcore.cc
+https://bitcore.org
 
 What is BitCore?
 ----------------
@@ -15,7 +15,7 @@ out collectively by the network. BitCore Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the BitCore Core software, see [http://bitcore.cc](http://bitcore.cc).
+the BitCore Core software, see [https://bitcore.org](https://bitcore.org).
 
 License
 -------
