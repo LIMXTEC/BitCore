@@ -1,6 +1,6 @@
 BitCore Core version 0.9.4 is now available from:
 
-  https://bitcore.org/bin/0.9.4/
+  http://bitcore.cc/bin/0.9.4/
 
 This is a new minor version release, bringing only bug fixes and updated
 translations. Upgrading to this release is recommended.
@@ -25,7 +25,7 @@ various operating system maintainers. Review by Gregory Maxwell determined that
 this update is incompatible with the BitCore system and could lead to consensus
 forks.
 
-BitCore Core released binaries from https://bitcore.org are unaffected,
+BitCore Core released binaries from http://bitcore.cc are unaffected,
 as are any built with the gitian deterministic build system.
 
 However, if you are running either

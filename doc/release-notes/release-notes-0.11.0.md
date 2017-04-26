@@ -1,6 +1,6 @@
 BitCore Core version 0.11.0 is now available from:
 
-  <https://bitcore.org/bin/bitcore-core-0.11.0/>
+  <http://bitcore.cc/bin/bitcore-core-0.11.0/>
 
 This is a new major version release, bringing both new features and
 bug fixes.
