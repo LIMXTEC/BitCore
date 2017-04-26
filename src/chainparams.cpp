@@ -90,32 +90,32 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 210000;
-        consensus.BIP34Height = 0; // BitCore BIP34 height 
+        consensus.BIP34Height = 2; // BitCore BIP34 height 
         consensus.BIP34Hash = uint256S("604148281e5c4b7f2487e5d03cd60d8e6f69411d613f6448034508cea52e9574"); // BitCore BIP34 Hash
-        consensus.BIP65Height = 0; // c49bfa33dd4d76a6a05f93c1eb4310993ce00c7a8a9ee23c76164ddc2eecbdef
-        consensus.BIP66Height = 0; // 83703951207fcf9e22516f97603f8621299de483e85d85e8a86f7b0fd32717dc
+        consensus.BIP65Height = 2; // c49bfa33dd4d76a6a05f93c1eb4310993ce00c7a8a9ee23c76164ddc2eecbdef
+        consensus.BIP66Height = 2; // 83703951207fcf9e22516f97603f8621299de483e85d85e8a86f7b0fd32717dc
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // BitCore PoW Limit
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // BitCore 3.5 days
         consensus.nPowTargetSpacing = 2.5 * 60; // BitCore 2.5 minutes
 
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1512; // 95% of 2016
+        consensus.nRuleChangeActivationThreshold = 108; // 95% of 2016
 //Limx DevMinimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period, (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments. 
-        consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.nMinerConfirmationWindow = 2; //2016 nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1492973500; // January 1, 2008
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 2577836800; // December 31, 2008
 
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1492973331; // April 23, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1577836800; // 01/01/2020 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1492973500; // 1492973331 April 23, 2017
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 2577836800; // 01/01/2020 @ 12:00am (UTC)
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1492973331; // April 23, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1577836800; // 01/01/2020 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1492973500; // 1492973331 April 23, 2017
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 2577836800; // 01/01/2020 @ 12:00am (UTC)
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
