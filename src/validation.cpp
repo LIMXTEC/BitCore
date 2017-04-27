@@ -85,8 +85,9 @@ CTxMemPool mempool(::minRelayTxFee);
 
 static void CheckBlockIndex(const Consensus::Params& consensusParams);
 
-/** Constant stuff for coinbase transactions we create: */
-CScript COINBASE_FLAGS;
+/** Constant stuff for
+base transactions we create: */
+CScriptBASE_FLAGS;
 
 const std::string strMessageMagic = "BitCore Signed Message:\n";
 
@@ -1173,8 +1174,8 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 	// Premine for Swap
     //210000 = 10500000 Coin (50 Coin) 
     //210000 =  5250000 Coin (25 Coin)
-	// 43218 =   540225 Coin (12.5 Coin)
-	//463218 = 16290255 Coin Limx Dev 23.04.2017
+    // 42987 =   540225 Coin (12.5 Coin)
+    //462987 = 1628733,5 Coin Limx Dev 23.04.2017
 	int Intervalblock = consensusParams.nSubsidyHalvingInterval;
 	int Blocknumber = 167013;
     if(nHeight <= Blocknumber) {return nSubsidy;}
