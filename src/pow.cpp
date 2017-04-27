@@ -140,7 +140,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 }
 
 //For Tet POW
-unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
+unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     return DUAL_KGW3(pindexLast, params, pblock);
        // return CalculateNextWorkRequired_V2(pindexLast, nFirstBlockTime, params); // Machinecoin: Digishield retargeting (V2)
