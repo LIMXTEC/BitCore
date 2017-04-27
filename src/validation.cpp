@@ -1174,7 +1174,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 	// Premine for Swap
     //210000 = 10500000 Coin (50 Coin) 
     //210000 =  5250000 Coin (25 Coin)
-    // 42987 =   540225 Coin (12.5 Coin)
+    // 42987 =  537337,5 Coin (12.5 Coin)
     //462987 = 1628733,5 Coin Limx Dev 23.04.2017
 	int Intervalblock = consensusParams.nSubsidyHalvingInterval;
 	int Blocknumber = 167013;
