@@ -85,9 +85,8 @@ CTxMemPool mempool(::minRelayTxFee);
 
 static void CheckBlockIndex(const Consensus::Params& consensusParams);
 
-/** Constant stuff for
-base transactions we create: */
-CScriptBASE_FLAGS;
+/** Constant stuff for base transactions we create: */
+CScript COINBASE_FLAGS;
 
 const std::string strMessageMagic = "BitCore Signed Message:\n";
 
