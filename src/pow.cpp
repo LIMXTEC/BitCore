@@ -141,9 +141,9 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
- 
+    // Option for later
     // Until Block 5K only the DK3
-	if (pindexLast->nHeight+1 < 5000)
+    //	if (pindexLast->nHeight+1 < 5000)
 	return DUAL_KGW3(pindexLast, params, pblock);
 	// After then use we the Bitcoin standard Algo if the last block found under 6h was
 	
