@@ -114,6 +114,8 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
 	//BitBreak BitSend
 	// Reduce difficulty if current block generation time has already exceeded maximum time limit.
 	// Diffbreak 12 Hours
+	// The big diffbreak is disable after block 5000
+	if (BlockReading->nHeight < 5000){
 	const int nLongTimeLimit   = 12 * 60 * 60; 
     if(kgwdebug)
 	{		
@@ -126,6 +128,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
 	{
 		bnNew = bnPowLimit;
        	if(kgwdebug)LogPrintf("<BSD> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+	}
 	}
 
     if (bnNew > bnPowLimit) {
