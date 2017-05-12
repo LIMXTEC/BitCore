@@ -146,7 +146,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     //	if (pindexLast->nHeight+1 < 5000)
 	return DUAL_KGW3(pindexLast, params, pblock);
 	// After then use we the Bitcoin standard Algo if the last block found under 6h was
-	
+	/*
 	const int nLongTimeLimit2   = 6 * 60 * 60; 
 	if ((pblock-> nTime - pindexLast->GetBlockTime()) < nLongTimeLimit2)
 	{
@@ -185,9 +185,10 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 	}
 	else
 	{
-    //If the chain 6 hours stucks then use we the DK3 for one Block
+        //If the chain 6 hours stucks then use we the DK3 for one Block
 	return DUAL_KGW3(pindexLast, params, pblock);	
 	}
+	*/
 }
 
 //For Tet POW
