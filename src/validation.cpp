@@ -1175,19 +1175,28 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
     //210000 =  5250000 Coin (25 Coin)
     // 42987 =  537337,5 Coin (12.5 Coin)
     //462987 = 1628733,5 Coin Limx Dev 23.04.2017
-	int Intervalblock = consensusParams.nSubsidyHalvingInterval;
+	int intervalblock = consensusParams.nSubsidyHalvingInterval;
+	int fork1 = 10000;
+    int	block_reward_change_f4 = 4; 
 	int Blocknumber = 167013;
+	if(nHeight <= fork1)
+	{
     if(nHeight <= Blocknumber) {return nSubsidy;}
-    if(nHeight <= Blocknumber+Intervalblock){nSubsidy = nSubsidy/2 * COIN; return nSubsidy;} 
-    if(nHeight <= Blocknumber+(Intervalblock*2)){nSubsidy = nSubsidy/4 * COIN; return nSubsidy;} 
-    if(nHeight <= Blocknumber+(Intervalblock*3)){nSubsidy = nSubsidy/8 * COIN; return nSubsidy;} 
-    if(nHeight <= Blocknumber+(Intervalblock*4)){nSubsidy = nSubsidy/16* COIN; return nSubsidy;} 
-	if(nHeight <= Blocknumber+(Intervalblock*5)){nSubsidy = nSubsidy/32* COIN; return nSubsidy;}
-	if(nHeight <= Blocknumber+(Intervalblock*6)){nSubsidy = nSubsidy/64* COIN; return nSubsidy;}
-	if(nHeight <= Blocknumber+(Intervalblock*7)){nSubsidy = nSubsidy/128* COIN; return nSubsidy;}
-	if(nHeight <= Blocknumber+(Intervalblock*8)){nSubsidy = nSubsidy/256* COIN; return nSubsidy;} 	
+	}
+	else
+	{
+	if(nHeight <= Blocknumber) {return nSubsidy / block_reward_change_f4;}
+    if(nHeight <= Blocknumber+intervalblock){nSubsidy = nSubsidy/2 * COIN; return nSubsidy / block_reward_change_f4;} 
+    if(nHeight <= Blocknumber+(intervalblock*2)){nSubsidy = nSubsidy/4 * COIN; return nSubsidy / block_reward_change_f4;} 
+    if(nHeight <= Blocknumber+(intervalblock*3)){nSubsidy = nSubsidy/8 * COIN; return nSubsidy / block_reward_change_f4;} 
+    if(nHeight <= Blocknumber+(intervalblock*4)){nSubsidy = nSubsidy/16* COIN; return nSubsidy / block_reward_change_f4;} 
+	if(nHeight <= Blocknumber+(intervalblock*5)){nSubsidy = nSubsidy/32* COIN; return nSubsidy / block_reward_change_f4;}
+	if(nHeight <= Blocknumber+(intervalblock*6)){nSubsidy = nSubsidy/64* COIN; return nSubsidy / block_reward_change_f4;}
+	if(nHeight <= Blocknumber+(intervalblock*7)){nSubsidy = nSubsidy/128* COIN; return nSubsidy / block_reward_change_f4;}
+	if(nHeight <= Blocknumber+(intervalblock*8)){nSubsidy = nSubsidy/256* COIN; return nSubsidy / block_reward_change_f4;} 	
 	nSubsidy = nSubsidy/512* COIN; // Last Step 1280 BTX per Year for every?? 0.02441 BTX
-	return nSubsidy;
+	return nSubsidy / block_reward_change_f4;
+	}
 
 	
 	//if (halvings >= 64)
