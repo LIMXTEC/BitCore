@@ -1,17 +1,3 @@
-BitCore Core version 0.14.0 is now available from:
-
-  <http://bitcore.cc/bin/bitcore-core-0.14.0/>
-
-This is a new minor version release, including various bugfixes and
-performance improvements, as well as updated translations.
-
-Please report bugs using the issue tracker at github:
-
-  <https://github.com/bitcore-project/bitcore-core/issues>
-
-To receive security and update notifications, please subscribe to:
-
-  <https://bitcorecore.org/en/list/announcements/join/>
 
 Compatibility
 ==============
@@ -34,8 +20,8 @@ RPC changes
 -----------
 
 The first positional argument of `createrawtransaction` was renamed.
-This interface change breaks compatibility with 0.14.0, when the named
-arguments functionality, introduced in 0.14.0, is used.
+This interface change breaks compatibility with 0.14.1, when the named
+arguments functionality, introduced in 0.14.1, is used.
 
 
 Mining
@@ -51,7 +37,7 @@ Since many miners are now including the segwit commitment this concern
 no longer applies.
 
 
-0.14.0 Change log
+0.14.1 Change log
 =================
 
 Detailed release notes follow. This overview includes changes that affect

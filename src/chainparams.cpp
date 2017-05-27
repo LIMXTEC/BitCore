@@ -185,18 +185,18 @@ public:
     CTestNetParams() {
         strNetworkID = "test";
         consensus.nSubsidyHalvingInterval = 210000; // BitCore number of blocks until halving on 1st Nov. 2016 09:17:52 PM
-        consensus.BIP34Height = 999999; // BitCore BIP34 height
+        consensus.BIP34Height = 0; // BitCore BIP34 height
         consensus.BIP34Hash = uint256S("5b77f70e30731bbf8c4b6c44cf62170cc559b6015aa9b7988d8d44a30c4a4614"); // BitCore BIP34 Hash
-        consensus.BIP65Height = 999999; // c49bfa33dd4d76a6a05f93c1eb4310993ce00c7a8a9ee23c76164ddc2eecbdef
-        consensus.BIP66Height = 999999; // 83703951207fcf9e22516f97603f8621299de483e85d85e8a86f7b0fd32717dc
+        consensus.BIP65Height = 0; // c49bfa33dd4d76a6a05f93c1eb4310993ce00c7a8a9ee23c76164ddc2eecbdef
+        consensus.BIP66Height = 0; // 83703951207fcf9e22516f97603f8621299de483e85d85e8a86f7b0fd32717dc
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // BitCore PoW Limit
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // BitCore 3.5 days
         consensus.nPowTargetSpacing = 2.5 * 60; // BitCore 2.5 minutes
 
-        consensus.fPowAllowMinDifficultyBlocks = false;
+        consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1916; // BitCore 95% of 2016
-        consensus.nMinerConfirmationWindow = 2016; // BitCore nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 1; // Bitcore Testnet 1% of 2
+        consensus.nMinerConfirmationWindow = 2; // BitCore nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -212,7 +212,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1577836800; // 01/01/2020 @ 12:00am (UTC)
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000039fa7a2354aa8");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb"); //2

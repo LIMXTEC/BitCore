@@ -1,4 +1,4 @@
-BitCore Core 0.14.0
+BitCore Core 0.14.1
 =====================
 
 Setup
