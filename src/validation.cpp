@@ -1178,32 +1178,23 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 	int intervalblock = consensusParams.nSubsidyHalvingInterval;
 	int fork1 = 10000;
     int	block_reward_change_f4 = 4; 
-	int Blocknumber = 167013;
+	int Blocknumber = 167013; //BTC blocks after Snapshot from BTX
+	int BTXFullblock = (42987 + fork1)*4;
+	// 42987 blocks from BTC done with 12.5 BTC, 10000 blocks from prefork with 12.5 BTX
 	if(nHeight <= fork1)
-	{
-    if(nHeight <= Blocknumber) {return nSubsidy;}
-	}
+	    {
+        return nSubsidy;
+	    }
 	else
-	{
-	if(nHeight <= Blocknumber) {return nSubsidy / block_reward_change_f4;}
-    if(nHeight <= Blocknumber+intervalblock){nSubsidy = nSubsidy/2 * COIN; return nSubsidy / block_reward_change_f4;} 
-    if(nHeight <= Blocknumber+(intervalblock*2)){nSubsidy = nSubsidy/4 * COIN; return nSubsidy / block_reward_change_f4;} 
-    if(nHeight <= Blocknumber+(intervalblock*3)){nSubsidy = nSubsidy/8 * COIN; return nSubsidy / block_reward_change_f4;} 
-    if(nHeight <= Blocknumber+(intervalblock*4)){nSubsidy = nSubsidy/16* COIN; return nSubsidy / block_reward_change_f4;} 
-	if(nHeight <= Blocknumber+(intervalblock*5)){nSubsidy = nSubsidy/32* COIN; return nSubsidy / block_reward_change_f4;}
-	if(nHeight <= Blocknumber+(intervalblock*6)){nSubsidy = nSubsidy/64* COIN; return nSubsidy / block_reward_change_f4;}
-	if(nHeight <= Blocknumber+(intervalblock*7)){nSubsidy = nSubsidy/128* COIN; return nSubsidy / block_reward_change_f4;}
-	if(nHeight <= Blocknumber+(intervalblock*8)){nSubsidy = nSubsidy/256* COIN; return nSubsidy / block_reward_change_f4;} 	
-	nSubsidy = nSubsidy/512* COIN; // Last Step 1280 BTX per Year for every?? 0.02441 BTX
-	return nSubsidy / block_reward_change_f4;
-	}
-
-	
-	//if (halvings >= 64)
-    //    return 0;
-    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
-    //nSubsidy >>= halvings;
-    //return nSubsidy;
+	    {
+	    // Our Goal is to have the same amount how BTC
+	    int nSubsidyHalvingInterval2 = 840000;
+	    nSubsidy /= block_reward_change_f4;
+	    int halvings = (nHeight+BTXFullblock) / nSubsidyHalvingInterval2;
+	    if (halvings >= 10) return nSubsidy / 1024;
+	    nSubsidy >>= halvings;
+	    return nSubsidy;
+	    }
 }
 
 bool IsInitialBlockDownload()

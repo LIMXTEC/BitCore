@@ -100,9 +100,9 @@ public:
 
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 108; // Segwit direct online
+        consensus.nRuleChangeActivationThreshold = 250; // Segwit direct online
 //Limx DevMinimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period, (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments. 
-        consensus.nMinerConfirmationWindow = 2; //2016 nPowTargetTimespan / nPowTargetSpacing
+        consensus.nMinerConfirmationWindow = 1000; //2016 nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1492973500; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 2577836800; // December 31, 2008
