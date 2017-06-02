@@ -1178,7 +1178,6 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 	int intervalblock = consensusParams.nSubsidyHalvingInterval;
 	int fork1 = 10000;
     int	block_reward_change_f4 = 4; 
-	int Blocknumber = 167013; //BTC blocks after Snapshot from BTX
 	int BTXFullblock = (42987 + fork1)*4;
 	// 42987 blocks from BTC done with 12.5 BTC, 10000 blocks from prefork with 12.5 BTX
 	if(nHeight <= fork1)
