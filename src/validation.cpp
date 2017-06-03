@@ -2152,10 +2152,12 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
                 if (state == THRESHOLD_ACTIVE) {
                     std::string strWarning = strprintf(_("Warning: unknown new rules activated (versionbit %i)"), bit);
                     SetMiscWarning(strWarning);
+		/*
                     if (!fWarned) {
                         AlertNotify(strWarning);
                         fWarned = true;
                     }
+		    */
                 } else {
                     warningMessages.push_back(strprintf("unknown new rules are about to activate (versionbit %i)", bit));
                 }
