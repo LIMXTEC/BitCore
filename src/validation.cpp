@@ -2151,15 +2151,15 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
             if (state == THRESHOLD_ACTIVE || state == THRESHOLD_LOCKED_IN) {
                 if (state == THRESHOLD_ACTIVE) {
                     std::string strWarning = strprintf(_("Warning: unknown new rules activated (versionbit %i)"), bit);
-                    SetMiscWarning(strWarning);
-		/*
-                    if (!fWarned) {
+                    /*
+					SetMiscWarning(strWarning);
+		            if (!fWarned) {
                         AlertNotify(strWarning);
                         fWarned = true;
                     }
-		    */
+		            */
                 } else {
-                    warningMessages.push_back(strprintf("unknown new rules are about to activate (versionbit %i)", bit));
+                    //warningMessages.push_back(strprintf("unknown new rules are about to activate (versionbit %i)", bit));
                 }
             }
         }
@@ -2177,11 +2177,13 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
         {
             std::string strWarning = _("Warning: Unknown block versions being mined! It's possible unknown rules are in effect");
             // notify GetWarnings(), called by Qt and the JSON-RPC code to warn the user:
-            SetMiscWarning(strWarning);
+            /*
+			SetMiscWarning(strWarning);
             if (!fWarned) {
                 AlertNotify(strWarning);
                 fWarned = true;
             }
+			*/
         }
     }
     LogPrintf("%s: new best=%s height=%d version=0x%08x log2_work=%.8g tx=%lu date='%s' progress=%f cache=%.1fMiB(%utx)", __func__,
