@@ -103,11 +103,11 @@ BlockAssembler::BlockAssembler(const CChainParams& _chainparams)
     }
 
     // Limit weight to between 4K and MAX_BLOCK_WEIGHT-4K for sanity:
-    nBlockMaxWeight = std::max((unsigned int)4000, std::min((unsigned int)(MAX_BLOCK_WEIGHT-4000), nBlockMaxWeight));
+    nBlockMaxWeight = std::max((unsigned int)20000, std::min((unsigned int)(MAX_BLOCK_WEIGHT-20000), nBlockMaxWeight));
     // Limit size to between 1K and MAX_BLOCK_SERIALIZED_SIZE-1K for sanity:
-    nBlockMaxSize = std::max((unsigned int)1000, std::min((unsigned int)(MAX_BLOCK_SERIALIZED_SIZE-1000), nBlockMaxSize));
+    nBlockMaxSize = std::max((unsigned int)10000, std::min((unsigned int)(MAX_BLOCK_SERIALIZED_SIZE-10000), nBlockMaxSize));
     // Whether we need to account for byte usage (in addition to weight usage)
-    fNeedSizeAccounting = (nBlockMaxSize < MAX_BLOCK_SERIALIZED_SIZE-1000);
+    fNeedSizeAccounting = (nBlockMaxSize < MAX_BLOCK_SERIALIZED_SIZE-10000);
 }
 
 void BlockAssembler::resetBlock()
@@ -115,9 +115,9 @@ void BlockAssembler::resetBlock()
     inBlock.clear();
 
     // Reserve space for coinbase tx
-    nBlockSize = 1000;
-    nBlockWeight = 4000;
-    nBlockSigOpsCost = 400;
+    nBlockSize = 10000;//1000;
+    nBlockWeight = 20000;//4000;
+    nBlockSigOpsCost = 2000;//400;//250 tx signatures
     fIncludeWitness = false;
 
     // These counters do not include coinbase tx
