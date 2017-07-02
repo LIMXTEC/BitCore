@@ -29,7 +29,7 @@ Build BitCore Core
 
 1. Clone the bitcore source code and cd into `bitcore`
 
-        git clone https://github.com/bitcore-project/bitcore
+        git clone https://github.com/LIMXTEC/BitCore.git
         cd bitcore
 
 2.  Build bitcore-core:
