@@ -115,9 +115,9 @@ void BlockAssembler::resetBlock()
     inBlock.clear();
 
     // Reserve space for coinbase tx
-    nBlockSize = 10000;//1000;
-    nBlockWeight = 20000;//4000;
-    nBlockSigOpsCost = 2000;//400;//250 tx signatures
+    nBlockSize = 1000;//1000;
+    nBlockWeight = 4000;//4000;
+    nBlockSigOpsCost = 400;//
     fIncludeWitness = false;
 
     // These counters do not include coinbase tx
