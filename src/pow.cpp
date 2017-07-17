@@ -197,10 +197,20 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
 
     // Limit adjustment step
     int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
+	//Ist kleiner als fasktor vier dann gilt Faktor vier
     if (nActualTimespan < params.nPowTargetTimespan/4)
         nActualTimespan = params.nPowTargetTimespan/4;
+	//Ist größer als fasktor vier dann gilt Faktor vier
     if (nActualTimespan > params.nPowTargetTimespan*4)
         nActualTimespan = params.nPowTargetTimespan*4;
+	
+     /*
+     Low Retarget with 10 %
+     if (nActualTimespan < params.nPowTargetTimespan/(11/10))
+     nActualTimespan = params.nPowTargetTimespan/(11/10);
+     if (nActualTimespan > params.nPowTargetTimespan*(11/10))
+     nActualTimespan = params.nPowTargetTimespan*(11/10);
+     */
 
     // Retarget
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
