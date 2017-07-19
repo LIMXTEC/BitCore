@@ -138,13 +138,15 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 {
     
 	int fork1 = 10000;
+	int fork2 = 21000;
 	if (pindexLast->nHeight+1 <= fork1)
 	{
 	return DUAL_KGW3(pindexLast, params, pblock);
 	}
-	else
+
+    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+	if (pindexLast->nHeight+1 <= fork2)
 	{
-	unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
     // Genesis block
     if (pindexLast == NULL)
         return nProofOfWorkLimit;
@@ -187,34 +189,72 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
 	}
+	else
+	{
+    // Genesis block
+    if (pindexLast == NULL)
+        return nProofOfWorkLimit;
+
+    // Only change once per difficulty adjustment interval
+    if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentIntervalV2() != 0)
+    {
+        if (params.fPowAllowMinDifficultyBlocks)
+        {
+            // Special difficulty rule for testnet:
+            // If the new block's timestamp is more than 2* 10 minutes
+            // then allow mining of a min-difficulty block.
+            if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2)
+                return nProofOfWorkLimit;
+            else
+            {
+                // Return the last non-special-min-difficulty-rules-block
+                const CBlockIndex* pindex = pindexLast;
+                while (pindex->pprev && pindex->nHeight % params.DifficultyAdjustmentIntervalV2() != 0 && pindex->nBits == nProofOfWorkLimit)
+                    pindex = pindex->pprev;
+                return pindex->nBits;
+            }
+        }
+        return pindexLast->nBits;
+    }
+
+    // Go back by what we want to be 14 days worth of blocks
+    // Litecoin: This fixes an issue where a 51% attack can change difficulty at will.
+    // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
+    int blockstogoback2 = params.DifficultyAdjustmentIntervalV2()-1;
+    if ((pindexLast->nHeight+1) != params.DifficultyAdjustmentIntervalV2())
+        blockstogoback2 = params.DifficultyAdjustmentIntervalV2();
+
+    // Go back by what we want to be 14 days worth of blocks
+    const CBlockIndex* pindexFirst = pindexLast;
+    for (int i = 0; pindexFirst && i < blockstogoback2; i++)
+        pindexFirst = pindexFirst->pprev;
+
+    assert(pindexFirst);
+
+    return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
+	}
 }
 
 //For Tet POW
 unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
-    if (params.fPowNoRetargeting)
+    int fork2 = 21000;
+	if (params.fPowNoRetargeting)
         return pindexLast->nBits;
 
     // Limit adjustment step
     int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
-	//Ist kleiner als fasktor vier dann gilt Faktor vier
+	const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+	arith_uint256 bnNew;
+	
+    if (pindexLast->nHeight+1 <= fork2)
+	{
+	//Retarget with 400 %
     if (nActualTimespan < params.nPowTargetTimespan/4)
         nActualTimespan = params.nPowTargetTimespan/4;
-	//Ist größer als fasktor vier dann gilt Faktor vier
     if (nActualTimespan > params.nPowTargetTimespan*4)
         nActualTimespan = params.nPowTargetTimespan*4;
 	
-     /*
-     Low Retarget with 10 %
-     if (nActualTimespan < params.nPowTargetTimespan/(11/10))
-     nActualTimespan = params.nPowTargetTimespan/(11/10);
-     if (nActualTimespan > params.nPowTargetTimespan*(11/10))
-     nActualTimespan = params.nPowTargetTimespan*(11/10);
-     */
-
-    // Retarget
-    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    arith_uint256 bnNew;
     bnNew.SetCompact(pindexLast->nBits);
     bnNew *= nActualTimespan;
     bnNew /= params.nPowTargetTimespan;
@@ -223,6 +263,27 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
+	}
+	else
+	{
+    //Low Retarget with 15 %
+    if (nActualTimespan < params.nPowTargetTimespanV2/(115/100))
+    nActualTimespan = params.nPowTargetTimespanV2/(115/100);
+    if (nActualTimespan > params.nPowTargetTimespanV2*(115/100))
+    nActualTimespan = params.nPowTargetTimespanV2*(115/100);
+ 
+    bnNew.SetCompact(pindexLast->nBits);
+    bnNew *= nActualTimespan;
+    bnNew /= params.nPowTargetTimespanV2;
+
+    if (bnNew > bnPowLimit)
+        bnNew = bnPowLimit;
+
+    return bnNew.GetCompact();
+    }
+
+    // Retarget
+
 }
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)

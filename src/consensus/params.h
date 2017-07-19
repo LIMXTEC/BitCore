@@ -60,14 +60,11 @@ struct Params {
     bool fPowNoRetargeting;
     int64_t nPowTargetSpacing;
     int64_t nPowTargetTimespan;
-    int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
+	int64_t nPowTargetTimespanV2;
+    int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; } //2016
 		// BitCore TimeTravel
 		int64_t nPowTargetSpacingV2;
-    int64_t nPowTargetTimespanV2;
-    int64_t DifficultyAdjustmentIntervalV2() const { return nPowTargetTimespanV2 / nPowTargetSpacingV2; }
-		//int64_t nPowTargetSpacingV3;
-    //int64_t nPowTargetTimespanV3;
-    //int64_t DifficultyAdjustmentIntervalV3() const { return nPowTargetTimespanV3 / nPowTargetSpacingV3; }
+    int64_t DifficultyAdjustmentIntervalV2() const { return nPowTargetTimespanV2 / nPowTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
 };
