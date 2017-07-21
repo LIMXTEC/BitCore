@@ -3081,7 +3081,8 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
             // already does not permit it, it is impossible to trigger in the
             // witness tree.
 			
-			if(nHeight > 100000)	{
+			strprintf("block.vtx[0]->vin[0].scriptWitness.stack[0].size() %d nHeight %d \n",block.vtx[0]->vin[0].scriptWitness.stack[0].size(),nHeight);
+			if(nHeight > 25000)	{
             if (block.vtx[0]->vin[0].scriptWitness.stack.size() != 1 || block.vtx[0]->vin[0].scriptWitness.stack[0].size() != 32) {
                 return state.DoS(100, false, REJECT_INVALID, "bad-witness-nonce-size", true, strprintf("%s : invalid witness nonce size", __func__));
             }
@@ -3095,7 +3096,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
     }
 
     // No witness data is allowed in blocks that don't commit to witness data, as this would otherwise leave room for spam
-	if(nHeight > 100000)	{
+	if(nHeight > 25000)	{
     if (!fHaveWitness) {
         for (size_t i = 0; i < block.vtx.size(); i++) {
             if (block.vtx[i]->HasWitness()) {
