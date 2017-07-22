@@ -15,7 +15,7 @@
 
 unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Params& params, const CBlockHeader *pblock) {
     // current difficulty formula, ERC3 - DUAL_KGW3, written by Bitcoin Talk Limx Dev
-    // BitSend and Eropecoin Developer
+    // BitSend and Europecoin Developer
     const CBlockIndex *BlockLastSolved = pindexLast;
     const CBlockIndex *BlockReading = pindexLast;
     bool kgwdebug=false;
