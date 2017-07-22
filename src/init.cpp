@@ -1239,7 +1239,8 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
         }
     }
     */
-    strSubVersion = FormatSubVersion(CLIENT_NAME, CLIENT_VERSION);
+    std::vector<std::string> uacomments;
+    strSubVersion = FormatSubVersion(CLIENT_NAME, CLIENT_VERSION,uacomments);
     if (strSubVersion.size() > MAX_SUBVERSION_LENGTH) {
         return InitError(strprintf(_("Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments."),
             strSubVersion.size(), MAX_SUBVERSION_LENGTH));
