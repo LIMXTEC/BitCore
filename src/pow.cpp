@@ -267,10 +267,12 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     else
     {
         //Low Retarget with 15 %
-        if (nActualTimespan < params.nPowTargetTimespanV2/(115/100))
-        nActualTimespan = params.nPowTargetTimespanV2/(115/100);
-        if (nActualTimespan > params.nPowTargetTimespanV2*(115/100))
-        nActualTimespan = params.nPowTargetTimespanV2*(115/100);
+        if (nActualTimespan < params.nPowTargetTimespanV2/1.15)  // (115/101 != 1.15)
+        nActualTimespan = params.nPowTargetTimespanV2/1.15;
+        if (nActualTimespan > params.nPowTargetTimespanV2*1.15)
+        nActualTimespan = params.nPowTargetTimespanV2*1.15;
+	
+	// LogPrintf("278  nActualTimespan %d \n",  nActualTimespan);
  
         bnNew.SetCompact(pindexLast->nBits);
         bnNew *= nActualTimespan;
