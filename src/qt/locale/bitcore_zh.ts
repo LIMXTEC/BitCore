@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Warning: Invalid BitCore address</source>
-        <translation>警告：莱特币地址无效</translation>
+        <translation>警告：超级比特地址无效</translation>
     </message>
     </context>
 <context>
