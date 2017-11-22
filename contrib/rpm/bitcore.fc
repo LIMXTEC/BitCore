@@ -1,0 +1,8 @@
+/usr/bin/bitcore-cli		--	gen_context(system_u:object_r:bitcore_exec_t,s0)
+/usr/sbin/bitcored		--	gen_context(system_u:object_r:bitcore_exec_t,s0)
+/usr/lib(64)?/bitcore/bitcored		--	gen_context(system_u:object_r:bitcore_exec_t,s0)
+
+/etc/bitcore(/.*)?		gen_context(system_u:object_r:bitcore_conf_t,s0)
+/var/lib/bitcore(/.*)?		gen_context(system_u:object_r:bitcore_var_lib_t,s0)
+
+(/var)?/run/bitcored(/.*)?   gen_context(system_u:object_r:bitcore_var_run_t,s0)
