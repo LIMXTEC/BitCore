@@ -246,7 +246,7 @@ libbitcore_wallet_a_SOURCES = \
   $(BITCORE_CORE_H)
 
 # crypto primitives library
-crypto_libbitcore_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(PIE_FLAGS) $(BITCORE_CONFIG_INCLUDES) $(SSL_CFLAGS)
+crypto_libbitcore_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCORE_CONFIG_INCLUDES) $(SSL_CFLAGS)
 crypto_libbitcore_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 crypto_libbitcore_crypto_a_SOURCES = \
   crypto/aes.cpp \
