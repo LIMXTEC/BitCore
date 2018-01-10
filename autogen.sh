@@ -1,8 +1,9 @@
 #!/bin/sh
-# Copyright (c) 2013-2016 The BitCore Core developers
+# Copyright (c) 2009-2010 Satoshi Nakamoto
+# Copyright (c) 2009-2017 The Bitcoin Core developers
+# Copyright (c) 2017-2017 The Bitcore Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
 set -e
 srcdir="$(dirname $0)"
 cd "$srcdir"
