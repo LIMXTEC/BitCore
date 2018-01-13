@@ -78,7 +78,7 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     QDir translations(":translations");
 	
 	//themes kaali
-	ui->theme->addItem(QString("Bitcore Theme"), QVariant("bitcore_main"));
+        ui->theme->addItem(QString("Bitcore Theme"), QVariant("bitcore_main"));
 
     ui->bitcoreAtStartup->setToolTip(ui->bitcoreAtStartup->toolTip().arg(tr(PACKAGE_NAME)));
     ui->bitcoreAtStartup->setText(ui->bitcoreAtStartup->text().arg(tr(PACKAGE_NAME)));

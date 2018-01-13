@@ -874,15 +874,17 @@ QString loadStyleSheet()
     QString styleSheet;
     QSettings settings;
     QString cssName;
-    QString theme = settings.value("theme", "").toString();
+//    QString theme = settings.value("theme", "").toString();
 
-    if(!theme.isEmpty()){
-        cssName = QString(":/css/") + theme; 
-    }
-    else {
-        cssName = QString(":/css/bitcore_theme");  
-        settings.setValue("theme", "bitcore_theme");
-    }
+//    if(!theme.isEmpty()){
+//        cssName = QString(":/css/") + theme;
+//    }
+//    else {
+//        //cssName = QString(":/css/bitcore_main");
+//        settings.setValue("theme", "bitcore_main");
+//    }
+
+    cssName = QString(":/css/bitcore_main");
     
     QFile qFile(cssName);      
     if (qFile.open(QFile::ReadOnly)) {
