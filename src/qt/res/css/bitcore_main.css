@@ -1,5 +1,5 @@
 WalletFrame {
-border-image: url(':/images/bitsend_main_hg') 0 0 0 0 stretch stretch;
+border-image: url(':/images/bitcore_main_hgB') 0 0 0 0 stretch stretch;
 border-top:0px solid #000;
 margin:0;
 padding:0;
@@ -23,40 +23,41 @@ border:0px solid #fff;
 }
 
 QMenuBar {
-background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 lightgray, stop:1 darkgray);
+background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ff53ba, stop:1 #ff007f);
 }
 
 QMenuBar::item {
 spacing: 3px;
+color: white;
 padding:1px 4px;
 background: transparent;
 border-radius: 4px;
 }
 
 QMenuBar::item:selected {
-background:#a8a8a8;
+background:#ff53b9;
 }
 QMenuBar::item:pressed{
-background: #888888;
+background: #ff7ac9;
 }
 QMenu {
-background-color:#ababab;
+background-color:qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ff007f, stop:1 #ff8ed1);
 margin: 2px;
 }
 
 QMenu::item {
 padding: 2px 25px 2px 20px;
-color:#333;
-border 1px solid transparent;
+border: 1px solid transparent;
+color:#fff;
 }
 
 QMenu::item:selected {
-background-color:#f2f0f0;
-color:#333;
+background-color:#ff53b9;
+color:#fff;
 }
 
 QToolBar {
-background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 lightgray, stop:1 darkgray);
+background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ff53ba, stop:1 #ff007f);
 border:0px solid #000;
 padding:0;
 margin:0;
@@ -72,8 +73,7 @@ color:#fff;
 }
 
 QToolBar > QToolButton:checked {
-background: #888888;
-color:#333;
+background: #ff7ac9;
 font-weight:bold;
 }
 
