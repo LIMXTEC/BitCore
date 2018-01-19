@@ -55,7 +55,8 @@ public:
         TAB_INFO = 0,
         TAB_CONSOLE = 1,
         TAB_GRAPH = 2,
-        TAB_PEERS = 3
+        TAB_PEERS = 3,
+		TAB_REPAIR=4
     };
 
 protected:
@@ -84,6 +85,14 @@ private Q_SLOTS:
     void clearSelectedNode();
 
 public Q_SLOTS:
+ /** Wallet repair options */
+    void walletSalvage();
+    void walletRescan();
+    void walletZaptxes1();
+    void walletZaptxes2();
+    void walletUpgrade();
+    void walletReindex();
+	
     void clear(bool clearHistory = true);
     void fontBigger();
     void fontSmaller();
@@ -92,6 +101,8 @@ public Q_SLOTS:
     void message(int category, const QString &message, bool html = false);
     /** Set number of connections shown in the UI */
     void setNumConnections(int count);
+	/** Switch to wallet-repair tab and show */
+    void showRepair();
     /** Set network state shown in the UI */
     void setNetworkActive(bool networkActive);
     /** Set number of blocks and last block date shown in the UI */
@@ -118,6 +129,8 @@ public Q_SLOTS:
     void setTabFocus(enum TabTypes tabType);
 
 Q_SIGNALS:
+	/** Get restart command-line parameters and handle restart */
+    void handleRestart(QStringList args);
     // For RPC command executor
     void stopExecutor();
     void cmdRequest(const QString &command);
@@ -128,7 +141,8 @@ private:
     void setTrafficGraphRange(int mins);
     /** show detailed information on ui about selected node */
     void updateNodeDetail(const CNodeCombinedStats *stats);
-
+	/** Build parameter list for restart */
+    void buildParameterlist(QString arg);
     enum ColumnWidths
     {
         ADDRESS_COLUMN_WIDTH = 200,

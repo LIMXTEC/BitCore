@@ -69,7 +69,7 @@
 #ifdef USE_SSE2
 #include "crypto/scrypt.h"
 #endif
-
+bool fRestartRequested = false; 
 bool fFeeEstimatesInitialized = false;
 static const bool DEFAULT_PROXYRANDOMIZE = true;
 static const bool DEFAULT_REST_ENABLE = false;
@@ -129,7 +129,7 @@ void StartShutdown()
 }
 bool ShutdownRequested()
 {
-    return fRequestShutdown;
+    return fRequestShutdown || fRestartRequested;
 }
 
 /**
@@ -171,9 +171,112 @@ void Interrupt(boost::thread_group& threadGroup)
         g_connman->Interrupt();
     threadGroup.interrupt_all();
 }
-
-void Shutdown()
+/** Preparing steps before shutting down or restarting the wallet */
+void PrepareShutdown() 
 {
+    fRequestShutdown = true; // Needed when we shutdown the wallet//TODO--
+    fRestartRequested = true; // Needed when we restart the wallet//TODO--
+    LogPrintf("%s: In progress...\n", __func__);
+    static CCriticalSection cs_Shutdown;
+    TRY_LOCK(cs_Shutdown, lockShutdown);
+    if (!lockShutdown)
+        return;
+
+    /// Note: Shutdown() must be able to handle cases in which AppInit2() failed part of the way,
+    /// for example if the data directory was found to be locked.
+    /// Be sure that anything that writes files or flushes caches only does this if the respective
+    /// module was initialized.
+    RenameThread("bitcore-shutoff");
+    mempool.AddTransactionsUpdated(1);
+
+    StopHTTPRPC();
+    StopREST();
+    StopRPC();
+    StopHTTPServer();
+#ifdef ENABLE_WALLET
+    for (CWalletRef pwallet : vpwallets) {
+        pwallet->Flush(false);
+    }
+#endif
+    MapPort(false);
+    UnregisterValidationInterface(peerLogic.get());
+    peerLogic.reset();
+    g_connman.reset();
+
+    StopTorControl();
+    UnregisterNodeSignals(GetNodeSignals());
+    if (fDumpMempoolLater)
+        DumpMempool();
+
+    if (fFeeEstimatesInitialized)
+    {
+        ::feeEstimator.FlushUnconfirmed(::mempool);
+        fs::path est_path = GetDataDir() / FEE_ESTIMATES_FILENAME;
+        CAutoFile est_fileout(fsbridge::fopen(est_path, "wb"), SER_DISK, CLIENT_VERSION);
+        if (!est_fileout.IsNull())
+            ::feeEstimator.Write(est_fileout);
+        else
+            LogPrintf("%s: Failed to write fee estimates to %s\n", __func__, est_path.string());
+        fFeeEstimatesInitialized = false;
+    }
+
+     {
+        LOCK(cs_main);
+        if (pcoinsTip != nullptr) {
+            FlushStateToDisk();
+        }
+        delete pcoinsTip;
+        pcoinsTip = nullptr;
+        delete pcoinscatcher;
+        pcoinscatcher = nullptr;
+        delete pcoinsdbview;
+        pcoinsdbview = nullptr;
+        delete pblocktree;
+        pblocktree = nullptr;
+    }
+#ifdef ENABLE_WALLET
+   for (CWalletRef pwallet : vpwallets) {
+   pwallet->Flush(true);}
+#endif
+
+#if ENABLE_ZMQ
+    if (pzmqNotificationInterface) {
+        UnregisterValidationInterface(pzmqNotificationInterface);
+        delete pzmqNotificationInterface;
+        pzmqNotificationInterface = NULL;
+    }
+#endif
+
+#ifndef WIN32
+   try {
+        fs::remove(GetPidFile());
+    } catch (const fs::filesystem_error& e) {
+        LogPrintf("%s: Unable to remove pidfile: %s\n", __func__, e.what());
+    }
+#endif
+    UnregisterAllValidationInterfaces();
+	/**TODO-- */
+}
+/*TODO-- */
+void Shutdown()
+{	
+// Shutdown part 1: prepare shutdown
+    if(!fRestartRequested){
+        PrepareShutdown();
+    }
+
+   // Shutdown part 2: delete wallet instance
+	
+#ifdef ENABLE_WALLET
+    for (CWalletRef pwallet : vpwallets) {
+        delete pwallet;
+    }
+    vpwallets.clear();
+#endif
+    globalVerifyHandle.reset();
+    ECC_Stop();
+    LogPrintf("%s: done\n", __func__);
+	/* 
     LogPrintf("%s: In progress...\n", __func__);
     static CCriticalSection cs_Shutdown;
     TRY_LOCK(cs_Shutdown, lockShutdown);
@@ -279,7 +382,7 @@ void Shutdown()
 #endif
     globalVerifyHandle.reset();
     ECC_Stop();
-    LogPrintf("%s: done\n", __func__);
+    LogPrintf("%s: done\n", __func__); */
 }
 
 /**
