@@ -1029,7 +1029,6 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
     //210000 =  5250000 Coin (25 Coin)
     // 42987 =  537337,5 Coin (12.5 Coin)
     //462987 = 1628733,5 Coin Limx Dev 23.04.2017
-	int intervalblock = consensusParams.nSubsidyHalvingInterval;
 	int fork1 = 10000;
     int	block_reward_change_f4 = 4; 
 	int BTXFullblock = (42987 + fork1)*4;
