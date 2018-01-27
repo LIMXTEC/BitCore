@@ -154,7 +154,7 @@ if ENABLE_WALLET
 test_test_bitcore_LDADD += $(LIBBITCORE_WALLET)
 endif
 
-test_test_bitcore_LDADD += $(LIBBITCORE_CONSENSUS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
+test_test_bitcore_LDADD += $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
 test_test_bitcore_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
 
 if ENABLE_ZMQ
