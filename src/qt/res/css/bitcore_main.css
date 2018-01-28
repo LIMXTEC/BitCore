@@ -256,17 +256,18 @@ margin: 0px; }
 
 QWidget .QFrame#frame_2 { /* Transactions Widget */
 min-width:410px;
-margin-right:20px;
-margin-left:0;
-background-image: url(':/images/bitsend_logo_horizontal');
+margin-right:auto;
+margin-left:auto;
+background-image: url(':/images/bitcore_logo_horizontal');
 background-repeat:none;
+background-position: center top;
 }
 
 QWidget .QFrame#frame_2 .QLabel#label_4 { /* Recent Transactions Label */
 min-width:200px;
 color:#000;
 margin-left:67px;
-margin-top:123px;
+margin-top:173px;
 margin-right:5px;
 padding-right:5px;
 font-weight:bold;
