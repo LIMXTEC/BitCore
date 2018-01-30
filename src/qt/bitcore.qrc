@@ -60,6 +60,7 @@
     </qresource>
 	<qresource prefix="/images">
         <file alias="bitcore_main_hgB">res/images/bitcore_main_hgB.png</file>
+		<file alias="bitcore_logo_horizontal">res/images/bitcore_logo_horizontal.png</file>
     </qresource>
     <qresource prefix="/movies">
         <file alias="spinner-000">res/movies/spinner-000.png</file>
