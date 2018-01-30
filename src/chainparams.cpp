@@ -131,17 +131,11 @@ public:
 
         // Note that of those with the service bits flag, most only support a subset of possible options
 		
-		vSeeds.emplace_back("188.68.52.172", true);
-        vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("188.71.223.206", true);
+        vSeeds.emplace_back("37.120.190.76", false);
+        vSeeds.emplace_back("37.120.186.85", false);
+		vSeeds.emplace_back("185.194.140.60", false);
+        vSeeds.emplace_back("188.71.223.206", false);
         vSeeds.emplace_back("185.194.142.122", false);
-		
-		/*
-        vSeeds.push_back(CDNSSeedData("188.68.52.172", "188.68.52.172"));
-		vSeeds.push_back(CDNSSeedData("37.120.186.85", "37.120.186.85"));
-		vSeeds.push_back(CDNSSeedData("37.120.190.76", "37.120.190.76"));
-		*/
 		
 		/*
 		vSeeds.emplace_back("seed-a.litecoin.loshan.co.uk", true);
