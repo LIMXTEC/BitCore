@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 ###   This script attempts to download the signature file SHA256SUMS.asc from
-###   bitcorecore.org and bitcore.org and compares them.
+###   bitcorecore.org and bitcore.cc and compares them.
 ###   It first checks if the signature passes, and then downloads the files specified in
 ###   the file, and checks if the hashes of these files match those that are specified
 ###   in the signature file.
@@ -24,7 +24,7 @@ TMPFILE="hashes.tmp"
 SIGNATUREFILENAME="SHA256SUMS.asc"
 RCSUBDIR="test"
 HOST1="https://bitcorecore.org"
-HOST2="https://bitcore.org"
+HOST2="https://bitcore.cc"
 BASEDIR="/bin/"
 VERSIONPREFIX="bitcore-core-"
 RCVERSIONSTRING="rc"
@@ -97,7 +97,7 @@ fi
 
 WGETOUT=$(wget -N -O "$SIGNATUREFILENAME.2" "$HOST2$BASEDIR$SIGNATUREFILENAME" 2>&1)
 if [ $? -ne 0 ]; then
-   echo "bitcore.org failed to provide signature file, but bitcorecore.org did?"
+   echo "bitcore.cc failed to provide signature file, but bitcorecore.org did?"
    echo "wget output:"
    echo "$WGETOUT"|sed 's/^/\t/g'
    clean_up $SIGNATUREFILENAME
@@ -106,7 +106,7 @@ fi
 
 SIGFILEDIFFS="$(diff $SIGNATUREFILENAME $SIGNATUREFILENAME.2)"
 if [ "$SIGFILEDIFFS" != "" ]; then
-   echo "bitcore.org and bitcorecore.org signature files were not equal?"
+   echo "bitcore.cc and bitcorecore.org signature files were not equal?"
    clean_up $SIGNATUREFILENAME $SIGNATUREFILENAME.2
    exit 4
 fi

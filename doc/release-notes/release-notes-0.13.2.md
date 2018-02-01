@@ -1,6 +1,6 @@
 Bitcoin Core version 0.13.2 is now available from:
 
-  <https://bitcore.org/bin/bitcore-core-0.13.2/>
+  <https://bitcore.cc/bin/bitcore-core-0.13.2/>
 
 This is a new minor version release, including various bugfixes and
 performance improvements, as well as updated translations.

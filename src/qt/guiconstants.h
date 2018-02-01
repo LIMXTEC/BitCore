@@ -49,7 +49,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "BitCore"
-#define QAPP_ORG_DOMAIN "bitcore.org"
+#define QAPP_ORG_DOMAIN "bitcore.cc"
 #define QAPP_APP_NAME_DEFAULT "BitCore-Qt"
 #define QAPP_APP_NAME_TESTNET "BitCore-Qt-testnet"
 

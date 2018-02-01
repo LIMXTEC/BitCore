@@ -22,7 +22,7 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/bitcore-project/bitcore.git"
+- "url": "https://github.com/LIMXTEC/bitcore.git"
   "dir": "bitcore"
 files: []
 script: |

@@ -3,14 +3,14 @@ release-notes at release time)
 
 BitCore Core version *0.15.0* is now available from:
 
-  <https://download.bitcore.org/bitcore-0.15.0/>
+  <https://download.bitcore.cc/bitcore-0.15.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/bitcore-project/bitcore/issues>
+  <https://github.com/LIMXTEC/bitcore/issues>
 
 To receive security and update notifications, please subscribe to:
 
@@ -95,7 +95,7 @@ Initial Block Download, startup, transaction and block validation much faster:
   validation. In version 0.15, SHA256 hardware optimization is disabled in release builds by
   default, but can be enabled by using `--enable-experimental-asm` when building.
 - Refill of the keypool no longer flushes the wallet between each key which resulted in a ~20x speedup in creating a new wallet. Part of this speedup was used to increase the default keypool to 1000 keys to make recovery more robust. (See [PR 10831](https://github.com/bitcore/bitcore/pull/10831)).
-- Scrypt hashing has been optimized for architectures supporting SSE 2 (See [PR 362](https://github.com/bitcore-project/bitcore/pull/362)). This boosts scrypt hashing performance by a factor of 2. In version 0.15, scrypt hardware optimization is disabled in release builds by default, but can be enabled by using `--enable-sse2` when building.
+- Scrypt hashing has been optimized for architectures supporting SSE 2 (See [PR 362](https://github.com/LIMXTEC/bitcore/pull/362)). This boosts scrypt hashing performance by a factor of 2. In version 0.15, scrypt hardware optimization is disabled in release builds by default, but can be enabled by using `--enable-sse2` when building.
 
 Fee Estimation Improvements
 ---------------------------
@@ -725,7 +725,7 @@ Low-level RPC changes
 - #10728 `7397af9` fix typo in help text for removeprunedfunds (AkioNak)
 - #10193 `6dbcc74` scripted-diff: Remove #include <boost/foreach.hpp> (jtimon)
 - #10676 `379aed0` document script-based return fields for validateaddress (instagibbs)
-- #10651 `cef4b5c` Verify binaries from bitcorecore.org and bitcore.org (TheBlueMatt)
+- #10651 `cef4b5c` Verify binaries from bitcorecore.org and bitcore.cc (TheBlueMatt)
 - #10786 `ca4c545` Add PR description to merge commit in github-merge.py (sipa)
 - #10812 `c5904e8` [utils] Allow bitcore-cli's -rpcconnect option to be used with square brackets (jnewbery)
 - #10842 `3895e25` Fix incorrect Doxygen tag (@ince → @since). Doxygen parameter name matching (practicalswift)

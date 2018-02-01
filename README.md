@@ -6,7 +6,7 @@ Do not use this branch !! Please use the master.
 
 [![Build Status](https://travis-ci.org/bitcore-project/bitcore.svg?branch=master)](https://travis-ci.org/bitcore-project/bitcore)
 
-https://bitcore.org
+https://bitcore.cc
 
 What is BitCore?
 ----------------
@@ -18,7 +18,7 @@ out collectively by the network. BitCore Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the BitCore Core software, see [https://bitcore.org](https://bitcore.org).
+the BitCore Core software, see [https://bitcore.cc](https://bitcore.cc).
 
 License
 -------
@@ -30,7 +30,7 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcore-project/bitcore/tags) are created
+completely stable. [Tags](https://github.com/LIMXTEC/bitcore/tags) are created
 regularly to indicate new official, stable release versions of BitCore Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).

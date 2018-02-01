@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/bitcore-project/bitcore-detached-sigs.git"
+- "url": "https://github.com/LIMXTEC/bitcore-detached-sigs.git"
   "dir": "signature"
 files:
 - "bitcore-osx-unsigned.tar.gz"
