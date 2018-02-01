@@ -1228,8 +1228,8 @@
         <translation>Darbināt fonā kā servisu un pieņemt komandas</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

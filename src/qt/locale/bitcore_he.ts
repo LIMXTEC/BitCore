@@ -2714,7 +2714,7 @@
         <translation>ריצה כסוכן ברקע וקבלת פקודות</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>ליבת לייטקוין</translation>
     </message>
     <message>

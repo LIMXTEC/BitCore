@@ -231,7 +231,7 @@
     </message>
     <message>
         <source>BitCore</source>
-        <translation>BitCore Core</translation>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -832,8 +832,8 @@
 <context>
     <name>bitcore-core</name>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>

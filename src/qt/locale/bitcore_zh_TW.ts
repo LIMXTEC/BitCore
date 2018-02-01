@@ -3055,8 +3055,8 @@
         <translation>無法啟動 HTTP 伺服器。詳情請看除錯紀錄。</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>The %s developers</source>

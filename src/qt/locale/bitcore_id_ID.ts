@@ -1820,8 +1820,8 @@
         <translation>Berjalan dibelakang sebagai daemin dan menerima perintah</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>

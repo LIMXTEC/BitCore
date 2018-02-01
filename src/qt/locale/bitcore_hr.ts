@@ -1034,8 +1034,8 @@
         <translation>Izvršavaj u pozadini kao uslužnik i prihvaćaj komande</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>Block creation options:</source>

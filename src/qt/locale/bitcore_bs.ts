@@ -156,7 +156,7 @@
 <context>
     <name>bitcore-core</name>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCore Jezrga</translation>
     </message>
     </context>

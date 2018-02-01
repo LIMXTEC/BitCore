@@ -2254,8 +2254,8 @@
         <translation>Kunne ikke starte HTTP server. Se debug logg for detaljer.</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

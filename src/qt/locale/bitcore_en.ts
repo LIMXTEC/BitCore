@@ -4066,8 +4066,8 @@
     </message>
     <message>
         <location line="-384"/>
-        <source>BitCore Core</source>
-        <translation type="unfinished">BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation type="unfinished">BitCore BTX</translation>
     </message>
     <message>
         <location line="+1"/>

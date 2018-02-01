@@ -784,7 +784,7 @@
         <translation>Opsionet:</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Berthama BitCore</translation>
     </message>
     <message>

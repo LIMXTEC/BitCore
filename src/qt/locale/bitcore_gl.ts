@@ -1028,7 +1028,7 @@
         <translation>Executar no fondo como un demo e aceptar comandos</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Core de BitCore</translation>
     </message>
     <message>

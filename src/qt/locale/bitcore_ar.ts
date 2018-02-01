@@ -1960,7 +1960,7 @@
         <translation>حدد مجلد المعلومات</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>جوهر البيت كوين</translation>
     </message>
     <message>

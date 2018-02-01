@@ -3054,7 +3054,7 @@
         <translation>HTTP sunucusu başlatılamadı. Ayrıntılar için debug.log dosyasına bakınız.</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCore Çekirdeği</translation>
     </message>
     <message>

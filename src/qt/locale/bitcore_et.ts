@@ -1758,7 +1758,7 @@
         <translation>Tööta taustal ning aktsepteeri käsklusi</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCorei tuumik</translation>
     </message>
     <message>

@@ -2963,7 +2963,7 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
         <translation>Uruchomienie serwera HTTP nie powiodło się. Zobacz dziennik debugowania, aby uzyskać więcej szczegółów.</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Rdzeń BitCorea</translation>
     </message>
     <message>

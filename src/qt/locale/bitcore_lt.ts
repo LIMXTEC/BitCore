@@ -958,7 +958,7 @@
         <translation>Dirbti fone kaip šešėlyje ir priimti komandas</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCore branduolys</translation>
     </message>
     <message>

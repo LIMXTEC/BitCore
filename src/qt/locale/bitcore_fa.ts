@@ -1702,7 +1702,7 @@
         <translation>اجرا در پشت زمینه به‌صورت یک سرویس و پذیرش دستورات</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation> هسته BitCore </translation>
     </message>
     <message>

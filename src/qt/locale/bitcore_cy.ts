@@ -640,7 +640,7 @@
         <translation>Opsiynau:</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Craidd BitCore</translation>
     </message>
     <message>

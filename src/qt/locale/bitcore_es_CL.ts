@@ -772,7 +772,7 @@
 </translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>bitcore core</translation>
     </message>
     <message>

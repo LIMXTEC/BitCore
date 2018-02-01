@@ -1702,7 +1702,7 @@
         <translation>Rulează în fundal ca un demon şi acceptă comenzi</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Nucleul BitCore</translation>
     </message>
     <message>

@@ -3061,8 +3061,8 @@
         <translation>No se ha podido comenzar el servidor HTTP. Ver debug log para detalles.</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>The %s developers</source>

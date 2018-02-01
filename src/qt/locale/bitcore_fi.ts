@@ -2430,7 +2430,7 @@
         <translation>HTTP-palvelinta ei voitu käynnistää. Katso debug-lokista lisätietoja.</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCore-ydin</translation>
     </message>
     <message>

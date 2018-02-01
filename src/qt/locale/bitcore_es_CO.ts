@@ -296,8 +296,8 @@
 <context>
     <name>bitcore-core</name>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>Insufficient funds</source>

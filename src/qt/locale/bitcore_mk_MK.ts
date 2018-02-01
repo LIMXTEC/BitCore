@@ -578,7 +578,7 @@
         <translation>Опции:</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Биткоин Core</translation>
     </message>
     <message>

@@ -2370,7 +2370,7 @@
         <translation>Въведете Ваш публичен адрес</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCore ядро</translation>
     </message>
     <message>

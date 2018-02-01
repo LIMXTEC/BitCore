@@ -752,7 +752,7 @@
         <translation>Gumana king gulut bilang daemon at tumanggap commands</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Kapilubluban ning BitCore</translation>
     </message>
     <message>

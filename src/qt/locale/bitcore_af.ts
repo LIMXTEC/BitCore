@@ -1012,7 +1012,7 @@
 <context>
     <name>bitcore-core</name>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCore Kern</translation>
     </message>
     <message>

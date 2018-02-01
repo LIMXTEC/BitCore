@@ -3058,7 +3058,7 @@
         <translation>HTTPサーバを開始できませんでした。詳細はデバッグログをご確認ください。</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCore のコア</translation>
     </message>
     <message>

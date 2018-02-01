@@ -2987,8 +2987,8 @@
         <translation>Nepodarilo sa spustiť HTTP server. Pre viac detailov zobrazte debug log.</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>The %s developers</source>

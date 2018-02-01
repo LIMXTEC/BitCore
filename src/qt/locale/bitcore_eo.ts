@@ -1338,7 +1338,7 @@
         <translation>Ruli fone kiel demono kaj akcepti komandojn</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Kerno de BitCoreo</translation>
     </message>
     <message>

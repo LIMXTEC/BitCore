@@ -1123,7 +1123,7 @@
 </translation>
     </message>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>Núcleo de BitCore</translation>
     </message>
     <message>
