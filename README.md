@@ -1,8 +1,6 @@
 BitCore Core integration/staging tree
 =====================================
 
-Do not use this branch !! Please use the master.
-----------------
 
 [![Build Status](https://travis-ci.org/bitcore-project/bitcore.svg?branch=master)](https://travis-ci.org/bitcore-project/bitcore)
 
