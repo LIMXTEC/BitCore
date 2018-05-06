@@ -452,7 +452,7 @@ void hyperlinks2_slot6(){QString link1 = "https://exrates.me/"; QDesktopServices
 void hyperlinks2_slot7(){QString link1 = "https://hitbtc.com/exchange/BTX-to-BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot8(){QString link1 = "https://tradesatoshi.com/Exchange?market=BTX_BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot9(){QString link1 = "https://www.vebitcoin.com/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
-void hyperlinks2_slot10(){QString link1 = "https://octaex.com/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot10(){QString link1 = "https://octaex.com/trade/index/market/btx_btc/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 
 void SubstituteFonts(const QString& language)
 {

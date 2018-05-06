@@ -274,6 +274,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     connect(Exchangesite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot7()));
     connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot8()));
     connect(Exchangesite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot9()));
+	connect(Exchangesite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot10()));
 	
 
     modalOverlay = new ModalOverlay(this->centralWidget());
