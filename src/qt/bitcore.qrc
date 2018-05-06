@@ -72,6 +72,7 @@
 		<file alias="tradesat">res/icons/TradeSat.png</file>
 		<file alias="vebitcoin">res/icons/VEBITCOIN.png</file>
 		<file alias="hitbtc">res/icons/Hitbtc.png</file>
+		<file alias="exrates">res/icons/exrates.png</file>
     </qresource>
 	<qresource prefix="/css">
         <file alias="bitcore_main">res/css/bitcore_main.css</file>

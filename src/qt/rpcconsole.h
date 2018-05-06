@@ -148,6 +148,7 @@ public Q_SLOTS:
     void hyperlinks2_slot7();
     void hyperlinks2_slot8();
     void hyperlinks2_slot9();
+	void hyperlinks2_slot10();
 
 Q_SIGNALS:
 	/** Get restart command-line parameters and handle restart */

@@ -265,17 +265,15 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     connect(openWebsite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot9()));
     connect(openWebsite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot10()));
 	
-	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
-    connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
-    connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
-    connect(Exchangesite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot4()));
-    connect(Exchangesite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot5()));
-    connect(Exchangesite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot6()));
-    connect(Exchangesite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot7()));
-    connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot8()));
-    connect(Exchangesite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot9()));
-    connect(Exchangesite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot10()));
-
+	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
+    connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot2()));
+    connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot3()));
+    connect(Exchangesite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot4()));
+    connect(Exchangesite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot5()));
+    connect(Exchangesite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot6()));
+    connect(Exchangesite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot7()));
+    connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot8()));
+    connect(Exchangesite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot9()));
 	
 
     modalOverlay = new ModalOverlay(this->centralWidget());
@@ -441,15 +439,17 @@ void BitcoinGUI::createActions()
     openWebsite9 = new QAction(QIcon(":/icons/insightapi"), tr("&Explorer 1"), this);
     openWebsite10 = new QAction(QIcon(":/icons/cryptoid"), tr("&Explorer 2"), this);
 
-	Exchangesite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Bitcore.cc"), this);
-    Exchangesite2 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
-    Exchangesite3 = new QAction(QIcon(":/icons/bitz"), tr("&Bit-Z"), this);
-    Exchangesite4 = new QAction(QIcon(":/icons/chevron"), tr("&Exrates"), this);
-    Exchangesite5 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
-    Exchangesite6 = new QAction(QIcon(":/icons/vebitcoin"), tr("&Vebitcoin"), this);
-    Exchangesite7 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
-    Exchangesite8 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
-    Exchangesite9 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
+	Exchangesite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Ecosystem"), this);
+	Exchangesite2 = new QAction(QIcon(":/icons/bitz"), tr("&Bit-Z"), this);
+	Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
+	Exchangesite4 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
+    Exchangesite5 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
+	Exchangesite6 = new QAction(QIcon(":/icons/exrates"), tr("&Exrates"), this);
+	Exchangesite7 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
+    Exchangesite8 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
+	Exchangesite9 = new QAction(QIcon(":/icons/vebitcoin"), tr("&Vebitcoin"), this);
+    Exchangesite10 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
+	Exchangesite10 = new QAction(QIcon(":/icons/info"), tr("&Octaex"), this);
 
 #ifdef ENABLE_WALLET
     if(walletFrame)

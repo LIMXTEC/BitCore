@@ -135,6 +135,7 @@ private:
     QAction* Exchangesite7;
     QAction* Exchangesite8;
     QAction* Exchangesite9;
+	QAction* Exchangesite10;
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;

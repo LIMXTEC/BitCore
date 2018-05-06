@@ -326,7 +326,8 @@ RES_ICONS = \
   qt/res/icons/TradeSat.png \
   qt/res/icons/VEBITCOIN.png \ 
   qt/res/icons/Hitbtc.png \  
-  qt/res/icons/verify.png
+  qt/res/icons/verify.png \
+  qt/res/icons/exrates.png
   
 BITCORE_QT_BASE_CPP = \
   qt/bantablemodel.cpp \

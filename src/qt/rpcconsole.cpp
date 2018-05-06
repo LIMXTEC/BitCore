@@ -1052,6 +1052,7 @@ void RPCConsole::hyperlinks2_slot6(){ GUIUtil::hyperlinks2_slot6();}
 void RPCConsole::hyperlinks2_slot7(){ GUIUtil::hyperlinks2_slot7();}
 void RPCConsole::hyperlinks2_slot8(){ GUIUtil::hyperlinks2_slot8();}
 void RPCConsole::hyperlinks2_slot9(){ GUIUtil::hyperlinks2_slot9();}
+void RPCConsole::hyperlinks2_slot10(){ GUIUtil::hyperlinks2_slot10();}
 
 
 void RPCConsole::peerSelected(const QItemSelection &selected, const QItemSelection &deselected)
