@@ -308,8 +308,26 @@ RES_ICONS = \
   qt/res/icons/tx_output.png \
   qt/res/icons/tx_mined.png \
   qt/res/icons/warning.png \
+  qt/res/icons/Bitcointalk.png \
+  qt/res/icons/BitcoreCC.png \
+  qt/res/icons/cryptoID.png \
+  qt/res/icons/GitHub.png \
+  qt/res/icons/Telegram.png \
+  qt/res/icons/Twitter.png \
+  qt/res/icons/BitZ.png \
+  qt/res/icons/Ccex.png \
+  qt/res/icons/Coinexchange.png \
+  qt/res/icons/Coinomi.png \
+  qt/res/icons/CryptoBridgeB.png \
+  qt/res/icons/Cryptopia.png \
+  qt/res/icons/Facebook.png \
+  qt/res/icons/InsightAPI.png \
+  qt/res/icons/Reddit.png \
+  qt/res/icons/TradeSat.png \
+  qt/res/icons/VEBITCOIN.png \ 
+  qt/res/icons/Hitbtc.png \  
   qt/res/icons/verify.png
-
+  
 BITCORE_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
   qt/bitcoreaddressvalidator.cpp \

@@ -253,6 +253,30 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     subscribeToCoreSignals();
 
     connect(connectionsControl, SIGNAL(clicked(QPoint)), this, SLOT(toggleNetworkActive()));
+	///CCCC
+    connect(openWebsite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
+    connect(openWebsite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
+    connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
+    connect(openWebsite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot4()));
+    connect(openWebsite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot5()));
+    connect(openWebsite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot6()));
+    connect(openWebsite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot7()));
+    connect(openWebsite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot8()));
+    connect(openWebsite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot9()));
+    connect(openWebsite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot10()));
+	
+	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
+    connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
+    connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
+    connect(Exchangesite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot4()));
+    connect(Exchangesite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot5()));
+    connect(Exchangesite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot6()));
+    connect(Exchangesite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot7()));
+    connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot8()));
+    connect(Exchangesite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot9()));
+    connect(Exchangesite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot10()));
+
+	
 
     modalOverlay = new ModalOverlay(this->centralWidget());
 #ifdef ENABLE_WALLET
@@ -397,6 +421,35 @@ void BitcoinGUI::createActions()
     connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showDebugWindow()));
     // prevents an open debug window from becoming stuck/unusable on client shutdown
     connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
+	/*
+			<file alias="bitcointalk">res/icons/Bitcointalk.png</file>
+		<file alias="bitcorecc">res/icons/BitcoreCC.png</file>
+		<file alias="cryptoid">res/icons/cryptoID.png</file>
+		<file alias="github">res/icons/GitHub.png</file>
+		<file alias="telegram">res/icons/Telegram.png</file>
+		<file alias="twitter">res/icons/Twitter.png</file>
+		*/
+	//CCCC
+    openWebsite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Bitcore.cc"), this);
+    openWebsite2 = new QAction(QIcon(":/icons/telegram"), tr("&Telegram"), this);
+    openWebsite3 = new QAction(QIcon(":/icons/twitter"), tr("&Twitter"), this);
+    openWebsite4 = new QAction(QIcon(":/icons/bitcointalk"), tr("&Bitcointalk"), this);
+    openWebsite5 = new QAction(QIcon(":/icons/reddit"), tr("&Reddit"), this);
+    openWebsite6 = new QAction(QIcon(":/icons/facebook"), tr("&Facebook"), this);
+    openWebsite7 = new QAction(QIcon(":/icons/coinomi"), tr("&Coinomi"), this);
+    openWebsite8 = new QAction(QIcon(":/icons/github"), tr("&Github"), this);
+    openWebsite9 = new QAction(QIcon(":/icons/insightapi"), tr("&Explorer 1"), this);
+    openWebsite10 = new QAction(QIcon(":/icons/cryptoid"), tr("&Explorer 2"), this);
+
+	Exchangesite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Bitcore.cc"), this);
+    Exchangesite2 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
+    Exchangesite3 = new QAction(QIcon(":/icons/bitz"), tr("&Bit-Z"), this);
+    Exchangesite4 = new QAction(QIcon(":/icons/chevron"), tr("&Exrates"), this);
+    Exchangesite5 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
+    Exchangesite6 = new QAction(QIcon(":/icons/vebitcoin"), tr("&Vebitcoin"), this);
+    Exchangesite7 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
+    Exchangesite8 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
+    Exchangesite9 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
 
 #ifdef ENABLE_WALLET
     if(walletFrame)
@@ -452,7 +505,38 @@ void BitcoinGUI::createMenuBar()
     }
     settings->addAction(optionsAction);
 
-    QMenu *help = appMenuBar->addMenu(tr("&Help"));
+///CCCC
+     if (walletFrame) {
+        QMenu* hyperlinks = appMenuBar->addMenu(tr("&Links"));
+        hyperlinks->addAction(openWebsite1);
+        hyperlinks->addSeparator();
+        hyperlinks->addAction(openWebsite2);
+        hyperlinks->addAction(openWebsite3);
+        hyperlinks->addAction(openWebsite4);
+        hyperlinks->addAction(openWebsite5);
+        hyperlinks->addAction(openWebsite6);
+		hyperlinks->addSeparator();
+        hyperlinks->addAction(openWebsite7);
+        hyperlinks->addAction(openWebsite8);
+        hyperlinks->addAction(openWebsite9);
+        hyperlinks->addAction(openWebsite10);
+    }
+	
+	     if (walletFrame) {
+        QMenu* hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
+        hyperlinks2->addAction(Exchangesite1);
+        hyperlinks2->addSeparator();
+        hyperlinks2->addAction(Exchangesite2);
+        hyperlinks2->addAction(Exchangesite3);
+        hyperlinks2->addAction(Exchangesite4);
+        hyperlinks2->addAction(Exchangesite5);
+        hyperlinks2->addAction(Exchangesite6);
+        hyperlinks2->addAction(Exchangesite7);
+        hyperlinks2->addAction(Exchangesite8);
+        hyperlinks2->addAction(Exchangesite9);
+    }
+	
+	QMenu *help = appMenuBar->addMenu(tr("&Help"));
     if(walletFrame)
     {
         help->addAction(openRPCConsoleAction);
@@ -608,6 +692,28 @@ void BitcoinGUI::createTrayIconMenu()
 
     trayIconMenu = new QMenu(this);
     trayIcon->setContextMenu(trayIconMenu);
+//CCCC
+    trayIconMenu->addAction(openWebsite1);
+    trayIconMenu->addAction(openWebsite2);
+	trayIconMenu->addAction(openWebsite3);
+	trayIconMenu->addAction(openWebsite4);
+	trayIconMenu->addAction(openWebsite5);
+	trayIconMenu->addAction(openWebsite6);
+	trayIconMenu->addAction(openWebsite7);
+	trayIconMenu->addAction(openWebsite8);
+	trayIconMenu->addAction(openWebsite9);
+	trayIconMenu->addAction(openWebsite10);
+   
+    trayIconMenu->addAction(Exchangesite1);
+    trayIconMenu->addAction(Exchangesite2);
+	trayIconMenu->addAction(Exchangesite3);
+	trayIconMenu->addAction(Exchangesite4);
+	trayIconMenu->addAction(Exchangesite5);
+	trayIconMenu->addAction(Exchangesite6);
+	trayIconMenu->addAction(Exchangesite7);
+	trayIconMenu->addAction(Exchangesite8);
+	trayIconMenu->addAction(Exchangesite9);
+
 
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));

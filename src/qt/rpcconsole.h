@@ -127,6 +127,27 @@ public Q_SLOTS:
     void unbanSelectedNode();
     /** set which tab has the focus (is visible) */
     void setTabFocus(enum TabTypes tabType);
+	//CC
+    void hyperlinks_slot1();
+    void hyperlinks_slot2();
+    void hyperlinks_slot3();
+    void hyperlinks_slot4();
+    void hyperlinks_slot5();
+    void hyperlinks_slot6();
+    void hyperlinks_slot7();
+    void hyperlinks_slot8();
+    void hyperlinks_slot9();
+    void hyperlinks_slot10();
+	
+    void hyperlinks2_slot1();
+    void hyperlinks2_slot2();
+    void hyperlinks2_slot3();
+    void hyperlinks2_slot4();
+    void hyperlinks2_slot5();
+    void hyperlinks2_slot6();
+    void hyperlinks2_slot7();
+    void hyperlinks2_slot8();
+    void hyperlinks2_slot9();
 
 Q_SIGNALS:
 	/** Get restart command-line parameters and handle restart */

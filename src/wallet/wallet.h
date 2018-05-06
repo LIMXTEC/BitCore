@@ -48,7 +48,7 @@ static const CAmount DEFAULT_FALLBACK_FEE = 2000000;
 //! -m_discard_rate default
 static const CAmount DEFAULT_DISCARD_FEE = 10000;
 //! -mintxfee default
-static const CAmount DEFAULT_TRANSACTION_MINFEE = 100000;
+static const CAmount DEFAULT_TRANSACTION_MINFEE = 10000;
 //! minimum recommended increment for BIP 125 replacement txs
 static const CAmount WALLET_INCREMENTAL_RELAY_FEE = 5000;
 //! target minimum change amount

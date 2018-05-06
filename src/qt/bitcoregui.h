@@ -113,6 +113,28 @@ private:
     QAction *openRPCConsoleAction;
     QAction *openAction;
     QAction *showHelpMessageAction;
+	
+	///
+    QAction* openWebsite1;
+    QAction* openWebsite2;
+    QAction* openWebsite3;
+    QAction* openWebsite4;
+    QAction* openWebsite5;
+    QAction* openWebsite6;
+    QAction* openWebsite7;
+    QAction* openWebsite8;
+    QAction* openWebsite9;
+    QAction* openWebsite10;
+
+    QAction* Exchangesite1;
+    QAction* Exchangesite2;
+    QAction* Exchangesite3;
+    QAction* Exchangesite4;
+    QAction* Exchangesite5;
+    QAction* Exchangesite6;
+    QAction* Exchangesite7;
+    QAction* Exchangesite8;
+    QAction* Exchangesite9;
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
