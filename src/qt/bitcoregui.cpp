@@ -534,6 +534,7 @@ void BitcoinGUI::createMenuBar()
         hyperlinks2->addAction(Exchangesite7);
         hyperlinks2->addAction(Exchangesite8);
         hyperlinks2->addAction(Exchangesite9);
+		hyperlinks2->addAction(Exchangesite10);
     }
 	
 	QMenu *help = appMenuBar->addMenu(tr("&Help"));
