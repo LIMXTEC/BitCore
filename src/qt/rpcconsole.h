@@ -127,7 +127,7 @@ public Q_SLOTS:
     void unbanSelectedNode();
     /** set which tab has the focus (is visible) */
     void setTabFocus(enum TabTypes tabType);
-	//CC
+	//CCCC
     void hyperlinks_slot1();
     void hyperlinks_slot2();
     void hyperlinks_slot3();
