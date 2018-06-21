@@ -145,9 +145,9 @@ public:
         vSeeds.emplace_back("dnsseed.koin-project.com", false);
         */
 		
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,0);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,50);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,3); //2 34 letters
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,125); //s 34 letters
+        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,125); //s 34 letters
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
@@ -215,25 +215,25 @@ public:
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb"); //2
+        consensus.defaultAssumeValid = uint256S("0xe833c399f04b0e7fa4ad143cdc8d311fe5a654c42c95b36c6c4dd92adf41f88f"); //2
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0x0b;
-        pchMessageStart[1] = 0x11;
-        pchMessageStart[2] = 0x09;
-        pchMessageStart[3] = 0x07;
-        nDefaultPort = 18333;
+        pchMessageStart[0] = 0xfd;
+        pchMessageStart[1] = 0xd2;
+        pchMessageStart[2] = 0xc8;
+        pchMessageStart[3] = 0xf1;
+        nDefaultPort = 8666;
         nPruneAfterHeight = 1000;
 
 
-        genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 0 * COIN); // BitCore 1492973331, 3716037
+        genesis = CreateGenesisBlock(1493124695, 1728920, 0x1e0ffff0, 1, 12.5 * COIN); // BitCore 1492973331, 3716037
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x604148281e5c4b7f2487e5d03cd60d8e6f69411d613f6448034508cea52e9574"));
-        assert(genesis.hashMerkleRoot == uint256S("0x1669526520b4e037738825c5f09c01c8f6ef6a3a5ee552e65e6d0141507987c7"));
+        assert(consensus.hashGenesisBlock == uint256S("0x02c5d66e8edb49984eb743c798bca069466ce457b7febfa3c3a01b33353b7bc6"));
+        assert(genesis.hashMerkleRoot == uint256S("0x0ac58b2cf882f0d25b640d4b22411a22246962aff702064255b2611f48e300ff"));
 
           vFixedSeeds.clear();
         // Note that of those with the service bits flag, most only support a subset of possible options
@@ -259,7 +259,7 @@ public:
 
         checkpointData = (CCheckpointData){
         {
-			{ 2, uint256S("0x222db35707d9af172ea5c23582338874d1f2956b1850f857c50a3e6f2c6f313")},
+			{ 0, uint256S("0xe02c5d66e8edb49984eb743c798bca069466ce457b7febfa3c3a01b33353b7bc6")},
 		}
         };
 
