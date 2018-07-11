@@ -8,9 +8,6 @@ cache:
   - depends/built
   - depends/sdk-sources
   - $HOME/.ccache
-stages:
-  - lint
-  - test
 env:
   global:
     - MAKEJOBS=-j3
