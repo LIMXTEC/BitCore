@@ -19,17 +19,17 @@ env:
     - BASE_PACKAGES="libdb4.8-dev libdb4.8++-dev zlib1g-dev zip git build-essential libtool autotools-dev automake pkg-config bsdmainutils curl libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libevent-dev"
   matrix:
 # ARM32
-    - HOST=arm-linux-gnueabihf PACKAGES="g++-arm-linux-gnueabihf" OPT="NO_QT=1" CONF="--without-gui" 
+    - HOST=arm-linux-gnueabihf PACKAGES="g++-arm-linux-gnueabihf" OPT="NO_QT=1" BITCORE_CONFIG="--without-gui" 
 # ARM64
-    - HOST=aarch64-linux-gnu PACKAGES="g++-aarch64-linux-gnu" OPT="NO_QT=1" CONF="--without-gui"
+    - HOST=aarch64-linux-gnu PACKAGES="g++-aarch64-linux-gnu" OPT="NO_QT=1" BITCORE_CONFIG="--without-gui"
 # Win32
-    - HOST=i686-w64-mingw32 PACKAGES="g++-mingw-w64-i686 mingw-w64-i686-dev" CONF="" 
+    - HOST=i686-w64-mingw32 PACKAGES="g++-mingw-w64-i686 mingw-w64-i686-dev" BITCORE_CONFIG="" 
 # Win64
-    - HOST=x86_64-w64-mingw32 PACKAGES="g++-mingw-w64-x86-64 mingw-w64-x86-64-dev" CONF="" 
+    - HOST=x86_64-w64-mingw32 PACKAGES="g++-mingw-w64-x86-64 mingw-w64-x86-64-dev" BITCORE_CONFIG="" 
 # x86_64 Linux
-    - HOST=x86_64-unknown-linux-gnu PACKAGES="" CONF="" 
+    - HOST=x86_64-unknown-linux-gnu PACKAGES="" BITCORE_CONFIG="" 
 # Cross-Mac-10.11
-    - HOST=x86_64-apple-darwin11 PACKAGES="cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools python-dev" OSX_SDK=10.11 CONF="" 
+    - HOST=x86_64-apple-darwin11 PACKAGES="cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools python-dev" OSX_SDK=10.11 BITCORE_CONFIG="" 
 
 before_install:
     - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
@@ -49,7 +49,7 @@ script:
     - OUTDIR=$BASE_OUTDIR/$TRAVIS_PULL_REQUEST/$TRAVIS_JOB_NUMBER-$HOST
     - ./autogen.sh
     - cd depends && make $MAKEJOBS $OPT
-    - cd $TRAVIS_BUILD_DIR && ./configure --prefix=$TRAVIS_BUILD_DIR/depends/$HOST $CONF --disable-tests --disable-hardening --disable-bench
+    - cd $TRAVIS_BUILD_DIR && ./configure --prefix=$TRAVIS_BUILD_DIR/depends/$HOST $BITCORE_CONFIG --disable-tests --disable-hardening --disable-bench
     - make $MAKEJOBS
 before_deploy:
     - ./pre-deploy.sh
