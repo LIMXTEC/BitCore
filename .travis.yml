@@ -16,7 +16,7 @@ env:
     - CCACHE_COMPRESS=1
     - MAKEJOBS="-j2"
     - BASE_OUTDIR=$TRAVIS_BUILD_DIR/out
-    - BASE_PACKAGES="libdb4.8-dev libdb4.8++-dev zlib1g-dev zip git build-essential libtool autotools-dev automake pkg-config bsdmainutils curl libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libevent-dev"
+    - BASE_PACKAGES="zlib1g-dev zip git build-essential libtool autotools-dev automake pkg-config bsdmainutils curl libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libevent-dev libssl-dev libboost-all-dev libminiupnpc-dev libdb4.8-dev libdb4.8++-dev"
   matrix:
 # ARM32
     - HOST=arm-linux-gnueabihf PACKAGES="g++-arm-linux-gnueabihf" OPT="NO_QT=1" BITCORE_CONFIG="--without-gui" 
