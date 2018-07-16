@@ -1116,7 +1116,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 	    int nSubsidyHalvingInterval2 = 840000;
 	    nSubsidy /= block_reward_change_f4;
 	    int halvings = (nHeight+BTXFullblock) / nSubsidyHalvingInterval2;
-	    if (halvings >= 10) return nSubsidy / 1024;
+	    if (halvings >= 256) return 0; //if (halvings >= 64) Bitcoin _ We have more blocks factor 4
 	    nSubsidy >>= halvings;
 	    return nSubsidy;
 	    }
