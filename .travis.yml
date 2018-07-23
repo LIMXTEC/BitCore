@@ -5,60 +5,82 @@ language: minimal
 cache:
   directories:
   - depends/built
-  - depends/work
   - depends/sdk-sources
   - $HOME/.ccache
+git:
+  depth: false  # full clone for git subtree check, this works around issue #12388
 env:
   global:
-    - SDK_URL=https://bitcoincore.org/depends-sources/sdks
-    - CCACHE_SIZE=250M
+    - MAKEJOBS=-j3
+    - RUN_TESTS=false
+    - CHECK_DOC=0
+    - BOOST_TEST_RANDOM=1$TRAVIS_BUILD_ID
+    - CCACHE_SIZE=100M
     - CCACHE_TEMPDIR=/tmp/.ccache-temp
     - CCACHE_COMPRESS=1
-    - MAKEJOBS="-j2"
     - BASE_OUTDIR=$TRAVIS_BUILD_DIR/out
-    - BASE_PACKAGES="zlib1g-dev zip git build-essential libtool autotools-dev automake pkg-config bsdmainutils curl libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libevent-dev libssl-dev libboost-all-dev libminiupnpc-dev libdb4.8-dev libdb4.8++-dev"
+    - SDK_URL=https://machinecoin.io/depends-sources/sdks
+    - WINEDEBUG=fixme-all
   matrix:
-# ARM32
-    - HOST=arm-linux-gnueabihf PACKAGES="g++-arm-linux-gnueabihf" OPT="NO_QT=1" BITCORE_CONFIG="--without-gui" 
-# ARM64
-    - HOST=aarch64-linux-gnu PACKAGES="g++-aarch64-linux-gnu" OPT="NO_QT=1" BITCORE_CONFIG="--without-gui"
+# ARM
+    - HOST=arm-linux-gnueabihf PACKAGES="g++-arm-linux-gnueabihf python3-pip" DEP_OPTS="NO_QT=1" GOAL="install" BITCORE_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
 # Win32
-    - HOST=i686-w64-mingw32 PACKAGES="g++-mingw-w64-i686 mingw-w64-i686-dev" BITCORE_CONFIG="" 
+    - HOST=i686-w64-mingw32 DPKG_ADD_ARCH="i386" DEP_OPTS="NO_QT=1" PACKAGES="python3 nsis g++-mingw-w64-i686 wine1.6" RUN_TESTS=false GOAL="install" BITCORE_CONFIG="--enable-reduce-exports"
+# Qt4 & system libs
+    - HOST=x86_64-unknown-linux-gnu PACKAGES="python3-zmq qt4-dev-tools libssl-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libdb5.1++-dev libminiupnpc-dev libzmq3-dev libprotobuf-dev protobuf-compiler libqrencode-dev xvfb" NO_DEPENDS=1 NEED_XVFB=1 RUN_TESTS=false GOAL="install" BITCORE_CONFIG="--enable-zmq --with-incompatible-bdb --enable-glibc-back-compat --enable-reduce-exports --with-gui=qt4 CPPFLAGS=-DDEBUG_LOCKORDER"
+# 32-bit + dash
+    - HOST=i686-pc-linux-gnu PACKAGES="g++-multilib python3-zmq" DEP_OPTS="NO_QT=1" RUN_TESTS=false GOAL="install" BITCORE_CONFIG="--enable-zmq --enable-glibc-back-compat --enable-reduce-exports LDFLAGS=-static-libstdc++" USE_SHELL="/bin/dash"
 # Win64
-    - HOST=x86_64-w64-mingw32 PACKAGES="g++-mingw-w64-x86-64 mingw-w64-x86-64-dev" BITCORE_CONFIG="" 
-# x86_64 Linux
-    - HOST=x86_64-unknown-linux-gnu PACKAGES="" BITCORE_CONFIG="" 
-# Cross-Mac-10.11
-    - HOST=x86_64-apple-darwin11 PACKAGES="cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools python-dev" OSX_SDK=10.11 BITCORE_CONFIG="" 
+    - HOST=x86_64-w64-mingw32 DPKG_ADD_ARCH="i386" DEP_OPTS="NO_QT=1" PACKAGES="python3 nsis g++-mingw-w64-x86-64 wine1.6" RUN_TESTS=false GOAL="install" BITCORE_CONFIG="--enable-reduce-exports"
+# x86_64 Linux (uses qt5 dev package instead of depends Qt to speed up build and avoid timeout)
+    - HOST=x86_64-unknown-linux-gnu PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev" DEP_OPTS="NO_QT=1 NO_UPNP=1 DEBUG=1 ALLOW_HOST_PACKAGES=1" RUN_TESTS=false GOAL="install" BITCORE_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER"
+# x86_64 Linux, No wallet
+    - HOST=x86_64-unknown-linux-gnu PACKAGES="python3" DEP_OPTS="NO_WALLET=1" RUN_TESTS=false GOAL="install" BITCORE_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
+# Cross-Mac
+    - HOST=x86_64-apple-darwin11 PACKAGES="cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools python-dev" BITCORE_CONFIG="--enable-gui --enable-reduce-exports --enable-werror" OSX_SDK=10.11 GOAL="deploy"
 
 before_install:
     - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
 install:
-    - sudo add-apt-repository -y ppa:bitcoin/bitcoin
-    - sudo apt-get update
-    - travis_retry sudo apt-get install --no-install-recommends --no-upgrade -qq $BASE_PACKAGES 
+    - if [ -n "$DPKG_ADD_ARCH" ]; then sudo dpkg --add-architecture "$DPKG_ADD_ARCH" ; fi
+    - if [ -n "$PACKAGES" ]; then travis_retry sudo apt-get update; fi
     - if [ -n "$PACKAGES" ]; then travis_retry sudo apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES; fi
+    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_EVENT_TYPE" = "pull_request" ]; then travis_retry pip3 install flake8 --user; fi
 before_script:
+    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_EVENT_TYPE" = "pull_request" ]; then contrib/devtools/commit-script-check.sh $TRAVIS_COMMIT_RANGE; fi
+    - if [ "$CHECK_DOC" = 1 ]; then contrib/devtools/git-subtree-check.sh src/crypto/ctaes; fi
+    - if [ "$CHECK_DOC" = 1 ]; then contrib/devtools/git-subtree-check.sh src/secp256k1; fi
+    - if [ "$CHECK_DOC" = 1 ]; then contrib/devtools/git-subtree-check.sh src/univalue; fi
+    - if [ "$CHECK_DOC" = 1 ]; then contrib/devtools/git-subtree-check.sh src/leveldb; fi
+    - if [ "$CHECK_DOC" = 1 ]; then contrib/devtools/check-doc.py; fi
+    - if [ "$CHECK_DOC" = 1 ]; then contrib/devtools/check-rpc-mappings.py .; fi
+    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_EVENT_TYPE" = "pull_request" ]; then contrib/devtools/lint-all.sh; fi
     - unset CC; unset CXX
-    - cd $TRAVIS_BUILD_DIR
     - mkdir -p depends/SDKs depends/sdk-sources
     - if [ -n "$OSX_SDK" -a ! -f depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz ]; then curl --location --fail $SDK_URL/MacOSX${OSX_SDK}.sdk.tar.gz -o depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz; fi
     - if [ -n "$OSX_SDK" -a -f depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz ]; then tar -C depends/SDKs -xf depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz; fi
+    - if [ -z "$NO_DEPENDS" ]; then make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS; fi
+    # Start xvfb if needed, as documented at https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
+    - if [ "$NEED_XVFB" = 1 ]; then export DISPLAY=:99.0; /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac; fi
 script:
-
+    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "machinecoin/machinecoin" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then while read LINE; do travis_retry gpg --keyserver hkp://subset.pool.sks-keyservers.net --recv-keys $LINE; done < contrib/verify-commits/trusted-keys; fi
+    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "machinecoin/machinecoin" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then contrib/verify-commits/verify-commits.sh; fi
+    - export TRAVIS_COMMIT_LOG=`git log --format=fuller -1`
+    - if [ -n "$USE_SHELL" ]; then export CONFIG_SHELL="$USE_SHELL"; fi
     - OUTDIR=$BASE_OUTDIR/$TRAVIS_PULL_REQUEST/$TRAVIS_JOB_NUMBER-$HOST
-    - ./autogen.sh
-    - cd depends && make $MAKEJOBS $OPT
-    - cd $TRAVIS_BUILD_DIR && ./configure --prefix=$TRAVIS_BUILD_DIR/depends/$HOST $BITCORE_CONFIG --disable-tests --disable-hardening --disable-bench
-    - make $MAKEJOBS
-before_deploy:
-    - ./pre-deploy.sh
-deploy:
-  provider: releases
-  api_key: 
-    secure: Yai5OGSMOwPEbA41/N0nZHDx9z6kkIcmYmjo/6qEFVr7GL7VHSvSK7LFcNrUjseSHzLcwVVKRZqL5Dq+VHZsUSOI1IM0t5IXbBCgNyJE23RcxjUZufBPrxjabxrkDhUjSrqBilAFUg2KYFRMDBTGPcdqegpl6wsCIzrNn/wCUOXsib531enc/eMFS+OcZVvihFubX1agI8fq7mdhGuCiRtl73u9wfAxn0ygccgGYhGMqIInHm6B5IrbSRQLl5o599+OTvwf1Zm49ChPsYcvGxvxTlEqooQlHhKn+QNmLFua+u6Ru43bynr+5wMkkVNtW0i+ecl8ypEmkYtEcKF+gDbv3F7Lvj7LtrcBAYM2APrxaYudvOLHV83tJmOdimlxKJUokAtzb+Cs9sddqpkrFRVD/BOxiE0Nj+X1YbBWpN86Xw4fpVWQpRns8ToxHMMpjR2lokBBIyRGCTUTj6WT3fYBcM0dIsZZgPG6MRXHfLVDpYcCujVYs3dLmtoxzqYSWP6QC75D7vxXethEOPawIULHQcGGAR6WHIwaWMo2gOMw1IBt3RqnXDFN/1sd0sugC0+gjUOCCINCxBGzLvbsm1GAy9viGSfi7VPy3LMfI1NGGXI15TTmGmlAomSs9mUG+4hHJmxDZvEvaNKJcDYuK1TU85AXNsmg6xV5Ra9Ugn+Q=
-  file_glob: true
-  file: out/**/zip/*
-  skip_cleanup: true
-  on:
-tags: true
+    - BITCORE_CONFIG_ALL="--disable-dependency-tracking --prefix=$TRAVIS_BUILD_DIR/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib --disable-tests --disable-hardening --disable-bench"
+    - if [ -z "$NO_DEPENDS" ]; then depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; fi
+    - test -n "$USE_SHELL" && eval '"$USE_SHELL" -c "./autogen.sh"' || ./autogen.sh
+    - mkdir build && cd build
+    - ../configure --cache-file=config.cache $BITCORE_CONFIG_ALL $BITCORE_CONFIG || ( cat config.log && false)
+    - make distdir VERSION=$HOST
+    - cd machinecoin-$HOST
+    - ./configure --cache-file=../config.cache $BITCORE_CONFIG_ALL $BITCORE_CONFIG || ( cat config.log && false)
+    - make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
+    - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib
+    - if [ "$RUN_TESTS" = "true" ]; then travis_wait 30 make $MAKEJOBS check VERBOSE=1; fi
+    - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then extended="--extended --exclude feature_pruning,feature_dbcrash"; fi
+    - if [ "$RUN_TESTS" = "true" ]; then test/functional/test_runner.py --combinedlogslen=4000 --coverage --quiet ${extended}; fi
+after_script:
+    - echo $TRAVIS_COMMIT_RANGE
+    - echo $TRAVIS_COMMIT_LOG
