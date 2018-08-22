@@ -139,7 +139,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 	unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
 	if (params.fPowNoRetargeting)
 	{
-        if (pindexLast == NULL)
+        if (pindexLast->nHeight == 1)
             return nProofOfWorkLimit*10000;
 		return pindexLast->nBits;
 	}
