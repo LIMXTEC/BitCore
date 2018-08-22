@@ -136,6 +136,8 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     assert(pindexLast != nullptr);
+	if (params.fPowNoRetargeting)
+        return pindexLast->nBits;
 
     int fork1 = 10000;
     int fork2 = 21000;
