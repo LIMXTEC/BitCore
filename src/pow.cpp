@@ -137,11 +137,10 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 {
     assert(pindexLast != nullptr);
 	unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
-	if (params.fPowNoRetargeting)
+	
+if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks )
 	{
-        if (pindexLast->nHeight == 1)
-            return nProofOfWorkLimit*10000;
-		return pindexLast->nBits;
+		return nProofOfWorkLimit;
 	}
     int fork1 = 10000;
     int fork2 = 21000;
