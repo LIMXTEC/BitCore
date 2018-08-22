@@ -137,8 +137,11 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 {
     assert(pindexLast != nullptr);
 	if (params.fPowNoRetargeting)
-        return pindexLast->nBits;
-
+	{
+        if (pindexLast == NULL)
+            return nProofOfWorkLimit*10000;
+		return pindexLast->nBits;
+	}
     int fork1 = 10000;
     int fork2 = 21000;
     if (pindexLast->nHeight+1 <= fork1)
