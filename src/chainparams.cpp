@@ -65,14 +65,6 @@ void CChainParams::UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64
 /**
  * Main network
  */
-/**
- * What makes a good checkpoint block?
- * + Is surrounded by blocks with reasonable timestamps
- *   (no blocks before with a timestamp after, none after with
- *    timestamp before)
- * + Contains no strange transactions
- */
-
 class CMainParams : public CChainParams {
 public:
     CMainParams() {
@@ -161,7 +153,6 @@ public:
         fRequireStandard = true;
         fMineBlocksOnDemand = false;
 
-
         checkpointData = (CCheckpointData){
         {
             { 2, uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb")},
@@ -177,9 +168,9 @@ public:
         chainTxData = ChainTxData{
             // Data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
             1524674828, // * UNIX timestamp of last known number of transactions
-            1319232,  // * total number of transactions between genesis and that timestamp
+            1319232,    // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            1         // * estimated number of transactions per second after that timestamp
+            1           // * estimated number of transactions per second after that timestamp
         };
     }
 };
@@ -228,6 +219,7 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
+
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xd2;
         pchMessageStart[2] = 0xc8;
@@ -241,7 +233,7 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x02c5d66e8edb49984eb743c798bca069466ce457b7febfa3c3a01b33353b7bc6"));
         assert(genesis.hashMerkleRoot == uint256S("0x0ac58b2cf882f0d25b640d4b22411a22246962aff702064255b2611f48e300ff"));
 
-          vFixedSeeds.clear();
+        //vFixedSeeds.clear();
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.emplace_back("188.68.52.172", true);
         vSeeds.emplace_back("37.120.186.85", true);
@@ -273,9 +265,9 @@ public:
         chainTxData = ChainTxData{
             // Data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
             1490495580, // * UNIX timestamp of last known number of transactions
-            449775,  // * total number of transactions between genesis and that timestamp
+            449775,     // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            500.0         // * estimated number of transactions per second after that timestamp
+            500.0       // * estimated number of transactions per second after that timestamp
         };
 
     }
