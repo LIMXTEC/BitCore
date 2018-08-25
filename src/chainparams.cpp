@@ -84,12 +84,12 @@ public:
         consensus.BIP66Height = 2; // 83703951207fcf9e22516f97603f8621299de483e85d85e8a86f7b0fd32717dc
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // BitCore PoW Limit
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60;
-	consensus.nPowTargetTimespanV2 = 160 * 60;
+        consensus.nPowTargetTimespanV2 = 160 * 60;
         consensus.nPowTargetSpacing = 2.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 250; // Segwit direct online
-	//Limx DevMinimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period, (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments. 
+        //Limx DevMinimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period, (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments. 
         consensus.nMinerConfirmationWindow = 1000; //2016 nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1492973500; // January 1, 2008
@@ -116,38 +116,38 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          *
-	 */
-	
-	pchMessageStart[0] = 0xf9;
+         */
+
+        pchMessageStart[0] = 0xf9;
         pchMessageStart[1] = 0xbe;
         pchMessageStart[2] = 0xb4;
         pchMessageStart[3] = 0xd9;
         nDefaultPort = 8555;
         nPruneAfterHeight = 100000;
-		//Time Nonce ?
-		// genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 50 * COIN); // BitCore 1492973331, 3716037
+        //Time Nonce ?
+        // genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 50 * COIN); // BitCore 1492973331, 3716037
         genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 0 * COIN); // BitCore 1492973331, 3716037
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x604148281e5c4b7f2487e5d03cd60d8e6f69411d613f6448034508cea52e9574"));
         assert(genesis.hashMerkleRoot == uint256S("0x1669526520b4e037738825c5f09c01c8f6ef6a3a5ee552e65e6d0141507987c7"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-		
+
         vSeeds.emplace_back("37.120.190.76", false);
         vSeeds.emplace_back("37.120.186.85", false);
-	vSeeds.emplace_back("185.194.140.60", false);
+        vSeeds.emplace_back("185.194.140.60", false);
         vSeeds.emplace_back("188.71.223.206", false);
         vSeeds.emplace_back("185.194.142.122", false);
-	vSeeds.emplace_back("seed.bitcore.biz", true);
-		
-	/*
-	vSeeds.emplace_back("seed-a.litecoin.loshan.co.uk", true);
+        vSeeds.emplace_back("seed.bitcore.biz", true);
+
+        /*
+        vSeeds.emplace_back("seed-a.litecoin.loshan.co.uk", true);
         vSeeds.emplace_back("dnsseed.thrasher.io", true);
         vSeeds.emplace_back("dnsseed.litecointools.com", true);
         vSeeds.emplace_back("dnsseed.litecoinpool.org", true);
         vSeeds.emplace_back("dnsseed.koin-project.com", false);
         */
-		
+
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,3); //2 34 letters
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,125); //s 34 letters
         base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,125); //s 34 letters
@@ -164,15 +164,15 @@ public:
 
         checkpointData = (CCheckpointData){
         {
-			{ 2, uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb")},
-			{ 50000, uint256S("0xd3cdc4bd5bdafa908fae273f5cca9fda527b49e3fe727c6fe9122f28f2afbf6d")},
-			{ 100000, uint256S("0x99103dc00414fd4c90b03cd1a770626e2ac681baa10e5f7f7ce089a6d98f0dad")},
-			{ 150000, uint256S("0xa4245ff8d8a3d7fbbfde37a961fc74228ab142282d3c4f6104c69d28a5414c7c")},
-			{ 175000, uint256S("0x4b6cc8d2b186d4aaecab3b72bfa88469690e775ae586c35947d77bd6dabd1607")},
-			{ 200000, uint256S("0x65c89c662dbdad4aeeb4215076884be736a7512984741b353bbdef47478305e5")},
-			{ 215000, uint256S("0x18accc496518e6f3008eeaab7e04123939d66eb7f8a02f2fcb3d69093c1df38c")},
+            { 2, uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb")},
+            { 50000, uint256S("0xd3cdc4bd5bdafa908fae273f5cca9fda527b49e3fe727c6fe9122f28f2afbf6d")},
+            { 100000, uint256S("0x99103dc00414fd4c90b03cd1a770626e2ac681baa10e5f7f7ce089a6d98f0dad")},
+            { 150000, uint256S("0xa4245ff8d8a3d7fbbfde37a961fc74228ab142282d3c4f6104c69d28a5414c7c")},
+            { 175000, uint256S("0x4b6cc8d2b186d4aaecab3b72bfa88469690e775ae586c35947d77bd6dabd1607")},
+            { 200000, uint256S("0x65c89c662dbdad4aeeb4215076884be736a7512984741b353bbdef47478305e5")},
+            { 215000, uint256S("0x18accc496518e6f3008eeaab7e04123939d66eb7f8a02f2fcb3d69093c1df38c")},
         }
-		};
+        };
 
         chainTxData = ChainTxData{
             // Data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
@@ -243,21 +243,21 @@ public:
 
           vFixedSeeds.clear();
         // Note that of those with the service bits flag, most only support a subset of possible options
-	vSeeds.emplace_back("188.68.52.172", true);
+        vSeeds.emplace_back("188.68.52.172", true);
         vSeeds.emplace_back("37.120.186.85", true);
         vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("188.71.223.206", true);	    
+        vSeeds.emplace_back("188.71.223.206", true);        
         vSeeds.emplace_back("185.194.142.122", false);
-	vSeeds.emplace_back("51.15.84.165", true);
+        vSeeds.emplace_back("51.15.84.165", true);
 
-		
+        
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
         base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,58);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
-		
+        
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
         fDefaultConsistencyChecks = false;
@@ -266,8 +266,8 @@ public:
 
         checkpointData = (CCheckpointData){
         {
-			{ 0, uint256S("0xe02c5d66e8edb49984eb743c798bca069466ce457b7febfa3c3a01b33353b7bc6")},
-		}
+            { 0, uint256S("0xe02c5d66e8edb49984eb743c798bca069466ce457b7febfa3c3a01b33353b7bc6")},
+        }
         };
 
         chainTxData = ChainTxData{
@@ -329,11 +329,8 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x1669526520b4e037738825c5f09c01c8f6ef6a3a5ee552e65e6d0141507987c7"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-	vSeeds.emplace_back("188.68.52.172", true);
-        vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("188.71.223.206", true);
-        vSeeds.emplace_back("185.194.142.122", false);
+        vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
+        vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
 
         fDefaultConsistencyChecks = true;
         fRequireStandard = false;
@@ -341,7 +338,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             {
-                { 999999, uint256S("0x0000000069e244f73d78e8fd29ba2fd2ed618bd6fa2ee92559f542fdb26e7c1d")},
+                { 0, uint256S("0x604148281e5c4b7f2487e5d03cd60d8e6f69411d613f6448034508cea52e9574")},
             }
         };
  

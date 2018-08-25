@@ -105,7 +105,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
         {
         if(kgwdebug)LogPrintf("Vordiff:%08x %s bnNew first  \n", bnNew.GetCompact(), bnNew.ToString().c_str());
         const int nLongShortNew1   = 85; const int nLongShortNew2   = 100;
-        bnNew = bnNew * nLongShortNew1;	bnNew = bnNew / nLongShortNew2;	
+        bnNew = bnNew * nLongShortNew1;    bnNew = bnNew / nLongShortNew2;    
         if(kgwdebug)LogPrintf("Erhöhte Diff:\n %08x %s bnNew second \n", bnNew.GetCompact(), bnNew.ToString().c_str() );
         }
 
@@ -124,7 +124,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
     if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime 
     {
         bnNew = bnPowLimit;
-       	if(kgwdebug)LogPrintf("<BSD> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+           if(kgwdebug)LogPrintf("<BSD> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
     }
 
     if (bnNew > bnPowLimit) {
@@ -136,6 +136,12 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     assert(pindexLast != nullptr);
+
+    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+    if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks )
+    {
+        return nProofOfWorkLimit;
+    }
 
     int fork1 = 10000;
     int fork2 = 21000;
@@ -239,12 +245,12 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
 
     // Initial //64_15 Written by Limx Dev 04/2017
     int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
-	const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-	bool fShift;
-	// Initial
+    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+    bool fShift;
+    // Initial
     if (pindexLast->nHeight+1 <= fork2)
     {
-	if (nActualTimespan < params.nPowTargetTimespan/4)
+    if (nActualTimespan < params.nPowTargetTimespan/4)
         nActualTimespan = params.nPowTargetTimespan/4;
     if (nActualTimespan > params.nPowTargetTimespan*4)
         nActualTimespan = params.nPowTargetTimespan*4;
@@ -267,8 +273,8 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
-	
-	}
+    
+    }
     else
     {
     if (nActualTimespan < params.nPowTargetTimespanV2/1.15)
@@ -294,7 +300,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
-	}
+    }
 }
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
