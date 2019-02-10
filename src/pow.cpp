@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers\n// Copyright (c) 2009-2016 The Litecoin Core developers\n// Copyright (c) 2009-2016 The Bitcore Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers\n
+// Copyright (c) 2009-2016 The Litecoin Core developers\n
+// Copyright (c) 2017-2019 The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -34,9 +36,9 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
     uint64_t pastSecondsMax = timeDaySeconds * 7;
     uint64_t PastBlocksMin = pastSecondsMin / Blocktime;
     uint64_t PastBlocksMax = pastSecondsMax / Blocktime;
-    
+
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    
+
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) {  return bnPowLimit.GetCompact(); }
 
     for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
@@ -68,7 +70,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
         if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
         BlockReading = BlockReading->pprev;
     }
-    
+
     //KGW Original
     arith_uint256 kgw_dual1(PastDifficultyAverage);
     arith_uint256 kgw_dual2;
@@ -77,10 +79,10 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
          kgw_dual1 *= PastRateActualSeconds;
          kgw_dual1 /= PastRateTargetSeconds;
     }
-    
+
     int64_t nActualTime1 = pindexLast->GetBlockTime() - pindexLast->pprev->GetBlockTime();
     int64_t nActualTimespanshort = nActualTime1;
-    
+
     // Retarget BTC Original ...not exactly
     // Small Fix
 
@@ -90,41 +92,41 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
         nActualTime1 = Blocktime / 3;
     if (nActualTime1 > Blocktime * 3)
         nActualTime1 = Blocktime * 3;
-        
+
     kgw_dual2 *= nActualTime1;
     kgw_dual2 /= Blocktime;
-    
+
     //Fusion from Retarget and Classic KGW3 (BitSend=)
-    
+
     arith_uint256 bnNew;
     bnNew = ((kgw_dual2 + kgw_dual1)/2);
     // DUAL KGW3 increased rapidly the Diff if Blocktime to last block under Blocktime/6 sec.
-    
+
     if(kgwdebug)LogPrintf("nActualTimespanshort = %d \n", nActualTimespanshort );
     if( nActualTimespanshort < Blocktime/6 )
         {
         if(kgwdebug)LogPrintf("Vordiff:%08x %s bnNew first  \n", bnNew.GetCompact(), bnNew.ToString().c_str());
         const int nLongShortNew1   = 85; const int nLongShortNew2   = 100;
-        bnNew = bnNew * nLongShortNew1;    bnNew = bnNew / nLongShortNew2;    
+        bnNew = bnNew * nLongShortNew1;    bnNew = bnNew / nLongShortNew2;
         if(kgwdebug)LogPrintf("Erhöhte Diff:\n %08x %s bnNew second \n", bnNew.GetCompact(), bnNew.ToString().c_str() );
         }
 
-    
+
     //BitBreak BitSend
     // Reduce difficulty if current block generation time has already exceeded maximum time limit.
     // Diffbreak 12 Hours
-    const int nLongTimeLimit   = 12 * 60 * 60; 
+    const int nLongTimeLimit   = 12 * 60 * 60;
     if(kgwdebug)
     {
     LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
     LogPrintf("Vordiff %d \n", nLongTimeLimit);
     LogPrintf(" %d Block", BlockReading->nHeight );
     }
-    
-    if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime 
+
+    if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime
     {
         bnNew = bnPowLimit;
-           if(kgwdebug)LogPrintf("<BSD> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+           if(kgwdebug)LogPrintf("<BSD> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
     }
 
     if (bnNew > bnPowLimit) {
@@ -272,7 +274,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
-    
+
     }
     else
     {

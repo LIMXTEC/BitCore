@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers\n// Copyright (c) 2009-2016 The Litecoin Core developers\n// Copyright (c) 2009-2016 The Bitcore Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers\n
+// Copyright (c) 2009-2016 The Litecoin Core developers\n
+// Copyright (c) 2017-2019 The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -69,7 +71,7 @@
 #ifdef USE_SSE2
 #include "crypto/scrypt.h"
 #endif
-bool fRestartRequested = false; 
+bool fRestartRequested = false;
 bool fFeeEstimatesInitialized = false;
 static const bool DEFAULT_PROXYRANDOMIZE = true;
 static const bool DEFAULT_REST_ENABLE = false;
@@ -172,7 +174,7 @@ void Interrupt(boost::thread_group& threadGroup)
     threadGroup.interrupt_all();
 }
 /** Preparing steps before shutting down or restarting the wallet */
-void PrepareShutdown() 
+void PrepareShutdown()
 {
     fRequestShutdown = true; // Needed when we shutdown the wallet//TODO--
     fRestartRequested = true; // Needed when we restart the wallet//TODO--
@@ -259,14 +261,14 @@ void PrepareShutdown()
 }
 /*TODO-- */
 void Shutdown()
-{	
+{
 // Shutdown part 1: prepare shutdown
     if(!fRestartRequested){
         PrepareShutdown();
     }
 
    // Shutdown part 2: delete wallet instance
-	
+
 #ifdef ENABLE_WALLET
     for (CWalletRef pwallet : vpwallets) {
         delete pwallet;
@@ -276,7 +278,7 @@ void Shutdown()
     globalVerifyHandle.reset();
     ECC_Stop();
     LogPrintf("%s: done\n", __func__);
-	/* 
+	/*
     LogPrintf("%s: In progress...\n", __func__);
     static CCriticalSection cs_Shutdown;
     TRY_LOCK(cs_Shutdown, lockShutdown);

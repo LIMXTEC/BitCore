@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers\n// Copyright (c) 2009-2016 The Litecoin Core developers\n// Copyright (c) 2009-2016 The Bitcore Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers\n
+// Copyright (c) 2009-2016 The Litecoin Core developers\n
+// Copyright (c) 2017-2019 The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -689,7 +691,7 @@ private:
     void removeUnchecked(txiter entry, MemPoolRemovalReason reason = MemPoolRemovalReason::UNKNOWN);
 };
 
-/** 
+/**
  * CCoinsView that brings transactions from a memorypool into view.
  * It does not check for spendings by memory pool transactions.
  * Instead, it provides access to all Coins which are either unspent in the
