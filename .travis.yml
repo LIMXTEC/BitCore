@@ -61,8 +61,8 @@ before_script:
     # Start xvfb if needed, as documented at https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
     - if [ "$NEED_XVFB" = 1 ]; then export DISPLAY=:99.0; /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac; fi
 script:
-    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "dalijolijo/BitCore" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then while read LINE; do travis_retry gpg --keyserver hkp://subset.pool.sks-keyservers.net --recv-keys $LINE; done < contrib/verify-commits/trusted-keys; fi
-    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "dalijolijo/BitCore" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then contrib/verify-commits/verify-commits.sh; fi
+    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "LIMXTEC/BitCore" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then while read LINE; do travis_retry gpg --keyserver hkp://subset.pool.sks-keyservers.net --recv-keys $LINE; done < contrib/verify-commits/trusted-keys; fi
+    - if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "LIMXTEC/BitCore" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then contrib/verify-commits/verify-commits.sh; fi
     - export TRAVIS_COMMIT_LOG=`git log --format=fuller -1`
     - if [ -n "$USE_SHELL" ]; then export CONFIG_SHELL="$USE_SHELL"; fi
     - OUTDIR=$BASE_OUTDIR/$TRAVIS_PULL_REQUEST/$TRAVIS_JOB_NUMBER-$HOST
@@ -96,7 +96,7 @@ script:
     - if [ "$NAME" = "x86_64-linux-gnu_no-wallet" ]; then cd $OUTDIR; tar -czf bitcore-$TRAVIS_TAG-$NAME.tar.gz -C $OUTDIR bin lib; fi
 # Cross-Mac
     - if [ "$NAME" = "osx64" ]; then mkdir -p $OUTDIR; cp BitCore-BTX.dmg $OUTDIR/bitcore-$TRAVIS_TAG-$NAME.dmg; fi
-    
+
     - pwd
     - ls ./*
     - ls ./*/*
@@ -108,13 +108,12 @@ after_script:
 deploy:
   provider: releases
   api_key:
-    secure: A+tfi7t5bVrUJgAYLaHeYhK1UAJNF11VK2PCj8yg5+6FZsR15Vf/Zx6xzdSvJteFIqzEBa9PzPBtW1BrASHryCaMM7Zo1fofTUrfw1whd0A7xBS3DgZShfU1c1Oj+niH21cRel64KCOl/0eEuF9SHri8TtJO79KChikl4nAKtXZdZ+3EpiJC7IUZhrHd4JU2oSNAt/5AB5h87/pBGNSsJaUwrh8hW/LJZfEx1vKT22OqLgkQOwzt0ES8D9HPPRrhxAadweAm+SHrMGHBYOsVL7s7H5MoEUpz/2m2PRQ7MTi9BNWbLr53quqJSKvgv8qTOv/7m/HkjwwgqSUd4KhHIcw2CNC/Tb86TCexVUx/ZHqvEZk/91m6w2ln1RY7kpdhl10SCb0VFyMmf9n5MPO8SkFUOmfWmjZIqkcOyUL8TcohxOUPxp8kFerRsP31zmbPCQSQw0djcdKr5w6hFR+uI+eyjR59UVoGfwZGQbEDp+rb8qD7X+yE7/AwvgOWxpyWGjzQFZYVbxFs8w987iJUiCkCfqH5iw8sOfdv6QC02NWzqfTb2w7YyrbQoB7US96Lr+Jo7Ux2lHigLyCoTPLM1lBwiV6vKaWgkckcWN3zqod1LJAIOfbw29uARh6jFq8V+HZRakRlqhZKfLUFl0VgQiSURyK7qcaQioPLU2p6/38=
+    secure: <github API pubkey> #TODO
   file_glob: true
   file:
     - $OUTDIR/*.tar.gz
     - $OUTDIR/*.zip
     - $OUTDIR/*.dmg
-    - $OUTDIR/*.exe
   skip_cleanup: true 
   on:
     tags: true
