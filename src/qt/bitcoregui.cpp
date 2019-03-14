@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2011-2019 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -443,14 +443,14 @@ void BitcoinGUI::createActions()
 	Exchangesite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Ecosystem"), this);
 	Exchangesite2 = new QAction(QIcon(":/icons/bitz"), tr("&Bit-Z"), this);
 	Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
-	Exchangesite4 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
+	Exchangesite4 = new QAction(QIcon(":/icons/info"), tr("&Crex24"), this);
     Exchangesite5 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
-	Exchangesite6 = new QAction(QIcon(":/icons/exrates"), tr("&Exrates"), this);
+	Exchangesite6 = new QAction(QIcon(":/icons/info"), tr("&Bitexlive"), this);
 	Exchangesite7 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
     Exchangesite8 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
-	Exchangesite9 = new QAction(QIcon(":/icons/vebitcoin"), tr("&Vebitcoin"), this);
+	Exchangesite9 = new QAction(QIcon(":/icons/info"), tr("&Mylocalcoin"), this);
     Exchangesite10 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
-	Exchangesite10 = new QAction(QIcon(":/icons/info"), tr("&Octaex"), this);
+	Exchangesite10 = new QAction(QIcon(":/icons/info"), tr("&Novaexchange"), this);
 
 #ifdef ENABLE_WALLET
     if(walletFrame)
