@@ -108,7 +108,7 @@ after_script:
 deploy:
   provider: releases
   api_key:
-    secure: <github API pubkey> #TODO
+    secure: 4f:cb:e6:2b:7f:c6:a8:62:b3:e0:38:bd:00:c6:2e:08 #TODO
   file_glob: true
   file:
     - $OUTDIR/*.tar.gz
