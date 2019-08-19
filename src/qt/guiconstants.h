@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2017 The BitCore Core developers
+// Copyright (c) 2011-2019 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +11,7 @@ static const int MODEL_UPDATE_DELAY = 250;
 /* AskPassphraseDialog -- Maximum passphrase length */
 static const int MAX_PASSPHRASE_SIZE = 1024;
 
-/* BitCoreGUI -- Size of icons in status bar */
+/* BitcoinGUI -- Size of icons in status bar */
 static const int STATUSBAR_ICONSIZE = 16;
 
 static const bool DEFAULT_SPLASHSCREEN = true;
@@ -49,7 +49,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "BitCore"
-#define QAPP_ORG_DOMAIN "bitcore.org"
+#define QAPP_ORG_DOMAIN "bitcore.cc"
 #define QAPP_APP_NAME_DEFAULT "BitCore-Qt"
 #define QAPP_APP_NAME_TESTNET "BitCore-Qt-testnet"
 

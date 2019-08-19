@@ -1,5 +1,5 @@
-BitCore version 0.6.0 is now available for download at:
-http://sourceforge.net/projects/bitcore/files/BitCore/bitcore-0.6.0/test/
+Bitcoin version 0.6.0 is now available for download at:
+http://sourceforge.net/projects/bitcore/files/Bitcoin/bitcore-0.6.0/test/
 
 This release includes more than 20 language localizations.
 More translations are welcome; join the
@@ -7,13 +7,13 @@ project at Transifex to help:
 https://www.transifex.net/projects/p/bitcore/
 
 Please report bugs using the issue tracker at github:
-https://github.com/bitcore-project/bitcore-core/issues
+https://github.com/bitcore/bitcore/issues
 
 Project source code is hosted at github; we are no longer
 distributing .tar.gz files here, you can get them
 directly from github:
-https://github.com/bitcore-project/bitcore-core/tarball/v0.6.0  # .tar.gz
-https://github.com/bitcore-project/bitcore-core/zipball/v0.6.0  # .zip
+https://github.com/bitcore/bitcore/tarball/v0.6.0  # .tar.gz
+https://github.com/bitcore/bitcore/zipball/v0.6.0  # .zip
 
 For Ubuntu users, there is a ppa maintained by Matt Corallo which
 you can add to your system so that it will automatically keep
@@ -38,7 +38,7 @@ hours).
 
 Backup Wallet menu option.
 
-BitCore-Qt can display and save QR codes for sending
+Bitcoin-Qt can display and save QR codes for sending
 and receiving addresses.
 
 New context menu on addresses to copy/edit/delete them.
@@ -54,14 +54,14 @@ transactions and less traffic on the bitcore
 network. The shorter keys are already supported
 by the network but wallet.dat files containing
 short keys are not compatible with earlier
-versions of BitCore-Qt/bitcored.
+versions of Bitcoin-Qt/bitcored.
 
 New command-line argument -blocknotify=<command>
 that will spawn a shell process to run <command> 
 when a new block is accepted.
 
 New command-line argument -splash=0 to disable
-BitCore-Qt's initial splash screen
+Bitcoin-Qt's initial splash screen
 
 validateaddress JSON-RPC api command output includes
 two new fields for addresses in the wallet:
@@ -105,10 +105,10 @@ attacks were fixed.
 NOT YET IMPLEMENTED FEATURES
 
 Support for clicking on bitcore: URIs and
-opening/launching BitCore-Qt is available only on Linux,
+opening/launching Bitcoin-Qt is available only on Linux,
 and only if you configure your desktop to launch
-BitCore-Qt. All platforms support dragging and dropping
-bitcore: URIs onto the BitCore-Qt window to start
+Bitcoin-Qt. All platforms support dragging and dropping
+bitcore: URIs onto the Bitcoin-Qt window to start
 payment.
 
 
@@ -125,7 +125,7 @@ with this release multisignature transactions are
 considered standard and will start to be relayed
 and accepted into blocks.
 
-It is expected that future releases of BitCore-Qt
+It is expected that future releases of Bitcoin-Qt
 will support the creation of multisignature transactions,
 once enough of the network has upgraded so relaying
 and validating them is robust.

@@ -1,0 +1,290 @@
+WalletFrame {
+border-image: url(':/images/bitcore_main_hgB') 0 0 0 0 stretch stretch;
+border-top:0px solid #000;
+margin:0;
+padding:0;
+}
+QMainWindow::seperator{
+background: yellow;
+width: 10px;
+height: 10px;
+}
+QMainWindow::seperator:hover{
+background: red;
+}
+
+QStatusBar {
+background-color:#ffffff;
+}
+
+.QFrame {
+background-color:transparent;
+border:0px solid #fff;
+}
+
+QMenuBar {
+background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ff53ba, stop:1 #ff007f);
+}
+
+QMenuBar::item {
+spacing: 3px;
+color: white;
+padding:1px 4px;
+background: transparent;
+border-radius: 4px;
+}
+
+QMenuBar::item:selected {
+background:#ff53b9;
+}
+QMenuBar::item:pressed{
+background: #ff7ac9;
+}
+QMenu {
+background-color:qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ff007f, stop:1 #ff8ed1);
+margin: 2px;
+}
+
+QMenu::item {
+padding: 2px 25px 2px 20px;
+border: 1px solid transparent;
+color:#fff;
+}
+
+QMenu::item:selected {
+background-color:#ff53b9;
+color:#fff;
+}
+
+QToolBar {
+background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ff53ba, stop:1 #ff007f);
+border:0px solid #000;
+padding:0;
+margin:0;
+}
+
+QToolBar > QToolButton {
+background: transparent;
+border:0px solid #333;
+min-height:2.5em;
+padding: 0em 1em;
+font-weight:bold;
+color:#fff;
+}
+
+QToolBar > QToolButton:checked {
+background: #ff7ac9;
+font-weight:bold;
+}
+
+QMessageBox {
+background-color:#f3f3f3;
+}
+
+/*******************************************************/
+
+QLabel { /* Base Text Size & Color */
+font-size:12px;
+color:#333333;
+}
+
+.QCheckBox { /* Checkbox Labels */
+color:#333333;
+background-color:transparent;
+}
+
+.QCheckBox:hover {
+background-color:transparent;
+}
+
+.QValidatedLineEdit, .QLineEdit { /* Text Entry Fields */
+border: 1px solid #000;
+font-size:11px;
+min-height:25px;
+outline:0;
+padding:3px;
+background-color:#fcfcfc;
+}
+
+.QLineEdit:!focus {
+font-size:12px;
+}
+
+.QValidatedLineEdit:disabled, .QLineEdit:disabled {
+background-color:#f2f2f2;
+}
+
+/*******************************************************/
+
+QPushButton { /* Global Button Style */
+background-color:transparent;/* qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: .01 #000, stop: .1 #000, stop: .95 #000, stop: 1 #000); */
+border:1px solid #d2d2d2;
+border-radius:3px;
+color:#666666;
+font-size:12px;
+font-weight:bold;
+padding-left:25px;
+padding-right:25px;
+padding-top:5px;
+padding-bottom:5px;
+}
+
+QPushButton:hover {
+background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+/* qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: .01 #42cd42, stop: .1 #42cd42, stop: .95 #42cd42, stop: 1 #42cd42); */
+}
+
+QPushButton:focus {
+border:none;
+outline:none;
+}
+
+QPushButton:pressed {
+border:1px solid #333;
+}
+
+QComboBox { /* Dropdown Menus */
+border:1px solid #000000;
+padding: 3px 5px 3px 5px;
+background:#fcfcfc;
+min-height:25px;
+color:#818181;
+}
+
+QComboBox:checked {
+background:#f2f2f2;
+}
+
+QComboBox:editable {
+background: #000;
+color:#616161;
+border:0px solid transparent;
+}
+
+QComboBox::drop-down {
+width:25px;
+border:0px;
+}
+
+QComboBox::down-arrow {
+border-image: url(':/images/drkblue_downArrow') 0 0 0 0 stretch stretch;
+}
+
+QComboBox QListView {
+background:#fff;
+border:1px solid #333;
+padding-right:1px;
+padding-left:1px;
+}
+
+QComboBox QAbstractItemView::item { margin:4px; }
+
+QComboBox::item {
+color:#818181;
+}
+
+QComboBox::item:alternate {
+background:#fff;
+}
+
+QComboBox::item:selected {
+border:0px solid transparent;
+background:#f2f2f2;
+}
+
+QComboBox::indicator {
+background-color:transparent;
+selection-background-color:transparent;
+color:transparent;
+selection-color:transparent;
+}
+
+QAbstractSpinBox {
+border:1px solid #000000;
+padding: 3px 5px 3px 5px;
+background:#fcfcfc;
+min-height:25px;
+color:#818181;
+}
+
+QAbstractSpinBox::up-button {
+subcontrol-origin: border;
+subcontrol-position: top right;
+width:21px;
+background:#fcfcfc;
+border-left:0px;
+border-right:1px solid #000;
+border-top:1px solid #000;
+border-bottom:0px;
+padding-right:1px;
+padding-left:5px;
+padding-top:2px;
+}
+
+QAbstractSpinBox::up-arrow {
+image:url(':/images/drkblue_upArrow_small');
+}
+
+QAbstractSpinBox::down-button {
+subcontrol-origin: border;
+subcontrol-position: bottom right;
+width:21px;
+background:#fcfcfc;
+border-top:0px;
+border-left:0px;
+border-right:1px solid #000;
+border-bottom:1px solid #000;
+padding-right:1px;
+padding-left:5px;
+padding-bottom:2px;
+}
+
+QAbstractSpinBox::down-arrow {
+image:url(':/images/drkblue_downArrow_small');
+}
+
+QProgressBar { 
+background-color: #e8e8e8; 
+border: 1px solid grey; 
+border-radius: 7px; 
+padding: 1px; 
+text-align: center; } 
+QProgressBar::chunk { 
+background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #0c71c3, stop: 1 #d8d9d9); 
+border-radius: 7px; 
+margin: 0px; }
+
+QWidget .QFrame#frame_2 { /* Transactions Widget */
+min-width:410px;
+margin-right:auto;
+margin-left:auto;
+background-image: url(':/images/bitcore_logo_horizontal');
+background-repeat:none;
+background-position: center top;
+}
+
+QWidget .QFrame#frame_2 .QLabel#label_4 { /* Recent Transactions Label */
+min-width:200px;
+color:#000;
+margin-left:67px;
+margin-top:173px;
+margin-right:5px;
+padding-right:5px;
+font-weight:bold;
+font-size:15px;
+min-height:24px;
+}
+
+QWidget .QFrame#frame_2 .QLabel#labelTransactionsStatus { /* Recent Transactions Sync Status */
+qproperty-alignment: 'AlignBottom | AlignLeft';
+margin-top:123px;
+margin-left:16px;
+min-height:16px;
+}
+
+QWidget .QFrame#frame_2 QListView { /* Transaction List */
+font-weight:normal;
+font-size:12px;
+max-width:369px;
+margin-left:0px; /* CSS Voodoo - set to -66px to hide default transaction icons */
+}

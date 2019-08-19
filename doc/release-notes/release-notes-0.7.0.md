@@ -1,16 +1,16 @@
-BitCore version 0.7.0 is now available for download at:
-  http://sourceforge.net/projects/bitcore/files/BitCore/bitcore-0.7.0/
+Bitcoin version 0.7.0 is now available for download at:
+  http://sourceforge.net/projects/bitcore/files/Bitcoin/bitcore-0.7.0/
 
-We recommend that everybody running prior versions of bitcored/BitCore-Qt
+We recommend that everybody running prior versions of bitcored/Bitcoin-Qt
 upgrade to this release, except for users running Mac OSX 10.5.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/bitcore-project/bitcore-core/issues
+  https://github.com/bitcore/bitcore/issues
 
 Project source code is hosted at github; you can get
 source-only tarballs/zipballs directly from there:
-  https://github.com/bitcore-project/bitcore-core/tarball/v0.7.0  # .tar.gz
-  https://github.com/bitcore-project/bitcore-core/zipball/v0.7.0  # .zip
+  https://github.com/bitcore/bitcore/tarball/v0.7.0  # .tar.gz
+  https://github.com/bitcore/bitcore/zipball/v0.7.0  # .zip
 
 Ubuntu Linux users can use the "Personal Package Archive" (PPA)
 maintained by Matt Corallo to automatically keep 
@@ -27,7 +27,7 @@ If you are running an older version, shut it down. Wait
 until it has completely shut down (which might take a few minutes for older
 versions), then run the installer (on Windows) or just copy over
 Code:
-/Applications/BitCore-Qt
+/Applications/Bitcoin-Qt
 (on Mac) or
 Code:
 bitcored/bitcore-qt
@@ -45,7 +45,7 @@ Incompatible Changes
   and 'getrawmempool' commands.
 * Remove deprecated RPC 'getblocknumber'
 
-BitCore Improvement Proposals implemented
+Bitcoin Improvement Proposals implemented
 
 BIP 22 - 'getblocktemplate', 'submitblock' RPCs
 BIP 34 - block version 2, height in coinbase

@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2017 The BitCore Core developers
+// Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,6 @@
 #include "test/test_bitcore.h"
 
 #include <boost/assign/std/vector.hpp> // for 'operator+=()'
-#include <boost/assert.hpp>
 #include <boost/test/unit_test.hpp>
 
 using namespace boost::assign; // bring 'operator+=()' into scope

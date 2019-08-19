@@ -3,7 +3,7 @@ Shared Libraries
 
 ## bitcoreconsensus
 
-The purpose of this library is to make the verification functionality that is critical to BitCore's consensus available to other applications, e.g. to language bindings.
+The purpose of this library is to make the verification functionality that is critical to Bitcoin's consensus available to other applications, e.g. to language bindings.
 
 ### API
 
@@ -43,7 +43,7 @@ The interface is defined in the C header `bitcoreconsensus.h` located in  `src/s
 - `bitcoreconsensus_ERR_AMOUNT_REQUIRED` - Input amount is required if WITNESS is used
 
 ### Example Implementations
-- [NBitCore](https://github.com/NicolasDorier/NBitCore/blob/master/NBitCore/Script.cs#L814) (.NET Bindings)
+- [NBitcoin](https://github.com/NicolasDorier/NBitcoin/blob/master/NBitcoin/Script.cs#L814) (.NET Bindings)
 - [node-libbitcoreconsensus](https://github.com/bitpay/node-libbitcoreconsensus) (Node.js Bindings)
 - [java-libbitcoreconsensus](https://github.com/dexX7/java-libbitcoreconsensus) (Java Bindings)
 - [bitcoreconsensus-php](https://github.com/Bit-Wasp/bitcoreconsensus-php) (PHP Bindings)

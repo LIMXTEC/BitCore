@@ -3,14 +3,14 @@ Release Process
 
 Before every release candidate:
 
-* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcore-project/bitcore-core/blob/master/doc/translation_process.md#synchronising-translations).
+* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcore/bitcore/blob/master/doc/translation_process.md#synchronising-translations).
 
-* Update manpages, see [gen-manpages.sh](https://github.com/bitcore-project/bitcore/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update manpages, see [gen-manpages.sh](https://github.com/LIMXTEC/bitcore/blob/master/contrib/devtools/README.md#gen-manpagessh).
 
 Before every minor and major release:
 
 * Update [bips.md](bips.md) to account for changes since the last release.
-* Update version in sources (see below)
+* Update version in `configure.ac` (don't forget to set `CLIENT_VERSION_IS_RELEASE` to `true`)
 * Write release notes (see below)
 * Update `src/chainparams.cpp` nMinimumChainWork with information from the getblockchaininfo rpc.
 * Update `src/chainparams.cpp` defaultAssumeValid  with information from the getblockhash rpc.
@@ -21,8 +21,10 @@ Before every minor and major release:
 
 Before every major release:
 
-* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/bitcore-project/bitcore-core/pull/7415) for an example.
+* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/bitcore/bitcore/pull/7415) for an example.
 * Update [`BLOCK_CHAIN_SIZE`](/src/qt/intro.cpp) to the current size plus some overhead.
+* Update `src/chainparams.cpp` chainTxData with statistics about the transaction count and rate.
+* Update version of `contrib/gitian-descriptors/*.yml`: usually one'd want to do this on master after branching off the release - but be sure to at least do it before a new major release
 
 ### First time / New builders
 
@@ -31,28 +33,12 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/bitcore-project/gitian.sigs.mac.git
-    git clone https://github.com/bitcore-project/bitcore-detached-sigs.git
+    git clone https://github.com/bitcore-project/gitian.sigs.btx.git
+    git clone https://github.com/LIMXTEC/bitcore-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/bitcore-project/bitcore.git
+    git clone https://github.com/LIMXTEC/bitcore.git
 
-### BitCore maintainers/release engineers, update version in sources
-
-Update the following:
-
-- `configure.ac`:
-    - `_CLIENT_VERSION_MAJOR`
-    - `_CLIENT_VERSION_MINOR`
-    - `_CLIENT_VERSION_REVISION`
-    - Don't forget to set `_CLIENT_VERSION_IS_RELEASE` to `true`
-- `src/clientversion.h`: (this mirrors `configure.ac` - see issue #3539)
-    - `CLIENT_VERSION_MAJOR`
-    - `CLIENT_VERSION_MINOR`
-    - `CLIENT_VERSION_REVISION`
-    - Don't forget to set `CLIENT_VERSION_IS_RELEASE` to `true`
-- `doc/README.md` and `doc/README_windows.txt`
-- `doc/Doxyfile`: `PROJECT_NUMBER` contains the full version
-- `contrib/gitian-descriptors/*.yml`: usually one'd want to do this on master after branching off the release - but be sure to at least do it before a new major release
+### BitCore maintainers/release engineers, suggestion for writing release notes
 
 Write release notes. git shortlog helps a lot, for example:
 
@@ -82,9 +68,9 @@ Setup Gitian descriptors:
     git checkout v${VERSION}
     popd
 
-Ensure your gitian.sigs.mac are up-to-date if you wish to gverify your builds against other Gitian signatures.
+Ensure your gitian.sigs.btx are up-to-date if you wish to gverify your builds against other Gitian signatures.
 
-    pushd ./gitian.sigs.mac
+    pushd ./gitian.sigs.btx
     git pull
     popd
 
@@ -125,17 +111,17 @@ The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 ### Build and sign BitCore Core for Linux, Windows, and OS X:
 
     pushd ./gitian-builder
-    ./bin/gbuild --memory 3000 --commit bitcore=v${VERSION} ../bitcore/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs.mac/ ../bitcore/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gbuild --num-make 2 --memory 3000 --commit bitcore=v${VERSION} ../bitcore/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs.btx/ ../bitcore/contrib/gitian-descriptors/gitian-linux.yml
     mv build/out/bitcore-*.tar.gz build/out/src/bitcore-*.tar.gz ../
 
-    ./bin/gbuild --memory 3000 --commit bitcore=v${VERSION} ../bitcore/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs.mac/ ../bitcore/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gbuild --num-make 2 --memory 3000 --commit bitcore=v${VERSION} ../bitcore/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs.btx/ ../bitcore/contrib/gitian-descriptors/gitian-win.yml
     mv build/out/bitcore-*-win-unsigned.tar.gz inputs/bitcore-win-unsigned.tar.gz
     mv build/out/bitcore-*.zip build/out/bitcore-*.exe ../
 
-    ./bin/gbuild --memory 3000 --commit bitcore=v${VERSION} ../bitcore/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.mac/ ../bitcore/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gbuild --num-make 2 --memory 3000 --commit bitcore=v${VERSION} ../bitcore/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.btx/ ../bitcore/contrib/gitian-descriptors/gitian-osx.yml
     mv build/out/bitcore-*-osx-unsigned.tar.gz inputs/bitcore-osx-unsigned.tar.gz
     mv build/out/bitcore-*.tar.gz build/out/bitcore-*.dmg ../
     popd
@@ -146,7 +132,7 @@ Build output expected:
   2. linux 32-bit and 64-bit dist tarballs (`bitcore-${VERSION}-linux[32|64].tar.gz`)
   3. windows 32-bit and 64-bit unsigned installers and dist zips (`bitcore-${VERSION}-win[32|64]-setup-unsigned.exe`, `bitcore-${VERSION}-win[32|64].zip`)
   4. OS X unsigned installer and dist tarball (`bitcore-${VERSION}-osx-unsigned.dmg`, `bitcore-${VERSION}-osx64.tar.gz`)
-  5. Gitian signatures (in `gitian.sigs.mac/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
+  5. Gitian signatures (in `gitian.sigs.btx/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
@@ -158,34 +144,65 @@ Add other gitian builders keys to your gpg keyring, and/or refresh keys.
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs.mac/ -r ${VERSION}-linux ../bitcore/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs.mac/ -r ${VERSION}-win-unsigned ../bitcore/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs.mac/ -r ${VERSION}-osx-unsigned ../bitcore/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs.btx/ -r ${VERSION}-linux ../bitcore/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs.btx/ -r ${VERSION}-win-unsigned ../bitcore/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs.btx/ -r ${VERSION}-osx-unsigned ../bitcore/contrib/gitian-descriptors/gitian-osx.yml
     popd
 
 ### Next steps:
 
-Commit your signature to gitian.sigs.mac:
+Commit your signature to gitian.sigs.btx:
 
-    pushd gitian.sigs.mac
+    pushd gitian.sigs.btx
     git add ${VERSION}-linux/${SIGNER}
     git add ${VERSION}-win-unsigned/${SIGNER}
     git add ${VERSION}-osx-unsigned/${SIGNER}
     git commit -a
-    git push  # Assuming you can push to the gitian.sigs.mac tree
+    git push  # Assuming you can push to the gitian.sigs.btx tree
     popd
 
-Wait for Windows/OS X detached signatures:
+Codesigner only: Create Windows/OS X detached signatures:
+- Only one person handles codesigning. Everyone else should skip to the next step.
+- Only once the Windows/OS X builds each have 3 matching signatures may they be signed with their respective release keys.
+
+Codesigner only: Sign the osx binary:
+
+    transfer bitcore-osx-unsigned.tar.gz to osx for signing
+    tar xf bitcore-osx-unsigned.tar.gz
+    ./detached-sig-create.sh -s "Key ID"
+    Enter the keychain password and authorize the signature
+    Move signature-osx.tar.gz back to the gitian host
+
+Codesigner only: Sign the windows binaries:
+
+    tar xf bitcore-win-unsigned.tar.gz
+    ./detached-sig-create.sh -key /path/to/codesign.key
+    Enter the passphrase for the key when prompted
+    signature-win.tar.gz will be created
+
+Codesigner only: Commit the detached codesign payloads:
+
+    cd ~/bitcore-detached-sigs
+    checkout the appropriate branch for this release series
+    rm -rf *
+    tar xf signature-osx.tar.gz
+    tar xf signature-win.tar.gz
+    git add -a
+    git commit -m "point to ${VERSION}"
+    git tag -s v${VERSION} HEAD
+    git push the current branch and new tag
+
+Non-codesigners: wait for Windows/OS X detached signatures:
 
 - Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [bitcore-detached-sigs](https://github.com/bitcore-project/bitcore-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [bitcore-detached-sigs](https://github.com/LIMXTEC/bitcore-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create (and optionally verify) the signed OS X binary:
 
     pushd ./gitian-builder
     ./bin/gbuild -i --commit signature=v${VERSION} ../bitcore/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs.mac/ ../bitcore/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.mac/ -r ${VERSION}-osx-signed ../bitcore/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs.btx/ ../bitcore/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs.btx/ -r ${VERSION}-osx-signed ../bitcore/contrib/gitian-descriptors/gitian-osx-signer.yml
     mv build/out/bitcore-osx-signed.dmg ../bitcore-${VERSION}-osx.dmg
     popd
 
@@ -193,19 +210,19 @@ Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
     ./bin/gbuild -i --commit signature=v${VERSION} ../bitcore/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs.mac/ ../bitcore/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.mac/ -r ${VERSION}-win-signed ../bitcore/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs.btx/ ../bitcore/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs.btx/ -r ${VERSION}-win-signed ../bitcore/contrib/gitian-descriptors/gitian-win-signer.yml
     mv build/out/bitcore-*win64-setup.exe ../bitcore-${VERSION}-win64-setup.exe
     mv build/out/bitcore-*win32-setup.exe ../bitcore-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed OS X/Windows binaries:
 
-    pushd gitian.sigs.mac
+    pushd gitian.sigs.btx
     git add ${VERSION}-osx-signed/${SIGNER}
     git add ${VERSION}-win-signed/${SIGNER}
     git commit -a
-    git push  # Assuming you can push to the gitian.sigs.mac tree
+    git push  # Assuming you can push to the gitian.sigs.btx tree
     popd
 
 ### After 3 or more people have gitian-built and their results match:
@@ -234,7 +251,7 @@ The `*-debug*` files generated by the gitian build contain debug symbols
 for troubleshooting by developers. It is assumed that anyone that is interested
 in debugging can run gitian to generate the files for themselves. To avoid
 end-user confusion about which file to pick, as well as save storage
-space *do not upload these to the bitcore.org server, nor put them in the torrent*.
+space *do not upload these to the bitcore.cc server, nor put them in the torrent*.
 
 - GPG-sign it, delete the unsigned file:
 ```
@@ -244,17 +261,17 @@ rm SHA256SUMS
 (the digest algorithm is forced to sha256 to avoid confusion of the `Hash:` header that GPG adds with the SHA256 used for the files)
 Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spurious/nonsensical entry.
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the bitcore.org server.
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the bitcore.cc server.
 
 ```
 
-- Update bitcore.org version
+- Update bitcore.cc version
 
 - Announce the release:
 
   - bitcore-dev and bitcore-dev mailing list
 
-  - blog.bitcore.org blog post
+  - blog.bitcore.cc blog post
 
   - Update title of #bitcore and #bitcore-dev on Freenode IRC
 
@@ -262,6 +279,6 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/bitcore-project/bitcore/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/LIMXTEC/bitcore/releases/new) with a link to the archived release notes.
 
   - Celebrate

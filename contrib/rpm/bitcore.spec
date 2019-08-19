@@ -20,8 +20,8 @@ Summary:	Peer to Peer Cryptographic Currency
 
 Group:		Applications/System
 License:	MIT
-URL:		http://bitcore.cc/
-Source0:	http://bitcore.cc/bin/bitcore-core-%{version}/bitcore-%{version}.tar.gz
+URL:		https://bitcore.cc/
+Source0:	https://bitcore.cc/bin/bitcore-core-%{version}/bitcore-%{version}.tar.gz
 Source1:	http://download.oracle.com/berkeley-db/db-%{bdbv}.NC.tar.gz
 
 Source10:	https://raw.githubusercontent.com/bitcore/bitcore/v%{version}/contrib/debian/examples/bitcore.conf
@@ -37,7 +37,7 @@ Source30:	https://raw.githubusercontent.com/bitcore/bitcore/v%{version}/contrib/
 Source31:	https://raw.githubusercontent.com/bitcore/bitcore/v%{version}/contrib/rpm/bitcore.fc
 Source32:	https://raw.githubusercontent.com/bitcore/bitcore/v%{version}/contrib/rpm/bitcore.if
 
-Source100:	https://upload.wikimedia.org/wikipedia/commons/4/46/BitCore.svg
+Source100:	https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg
 
 %if 0%{?_use_libressl:1}
 BuildRequires:	libressl-devel
@@ -54,7 +54,7 @@ Patch0:		bitcore-0.12.0-libressl.patch
 
 
 %description
-BitCore is a digital cryptographic currency that uses peer-to-peer technology to
+Bitcoin is a digital cryptographic currency that uses peer-to-peer technology to
 operate with no central authority or banks; managing transactions and the
 issuing of bitcores is carried out collectively by the network.
 
@@ -79,17 +79,17 @@ BuildRequires:	%{_bindir}/inkscape
 BuildRequires:	%{_bindir}/convert
 
 %description core
-BitCore is a digital cryptographic currency that uses peer-to-peer technology to
+Bitcoin is a digital cryptographic currency that uses peer-to-peer technology to
 operate with no central authority or banks; managing transactions and the
 issuing of bitcores is carried out collectively by the network.
 
 This package contains the Qt based graphical client and node. If you are looking
-to run a BitCore wallet, this is probably the package you want.
+to run a Bitcoin wallet, this is probably the package you want.
 %endif
 
 
 %package libs
-Summary:	BitCore shared libraries
+Summary:	Bitcoin shared libraries
 Group:		System Environment/Libraries
 
 %description libs
@@ -134,7 +134,7 @@ If you use the graphical bitcore-core client then you almost certainly do not
 need this package.
 
 %package utils
-Summary:	BitCore utilities
+Summary:	Bitcoin utilities
 Group:		Applications/System
 
 %description utils
@@ -209,7 +209,7 @@ touch -a -m -t 201504280000 %{buildroot}%{_sysconfdir}/sysconfig/bitcore
 mkdir -p %{buildroot}%{_unitdir}
 cat <<EOF > %{buildroot}%{_unitdir}/bitcore.service
 [Unit]
-Description=BitCore daemon
+Description=Bitcoin daemon
 After=syslog.target network.target
 
 [Service]
@@ -265,10 +265,10 @@ mkdir -p %{buildroot}%{_datadir}/applications
 cat <<EOF > %{buildroot}%{_datadir}/applications/bitcore-core.desktop
 [Desktop Entry]
 Encoding=UTF-8
-Name=BitCore
-Comment=BitCore P2P Cryptocurrency
-Comment[fr]=BitCore, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=BitCore, eşten eşe kriptografik sanal para birimi
+Name=Bitcoin
+Comment=Bitcoin P2P Cryptocurrency
+Comment[fr]=Bitcoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Bitcoin, eşten eşe kriptografik sanal para birimi
 Exec=bitcore-qt %u
 Terminal=false
 Type=Application
@@ -311,10 +311,8 @@ rm -f %{buildroot}%{_bindir}/test_*
 
 %check
 make check
-pushd src
-srcdir=. test/bitcore-util-test.py
-popd
-qa/pull-tester/rpc-tests.py -extended
+srcdir=src test/bitcore-util-test.py
+test/functional/test_runner.py --extended
 
 %post libs -p /sbin/ldconfig
 
@@ -324,7 +322,7 @@ qa/pull-tester/rpc-tests.py -extended
 getent group bitcore >/dev/null || groupadd -r bitcore
 getent passwd bitcore >/dev/null ||
 	useradd -r -g bitcore -d /var/lib/bitcore -s /sbin/nologin \
-	-c "BitCore wallet server" bitcore
+	-c "Bitcoin wallet server" bitcore
 exit 0
 
 %post server
@@ -334,10 +332,10 @@ if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
 for selinuxvariant in %{selinux_variants}; do
 	%{_sbindir}/semodule -s ${selinuxvariant} -i %{_datadir}/selinux/${selinuxvariant}/bitcore.pp &> /dev/null || :
 done
-%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 40332
-%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 8555
-%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 140332
-%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 140333
+%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 9332
+%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 9333
+%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 19332
+%{_sbindir}/semanage port -a -t bitcore_port_t -p tcp 19333
 %{_sbindir}/fixfiles -R bitcore-server restore &> /dev/null || :
 %{_sbindir}/restorecon -R %{_localstatedir}/lib/bitcore || :
 fi
@@ -353,10 +351,10 @@ fi
 # SELinux
 if [ $1 -eq 0 ]; then
 	if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
-	%{_sbindir}/semanage port -d -p tcp 40332
+	%{_sbindir}/semanage port -d -p tcp 9332
 	%{_sbindir}/semanage port -d -p tcp 8555
-	%{_sbindir}/semanage port -d -p tcp 140332
-	%{_sbindir}/semanage port -d -p tcp 140333
+	%{_sbindir}/semanage port -d -p tcp 19332
+	%{_sbindir}/semanage port -d -p tcp 19333
 	for selinuxvariant in %{selinux_variants}; do
 		%{_sbindir}/semodule -s ${selinuxvariant} -r bitcore &> /dev/null || :
 	done

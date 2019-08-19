@@ -1,6 +1,6 @@
-BitCore Core version 0.11.2 is now available from:
+Bitcoin Core version 0.11.2 is now available from:
 
-  <http://bitcore.cc/bin/bitcore-core-0.11.2/>
+  <https://bitcore.cc/bin/bitcore-core-0.11.2/>
 
 This is a new minor version release, bringing bug fixes, the BIP65
 (CLTV) consensus change, and relay policy preparation for BIP113. It is
@@ -8,7 +8,7 @@ recommended to upgrade to this version as soon as possible.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/bitcore-project/bitcore-core/issues>
+  <https://github.com/bitcore/bitcore/issues>
 
 Upgrading and downgrading
 =========================
@@ -18,7 +18,7 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/BitCore-Qt (on Mac) or
+installer (on Windows) or just copy over /Applications/Bitcoin-Qt (on Mac) or
 bitcored/bitcore-qt (on Linux).
 
 Downgrade warning
@@ -26,7 +26,7 @@ Downgrade warning
 
 Because release 0.10.0 and later makes use of headers-first synchronization and
 parallel block download (see further), the block files and databases are not
-backwards-compatible with pre-0.10 versions of BitCore Core or other software:
+backwards-compatible with pre-0.10 versions of Bitcoin Core or other software:
 
 * Blocks will be stored on disk out of order (in the order they are
 received, really), which makes it incompatible with some tools or
@@ -68,7 +68,7 @@ specified point in the future.
    blocks if they comply with the BIP65 rules for CLTV.
 
 For more information about the soft-forking change, please see
-<https://github.com/bitcore-project/bitcore-core/pull/6351>
+<https://github.com/bitcore/bitcore/pull/6351>
 
 Graphs showing the progress towards block version 4 adoption may be
 found at the URLs below:
@@ -79,13 +79,13 @@ found at the URLs below:
 - Block versions over the last 2,000 blocks showing the days to the
   earliest possible BIP65 consensus-enforced block: <http://bitcore.sipa.be/ver-2k.png>
 
-**Notice to miners:** BitCore Core’s block templates are now for
+**Notice to miners:** Bitcoin Core’s block templates are now for
 version 4 blocks only, and any mining software relying on its
 getblocktemplate must be updated in parallel to use libblkmaker either
 version 0.4.3 or any version from 0.5.2 onward.
 
 - If you are solo mining, this will affect you the moment you upgrade
-  BitCore Core, which must be done prior to BIP65 achieving its 951/1001
+  Bitcoin Core, which must be done prior to BIP65 achieving its 951/1001
   status.
 
 - If you are mining with the stratum mining protocol: this does not
@@ -100,7 +100,7 @@ version 0.4.3 or any version from 0.5.2 onward.
 BIP113 mempool-only locktime enforcement using GetMedianTimePast()
 ----------------------------------------------------------------
 
-BitCore transactions currently may specify a locktime indicating when
+Bitcoin transactions currently may specify a locktime indicating when
 they may be added to a valid block.  Current consensus rules require
 that blocks have a block header time greater than the locktime specified
 in any transaction in that block.
@@ -149,13 +149,13 @@ Windows bug fix for corrupted UTXO database on unclean shutdowns
 ----------------------------------------------------------------
 
 Several Windows users reported that they often need to reindex the
-entire blockchain after an unclean shutdown of BitCore Core on Windows
+entire blockchain after an unclean shutdown of Bitcoin Core on Windows
 (or an unclean shutdown of Windows itself). Although unclean shutdowns
 remain unsafe, this release no longer relies on memory-mapped files for
 the UTXO database, which significantly reduced the frequency of unclean
 shutdowns leading to required reindexes during testing.
 
-For more information, see: <https://github.com/bitcore-project/bitcore-core/pull/6917>
+For more information, see: <https://github.com/bitcore/bitcore/pull/6917>
 
 Other fixes for database corruption on Windows are expected in the
 next major release.

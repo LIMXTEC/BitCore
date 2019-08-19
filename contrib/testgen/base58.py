@@ -1,8 +1,8 @@
-# Copyright (c) 2012-2016 The BitCore Core developers
+# Copyright (c) 2012-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
-BitCore base58 encoding and decoding.
+Bitcoin base58 encoding and decoding.
 
 Based on https://bitcoretalk.org/index.php?topic=1026.0 (public domain)
 '''
@@ -37,7 +37,7 @@ def b58encode(v):
         long_value = div
     result = __b58chars[long_value] + result
 
-    # BitCore does a little leading-zero-compression:
+    # Bitcoin does a little leading-zero-compression:
     # leading 0-bytes in the input become leading-1s
     nPad = 0
     for c in v:

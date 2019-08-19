@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2017 The BitCore Core developers
+// Copyright (c) 2013-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,7 +19,7 @@ BOOST_AUTO_TEST_CASE(murmurhash3)
 
     // Test MurmurHash3 with various inputs. Of course this is retested in the
     // bloom filter tests - they would fail if MurmurHash3() had any problems -
-    // but is useful for those trying to implement BitCore libraries as a
+    // but is useful for those trying to implement Bitcoin libraries as a
     // source of test data for their MurmurHash3() primitive during
     // development.
     //
@@ -128,6 +128,23 @@ BOOST_AUTO_TEST_CASE(siphash)
     tx.nVersion = 1;
     ss << tx;
     BOOST_CHECK_EQUAL(SipHashUint256(1, 2, ss.GetHash()), 0x79751e980c2a0a35ULL);
+
+    // Check consistency between CSipHasher and SipHashUint256[Extra].
+    FastRandomContext ctx;
+    for (int i = 0; i < 16; ++i) {
+        uint64_t k1 = ctx.rand64();
+        uint64_t k2 = ctx.rand64();
+        uint256 x = InsecureRand256();
+        uint32_t n = ctx.rand32();
+        uint8_t nb[4];
+        WriteLE32(nb, n);
+        CSipHasher sip256(k1, k2);
+        sip256.Write(x.begin(), 32);
+        CSipHasher sip288 = sip256;
+        sip288.Write(nb, 4);
+        BOOST_CHECK_EQUAL(SipHashUint256(k1, k2, x), sip256.Finalize());
+        BOOST_CHECK_EQUAL(SipHashUint256Extra(k1, k2, x, n), sip288.Finalize());
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2015 The BitCore Core developers
+// Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,16 +17,16 @@ QT_END_NAMESPACE
 
 /** Widget for entering bitcore amounts.
   */
-class BitCoreAmountField: public QWidget
+class BitcoinAmountField: public QWidget
 {
     Q_OBJECT
 
     // ugly hack: for some unknown reason CAmount (instead of qint64) does not work here as expected
-    // discussion: https://github.com/bitcore-project/bitcore-core/pull/5117
+    // discussion: https://github.com/bitcore/bitcore/pull/5117
     Q_PROPERTY(qint64 value READ value WRITE setValue NOTIFY valueChanged USER true)
 
 public:
-    explicit BitCoreAmountField(QWidget *parent = 0);
+    explicit BitcoinAmountField(QWidget *parent = 0);
 
     CAmount value(bool *value=0) const;
     void setValue(const CAmount& value);

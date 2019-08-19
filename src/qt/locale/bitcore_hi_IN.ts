@@ -1,13 +1,25 @@
-﻿<TS language="hi_IN" version="2.1">
+<TS language="hi_IN" version="2.1">
 <context>
     <name>AddressBookPage</name>
+    <message>
+        <source>Right-click to edit address or label</source>
+        <translation>पते या लेबल को संपादित करने के लिए राइट-क्लिक करें</translation>
+    </message>
     <message>
         <source>Create a new address</source>
         <translation>नया पता लिखिए !</translation>
     </message>
     <message>
+        <source>&amp;New</source>
+        <translation>&amp;NEW</translation>
+    </message>
+    <message>
         <source>Copy the currently selected address to the system clipboard</source>
         <translation>चुनिन्दा पते को सिस्टम क्लिपबोर्ड पर कापी करे !</translation>
+    </message>
+    <message>
+        <source>Delete the currently selected address from the list</source>
+        <translation>सूची से वर्तमान में चयनित पता हटाएं</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -36,7 +48,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitCoreGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>नेटवर्क से समकालिक (मिल) रहा है ...</translation>

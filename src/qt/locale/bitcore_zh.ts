@@ -12,7 +12,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitCoreGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Error</source>
         <translation>错误</translation>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Warning: Invalid BitCore address</source>
-        <translation>警告：超级比特地址无效</translation>
+        <translation>警告：莱特币地址无效</translation>
     </message>
     </context>
 <context>

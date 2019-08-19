@@ -1,4 +1,4 @@
-﻿<TS language="ta" version="2.1">
+<TS language="ta" version="2.1">
 <context>
     <name>AddressBookPage</name>
     <message>
@@ -52,7 +52,7 @@
     </message>
     </context>
 <context>
-    <name>BitCoreGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation>&amp;கண்ணோட்டம்</translation>
@@ -708,7 +708,7 @@
 <context>
     <name>bitcore-core</name>
     <message>
-        <source>BitCore Core</source>
+        <source>BitCore BTX</source>
         <translation>BitCore மையம்</translation>
     </message>
     <message>

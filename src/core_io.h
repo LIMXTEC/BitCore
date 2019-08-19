@@ -1,10 +1,13 @@
-// Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2017-2017 The Bitcore Core developers
+// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2019 The Litecoin Core developers
+// Copyright (c) 2017-2019 The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCORE_CORE_IO_H
 #define BITCORE_CORE_IO_H
+
+#include "amount.h"
 
 #include <string>
 #include <vector>
@@ -26,9 +29,10 @@ uint256 ParseHashStr(const std::string&, const std::string& strName);
 std::vector<unsigned char> ParseHexUV(const UniValue& v, const std::string& strName);
 
 // core_write.cpp
+UniValue ValueFromAmount(const CAmount& amount);
 std::string FormatScript(const CScript& script);
 std::string EncodeHexTx(const CTransaction& tx, const int serializeFlags = 0);
 void ScriptPubKeyToUniv(const CScript& scriptPubKey, UniValue& out, bool fIncludeHex);
-void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry);
+void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry, bool include_hex = true, int serialize_flags = 0);
 
 #endif // BITCORE_CORE_IO_H

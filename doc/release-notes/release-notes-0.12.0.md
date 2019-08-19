@@ -1,12 +1,12 @@
-BitCore Core version 0.12.0 is now available from:
+Bitcoin Core version 0.12.0 is now available from:
 
-  <http://bitcore.cc/bin/bitcore-core-0.12.0/>
+  <https://bitcore.cc/bin/bitcore-core-0.12.0/>
 
 This is a new major version release, bringing new features and other improvements.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/bitcore-project/bitcore-core/issues>
+  <https://github.com/bitcore/bitcore/issues>
 
 Upgrading and downgrading
 =========================
@@ -16,7 +16,7 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/BitCore-Qt (on Mac) or
+installer (on Windows) or just copy over /Applications/Bitcoin-Qt (on Mac) or
 bitcored/bitcore-qt (on Linux).
 
 Downgrade warning
@@ -26,7 +26,7 @@ Downgrade warning
 
 Because release 0.10.0 and later makes use of headers-first synchronization and
 parallel block download (see further), the block files and databases are not
-backwards-compatible with pre-0.10 versions of BitCore Core or other software:
+backwards-compatible with pre-0.10 versions of Bitcoin Core or other software:
 
 * Blocks will be stored on disk out of order (in the order they are
 received, really), which makes it incompatible with some tools or
@@ -48,10 +48,10 @@ This does not affect wallet forward or backward compatibility.
 
 Because release 0.12.0 and later will obfuscate the chainstate on every
 fresh sync or reindex, the chainstate is not backwards-compatible with
-pre-0.12 versions of BitCore Core or other software.
+pre-0.12 versions of Bitcoin Core or other software.
 
 If you want to downgrade after you have done a reindex with 0.12.0 or later,
-you will need to reindex when you first start BitCore Core version 0.11 or
+you will need to reindex when you first start Bitcoin Core version 0.11 or
 earlier.
 
 Notable changes
@@ -60,7 +60,7 @@ Notable changes
 Signature validation using libsecp256k1
 ---------------------------------------
 
-ECDSA signatures inside BitCore transactions now use validation using
+ECDSA signatures inside Bitcoin transactions now use validation using
 [libsecp256k1](https://github.com/bitcore-core/secp256k1) instead of OpenSSL.
 
 Depending on the platform, this means a significant speedup for raw signature
@@ -107,15 +107,15 @@ can often prevent an extra roundtrip before the actual block is downloaded.
 Memory pool limiting
 --------------------
 
-Previous versions of BitCore Core had their mempool limited by checking
+Previous versions of Bitcoin Core had their mempool limited by checking
 a transaction's fees against the node's minimum relay fee. There was no
 upper bound on the size of the mempool and attackers could send a large
 number of transactions paying just slighly more than the default minimum
 relay fee to crash nodes with relatively low RAM. A temporary workaround
-for previous versions of BitCore Core was to raise the default minimum
+for previous versions of Bitcoin Core was to raise the default minimum
 relay fee.
 
-BitCore Core 0.12 will have a strict maximum size on the mempool. The
+Bitcoin Core 0.12 will have a strict maximum size on the mempool. The
 default value is 300 MB and can be configured with the `-maxmempool`
 parameter. Whenever a transaction would cause the mempool to exceed
 its maximum size, the transaction that (along with in-mempool descendants) has
@@ -124,7 +124,7 @@ minimum relay feerate will be increased to match this feerate plus the initial
 minimum relay feerate. The initial minimum relay feerate is set to
 1000 satoshis per kB.
 
-BitCore Core 0.12 also introduces new default policy limits on the length and
+Bitcoin Core 0.12 also introduces new default policy limits on the length and
 size of unconfirmed transaction chains that are allowed in the mempool
 (generally limiting the length of unconfirmed chains to 25 transactions, with a
 total size of 101 KB).  These limits can be overriden using command line
@@ -134,7 +134,7 @@ Opt-in Replace-by-fee transactions
 ----------------------------------
 
 It is now possible to replace transactions in the transaction memory pool of
-BitCore Core 0.12 nodes. BitCore Core will only allow replacement of
+Bitcoin Core 0.12 nodes. Bitcoin Core will only allow replacement of
 transactions which have any of their inputs' `nSequence` number set to less
 than `0xffffffff - 1`.  Moreover, a replacement transaction may only be
 accepted when it pays sufficient fee, as described in [BIP 125]
@@ -156,7 +156,7 @@ updated RPC calls `gettransaction` and `listtransactions`, which now have an
 additional field in the output indicating if a transaction is replaceable under
 BIP125 ("bip125-replaceable").
 
-Note that the wallet in BitCore Core 0.12 does not yet have support for
+Note that the wallet in Bitcoin Core 0.12 does not yet have support for
 creating transactions that would be replaceable under BIP 125.
 
 
@@ -196,14 +196,14 @@ returned (previously all relevant hashes were returned).
 Relay and Mining: Priority transactions
 ---------------------------------------
 
-BitCore Core has a heuristic 'priority' based on coin value and age. This
+Bitcoin Core has a heuristic 'priority' based on coin value and age. This
 calculation is used for relaying of transactions which do not pay the
 minimum relay fee, and can be used as an alternative way of sorting
-transactions for mined blocks. BitCore Core will relay transactions with
+transactions for mined blocks. Bitcoin Core will relay transactions with
 insufficient fees depending on the setting of `-limitfreerelay=<r>` (default:
 `r=15` kB per minute) and `-blockprioritysize=<s>`.
 
-In BitCore Core 0.12, when mempool limit has been reached a higher minimum
+In Bitcoin Core 0.12, when mempool limit has been reached a higher minimum
 relay fee takes effect to limit memory usage. Transactions which do not meet
 this higher effective minimum relay fee will not be relayed or mined even if
 they rank highly according to the priority heuristic.
@@ -224,7 +224,7 @@ Note, however, that if mining priority transactions is left disabled, the
 priority delta will be ignored and only the fee metric will be effective.
 
 This internal automatic prioritization handling is being considered for removal
-entirely in BitCore Core 0.13, and it is at this time undecided whether the
+entirely in Bitcoin Core 0.13, and it is at this time undecided whether the
 more accurate priority calculation for chained unconfirmed transactions will be
 restored. Community direction on this topic is particularly requested to help
 set project priorities.
@@ -234,15 +234,15 @@ Automatically use Tor hidden services
 
 Starting with Tor version 0.2.7.1 it is possible, through Tor's control socket
 API, to create and destroy 'ephemeral' hidden services programmatically.
-BitCore Core has been updated to make use of this.
+Bitcoin Core has been updated to make use of this.
 
 This means that if Tor is running (and proper authorization is available),
-BitCore Core automatically creates a hidden service to listen on, without
-manual configuration. BitCore Core will also use Tor automatically to connect
+Bitcoin Core automatically creates a hidden service to listen on, without
+manual configuration. Bitcoin Core will also use Tor automatically to connect
 to other .onion nodes if the control socket can be successfully opened. This
 will positively affect the number of available .onion nodes and their usage.
 
-This new feature is enabled by default if BitCore Core is listening, and
+This new feature is enabled by default if Bitcoin Core is listening, and
 a connection to Tor can be made. It can be configured with the `-listenonion`,
 `-torcontrol` and `-torpassword` settings. To show verbose debugging
 information, pass `-debug=tor`.
@@ -250,7 +250,7 @@ information, pass `-debug=tor`.
 Notifications through ZMQ
 -------------------------
 
-BitCored can now (optionally) asynchronously notify clients through a
+Bitcoind can now (optionally) asynchronously notify clients through a
 ZMQ-based PUB socket of the arrival of new transactions and blocks.
 This feature requires installation of the ZMQ C API library 4.x and
 configuring its use through the command line or configuration file.
@@ -263,8 +263,8 @@ Various improvements have been made to how the wallet calculates
 transaction fees.
 
 Users can decide to pay a predefined fee rate by setting `-paytxfee=<n>`
-(or `settxfee <n>` rpc during runtime). A value of `n=0` signals BitCore
-Core to use floating fees. By default, BitCore Core will use floating
+(or `settxfee <n>` rpc during runtime). A value of `n=0` signals Bitcoin
+Core to use floating fees. By default, Bitcoin Core will use floating
 fees.
 
 Based on past transaction data, floating fees approximate the fees
@@ -275,9 +275,9 @@ Sometimes, it is not possible to give good estimates, or an estimate
 at all. Therefore, a fallback value can be set with `-fallbackfee=<f>`
 (default: `0.0002` BTC/kB).
 
-At all times, BitCore Core will cap fees at `-maxtxfee=<x>` (default:
+At all times, Bitcoin Core will cap fees at `-maxtxfee=<x>` (default:
 0.10) BTC.
-Furthermore, BitCore Core will never create transactions paying less than
+Furthermore, Bitcoin Core will never create transactions paying less than
 the current minimum relay fee.
 Finally, a user can set the minimum fee rate for all transactions with
 `-mintxfee=<i>`, which defaults to 1000 satoshis per kB.
@@ -331,7 +331,7 @@ practice. In future releases, a higher value may also help the network
 as a whole: stored blocks could be served to other nodes.
 
 For further information about pruning, you may also consult the [release
-notes of v0.11.0](https://github.com/bitcore-project/bitcore-core/blob/v0.11.0/doc/release-notes.md#block-file-pruning).
+notes of v0.11.0](https://github.com/bitcore/bitcore/blob/v0.11.0/doc/release-notes.md#block-file-pruning).
 
 `NODE_BLOOM` service bit
 ------------------------
@@ -410,9 +410,9 @@ arbitrary TCP connections inside SSL. On e.g. Ubuntu it can be installed with:
 
     sudo apt-get install stunnel4
 
-Then, to tunnel a SSL connection on 240332 to a RPC server bound on localhost on port 140332 do:
+Then, to tunnel a SSL connection on 28332 to a RPC server bound on localhost on port 18332 do:
 
-    stunnel -d 240332 -r 127.0.0.1:140332 -p stunnel.pem -P ''
+    stunnel -d 28332 -r 127.0.0.1:18332 -p stunnel.pem -P ''
 
 It can also be set up system-wide in inetd style.
 
@@ -430,8 +430,8 @@ caching. A sample config for apache2 could look like:
     SSLCertificateKeyFile /etc/apache2/ssl/server.key
 
     <Location /bitcorerpc>
-        ProxyPass http://127.0.0.1:40332/
-        ProxyPassReverse http://127.0.0.1:40332/
+        ProxyPass http://127.0.0.1:8332/
+        ProxyPassReverse http://127.0.0.1:8332/
         # optional enable digest auth
         # AuthType Digest
         # ...
@@ -623,7 +623,7 @@ git merge commit are mentioned.
 ### Validation
 
 - #5927 `8d9f0a6` Reduce checkpoints' effect on consensus. (Pieter Wuille)
-- #6299 `24f2489` Bugfix: Don't check the genesis block header before accepting it (Jorge Tim??n)
+- #6299 `24f2489` Bugfix: Don't check the genesis block header before accepting it (Jorge Timón)
 - #6361 `d7ada03` Use real number of cores for default -par, ignore virtual cores (Wladimir J. van der Laan)
 - #6519 `87f37e2` Make logging for validation optional (Wladimir J. van der Laan)
 - #6351 `2a1090d` CHECKLOCKTIMEVERIFY (BIP65) IsSuperMajority() soft-fork (Peter Todd)
@@ -637,7 +637,7 @@ git merge commit are mentioned.
 ### Build system
 
 - #6210 `0e4f2a0` build: disable optional use of gmp in internal secp256k1 build (Wladimir J. van der Laan)
-- #6214 `87406aa` [OSX] revert renaming of BitCore-Qt.app and use CFBundleDisplayName (partial revert of #6116) (Jonas Schnelli)
+- #6214 `87406aa` [OSX] revert renaming of Bitcoin-Qt.app and use CFBundleDisplayName (partial revert of #6116) (Jonas Schnelli)
 - #6218 `9d67b10` build/gitian misc updates (Cory Fields)
 - #6269 `d4565b6` gitian: Use the new bitcore-detached-sigs git repo for OSX signatures (Cory Fields)
 - #6418 `d4a910c` Add autogen.sh to source tarball. (randy-waterhouse)
@@ -761,8 +761,8 @@ git merge commit are mentioned.
 ### Miscellaneous
 
 - #6213 `e54ff2f` [init] add -blockversion help and extend -upnp help (Diapolo)
-- #5975 `1fea667` Consensus: Decouple ContextualCheckBlockHeader from checkpoints (Jorge Tim??n)
-- #6061 `eba2f06` Separate Consensus::CheckTxInputs and GetSpendHeight in CheckInputs (Jorge Tim??n)
+- #5975 `1fea667` Consensus: Decouple ContextualCheckBlockHeader from checkpoints (Jorge Timón)
+- #6061 `eba2f06` Separate Consensus::CheckTxInputs and GetSpendHeight in CheckInputs (Jorge Timón)
 - #5994 `786ed11` detach wallet from miner (Jonas Schnelli)
 - #6387 `11576a5` [bitcore-cli] improve error output (Jonas Schnelli)
 - #6401 `6db53b4` Add BITCORED_SIGTERM_TIMEOUT to OpenRC init scripts (Florian Schmaus)
@@ -779,7 +779,7 @@ git merge commit are mentioned.
 - #6565 `a6f2aff` Make sure we re-acquire lock if a task throws (Casey Rodarmor)
 - #6599 `f4d88c4` Make sure LogPrint strings are line-terminated (Ross Nicoll)
 - #6630 `195942d` Replace boost::reverse_lock with our own (Casey Rodarmor)
-- #6103 `13b8282` Add ZeroMQ notifications (Jo??o Barbosa)
+- #6103 `13b8282` Add ZeroMQ notifications (João Barbosa)
 - #6692 `d5d1d2e` devtools: don't push if signing fails in github-merge (Wladimir J. van der Laan)
 - #6728 `2b0567b` timedata: Prevent warning overkill (Wladimir J. van der Laan)
 - #6713 `f6ce59c` SanitizeString: Allow hypen char (MarcoFalke)
@@ -839,8 +839,8 @@ Thanks to everyone who directly contributed to this release:
 - Johnathan Corgan
 - Jonas Schnelli
 - Jonathan Cross
-- Jo??o Barbosa
-- Jorge Tim??n
+- João Barbosa
+- Jorge Timón
 - Josh Lehan
 - J Ross Nicoll
 - kazcw
@@ -864,7 +864,7 @@ Thanks to everyone who directly contributed to this release:
 - Patrick Strateman
 - Paul Georgiou
 - Paul Rabahy
-- Pavel Jan??k / paveljanik
+- Pavel Janík / paveljanik
 - Pavel Vasin
 - Pavol Rusnak
 - Peter Josling

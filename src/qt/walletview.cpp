@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2017 The BitCore Core developers
+// Copyright (c) 2011-2019 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -33,6 +33,7 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
     QStackedWidget(parent),
     clientModel(0),
     walletModel(0),
+	unlockContext(0),
     platformStyle(_platformStyle)
 {
     // Create tabs
@@ -82,9 +83,11 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
 
 WalletView::~WalletView()
 {
+    if(unlockContext)
+    delete (WalletModel::UnlockContext*)(unlockContext);
 }
 
-void WalletView::setBitCoreGUI(BitCoreGUI *gui)
+void WalletView::setBitcoinGUI(BitcoinGUI *gui)
 {
     if (gui)
     {
@@ -246,7 +249,7 @@ void WalletView::backupWallet()
 {
     QString filename = GUIUtil::getSaveFileName(this,
         tr("Backup Wallet"), QString(),
-        tr("Wallet Data (*.dat)"), NULL);
+        tr("Wallet Data (*.dat)"), nullptr);
 
     if (filename.isEmpty())
         return;
@@ -279,6 +282,15 @@ void WalletView::unlockWallet()
         dlg.setModel(walletModel);
         dlg.exec();
     }
+}
+
+void WalletView::requestUnlockWallet()
+{
+    if(walletModel)
+    {
+        unlockContext = (void*)(new WalletModel::UnlockContext(walletModel->requestUnlock()));
+    }
+    unlockContext = 0;
 }
 
 void WalletView::usedSendingAddresses()

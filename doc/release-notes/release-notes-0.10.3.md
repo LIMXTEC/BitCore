@@ -1,13 +1,13 @@
-BitCore Core version 0.10.3 is now available from:
+Bitcoin Core version 0.10.3 is now available from:
 
-  <http://bitcore.cc/bin/bitcore-core-0.10.3/>
+  <https://bitcore.cc/bin/bitcore-core-0.10.3/>
 
 This is a new minor version release, bringing security fixes and translation 
 updates. It is recommended to upgrade to this version as soon as possible.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/bitcore-project/bitcore-core/issues>
+  <https://github.com/bitcore/bitcore/issues>
 
 Upgrading and downgrading
 =========================
@@ -17,7 +17,7 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/BitCore-Qt (on Mac) or
+installer (on Windows) or just copy over /Applications/Bitcoin-Qt (on Mac) or
 bitcored/bitcore-qt (on Linux).
 
 Downgrade warning
@@ -25,7 +25,7 @@ Downgrade warning
 
 Because release 0.10.0 and later makes use of headers-first synchronization and
 parallel block download (see further), the block files and databases are not
-backwards-compatible with pre-0.10 versions of BitCore Core or other software:
+backwards-compatible with pre-0.10 versions of Bitcoin Core or other software:
 
 * Blocks will be stored on disk out of order (in the order they are
 received, really), which makes it incompatible with some tools or
@@ -60,7 +60,7 @@ using distribution provided packages.
 Additionally, upnp has been disabled by default. This may result in a lower
 number of reachable nodes on IPv4, however this prevents future libupnpc
 vulnerabilities from being a structural risk to the network
-(see https://github.com/bitcore-project/bitcore-core/pull/6795).
+(see https://github.com/bitcore/bitcore/pull/6795).
 
 Test for LowS signatures before relaying
 -----------------------------------------
@@ -82,17 +82,17 @@ permitted. Even BIP62 did not propose applying this rule to
 old version transactions, but conforming implementations have become
 much more common since BIP62 was initially written.
 
-BitCore Core has produced compatible signatures since a28fb70e in
+Bitcoin Core has produced compatible signatures since a28fb70e in
 September 2013, but this didn't make it into a release until 0.9
-in March 2014; BitCorej has done so for a similar span of time.
-BitCorejs and electrum have been more recently updated.
+in March 2014; Bitcoinj has done so for a similar span of time.
+Bitcoinjs and electrum have been more recently updated.
 
 This does not replace the need for BIP62 or similar, as miners can
 still cooperate to break transactions.  Nor does it replace the
 need for wallet software to handle malleability sanely[1]. This
 only eliminates the cheap and irritating DOS attack.
 
-[1] On the Malleability of BitCore Transactions
+[1] On the Malleability of Bitcoin Transactions
 Marcin Andrychowicz, Stefan Dziembowski, Daniel Malinowski, Łukasz Mazurek
 http://fc15.ifca.ai/preproceedings/bitcore/paper_9.pdf
 
@@ -107,7 +107,7 @@ outrageous memory usage on nodes due to the mempool ballooning. This is a
 temporary measure, bridging the time until a dynamic method for determining
 this fee is merged (which will be in 0.12).
 
-(see https://github.com/bitcore-project/bitcore-core/pull/6793, as well as the 0.11.0
+(see https://github.com/bitcore/bitcore/pull/6793, as well as the 0.11.0
 release notes, in which this value was suggested)
 
 0.10.3 Change log

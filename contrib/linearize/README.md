@@ -7,11 +7,12 @@ run using Python 3 but are compatible with Python 2.
     $ ./linearize-hashes.py linearize.cfg > hashlist.txt
 
 Required configuration file settings for linearize-hashes:
-* RPC: `rpcuser`, `rpcpassword`
+* RPC: `datadir` (Required if `rpcuser` and `rpcpassword` are not specified)
+* RPC: `rpcuser`, `rpcpassword` (Required if `datadir` is not specified)
 
 Optional config file setting for linearize-hashes:
 * RPC: `host`  (Default: `127.0.0.1`)
-* RPC: `port`  (Default: `40332`)
+* RPC: `port`  (Default: `9332`)
 * Blockchain: `min_height`, `max_height`
 * `rev_hash_bytes`: If true, the written block hash list will be
 byte-reversed. (In other words, the hash returned by getblockhash will have its

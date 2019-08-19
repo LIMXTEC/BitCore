@@ -1,9 +1,9 @@
 BitCore Core integration/staging tree
 =====================================
 
-[![Build Status](https://travis-ci.org/bitcore-project/bitcore.svg?branch=master)](https://travis-ci.org/bitcore-project/bitcore)
+[![Build Status](https://travis-ci.org/LIMXTEC/BitCore.svg?branch=0.15)](https://travis-ci.org/LIMXTEC/BitCore)
 
-http://bitcore.cc
+https://bitcore.cc
 
 What is BitCore?
 ----------------
@@ -15,7 +15,7 @@ out collectively by the network. BitCore Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the BitCore Core software, see [http://bitcore.cc](http://bitcore.cc).
+the BitCore Core software, see [https://bitcore.cc](https://bitcore.cc).
 
 License
 -------
@@ -23,11 +23,13 @@ License
 BitCore Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see https://opensource.org/licenses/MIT.
 
+
+
 Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/LIMXTEC/BitCore/tags) are created
+
 regularly to indicate new official, stable release versions of BitCore Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
@@ -53,9 +55,9 @@ submit new unit tests for old code. Unit tests can be compiled and run
 (assuming they weren't disabled in configure) with: `make check`. Further details on running
 and extending unit tests can be found in [/src/test/README.md](/src/test/README.md).
 
-There are also [regression and integration tests](/qa) of the RPC interface, written
+There are also [regression and integration tests](/test), written
 in Python, that are run automatically on the build server.
-These tests can be run (if the [test dependencies](/qa) are installed) with: `qa/pull-tester/rpc-tests.py`
+These tests can be run (if the [test dependencies](/test) are installed) with: `test/functional/test_runner.py`
 
 The Travis CI system makes sure that every pull request is built for Windows, Linux, and OS X, and that unit/sanity tests are run automatically.
 
@@ -69,7 +71,7 @@ not straightforward.
 Translations
 ------------
 
-We only accept translation fixes that are submitted through [BitCore Core's Transifex page](https://www.transifex.com/projects/p/bitcore/).
+We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcore/).
 Translations are converted to BitCore periodically.
 
 Translations are periodically pulled from Transifex and merged into the git repository. See the

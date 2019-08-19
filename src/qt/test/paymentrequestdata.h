@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2015 The BitCore Core developers
+// Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -435,7 +435,7 @@ d2hj739GDLz0b5KuJ2SG6VknMRQM976w/m2qlq0ccVGaaZ2zMIGfpzL3p6adwx/5\
 ";
 
 //
-// Payment request with amount overflow (amount is set to 84000001 MAC)
+// Payment request with amount overflow (amount is set to 84000001 BTX)
 //
 const char* paymentrequest5_cert2_BASE64 =
 "\

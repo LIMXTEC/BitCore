@@ -4,7 +4,7 @@ This issue tracker is only for technical issues related to bitcore-core.
 
 General bitcore questions and/or support requests and are best directed to the [bitcoretalk.io forums](https://bitcoretalk.io/).
 
-For reporting security issues, please contact the BitCore developers on the #bitcore-dev Freenode IRC channel or alternatively you can email us at contact@bitcore.org.
+For reporting security issues, please contact the BitCore developers on the #bitcore-dev Freenode IRC channel or alternatively you can email us at contact@bitcore.cc.
 
 ### Describe the issue
 

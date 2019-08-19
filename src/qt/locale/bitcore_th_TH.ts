@@ -1,4 +1,4 @@
-﻿<TS language="th_TH" version="2.1">
+<TS language="th_TH" version="2.1">
 <context>
     <name>AddressBookPage</name>
     <message>
@@ -88,7 +88,7 @@
     </message>
 </context>
 <context>
-    <name>BitCoreGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>เซ็นต์ชื่อด้วย &amp;ข้อความ...</translation>

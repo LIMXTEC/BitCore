@@ -1,5 +1,5 @@
 [Unit]
-Description=BitCore's distributed currency daemon
+Description=Bitcoin's distributed currency daemon
 After=network.target
 
 [Service]

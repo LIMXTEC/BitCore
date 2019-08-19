@@ -55,7 +55,6 @@ src/qt/test/moc*.cpp
 *.pyc
 *.o
 *.o-*
-!*.patch
 *.a
 *.pb.cc
 *.pb.h
@@ -80,7 +79,6 @@ BitCore-Qt.app
 # Unit-tests
 Makefile.test
 bitcore-qt_test
-src/test/buildenv.py
 
 # Resources cpp
 qrc_*.cpp
@@ -101,11 +99,10 @@ coverage_percent.txt
 linux-coverage-build
 linux-build
 win32-build
-qa/pull-tester/tests_config.py
-qa/cache/*
+test/config.ini
+test/cache/*
 
 !src/leveldb*/Makefile
-!depends/Makefile
 
 /doc/doxygen/
 

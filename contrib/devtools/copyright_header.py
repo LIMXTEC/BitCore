@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-# Copyright (c) 2016 The BitCore Core developers
+# Copyright (c) 2016 The Bitcoin Core developers
+# Copyright (c) 2017-2019 The Bitcore Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -32,7 +33,7 @@ EXCLUDE = [
     'src/tinyformat.h',
     'src/leveldb/util/env_win.cc',
     'src/crypto/ctaes/bench.c',
-    'qa/rpc-tests/test_framework/bignum.py',
+    'test/functional/test_framework/bignum.py',
     # python init:
     '*__init__.py',
 ]
@@ -83,11 +84,12 @@ def compile_copyright_regex(copyright_style, year_style, name):
 
 EXPECTED_HOLDER_NAMES = [
     "Satoshi Nakamoto\n",
-    "The BitCore Core developers\n",
-    "The BitCore Core developers \n",
-    "BitCore Core Developers\n",
-    "the BitCore Core developers\n",
-    "The BitCore developers\n",
+    "The Bitcore Core developers"
+    "The Bitcoin Core developers\n",
+    "The Bitcoin Core developers \n",
+    "Bitcoin Core Developers\n",
+    "the Bitcoin Core developers\n",
+    "The Bitcoin developers\n",
     "The LevelDB Authors\. All rights reserved\.\n",
     "BitPay Inc\.\n",
     "BitPay, Inc\.\n",
@@ -284,7 +286,7 @@ Arguments:
 def report_cmd(argv):
     if len(argv) == 2:
         sys.exit(REPORT_USAGE)
-        
+
     base_directory = argv[2]
     if not os.path.exists(base_directory):
         sys.exit("*** bad <base_directory>: %s" % base_directory)
@@ -340,7 +342,7 @@ def write_file_lines(filename, file_lines):
 COPYRIGHT = 'Copyright \(c\)'
 YEAR = "20[0-9][0-9]"
 YEAR_RANGE = '(%s)(-%s)?' % (YEAR, YEAR)
-HOLDER = 'The BitCore Core developers'
+HOLDER = 'The Bitcore Core developers'
 UPDATEABLE_LINE_COMPILED = re.compile(' '.join([COPYRIGHT, YEAR_RANGE, HOLDER]))
 
 def get_updatable_copyright_line(file_lines):
@@ -408,24 +410,24 @@ def exec_update_header_year(base_directory):
 ################################################################################
 
 UPDATE_USAGE = """
-Updates all the copyright headers of "The BitCore Core developers" which were
+Updates all the copyright headers of "The Bitcore Core developers" which were
 changed in a year more recent than is listed. For example:
 
-// Copyright (c) <firstYear>-<lastYear> The BitCore Core developers
+// Copyright (c) <firstYear>-<lastYear> The Bitcore Core developers
 
 will be updated to:
 
-// Copyright (c) <firstYear>-<lastModifiedYear> The BitCore Core developers
+// Copyright (c) <firstYear>-<lastModifiedYear> The Bitcore Core developers
 
 where <lastModifiedYear> is obtained from the 'git log' history.
 
 This subcommand also handles copyright headers that have only a single year. In those cases:
 
-// Copyright (c) <year> The BitCore Core developers
+// Copyright (c) <year> The Bitcore Core developers
 
 will be updated to:
 
-// Copyright (c) <year>-<lastModifiedYear> The BitCore Core developers
+// Copyright (c) <year>-<lastModifiedYear> The Bitcore Core developers
 
 where the update is appropriate.
 
@@ -442,7 +444,6 @@ def print_file_action_message(filename, action):
 def update_cmd(argv):
     if len(argv) != 3:
         sys.exit(UPDATE_USAGE)
-    
     base_directory = argv[2]
     if not os.path.exists(base_directory):
         sys.exit("*** bad base_directory: %s" % base_directory)
@@ -458,7 +459,7 @@ def get_header_lines(header, start_year, end_year):
     return [line + '\n' for line in lines]
 
 CPP_HEADER = '''
-// Copyright (c) %s The BitCore Core developers
+// Copyright (c) %s The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -467,7 +468,7 @@ def get_cpp_header_lines_to_insert(start_year, end_year):
     return reversed(get_header_lines(CPP_HEADER, start_year, end_year))
 
 PYTHON_HEADER = '''
-# Copyright (c) %s The BitCore Core developers
+# Copyright (c) %s The Bitcore Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -504,7 +505,7 @@ def file_has_hashbang(file_lines):
 
 def insert_python_header(filename, file_lines, start_year, end_year):
     if file_has_hashbang(file_lines):
-        insert_idx = 1 
+        insert_idx = 1
     else:
         insert_idx = 0
     header_lines = get_python_header_lines_to_insert(start_year, end_year)
@@ -521,7 +522,7 @@ def insert_cpp_header(filename, file_lines, start_year, end_year):
 def exec_insert_header(filename, style):
     file_lines = read_file_lines(filename)
     if file_already_has_core_copyright(file_lines):
-        sys.exit('*** %s already has a copyright by The BitCore Core developers'
+        sys.exit('*** %s already has a copyright by The Bitcore Core developers'
                  % (filename))
     start_year, end_year = get_git_change_year_range(filename)
     if style == 'python':
@@ -534,7 +535,7 @@ def exec_insert_header(filename, style):
 ################################################################################
 
 INSERT_USAGE = """
-Inserts a copyright header for "The BitCore Core developers" at the top of the
+Inserts a copyright header for "The Bitcore Core developers" at the top of the
 file in either Python or C++ style as determined by the file extension. If the
 file is a Python file and it has a '#!' starting the first line, the header is
 inserted in the line below it.
@@ -548,7 +549,7 @@ where <year_introduced> is according to the 'git log' history. If
 
 "<current_year>"
 
-If the file already has a copyright for "The BitCore Core developers", the
+If the file already has a copyright for "The Bitcore Core developers", the
 script will exit.
 
 Usage:
@@ -568,20 +569,19 @@ def insert_cmd(argv):
     _, extension = os.path.splitext(filename)
     if extension not in ['.h', '.cpp', '.cc', '.c', '.py']:
         sys.exit("*** cannot insert for file extension %s" % extension)
-   
-    if extension == '.py': 
+
+    if extension == '.py':
         style = 'python'
     else:
         style = 'cpp'
     exec_insert_header(filename, style)
-         
+
 ################################################################################
 # UI
 ################################################################################
 
 USAGE = """
-copyright_header.py - utilities for managing copyright headers of 'The BitCore
-Core developers' in repository source files.
+copyright_header.py - utilities for managing copyright headers of 'The Bitcore Core developers' in repository source files.
 
 Usage:
     $ ./copyright_header <subcommand>

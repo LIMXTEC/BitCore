@@ -1,4 +1,4 @@
-﻿<TS language="zh_HK" version="2.1">
+<TS language="zh_HK" version="2.1">
 <context>
     <name>AddressBookPage</name>
     <message>
@@ -220,7 +220,7 @@
     </message>
 </context>
 <context>
-    <name>BitCoreGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>簽署訊息... &amp;m</translation>
@@ -650,6 +650,14 @@
     </context>
 <context>
     <name>WalletView</name>
+    <message>
+        <source>&amp;Export</source>
+        <translation>匯出 &amp;E</translation>
+    </message>
+    <message>
+        <source>Export the data in the current tab to a file</source>
+        <translation>把目前分頁的資料匯出至檔案</translation>
+    </message>
     </context>
 <context>
     <name>bitcore-core</name>

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2017 The BitCore Core developers
+// Copyright (c) 2011-2019 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -31,8 +31,6 @@ class WalletModel;
 class HelpMessageDialog;
 class ModalOverlay;
 
-class CWallet;
-
 QT_BEGIN_NAMESPACE
 class QAction;
 class QProgressBar;
@@ -40,10 +38,10 @@ class QProgressDialog;
 QT_END_NAMESPACE
 
 /**
-  BitCore GUI main class. This class represents the main window of the BitCore UI. It communicates with both the client and
+  Bitcoin GUI main class. This class represents the main window of the Bitcoin UI. It communicates with both the client and
   wallet models to give the user an up-to-date view of the current core state.
 */
-class BitCoreGUI : public QMainWindow
+class BitcoinGUI : public QMainWindow
 {
     Q_OBJECT
 
@@ -51,8 +49,8 @@ public:
     static const QString DEFAULT_WALLET;
     static const std::string DEFAULT_UIPLATFORM;
 
-    explicit BitCoreGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = 0);
-    ~BitCoreGUI();
+    explicit BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = 0);
+    ~BitcoinGUI();
 
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
@@ -105,14 +103,39 @@ private:
     QAction *receiveCoinsAction;
     QAction *receiveCoinsMenuAction;
     QAction *optionsAction;
+	QAction* openRepairAction;
     QAction *toggleHideAction;
     QAction *encryptWalletAction;
     QAction *backupWalletAction;
     QAction *changePassphraseAction;
+	QAction *unlockWalletAction;
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
     QAction *openAction;
     QAction *showHelpMessageAction;
+	
+	///
+    QAction* openWebsite1;
+    QAction* openWebsite2;
+    QAction* openWebsite3;
+    QAction* openWebsite4;
+    QAction* openWebsite5;
+    QAction* openWebsite6;
+    QAction* openWebsite7;
+    QAction* openWebsite8;
+    QAction* openWebsite9;
+    QAction* openWebsite10;
+
+    QAction* Exchangesite1;
+    QAction* Exchangesite2;
+    QAction* Exchangesite3;
+    QAction* Exchangesite4;
+    QAction* Exchangesite5;
+    QAction* Exchangesite6;
+    QAction* Exchangesite7;
+    QAction* Exchangesite8;
+    QAction* Exchangesite9;
+	QAction* Exchangesite10;
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
@@ -154,6 +177,8 @@ private:
 Q_SIGNALS:
     /** Signal raised when a URI was entered or dragged to the GUI */
     void receivedURI(const QString &uri);
+	//handlerestart
+	void requestedRestart(QStringList args);
 
 public Q_SLOTS:
     /** Set number of connections shown in the UI */
@@ -162,7 +187,8 @@ public Q_SLOTS:
     void setNetworkActive(bool networkActive);
     /** Set number of blocks and last block date shown in the UI */
     void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool headers);
-
+	/** Get restart command-line parameters and request restart */
+    void handleRestart(QStringList args);
     /** Notify the user of an event from the core network or transaction handling code.
        @param[in] title     the message box / notification title
        @param[in] message   the displayed text
@@ -170,7 +196,7 @@ public Q_SLOTS:
                             @see CClientUIInterface::MessageBoxFlags
        @param[in] ret       pointer to a bool that will be modified to whether Ok was clicked (modal only)
     */
-    void message(const QString &title, const QString &message, unsigned int style, bool *ret = NULL);
+    void message(const QString &title, const QString &message, unsigned int style, bool *ret = nullptr);
 
 #ifdef ENABLE_WALLET
     /** Set the encryption status as shown in the UI.

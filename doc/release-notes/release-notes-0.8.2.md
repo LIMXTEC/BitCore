@@ -1,11 +1,11 @@
-BitCore-Qt version 0.8.2 is now available from:
-  http://sourceforge.net/projects/bitcore/files/BitCore/bitcore-0.8.2/
+Bitcoin-Qt version 0.8.2 is now available from:
+  http://sourceforge.net/projects/bitcore/files/Bitcoin/bitcore-0.8.2/
 
 This is a maintenance release that fixes many bugs and includes
 a few small new features.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/bitcore-project/bitcore-core/issues
+  https://github.com/bitcore/bitcore/issues
 
 
 How to Upgrade
@@ -13,7 +13,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait
 until it has completely shut down (which might take a few minutes for older
 versions), then run the installer (on Windows) or just copy over
-/Applications/BitCore-Qt (on Mac) or bitcored/bitcore-qt (on Linux).
+/Applications/Bitcoin-Qt (on Mac) or bitcored/bitcore-qt (on Linux).
 
 If you are upgrading from version 0.7.2 or earlier, the first time you
 run 0.8.2 your blockchain files will be re-indexed, which will take
@@ -43,7 +43,7 @@ with code that automatically calculates and suggests appropriate fees in the
 0.9 release and note that if you set a fee policy significantly different from
 the rest of the network your transactions may never confirm.
 
-BitCore-Qt changes
+Bitcoin-Qt changes
 
 * New icon and splash screen
 * Improve reporting of synchronization process
@@ -97,8 +97,8 @@ Wallet compatibility/rescuing
 
 Known Bugs
 
-* Entering the 'getblocktemplate' or 'getwork' RPC commands into the BitCore-Qt debug
-console will cause BitCore-Qt to crash. Run BitCore-Qt with the -server command-line
+* Entering the 'getblocktemplate' or 'getwork' RPC commands into the Bitcoin-Qt debug
+console will cause Bitcoin-Qt to crash. Run Bitcoin-Qt with the -server command-line
 option to workaround.
 
 Thanks to everybody who contributed to the 0.8.2 release!

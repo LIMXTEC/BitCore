@@ -1,98 +1,70 @@
 
+How to Upgrade
+==============
+
+If you are running an older version, shut it down. Wait until it has completely
+shut down (which might take a few minutes for older versions), then run the 
+installer (on Windows) or just copy over `/Applications/Bitcoin-Qt` (on Mac)
+or `bitcored`/`bitcore-qt` (on Linux).
+
+The first time you run version 0.15.0 or higher, your chainstate database will
+be converted to a new format, which will take anywhere from a few minutes to
+half an hour, depending on the speed of your machine.
+
+The file format of `fee_estimates.dat` changed in version 0.15.0. Hence, a
+downgrade from version 0.15.0 or upgrade to version 0.15.0 will cause all fee
+estimates to be discarded.
+
+Note that the block database format also changed in version 0.8.0 and there is no
+automatic upgrade code from before version 0.8 to version 0.15.0. Upgrading
+directly from 0.7.x and earlier without redownloading the blockchain is not supported.
+However, as usual, old wallet versions are still supported.
+
+Downgrading warning
+-------------------
+
+The chainstate database for this release is not compatible with previous
+releases, so if you run 0.15 and then decide to switch back to any
+older version, you will need to run the old release with the `-reindex-chainstate`
+option to rebuild the chainstate data structures in the old format.
+
+If your node has pruning enabled, this will entail re-downloading and
+processing the entire blockchain.
+
 Compatibility
 ==============
 
-BitCore Core is extensively tested on multiple operating systems using
-the Linux kernel, macOS 10.8+, and Windows Vista and later.
+Bitcoin Core is extensively tested on multiple operating systems using
+the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
-No attempt is made to prevent installing or running the software on Windows XP, you
-can still do so at your own risk but be aware that there are known instabilities and issues.
-Please do not report issues about Windows XP to the issue tracker.
-
-BitCore Core should also work on most other Unix-like systems but is not
+Bitcoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 Notable changes
 ===============
 
-RPC changes
------------
+GUI startup crash issue
+-------------------------
 
-The first positional argument of `createrawtransaction` was renamed.
-This interface change breaks compatibility with 0.14.1, when the named
-arguments functionality, introduced in 0.14.1, is used.
+After upgrade to 0.15.0, some clients would crash at startup because a custom
+fee setting was configured that no longer exists in the GUI. This is a minimal
+patch to avoid this issue from occuring.
 
+0.15.0.1 Change log
+====================
 
-Mining
-------
+-  #11332 `46c8d23` Fix possible crash with invalid nCustomFeeRadio in QSettings (achow101, TheBlueMatt)
 
-Getblocktemplate sets the segwit version bit even when the downstream
-client has not been updated to include the segwit commitment.  Ability
-to enforce the rule is the only required criteria for safe activation,
-but previously signaling was only requested if the miner could include
-transactions in order to avoid a potential outcome where segwit would
-activate at a time when no segwit transactions could be included.
-Since many miners are now including the segwit commitment this concern
-no longer applies.
-
-
-0.14.1 Change log
-=================
-
-Detailed release notes follow. This overview includes changes that affect
-behavior, not code moves, refactors and string updates. For convenience in locating
-the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
-
-### RPC and other APIs
-- #10084 `142fbb2` Rename first named arg of createrawtransaction (MarcoFalke)
-- #10139 `f15268d` Remove auth cookie on shutdown (practicalswift)
-- #10146 `2fea10a` Better error handling for submitblock (rawodb, gmaxwell)
-- #10144 `d947afc` Prioritisetransaction wasn't always updating ancestor fee (sdaftuar)
-
-### Block and transaction handling
-- #10126 `0b5e162` Compensate for memory peak at flush time (sipa)
-- #9912 `fc3d7db` Optimize GetWitnessHash() for non-segwit transactions (sdaftuar)
-- #10133 `ab864d3` Clean up calculations of pcoinsTip memory usage (morcos)
-
-### P2P protocol and network code
-- #9953/#10013 `d2548a4` Fix shutdown hang with >= 8 -addnodes set (TheBlueMatt)
-
-### Build system
-- #9973 `e9611d1` depends: fix zlib build on osx (theuni)
-
-### GUI
-- #10060 `ddc2dd1` Ensure an item exists on the rpcconsole stack before adding (achow101)
-
-### Mining
-- #9955/#10006 `569596c` Don't require segwit in getblocktemplate for segwit signalling or mining (sdaftuar)
-- #9959/#10127 `b5c3440` Prevent slowdown in CreateNewBlock on large mempools (sdaftuar)
-
-### Miscellaneous
-- #10037 `4d8e660` Trivial: Fix typo in help getrawtransaction RPC (keystrike)
-- #10120 `e4c9a90` util: Work around (virtual) memory exhaustion on 32-bit w/ glibc (laanwj)
-- #10130 `ecc5232` bitcore-tx input verification (awemany, jnewbery)
+Also the manpages were updated, as this was forgotten for 0.15.0.
 
 Credits
 =======
 
 Thanks to everyone who directly contributed to this release:
 
-- Alex Morcos
 - Andrew Chow
-- Awemany
-- Cory Fields
-- Gregory Maxwell
-- James Evans
-- John Newbery
-- MarcoFalke
 - Matt Corallo
-- Pieter Wuille
-- practicalswift
-- rawodb
-- Suhas Daftuar
+- Jonas Schnelli
 - Wladimir J. van der Laan
 
 As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcore/).
-

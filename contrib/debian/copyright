@@ -1,13 +1,13 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: BitCore
+Upstream-Name: Bitcoin
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
  irc://#bitcore@freenode.net
-Source: https://github.com/bitcore-project/bitcore-core
+Source: https://github.com/bitcore/bitcore
 
 Files: *
-Copyright: 2009-2017, BitCore Core Developers
+Copyright: 2009-2017, Bitcoin Core Developers
 License: Expat
-Comment: The BitCore Core Developers encompasses the current developers listed on bitcore.org,
+Comment: The Bitcoin Core Developers encompasses the current developers listed on bitcore.cc,
          as well as the numerous contributors to the project.
 
 Files: debian/*

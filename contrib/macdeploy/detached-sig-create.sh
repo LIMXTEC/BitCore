@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (c) 2014-2015 The BitCore Core developers
+# Copyright (c) 2014-2015 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,7 @@ BUNDLE="${ROOTDIR}/BitCore-Qt.app"
 CODESIGN=codesign
 TEMPDIR=sign.temp
 TEMPLIST=${TEMPDIR}/signatures.txt
-OUT=signature.tar.gz
+OUT=signature-osx.tar.gz
 OUTROOT=osx
 
 if [ ! -n "$1" ]; then

@@ -1,5 +1,5 @@
-BitCore version 0.5.1 is now available for download at:
-http://sourceforge.net/projects/bitcore/files/BitCore/bitcore-0.5.1/
+Bitcoin version 0.5.1 is now available for download at:
+http://sourceforge.net/projects/bitcore/files/Bitcoin/bitcore-0.5.1/
 
 This is a bugfix-only release.
 
@@ -9,13 +9,13 @@ More translations are welcome; join the project at Transifex if you can help:
 https://www.transifex.net/projects/p/bitcore/
 
 Please report bugs using the issue tracker at github:
-https://github.com/bitcore-project/bitcore-core/issues
+https://github.com/bitcore/bitcore/issues
 
 Project source code is hosted at github; we are no longer
 distributing .tar.gz files here, you can get them
 directly from github:
-https://github.com/bitcore-project/bitcore-core/tarball/v0.5.1  # .tar.gz
-https://github.com/bitcore-project/bitcore-core/zipball/v0.5.1  # .zip
+https://github.com/bitcore/bitcore/tarball/v0.5.1  # .tar.gz
+https://github.com/bitcore/bitcore/zipball/v0.5.1  # .zip
 
 For Ubuntu users, there is a new ppa maintained by Matt Corallo which
 you can add to your system so that it will automatically keep

@@ -1,5 +1,6 @@
-// Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2017-2017 The Bitcore Core developers
+// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2019 The Litecoin Core developers
+// Copyright (c) 2017-2019 The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,8 +10,8 @@
 #ifndef BITCORE_TEST_TESTUTIL_H
 #define BITCORE_TEST_TESTUTIL_H
 
-#include <boost/filesystem/path.hpp>
+#include "fs.h"
 
-boost::filesystem::path GetTempPath();
+fs::path GetTempPath();
 
 #endif // BITCORE_TEST_TESTUTIL_H

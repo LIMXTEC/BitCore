@@ -11,14 +11,14 @@ Install the OS X command line tools:
 
 When the popup appears, click `Install`.
 
-Then install [Homebrew](http://brew.sh).
+Then install [Homebrew](https://brew.sh).
 
 Dependencies
 ----------------------
 
-    brew install automake berkeley-db4 libtool boost --c++11 miniupnpc openssl pkg-config protobuf --c++11 qt5 libevent
+    brew install automake berkeley-db4 libtool boost --c++11 miniupnpc openssl pkg-config protobuf qt libevent
 
-In case you want to build the disk image with `make deploy` (.dmg / optional), you need RSVG
+If you want to build the disk image with `make deploy` (.dmg / optional), you need RSVG
 
     brew install librsvg
 
@@ -29,7 +29,7 @@ Build BitCore Core
 
 1. Clone the bitcore source code and cd into `bitcore`
 
-        git clone https://github.com/LIMXTEC/BitCore.git
+        git clone https://github.com/LIMXTEC/bitcore
         cd bitcore
 
 2.  Build bitcore-core:
@@ -96,4 +96,4 @@ Notes
 
 * Tested on OS X 10.8 through 10.12 on 64-bit Intel processors only.
 
-* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/bitcore-project/bitcore-core/issues/7714)
+* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/bitcore/bitcore/issues/7714)

@@ -1,5 +1,6 @@
-// Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2017-2017 The Bitcore Core developers
+// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2019 The Litecoin Core developers
+// Copyright (c) 2017-2019 The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -60,9 +61,8 @@ bool read_stdin(std::vector<char> &data) {
     return length==0;
 }
 
-int main(int argc, char **argv)
+int do_fuzz()
 {
-    ECCVerifyHandle globalVerifyHandle;
     std::vector<char> buffer;
     if (!read_stdin(buffer)) return 0;
 
@@ -170,8 +170,8 @@ int main(int argc, char **argv)
         {
             try
             {
-                CCoins block;
-                ds >> block;
+                Coin coin;
+                ds >> coin;
             } catch (const std::ios_base::failure& e) {return 0;}
             break;
         }
@@ -257,3 +257,23 @@ int main(int argc, char **argv)
     return 0;
 }
 
+int main(int argc, char **argv)
+{
+    ECCVerifyHandle globalVerifyHandle;
+#ifdef __AFL_INIT
+    // Enable AFL deferred forkserver mode. Requires compilation using
+    // afl-clang-fast++. See fuzzing.md for details.
+    __AFL_INIT();
+#endif
+
+#ifdef __AFL_LOOP
+    // Enable AFL persistent mode. Requires compilation using afl-clang-fast++.
+    // See fuzzing.md for details.
+    while (__AFL_LOOP(1000)) {
+        do_fuzz();
+    }
+    return 0;
+#else
+    return do_fuzz();
+#endif
+}

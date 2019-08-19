@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation>Feu clic dret per a editar l'adreça o l'etiqueta</translation>
+        <translation>Feu clic dret per a editar l'adreça o l'etiquetaccn</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -232,7 +232,7 @@
     </message>
 </context>
 <context>
-    <name>BitCoreGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Signa el &amp;missatge...</translation>
@@ -878,6 +878,10 @@
         <translation>Formulari</translation>
     </message>
     <message>
+        <source>Unknown...</source>
+        <translation>Desconegut...</translation>
+    </message>
+    <message>
         <source>Last block time</source>
         <translation>Últim temps de bloc</translation>
     </message>
@@ -1382,7 +1386,11 @@
     </context>
 <context>
     <name>QObject::QObject</name>
-    </context>
+    <message>
+        <source>Error: %1</source>
+        <translation>Avís: %1</translation>
+    </message>
+</context>
 <context>
     <name>QRImageWidget</name>
     <message>
@@ -2338,6 +2346,10 @@
         <translation>%1/fora de línia</translation>
     </message>
     <message>
+        <source>abandoned</source>
+        <translation>abandonada</translation>
+    </message>
+    <message>
         <source>%1/unconfirmed</source>
         <translation>%1/sense confirmar</translation>
     </message>
@@ -2468,7 +2480,11 @@
         <source>This pane shows a detailed description of the transaction</source>
         <translation>Aquest panell mostra una descripció detallada de la transacció</translation>
     </message>
-    </context>
+    <message>
+        <source>Details for %1</source>
+        <translation>Detalls per %1</translation>
+    </message>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -2659,6 +2675,10 @@
         <translation>Copia la transacció crua</translation>
     </message>
     <message>
+        <source>Copy full transaction details</source>
+        <translation>Copia els detalls complets de la transacció</translation>
+    </message>
+    <message>
         <source>Edit label</source>
         <translation>Editar etiqueta</translation>
     </message>
@@ -2842,8 +2862,8 @@
         <translation>No s'ha pogut iniciar el servidor HTTP. Vegeu debug.log per a més detalls.</translation>
     </message>
     <message>
-        <source>BitCore Core</source>
-        <translation>BitCore Core</translation>
+        <source>BitCore BTX</source>
+        <translation>BitCore BTX</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
@@ -3140,6 +3160,10 @@
     <message>
         <source>Warning</source>
         <translation>Avís</translation>
+    </message>
+    <message>
+        <source>Warning: unknown new rules activated (versionbit %i)</source>
+        <translation>Avís: regles noves desconegudes activades (versionbit %i)</translation>
     </message>
     <message>
         <source>Zapping all transactions from wallet...</source>

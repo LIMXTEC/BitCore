@@ -2,7 +2,7 @@
 #
 # linearize-hashes.py:  List blocks in a linear, no-fork version of the chain.
 #
-# Copyright (c) 2013-2016 The BitCore Core developers
+# Copyright (c) 2013-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #
@@ -16,6 +16,8 @@ import json
 import re
 import base64
 import sys
+import os
+import os.path
 
 settings = {}
 
@@ -25,7 +27,7 @@ def hex_switchEndian(s):
 	pairList = [s[i:i+2].encode() for i in range(0, len(s), 2)]
 	return b''.join(pairList[::-1]).decode()
 
-class BitCoreRPC:
+class BitcoinRPC:
 	def __init__(self, host, port, username, password):
 		authpair = "%s:%s" % (username, password)
 		authpair = authpair.encode('utf-8')
@@ -67,7 +69,7 @@ class BitCoreRPC:
 		return 'error' in resp_obj and resp_obj['error'] is not None
 
 def get_block_hashes(settings, max_blocks_per_call=10000):
-	rpc = BitCoreRPC(settings['host'], settings['port'],
+	rpc = BitcoinRPC(settings['host'], settings['port'],
 			 settings['rpcuser'], settings['rpcpassword'])
 
 	height = settings['min_height']
@@ -93,6 +95,14 @@ def get_block_hashes(settings, max_blocks_per_call=10000):
 
 		height += num_blocks
 
+def get_rpc_cookie():
+	# Open the cookie file
+	with open(os.path.join(os.path.expanduser(settings['datadir']), '.cookie'), 'r') as f:
+		combined = f.readline()
+		combined_split = combined.split(":")
+		settings['rpcuser'] = combined_split[0]
+		settings['rpcpassword'] = combined_split[1]
+
 if __name__ == '__main__':
 	if len(sys.argv) != 2:
 		print("Usage: linearize-hashes.py CONFIG-FILE")
@@ -115,15 +125,22 @@ if __name__ == '__main__':
 	if 'host' not in settings:
 		settings['host'] = '127.0.0.1'
 	if 'port' not in settings:
-		settings['port'] = 40332
+		settings['port'] = 9332
 	if 'min_height' not in settings:
 		settings['min_height'] = 0
 	if 'max_height' not in settings:
 		settings['max_height'] = 313000
 	if 'rev_hash_bytes' not in settings:
 		settings['rev_hash_bytes'] = 'false'
+
+	use_userpass = True
+	use_datadir = False
 	if 'rpcuser' not in settings or 'rpcpassword' not in settings:
-		print("Missing username and/or password in cfg file", file=stderr)
+		use_userpass = False
+	if 'datadir' in settings and not use_userpass:
+		use_datadir = True
+	if not use_userpass and not use_datadir:
+		print("Missing datadir or username and/or password in cfg file", file=stderr)
 		sys.exit(1)
 
 	settings['port'] = int(settings['port'])
@@ -132,5 +149,9 @@ if __name__ == '__main__':
 
 	# Force hash byte format setting to be lowercase to make comparisons easier.
 	settings['rev_hash_bytes'] = settings['rev_hash_bytes'].lower()
+
+	# Get the rpc user and pass from the cookie if the datadir is set
+	if use_datadir:
+		get_rpc_cookie()
 
 	get_block_hashes(settings)

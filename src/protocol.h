@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2017-2017 The Bitcore Core developers
+// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2019 The Litecoin Core developers
+// Copyright (c) 2017-2019 The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -64,7 +65,7 @@ public:
 };
 
 /**
- * BitCore protocol message types. When adding new message types, don't forget
+ * Bitcoin protocol message types. When adding new message types, don't forget
  * to update allNetMessageTypes in protocol.cpp.
  */
 namespace NetMsgType {
@@ -72,100 +73,100 @@ namespace NetMsgType {
 /**
  * The version message provides information about the transmitting node to the
  * receiving node at the beginning of a connection.
- * @see http://bitcore.cc/en/developer-reference#version
+ * @see https://bitcore.cc/en/developer-reference#version
  */
 extern const char *VERSION;
 /**
  * The verack message acknowledges a previously-received version message,
  * informing the connecting node that it can begin to send other messages.
- * @see http://bitcore.cc/en/developer-reference#verack
+ * @see https://bitcore.cc/en/developer-reference#verack
  */
 extern const char *VERACK;
 /**
  * The addr (IP address) message relays connection information for peers on the
  * network.
- * @see http://bitcore.cc/en/developer-reference#addr
+ * @see https://bitcore.cc/en/developer-reference#addr
  */
 extern const char *ADDR;
 /**
  * The inv message (inventory message) transmits one or more inventories of
  * objects known to the transmitting peer.
- * @see http://bitcore.cc/en/developer-reference#inv
+ * @see https://bitcore.cc/en/developer-reference#inv
  */
 extern const char *INV;
 /**
  * The getdata message requests one or more data objects from another node.
- * @see http://bitcore.cc/en/developer-reference#getdata
+ * @see https://bitcore.cc/en/developer-reference#getdata
  */
 extern const char *GETDATA;
 /**
  * The merkleblock message is a reply to a getdata message which requested a
  * block using the inventory type MSG_MERKLEBLOCK.
  * @since protocol version 70001 as described by BIP37.
- * @see http://bitcore.cc/en/developer-reference#merkleblock
+ * @see https://bitcore.cc/en/developer-reference#merkleblock
  */
 extern const char *MERKLEBLOCK;
 /**
  * The getblocks message requests an inv message that provides block header
  * hashes starting from a particular point in the block chain.
- * @see http://bitcore.cc/en/developer-reference#getblocks
+ * @see https://bitcore.cc/en/developer-reference#getblocks
  */
 extern const char *GETBLOCKS;
 /**
  * The getheaders message requests a headers message that provides block
  * headers starting from a particular point in the block chain.
  * @since protocol version 31800.
- * @see http://bitcore.cc/en/developer-reference#getheaders
+ * @see https://bitcore.cc/en/developer-reference#getheaders
  */
 extern const char *GETHEADERS;
 /**
  * The tx message transmits a single transaction.
- * @see http://bitcore.cc/en/developer-reference#tx
+ * @see https://bitcore.cc/en/developer-reference#tx
  */
 extern const char *TX;
 /**
  * The headers message sends one or more block headers to a node which
  * previously requested certain headers with a getheaders message.
  * @since protocol version 31800.
- * @see http://bitcore.cc/en/developer-reference#headers
+ * @see https://bitcore.cc/en/developer-reference#headers
  */
 extern const char *HEADERS;
 /**
  * The block message transmits a single serialized block.
- * @see http://bitcore.cc/en/developer-reference#block
+ * @see https://bitcore.cc/en/developer-reference#block
  */
 extern const char *BLOCK;
 /**
  * The getaddr message requests an addr message from the receiving node,
  * preferably one with lots of IP addresses of other receiving nodes.
- * @see http://bitcore.cc/en/developer-reference#getaddr
+ * @see https://bitcore.cc/en/developer-reference#getaddr
  */
 extern const char *GETADDR;
 /**
  * The mempool message requests the TXIDs of transactions that the receiving
  * node has verified as valid but which have not yet appeared in a block.
  * @since protocol version 60002.
- * @see http://bitcore.cc/en/developer-reference#mempool
+ * @see https://bitcore.cc/en/developer-reference#mempool
  */
 extern const char *MEMPOOL;
 /**
  * The ping message is sent periodically to help confirm that the receiving
  * peer is still connected.
- * @see http://bitcore.cc/en/developer-reference#ping
+ * @see https://bitcore.cc/en/developer-reference#ping
  */
 extern const char *PING;
 /**
  * The pong message replies to a ping message, proving to the pinging node that
  * the ponging node is still alive.
  * @since protocol version 60001 as described by BIP31.
- * @see http://bitcore.cc/en/developer-reference#pong
+ * @see https://bitcore.cc/en/developer-reference#pong
  */
 extern const char *PONG;
 /**
  * The notfound message is a reply to a getdata message which requested an
  * object the receiving node does not have available for relay.
- * @ince protocol version 70001.
- * @see http://bitcore.cc/en/developer-reference#notfound
+ * @since protocol version 70001.
+ * @see https://bitcore.cc/en/developer-reference#notfound
  */
 extern const char *NOTFOUND;
 /**
@@ -174,7 +175,7 @@ extern const char *NOTFOUND;
  * @since protocol version 70001 as described by BIP37.
  *   Only available with service bit NODE_BLOOM since protocol version
  *   70011 as described by BIP111.
- * @see http://bitcore.cc/en/developer-reference#filterload
+ * @see https://bitcore.cc/en/developer-reference#filterload
  */
 extern const char *FILTERLOAD;
 /**
@@ -183,7 +184,7 @@ extern const char *FILTERLOAD;
  * @since protocol version 70001 as described by BIP37.
  *   Only available with service bit NODE_BLOOM since protocol version
  *   70011 as described by BIP111.
- * @see http://bitcore.cc/en/developer-reference#filteradd
+ * @see https://bitcore.cc/en/developer-reference#filteradd
  */
 extern const char *FILTERADD;
 /**
@@ -192,21 +193,21 @@ extern const char *FILTERADD;
  * @since protocol version 70001 as described by BIP37.
  *   Only available with service bit NODE_BLOOM since protocol version
  *   70011 as described by BIP111.
- * @see http://bitcore.cc/en/developer-reference#filterclear
+ * @see https://bitcore.cc/en/developer-reference#filterclear
  */
 extern const char *FILTERCLEAR;
 /**
  * The reject message informs the receiving node that one of its previous
  * messages has been rejected.
  * @since protocol version 70002 as described by BIP61.
- * @see http://bitcore.cc/en/developer-reference#reject
+ * @see https://bitcore.cc/en/developer-reference#reject
  */
 extern const char *REJECT;
 /**
  * Indicates that a node prefers to receive new block announcements via a
  * "headers" message rather than an "inv".
  * @since protocol version 70012 as described by BIP130.
- * @see http://bitcore.cc/en/developer-reference#sendheaders
+ * @see https://bitcore.cc/en/developer-reference#sendheaders
  */
 extern const char *SENDHEADERS;
 /**
@@ -251,15 +252,15 @@ enum ServiceFlags : uint64_t {
     // Nothing
     NODE_NONE = 0,
     // NODE_NETWORK means that the node is capable of serving the block chain. It is currently
-    // set by all BitCore Core nodes, and is unset by SPV clients or other peers that just want
+    // set by all Bitcoin Core nodes, and is unset by SPV clients or other peers that just want
     // network services but don't provide them.
     NODE_NETWORK = (1 << 0),
     // NODE_GETUTXO means the node is capable of responding to the getutxo protocol request.
-    // BitCore Core does not support this but a patch set called BitCore XT does.
+    // Bitcoin Core does not support this but a patch set called Bitcoin XT does.
     // See BIP 64 for details on how this is implemented.
     NODE_GETUTXO = (1 << 1),
     // NODE_BLOOM means the node is capable and willing to handle bloom-filtered connections.
-    // BitCore Core nodes used to support this by default, without advertising this bit,
+    // Bitcoin Core nodes used to support this by default, without advertising this bit,
     // but no longer do as of protocol version 70011 (= NO_BLOOM_VERSION)
     NODE_BLOOM = (1 << 2),
     // NODE_WITNESS indicates that a node can be asked for blocks and transactions including

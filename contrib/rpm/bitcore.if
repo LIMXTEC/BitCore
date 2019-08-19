@@ -121,7 +121,7 @@ interface(`bitcore_manage_lib_dirs',`
 ########################################
 ## <summary>
 ##	All of the rules required to administrate
-##	an bitcore environment
+##	a bitcore environment
 ## </summary>
 ## <param name="domain">
 ##	<summary>

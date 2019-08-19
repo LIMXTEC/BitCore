@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2017-2017 The Bitcore Core developers
+// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2019 The Litecoin Core developers
+// Copyright (c) 2017-2019 The Bitcore Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,7 +13,6 @@
 #include "uint256.h"
 #include "util.h"
 #include <math.h>
-
 
 unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Params& params, const CBlockHeader *pblock) {
     // current difficulty formula, ERC3 - DUAL_KGW3, written by Bitcoin Talk Limx Dev
@@ -36,9 +36,9 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
     uint64_t pastSecondsMax = timeDaySeconds * 7;
     uint64_t PastBlocksMin = pastSecondsMin / Blocktime;
     uint64_t PastBlocksMax = pastSecondsMax / Blocktime;
-    
+
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    
+
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) {  return bnPowLimit.GetCompact(); }
 
     for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
@@ -70,7 +70,7 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
         if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
         BlockReading = BlockReading->pprev;
     }
-    
+
     //KGW Original
     arith_uint256 kgw_dual1(PastDifficultyAverage);
     arith_uint256 kgw_dual2;
@@ -79,10 +79,10 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
          kgw_dual1 *= PastRateActualSeconds;
          kgw_dual1 /= PastRateTargetSeconds;
     }
-    
+
     int64_t nActualTime1 = pindexLast->GetBlockTime() - pindexLast->pprev->GetBlockTime();
     int64_t nActualTimespanshort = nActualTime1;
-    
+
     // Retarget BTC Original ...not exactly
     // Small Fix
 
@@ -92,41 +92,41 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
         nActualTime1 = Blocktime / 3;
     if (nActualTime1 > Blocktime * 3)
         nActualTime1 = Blocktime * 3;
-        
+
     kgw_dual2 *= nActualTime1;
     kgw_dual2 /= Blocktime;
-    
+
     //Fusion from Retarget and Classic KGW3 (BitSend=)
-    
+
     arith_uint256 bnNew;
     bnNew = ((kgw_dual2 + kgw_dual1)/2);
     // DUAL KGW3 increased rapidly the Diff if Blocktime to last block under Blocktime/6 sec.
-    
+
     if(kgwdebug)LogPrintf("nActualTimespanshort = %d \n", nActualTimespanshort );
     if( nActualTimespanshort < Blocktime/6 )
         {
         if(kgwdebug)LogPrintf("Vordiff:%08x %s bnNew first  \n", bnNew.GetCompact(), bnNew.ToString().c_str());
         const int nLongShortNew1   = 85; const int nLongShortNew2   = 100;
-        bnNew = bnNew * nLongShortNew1;	bnNew = bnNew / nLongShortNew2;	
+        bnNew = bnNew * nLongShortNew1;    bnNew = bnNew / nLongShortNew2;
         if(kgwdebug)LogPrintf("Erhöhte Diff:\n %08x %s bnNew second \n", bnNew.GetCompact(), bnNew.ToString().c_str() );
         }
 
-    
+
     //BitBreak BitSend
     // Reduce difficulty if current block generation time has already exceeded maximum time limit.
     // Diffbreak 12 Hours
-    const int nLongTimeLimit   = 12 * 60 * 60; 
+    const int nLongTimeLimit   = 12 * 60 * 60;
     if(kgwdebug)
     {
     LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
     LogPrintf("Vordiff %d \n", nLongTimeLimit);
     LogPrintf(" %d Block", BlockReading->nHeight );
     }
-    
-    if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime 
+
+    if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime
     {
         bnNew = bnPowLimit;
-       	if(kgwdebug)LogPrintf("<BSD> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+           if(kgwdebug)LogPrintf("<BSD> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
     }
 
     if (bnNew > bnPowLimit) {
@@ -137,7 +137,14 @@ unsigned int static DUAL_KGW3(const CBlockIndex* pindexLast, const Consensus::Pa
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
-    
+    assert(pindexLast != nullptr);
+
+    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+    if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks )
+    {
+        return nProofOfWorkLimit;
+    }
+
     int fork1 = 10000;
     int fork2 = 21000;
     if (pindexLast->nHeight+1 <= fork1)
@@ -145,50 +152,45 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     return DUAL_KGW3(pindexLast, params, pblock);
     }
 
-    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
-    if (pindexLast->nHeight+1 <= fork2)
+ if (pindexLast->nHeight+1 <= fork2)
     {
-        // Genesis block
-        if (pindexLast == NULL)
-            return nProofOfWorkLimit;
-
-        // Only change once per difficulty adjustment interval
-        if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)
+    // Only change once per difficulty adjustment interval
+    if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)
+    {
+        if (params.fPowAllowMinDifficultyBlocks)
         {
-             if (params.fPowAllowMinDifficultyBlocks)
+            // Special difficulty rule for testnet:
+            // If the new block's timestamp is more than 2* 10 minutes
+            // then allow mining of a min-difficulty block.
+            if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2)
+                return nProofOfWorkLimit;
+            else
             {
-                // Special difficulty rule for testnet:
-                // If the new block's timestamp is more than 2* 10 minutes
-                // then allow mining of a min-difficulty block.
-                if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2)
-                    return nProofOfWorkLimit;
-                else
-                {
-                    // Return the last non-special-min-difficulty-rules-block
-                    const CBlockIndex* pindex = pindexLast;
-                    while (pindex->pprev && pindex->nHeight % params.DifficultyAdjustmentInterval() != 0 && pindex->nBits == nProofOfWorkLimit)
-                        pindex = pindex->pprev;
-                    return pindex->nBits;
-                }
+                // Return the last non-special-min-difficulty-rules-block
+                const CBlockIndex* pindex = pindexLast;
+                while (pindex->pprev && pindex->nHeight % params.DifficultyAdjustmentInterval() != 0 && pindex->nBits == nProofOfWorkLimit)
+                    pindex = pindex->pprev;
+                return pindex->nBits;
             }
-            return pindexLast->nBits;
         }
+        return pindexLast->nBits;
+    }
 
-        // Go back by what we want to be 14 days worth of blocks
-        // Litecoin: This fixes an issue where a 51% attack can change difficulty at will.
-        // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
-        int blockstogoback = params.DifficultyAdjustmentInterval()-1;
-        if ((pindexLast->nHeight+1) != params.DifficultyAdjustmentInterval())
+    // Go back by what we want to be 14 days worth of blocks
+    // BitCore: This fixes an issue where a 51% attack can change difficulty at will.
+    // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
+    int blockstogoback = params.DifficultyAdjustmentInterval()-1;
+    if ((pindexLast->nHeight+1) != params.DifficultyAdjustmentInterval())
         blockstogoback = params.DifficultyAdjustmentInterval();
 
-        // Go back by what we want to be 14 days worth of blocks
-        const CBlockIndex* pindexFirst = pindexLast;
-        for (int i = 0; pindexFirst && i < blockstogoback; i++)
-            pindexFirst = pindexFirst->pprev;
+    // Go back by what we want to be 14 days worth of blocks
+    const CBlockIndex* pindexFirst = pindexLast;
+    for (int i = 0; pindexFirst && i < blockstogoback; i++)
+        pindexFirst = pindexFirst->pprev;
 
-        assert(pindexFirst);
+    assert(pindexFirst);
 
-        return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
+    return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
     }
     else
     {
@@ -236,57 +238,70 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     }
 }
 
-//For Tet POW
 unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
     int fork2 = 21000;
     if (params.fPowNoRetargeting)
         return pindexLast->nBits;
 
-    // Limit adjustment step
+    // Initial //64_15 Written by Limx Dev 04/2017
     int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    arith_uint256 bnNew;
-    
+    bool fShift;
+    // Initial
     if (pindexLast->nHeight+1 <= fork2)
     {
-         //Retarget with 400 %
-        if (nActualTimespan < params.nPowTargetTimespan/4)
-            nActualTimespan = params.nPowTargetTimespan/4;
-        if (nActualTimespan > params.nPowTargetTimespan*4)
-            nActualTimespan = params.nPowTargetTimespan*4;
+    if (nActualTimespan < params.nPowTargetTimespan/4)
+        nActualTimespan = params.nPowTargetTimespan/4;
+    if (nActualTimespan > params.nPowTargetTimespan*4)
+        nActualTimespan = params.nPowTargetTimespan*4;
 
-        bnNew.SetCompact(pindexLast->nBits);
-        bnNew *= nActualTimespan;
-        bnNew /= params.nPowTargetTimespan;
+    // Retarget
+    arith_uint256 bnNew;
+    arith_uint256 bnOld;
+    bnNew.SetCompact(pindexLast->nBits);
+    bnOld = bnNew;
+    // BitCore: intermediate uint256 can overflow by 1 bit
+    fShift = bnNew.bits() > bnPowLimit.bits() - 1;
+    if (fShift)
+        bnNew >>= 1;
+    bnNew *= nActualTimespan;
+    bnNew /= params.nPowTargetTimespan;
+    if (fShift)
+        bnNew <<= 1;
 
-        if (bnNew > bnPowLimit)
-            bnNew = bnPowLimit;
+    if (bnNew > bnPowLimit)
+        bnNew = bnPowLimit;
 
-        return bnNew.GetCompact();
+    return bnNew.GetCompact();
+
     }
     else
     {
-        //Low Retarget with 15 %
-        if (nActualTimespan < params.nPowTargetTimespanV2/1.15)  // (115/101 != 1.15)
+    if (nActualTimespan < params.nPowTargetTimespanV2/1.15)
         nActualTimespan = params.nPowTargetTimespanV2/1.15;
-        if (nActualTimespan > params.nPowTargetTimespanV2*1.15)
+    if (nActualTimespan > params.nPowTargetTimespanV2*1.15)
         nActualTimespan = params.nPowTargetTimespanV2*1.15;
-	
-	// LogPrintf("278  nActualTimespan %d \n",  nActualTimespan);
- 
-        bnNew.SetCompact(pindexLast->nBits);
-        bnNew *= nActualTimespan;
-        bnNew /= params.nPowTargetTimespanV2;
-
-        if (bnNew > bnPowLimit)
-            bnNew = bnPowLimit;
-
-        return bnNew.GetCompact();
-    }
 
     // Retarget
+    arith_uint256 bnNew;
+    arith_uint256 bnOld;
+    bnNew.SetCompact(pindexLast->nBits);
+    bnOld = bnNew;
+    // BitCore: intermediate uint256 can overflow by 1 bit
+    fShift = bnNew.bits() > bnPowLimit.bits() - 1;
+    if (fShift)
+        bnNew >>= 1;
+    bnNew *= nActualTimespan;
+    bnNew /= params.nPowTargetTimespanV2;
+    if (fShift)
+        bnNew <<= 1;
 
+    if (bnNew > bnPowLimit)
+        bnNew = bnPowLimit;
+
+    return bnNew.GetCompact();
+    }
 }
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)

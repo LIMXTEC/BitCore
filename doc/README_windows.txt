@@ -1,5 +1,5 @@
-BitCore Core 0.14.1
-=====================
+BitCore Core
+=============
 
 Intro
 -----

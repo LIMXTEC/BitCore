@@ -1,15 +1,15 @@
-BitCore version 0.7.1 is now available from:
-  http://sourceforge.net/projects/bitcore/files/BitCore/bitcore-0.7.1/
+Bitcoin version 0.7.1 is now available from:
+  http://sourceforge.net/projects/bitcore/files/Bitcoin/bitcore-0.7.1/
 
 This is a bug-fix minor release.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/bitcore-project/bitcore-core/issues
+  https://github.com/bitcore/bitcore/issues
 
 Project source code is hosted at github; you can get
 source-only tarballs/zipballs directly from there:
-  https://github.com/bitcore-project/bitcore-core/tarball/v0.7.1  # .tar.gz
-  https://github.com/bitcore-project/bitcore-core/zipball/v0.7.1  # .zip
+  https://github.com/bitcore/bitcore/tarball/v0.7.1  # .tar.gz
+  https://github.com/bitcore/bitcore/zipball/v0.7.1  # .zip
 
 Ubuntu Linux users can use the "Personal Package Archive" (PPA)
 maintained by Matt Corallo to automatically keep 
@@ -30,7 +30,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait
 until it has completely shut down (which might take a few minutes for older
 versions), then run the installer (on Windows) or just copy over
-/Applications/BitCore-Qt (on Mac) or bitcored/bitcore-qt (on Linux).
+/Applications/Bitcoin-Qt (on Mac) or bitcored/bitcore-qt (on Linux).
 
 If you were running on Linux with a version that might have been compiled
 with a different version of Berkeley DB (for example, if you were using an
@@ -75,9 +75,9 @@ Dependency changes
 Bug fixes
 ---------
 
-* Clicking on a bitcore: URI on Windows should now launch BitCore-Qt properly.
+* Clicking on a bitcore: URI on Windows should now launch Bitcoin-Qt properly.
 
-* When running -testnet, use RPC port 140332 by default.
+* When running -testnet, use RPC port 18332 by default.
 
 * Better detection and handling of corrupt wallet.dat and blkindex.dat files.
   Previous versions would crash with a DB_RUNRECOVERY exception, this

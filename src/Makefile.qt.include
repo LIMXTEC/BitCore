@@ -1,4 +1,4 @@
-# Copyright (c) 2013-2017 The BitCore Core developers
+# Copyright (c) 2013-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,18 +13,24 @@ QT_TS = \
   qt/locale/bitcore_be_BY.ts \
   qt/locale/bitcore_bg_BG.ts \
   qt/locale/bitcore_bg.ts \
+  qt/locale/bitcore_bn.ts \
+  qt/locale/bitcore_bs.ts \
   qt/locale/bitcore_ca_ES.ts \
   qt/locale/bitcore_ca.ts \
   qt/locale/bitcore_ca@valencia.ts \
   qt/locale/bitcore_cs.ts \
   qt/locale/bitcore_cy.ts \
   qt/locale/bitcore_da.ts \
+  qt/locale/bitcore_de_DE.ts \
   qt/locale/bitcore_de.ts \
   qt/locale/bitcore_el_GR.ts \
   qt/locale/bitcore_el.ts \
+  qt/locale/bitcore_en_AU.ts \
   qt/locale/bitcore_en_GB.ts \
   qt/locale/bitcore_en.ts \
+  qt/locale/bitcore_en_US.ts \
   qt/locale/bitcore_eo.ts \
+  qt/locale/bitcore_es_419.ts \
   qt/locale/bitcore_es_AR.ts \
   qt/locale/bitcore_es_CL.ts \
   qt/locale/bitcore_es_CO.ts \
@@ -44,13 +50,16 @@ QT_TS = \
   qt/locale/bitcore_fr_FR.ts \
   qt/locale/bitcore_fr.ts \
   qt/locale/bitcore_gl.ts \
+  qt/locale/bitcore_he_IL.ts \
   qt/locale/bitcore_he.ts \
   qt/locale/bitcore_hi_IN.ts \
   qt/locale/bitcore_hr.ts \
   qt/locale/bitcore_hu.ts \
   qt/locale/bitcore_id_ID.ts \
+  qt/locale/bitcore_id.ts \
   qt/locale/bitcore_it_IT.ts \
   qt/locale/bitcore_it.ts \
+  qt/locale/bitcore_ja_JP.ts \
   qt/locale/bitcore_ja.ts \
   qt/locale/bitcore_ka.ts \
   qt/locale/bitcore_kk_KZ.ts \
@@ -63,8 +72,11 @@ QT_TS = \
   qt/locale/bitcore_mk_MK.ts \
   qt/locale/bitcore_mn.ts \
   qt/locale/bitcore_ms_MY.ts \
+  qt/locale/bitcore_my.ts \
+  qt/locale/bitcore_nb_NO.ts \
   qt/locale/bitcore_nb.ts \
   qt/locale/bitcore_ne.ts \
+  qt/locale/bitcore_nl_NL.ts \
   qt/locale/bitcore_nl.ts \
   qt/locale/bitcore_pam.ts \
   qt/locale/bitcore_pl.ts \
@@ -74,6 +86,7 @@ QT_TS = \
   qt/locale/bitcore_ro.ts \
   qt/locale/bitcore_ru_RU.ts \
   qt/locale/bitcore_ru.ts \
+  qt/locale/bitcore_si.ts \
   qt/locale/bitcore_sk.ts \
   qt/locale/bitcore_sl_SI.ts \
   qt/locale/bitcore_sq.ts \
@@ -81,7 +94,9 @@ QT_TS = \
   qt/locale/bitcore_sr.ts \
   qt/locale/bitcore_sv.ts \
   qt/locale/bitcore_ta.ts \
+  qt/locale/bitcore_te.ts \
   qt/locale/bitcore_th_TH.ts \
+  qt/locale/bitcore_th.ts \
   qt/locale/bitcore_tr_TR.ts \
   qt/locale/bitcore_tr.ts \
   qt/locale/bitcore_uk.ts \
@@ -122,6 +137,7 @@ QT_MOC_CPP = \
   qt/moc_bitcoreamountfield.cpp \
   qt/moc_bitcoregui.cpp \
   qt/moc_bitcoreunits.cpp \
+  qt/moc_callback.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
@@ -167,6 +183,7 @@ BITCORE_MM = \
 QT_MOC = \
   qt/bitcore.moc \
   qt/bitcoreamountfield.moc \
+  qt/callback.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
@@ -189,6 +206,7 @@ BITCORE_QT_H = \
   qt/bitcoreamountfield.h \
   qt/bitcoregui.h \
   qt/bitcoreunits.h \
+  qt/callback.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
@@ -270,6 +288,7 @@ RES_ICONS = \
   qt/res/icons/history.png \
   qt/res/icons/info.png \
   qt/res/icons/key.png \
+  qt/res/icons/bitcore_splash.png \
   qt/res/icons/lock_closed.png \
   qt/res/icons/lock_open.png \
   qt/res/icons/network_disabled.png \
@@ -289,8 +308,27 @@ RES_ICONS = \
   qt/res/icons/tx_output.png \
   qt/res/icons/tx_mined.png \
   qt/res/icons/warning.png \
-  qt/res/icons/verify.png
-
+  qt/res/icons/Bitcointalk.png \
+  qt/res/icons/BitcoreCC.png \
+  qt/res/icons/cryptoID.png \
+  qt/res/icons/GitHub.png \
+  qt/res/icons/Telegram.png \
+  qt/res/icons/Twitter.png \
+  qt/res/icons/BitZ.png \
+  qt/res/icons/Ccex.png \
+  qt/res/icons/Coinexchange.png \
+  qt/res/icons/Coinomi.png \
+  qt/res/icons/CryptoBridgeB.png \
+  qt/res/icons/Cryptopia.png \
+  qt/res/icons/Facebook.png \
+  qt/res/icons/InsightAPI.png \
+  qt/res/icons/Reddit.png \
+  qt/res/icons/TradeSat.png \
+  qt/res/icons/VEBITCOIN.png \ 
+  qt/res/icons/Hitbtc.png \  
+  qt/res/icons/verify.png \
+  qt/res/icons/exrates.png
+  
 BITCORE_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
   qt/bitcoreaddressvalidator.cpp \
@@ -353,9 +391,52 @@ if ENABLE_WALLET
 BITCORE_QT_CPP += $(BITCORE_QT_WALLET_CPP)
 endif
 
-RES_IMAGES = 
+RES_IMAGES = \
+  qt/res/images/bitcore_logo_horizontal.png \
+  qt/res/images/bitcore_main_hgB_flower.png \
+  qt/res/images/bitcore_main_hgB_machine.png \
+  qt/res/images/bitcore_main_hgB.png \
+  qt/res/images/bitcore_main_hgB_white.png
 
-RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
+RES_CSS = qt/res/css/bitcore_main.css
+
+RES_MOVIES =  \
+  qt/res/movies/spinner-000.png \
+  qt/res/movies/spinner-001.png \
+  qt/res/movies/spinner-002.png \
+  qt/res/movies/spinner-003.png \
+  qt/res/movies/spinner-004.png \
+  qt/res/movies/spinner-005.png \
+  qt/res/movies/spinner-006.png \
+  qt/res/movies/spinner-007.png \
+  qt/res/movies/spinner-008.png \
+  qt/res/movies/spinner-009.png \
+  qt/res/movies/spinner-010.png \
+  qt/res/movies/spinner-011.png \
+  qt/res/movies/spinner-012.png \
+  qt/res/movies/spinner-013.png \
+  qt/res/movies/spinner-014.png \
+  qt/res/movies/spinner-015.png \
+  qt/res/movies/spinner-016.png \
+  qt/res/movies/spinner-017.png \
+  qt/res/movies/spinner-018.png \
+  qt/res/movies/spinner-019.png \
+  qt/res/movies/spinner-020.png \
+  qt/res/movies/spinner-021.png \
+  qt/res/movies/spinner-022.png \
+  qt/res/movies/spinner-023.png \
+  qt/res/movies/spinner-024.png \
+  qt/res/movies/spinner-025.png \
+  qt/res/movies/spinner-026.png \
+  qt/res/movies/spinner-027.png \
+  qt/res/movies/spinner-028.png \
+  qt/res/movies/spinner-029.png \
+  qt/res/movies/spinner-030.png \
+  qt/res/movies/spinner-031.png \
+  qt/res/movies/spinner-032.png \
+  qt/res/movies/spinner-033.png \
+  qt/res/movies/spinner-034.png \
+  qt/res/movies/spinner-035.png
 
 BITCORE_RC = qt/res/bitcore-qt-res.rc
 
@@ -367,7 +448,7 @@ qt_libbitcoreqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCORE_INCLUDES) $(BITCORE_QT_INC
 qt_libbitcoreqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
 qt_libbitcoreqt_a_SOURCES = $(BITCORE_QT_CPP) $(BITCORE_QT_H) $(QT_FORMS_UI) \
-  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES)
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(RES_CSS)
 
 nodist_qt_libbitcoreqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
   $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
@@ -404,7 +485,7 @@ endif
 if ENABLE_ZMQ
 qt_bitcore_qt_LDADD += $(LIBBITCORE_ZMQ) $(ZMQ_LIBS)
 endif
-qt_bitcore_qt_LDADD += $(LIBBITCORE_CLI) $(LIBBITCORE_COMMON) $(LIBBITCORE_UTIL) $(LIBBITCORE_CONSENSUS) $(LIBBITCORE_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
+qt_bitcore_qt_LDADD += $(LIBBITCORE_CLI) $(LIBBITCORE_COMMON) $(LIBBITCORE_UTIL) $(LIBBITCORE_CONSENSUS) $(LIBBITCORE_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
   $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 qt_bitcore_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
@@ -430,7 +511,7 @@ $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 	@rm $(@D)/temp_$(<F)
 
-$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(PROTOBUF_H)
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(RES_CSS) $(PROTOBUF_H)
 	@test -f $(RCC)
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name bitcore $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@

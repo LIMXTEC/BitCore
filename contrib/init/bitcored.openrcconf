@@ -23,7 +23,7 @@
 #BITCORED_NICE=0
 
 # Additional options (avoid -conf and -datadir, use flags above)
-BITCORED_OPTS="-disablewallet"
+#BITCORED_OPTS=""
 
 # The timeout in seconds OpenRC will wait for bitcored to terminate
 # after a SIGTERM has been raised.
