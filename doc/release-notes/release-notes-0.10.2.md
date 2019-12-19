@@ -1,13 +1,13 @@
 Bitcoin Core version 0.10.2 is now available from:
 
-  <https://bitcore.cc/bin/bitcore-core-0.10.2/>
+  <https://bitcoin.org/bin/bitcoin-core-0.10.2/>
 
 This is a new minor version release, bringing minor bug fixes and translation 
 updates. It is recommended to upgrade to this version.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/bitcore/bitcore/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 Upgrading and downgrading
 =========================
@@ -18,7 +18,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over /Applications/Bitcoin-Qt (on Mac) or
-bitcored/bitcore-qt (on Linux).
+bitcoind/bitcoin-qt (on Linux).
 
 Downgrade warning
 ------------------
@@ -47,12 +47,12 @@ Notable changes
 ===============
 
 This fixes a serious problem on Windows with data directories that have non-ASCII
-characters (https://github.com/bitcore/bitcore/issues/6078).
+characters (https://github.com/bitcoin/bitcoin/issues/6078).
 
 For other platforms there are no notable changes.
 
 For the notable changes in 0.10, refer to the release notes
-at https://github.com/bitcore/bitcore/blob/v0.10.0/doc/release-notes.md
+at https://github.com/bitcoin/bitcoin/blob/v0.10.0/doc/release-notes.md
 
 0.10.2 Change log
 =================
@@ -83,4 +83,4 @@ And all those who contributed additional code review and/or security research:
 - Pieter Wuille
 - vayvanne
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcore/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

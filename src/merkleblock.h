@@ -1,17 +1,15 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin Core developers
-// Copyright (c) 2009-2019 The Litecoin Core developers
-// Copyright (c) 2017-2019 The Bitcore Core developers
+// Copyright (c) 2009-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCORE_MERKLEBLOCK_H
 #define BITCORE_MERKLEBLOCK_H
 
-#include "serialize.h"
-#include "uint256.h"
-#include "primitives/block.h"
-#include "bloom.h"
+#include <serialize.h>
+#include <uint256.h>
+#include <primitives/block.h>
+#include <bloom.h>
 
 #include <vector>
 
@@ -65,7 +63,7 @@ protected:
     bool fBad;
 
     /** helper function to efficiently calculate the number of nodes at given height in the merkle tree */
-    unsigned int CalcTreeWidth(int height) {
+    unsigned int CalcTreeWidth(int height) const {
         return (nTransactions+(1 << height)-1) >> height;
     }
 
@@ -117,6 +115,12 @@ public:
      * returns the merkle root, or 0 in case of failure
      */
     uint256 ExtractMatches(std::vector<uint256> &vMatch, std::vector<unsigned int> &vnIndex);
+
+    /** Get number of transactions the merkle proof is indicating for cross-reference with
+     * local blockchain knowledge.
+     */
+    unsigned int GetNumTransactions() const { return nTransactions; };
+
 };
 
 
@@ -133,8 +137,12 @@ public:
     CBlockHeader header;
     CPartialMerkleTree txn;
 
-public:
-    /** Public only for unit testing and relay testing (not relayed) */
+    /**
+     * Public only for unit testing and relay testing (not relayed).
+     *
+     * Used only when a bloom filter is specified to allow
+     * testing the transactions which matched the bloom filter.
+     */
     std::vector<std::pair<unsigned int, uint256> > vMatchedTxn;
 
     /**
@@ -142,10 +150,10 @@ public:
      * Note that this will call IsRelevantAndUpdate on the filter for each transaction,
      * thus the filter will likely be modified.
      */
-    CMerkleBlock(const CBlock& block, CBloomFilter& filter);
+    CMerkleBlock(const CBlock& block, CBloomFilter& filter) : CMerkleBlock(block, &filter, nullptr) { }
 
     // Create from a CBlock, matching the txids in the set
-    CMerkleBlock(const CBlock& block, const std::set<uint256>& txids);
+    CMerkleBlock(const CBlock& block, const std::set<uint256>& txids) : CMerkleBlock(block, nullptr, &txids) { }
 
     CMerkleBlock() {}
 
@@ -156,6 +164,10 @@ public:
         READWRITE(header);
         READWRITE(txn);
     }
+
+private:
+    // Combined constructor to consolidate code
+    CMerkleBlock(const CBlock& block, CBloomFilter* filter, const std::set<uint256>* txids);
 };
 
 #endif // BITCORE_MERKLEBLOCK_H

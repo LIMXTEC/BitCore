@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Combine logs from multiple bitcore nodes as well as the test_framework log.
+"""Combine logs from multiple bitcoin nodes as well as the test_framework log.
 
 This streams the combined log output to stdout. Use combine_logs.py > outputfile
 to write to an outputfile."""
@@ -13,7 +13,7 @@ import re
 import sys
 
 # Matches on the date format at the start of the log event
-TIMESTAMP_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}")
+TIMESTAMP_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}Z")
 
 LogEvent = namedtuple('LogEvent', ['timestamp', 'source', 'event'])
 
@@ -63,7 +63,7 @@ def get_log_events(source, logfile):
     Log events may be split over multiple lines. We use the timestamp
     regex match as the marker for a new log event."""
     try:
-        with open(logfile, 'r') as infile:
+        with open(logfile, 'r', encoding='utf-8') as infile:
             event = ''
             timestamp = ''
             for line in infile:

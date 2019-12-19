@@ -1,11 +1,14 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2012-2016 The Bitcoin Core developers
+// Copyright (c) 2012-2018 The Bitcoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2019 Limxtec developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCORE_UI_INTERFACE_H
 #define BITCORE_UI_INTERFACE_H
 
+#include <memory>
 #include <stdint.h>
 #include <string>
 
@@ -86,25 +89,34 @@ public:
     /** Network activity state changed. */
     boost::signals2::signal<void (bool networkActive)> NotifyNetworkActiveChanged;
 
+    /** Number of masternodes changed. */
+    // FXTC TODO: boost::signals2::signal<void (int newNumMasternodes)> NotifyStrMasternodeCountChanged; 
+
     /**
      * Status bar alerts changed.
      */
     boost::signals2::signal<void ()> NotifyAlertChanged;
 
     /** A wallet has been loaded. */
-    boost::signals2::signal<void (CWallet* wallet)> LoadWallet;
+    boost::signals2::signal<void (std::shared_ptr<CWallet> wallet)> LoadWallet;
 
-    /** Show progress e.g. for verifychain */
-    boost::signals2::signal<void (const std::string &title, int nProgress)> ShowProgress;
+    /**
+     * Show progress e.g. for verifychain.
+     * resume_possible indicates shutting down now will result in the current progress action resuming upon restart.
+     */
+    boost::signals2::signal<void (const std::string &title, int nProgress, bool resume_possible)> ShowProgress;
 
     /** Set progress break action (possible "cancel button" triggers that action) */
-    boost::signals2::signal<void (std::function<void(void)> action)> SetProgressBreakAction;
+    // FXTC TODO: boost::signals2::signal<void (std::function<void(void)> action)> SetProgressBreakAction; 
 
     /** New block has been accepted */
     boost::signals2::signal<void (bool, const CBlockIndex *)> NotifyBlockTip;
 
     /** Best header has changed */
     boost::signals2::signal<void (bool, const CBlockIndex *)> NotifyHeaderTip;
+
+    /** Additional data sync progress changed */
+    boost::signals2::signal<void (double nSyncProgress)> NotifyAdditionalDataSyncProgressChanged;
 
     /** Banlist did change. */
     boost::signals2::signal<void (void)> BannedListChanged;

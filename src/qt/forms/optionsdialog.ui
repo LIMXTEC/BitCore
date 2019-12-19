@@ -28,12 +28,75 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_Main">
        <item>
-        <widget class="QCheckBox" name="bitcoreAtStartup">
+        <widget class="QCheckBox" name="bitcoinAtStartup">
          <property name="toolTip">
           <string>Automatically start %1 after logging in to the system.</string>
          </property>
          <property name="text">
           <string>&amp;Start %1 on system login</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_0_Main">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_Main_Prune">
+        <item>
+         <widget class="QCheckBox" name="prune">
+          <property name="toolTip">
+           <string>Disables some advanced features but all blocks will still be fully validated. Reverting this setting requires re-downloading the entire blockchain. Actual disk usage may be somewhat higher.</string>
+          </property>
+          <property name="text">
+           <string>Prune &amp;block storage to</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="pruneSize"/>
+        </item>
+         <item>
+          <widget class="QLabel" name="pruneSizeUnitLabel">
+           <property name="text">
+            <string>GB</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::PlainText</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_Main_Prune">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="pruneWarning">
+         <property name="text">
+          <string>Reverting this setting requires re-downloading the entire blockchain.</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
          </property>
         </widget>
        </item>
@@ -81,7 +144,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3_Main">
+        <layout class="QHBoxLayout" name="horizontalLayout_Main_VerifyLabel">
          <item>
           <widget class="QLabel" name="threadsScriptVerifLabel">
            <property name="text">
@@ -103,7 +166,7 @@
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer_3_Main">
+          <spacer name="horizontalSpacer_Main_Threads">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -153,6 +216,18 @@
             </property>
            </widget>
           </item>
+          <!-- Dash -->
+          <item>
+           <widget class="QCheckBox" name="showMasternodesTab">
+            <property name="toolTip">
+             <string>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</string>
+            </property>
+            <property name="text">
+             <string>Show Masternodes Tab</string>
+            </property>
+           </widget>
+          </item>
+          <!--      -->
           <item>
            <widget class="QCheckBox" name="spendZeroConfChange">
             <property name="toolTip">
@@ -189,7 +264,7 @@
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
-          <string>Automatically open the BitCore client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+          <string>Automatically open the Bitcore client port on the router. This only works when your router supports UPnP and it is enabled.</string>
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
@@ -199,17 +274,17 @@
        <item>
         <widget class="QCheckBox" name="allowIncoming">
          <property name="toolTip">
-          <string>Accept connections from outside</string>
+          <string>Accept connections from outside.</string>
          </property>
          <property name="text">
-          <string>Allow incoming connections</string>
+          <string>Allow incomin&amp;g connections</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
-          <string>Connect to the BitCore network through a SOCKS5 proxy.</string>
+          <string>Connect to the Bitcore network through a SOCKS5 proxy.</string>
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS5 proxy (default proxy):</string>
@@ -396,10 +471,10 @@
        <item>
         <widget class="QCheckBox" name="connectSocksTor">
          <property name="toolTip">
-          <string>Connect to the BitCore network through a separate SOCKS5 proxy for Tor hidden services.</string>
+          <string>Connect to the Bitcore network through a separate SOCKS5 proxy for Tor hidden services.</string>
          </property>
          <property name="text">
-          <string>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</string>
+          <string>Use separate SOCKS&amp;5 proxy to reach peers via Tor hidden services:</string>
          </property>
         </widget>
        </item>
@@ -507,10 +582,10 @@
        <item>
         <widget class="QCheckBox" name="hideTrayIcon">
          <property name="toolTip">
-          <string>&amp;Hide the icon from the system tray.</string>
+          <string>Hide the icon from the system tray.</string>
          </property>
          <property name="text">
-          <string>Hide tray icon</string>
+          <string>&amp;Hide tray icon</string>
          </property>
         </widget>
        </item>
@@ -578,7 +653,7 @@
          </item>
         </layout>
        </item>
-	   <item>
+    <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4_Display" stretch="0,0">
          <item>
           <widget class="QLabel" name="themeLabel">
@@ -624,7 +699,7 @@
             <string>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</string>
            </property>
            <property name="text">
-            <string>Third party transaction URLs</string>
+            <string>&amp;Third party transaction URLs</string>
            </property>
            <property name="buddy">
             <cstring>thirdPartyTxUrls</cstring>
@@ -838,12 +913,12 @@
   <customwidget>
    <class>QValidatedLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>qvalidatedlineedit.h</header>
+   <header>qt/qvalidatedlineedit.h</header>
   </customwidget>
   <customwidget>
    <class>QValueComboBox</class>
    <extends>QComboBox</extends>
-   <header>qvaluecombobox.h</header>
+   <header>qt/qvaluecombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

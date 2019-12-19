@@ -1,13 +1,13 @@
 Bitcoin Core version 0.10.1 is now available from:
 
-  <https://bitcore.cc/bin/bitcore-core-0.10.1/>
+  <https://bitcoin.org/bin/bitcoin-core-0.10.1/>
 
 This is a new minor version release, bringing bug fixes and translation 
 updates. It is recommended to upgrade to this version.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/bitcore/bitcore/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 Upgrading and downgrading
 =========================
@@ -18,7 +18,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over /Applications/Bitcoin-Qt (on Mac) or
-bitcored/bitcore-qt (on Linux).
+bitcoind/bitcoin-qt (on Linux).
 
 Downgrade warning
 ------------------
@@ -48,7 +48,7 @@ Notable changes
 
 This is a minor release and hence there are no notable changes.
 For the notable changes in 0.10, refer to the release notes for the
-0.10.0 release at https://github.com/bitcore/bitcore/blob/v0.10.0/doc/release-notes.md
+0.10.0 release at https://github.com/bitcoin/bitcoin/blob/v0.10.0/doc/release-notes.md
 
 0.10.1 Change log
 =================
@@ -140,4 +140,4 @@ And all those who contributed additional code review and/or security research:
 - Sergio Demian Lerner
 - Sharon Goldberg
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcore/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

@@ -1,11 +1,12 @@
-// Copyright (c) 2009-2019 The Bitcoin Core developers
-// Copyright (c) 2009-2019 The Litecoin Core developers
-// Copyright (c) 2017-2019 The Bitcore Core developers
+// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2019 Limxtec developers
+// Copyright (c) 2019 BitCore developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCORE_RPCREGISTER_H
-#define BITCORE_RPCREGISTER_H
+#ifndef BITCORE_RPC_REGISTER_H
+#define BITCORE_RPC_REGISTER_H
 
 /** These are in one header file to avoid creating tons of single-function
  * headers for everything under src/rpc/ */
@@ -22,6 +23,13 @@ void RegisterMiningRPCCommands(CRPCTable &tableRPC);
 /** Register raw transaction RPC commands */
 void RegisterRawTransactionRPCCommands(CRPCTable &tableRPC);
 
+// Dash
+/** Register Dash masternode RPC commands */
+void RegisterDashMasternodeRPCCommands(CRPCTable &tableRPC);
+/** Register Dash Governance RPC commands */
+void RegisterDashGovernanceRPCCommands(CRPCTable &tableRPC);
+//
+
 static inline void RegisterAllCoreRPCCommands(CRPCTable &t)
 {
     RegisterBlockchainRPCCommands(t);
@@ -29,6 +37,8 @@ static inline void RegisterAllCoreRPCCommands(CRPCTable &t)
     RegisterMiscRPCCommands(t);
     RegisterMiningRPCCommands(t);
     RegisterRawTransactionRPCCommands(t);
+    RegisterDashMasternodeRPCCommands(t);
+    RegisterDashGovernanceRPCCommands(t);
 }
 
-#endif
+#endif // BITCORE_RPC_REGISTER_H

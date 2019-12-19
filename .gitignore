@@ -30,8 +30,8 @@ config.log
 config.status
 configure
 libtool
-src/config/bitcore-config.h
-src/config/bitcore-config.h.in
+src/config/bitcoin-config.h
+src/config/bitcoin-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -44,6 +44,12 @@ src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
 
+src/qt/bitcoin-qt.config
+src/qt/bitcoin-qt.creator
+src/qt/bitcoin-qt.creator.user
+src/qt/bitcoin-qt.files
+src/qt/bitcoin-qt.includes
+
 .deps
 .dirstamp
 .libs
@@ -55,6 +61,7 @@ src/qt/test/moc*.cpp
 *.pyc
 *.o
 *.o-*
+*.patch
 *.a
 *.pb.cc
 *.pb.h
@@ -74,7 +81,8 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 bitcore-qt
-BitCore-Qt.app
+FxTC-Qt.app
+background.tiff*
 
 # Unit-tests
 Makefile.test
@@ -106,5 +114,5 @@ test/cache/*
 
 /doc/doxygen/
 
-libbitcoreconsensus.pc
+libbitcoinconsensus.pc
 contrib/devtools/split-debug.sh

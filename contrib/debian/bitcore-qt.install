@@ -1,6 +1,0 @@
-usr/local/bin/bitcore-qt usr/bin
-share/pixmaps/bitcore32.xpm usr/share/pixmaps
-share/pixmaps/bitcore16.xpm usr/share/pixmaps
-share/pixmaps/bitcore128.png usr/share/pixmaps
-debian/bitcore-qt.desktop usr/share/applications
-debian/bitcore-qt.protocol usr/share/kde4/services/

@@ -1,19 +1,17 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin Core developers
-// Copyright (c) 2009-2019 The Litecoin Core developers
-// Copyright (c) 2017-2019 The Bitcore Core developers
+// Copyright (c) 2009-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "sigcache.h"
+#include <script/sigcache.h>
 
-#include "memusage.h"
-#include "pubkey.h"
-#include "random.h"
-#include "uint256.h"
-#include "util.h"
+#include <memusage.h>
+#include <pubkey.h>
+#include <random.h>
+#include <uint256.h>
+#include <util.h>
 
-#include "cuckoocache.h"
+#include <cuckoocache.h>
 #include <boost/thread.hpp>
 
 namespace {

@@ -1,15 +1,15 @@
-bitcored version 0.4.3 is now available for download at:
-http://luke.dashjr.org/programs/bitcore/files/bitcored-0.4.3/ (until Gavin uploads to SourceForge)
+bitcoind version 0.4.3 is now available for download at:
+http://luke.dashjr.org/programs/bitcoin/files/bitcoind-0.4.3/ (until Gavin uploads to SourceForge)
 
 This is a bugfix-only release based on 0.4.0.
 
 Please note that the wxBitcoin GUI client is no longer maintained nor supported. If someone would like to step up to maintain this, they should contact Luke-Jr.
 
 Please report bugs for the daemon only using the issue tracker at github:
-https://github.com/bitcore/bitcore/issues
+https://github.com/bitcoin/bitcoin/issues
 
 Stable source code is hosted at Gitorious:
-http://gitorious.org/bitcore/bitcored-stable/archive-tarball/v0.4.3#.tar.gz
+http://gitorious.org/bitcoin/bitcoind-stable/archive-tarball/v0.4.3#.tar.gz
 
 BUG FIXES
 

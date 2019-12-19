@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: bitcored.service
-Upstart: bitcored.conf
-OpenRC:  bitcored.openrc
-         bitcored.openrcconf
-CentOS:  bitcored.init
-OS X:    org.bitcore.bitcored.plist
+SystemD: bitcoind.service
+Upstart: bitcoind.conf
+OpenRC:  bitcoind.openrc
+         bitcoind.openrcconf
+CentOS:  bitcoind.init
+macOS:    org.bitcoin.bitcoind.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

@@ -29,7 +29,7 @@
 
 #if defined(USE_SSE2)
 
-#include "crypto/scrypt.h"
+#include <crypto/scrypt.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>

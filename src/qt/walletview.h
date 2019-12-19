@@ -1,11 +1,17 @@
-// Copyright (c) 2011-2019 The Bitcoin Core developers
+// Copyright (c) 2011-2018 The Bitcoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2019 Limxtec developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCORE_QT_WALLETVIEW_H
 #define BITCORE_QT_WALLETVIEW_H
 
-#include "amount.h"
+#include <amount.h>
+
+// Dash
+#include <qt/masternodelist.h>
+//
 
 #include <QStackedWidget>
 
@@ -44,8 +50,9 @@ public:
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
     */
     void setClientModel(ClientModel *clientModel);
+    WalletModel *getWalletModel() { return walletModel; }
     /** Set the wallet model.
-        The wallet model represents a bitcore wallet, and offers access to the list of transactions, address book and sending
+        The wallet model represents a bitcoin wallet, and offers access to the list of transactions, address book and sending
         functionality.
     */
     void setWalletModel(WalletModel *walletModel);
@@ -57,7 +64,6 @@ public:
 private:
     ClientModel *clientModel;
     WalletModel *walletModel;
-	void *unlockContext;
 
     OverviewPage *overviewPage;
     QWidget *transactionsPage;
@@ -65,6 +71,10 @@ private:
     SendCoinsDialog *sendCoinsPage;
     AddressBookPage *usedSendingAddressesPage;
     AddressBookPage *usedReceivingAddressesPage;
+
+    // Dash
+    MasternodeList *masternodeListPage;
+    //
 
     TransactionView *transactionView;
 
@@ -76,6 +86,12 @@ public Q_SLOTS:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
+
+    // Dash
+    /** Switch to masternode page */
+    void gotoMasternodePage();
+    //
+
     /** Switch to receive coins page */
     void gotoReceiveCoinsPage();
     /** Switch to send coins page */
@@ -98,9 +114,11 @@ public Q_SLOTS:
     /** Change encrypted wallet passphrase */
     void changePassphrase();
     /** Ask for passphrase to unlock wallet temporarily */
-    void unlockWallet();
-	/** Ask for passphrase to unlock wallet and return context*/
-	void requestUnlockWallet();
+    void unlockWallet(bool fAnonymizeOnly=false);
+    // Dash
+    /** Lock wallet */
+    void lockWallet();
+    //
 
     /** Show used sending addresses */
     void usedSendingAddresses();
@@ -122,11 +140,11 @@ Q_SIGNALS:
     /**  Fired when a message should be reported to the user */
     void message(const QString &title, const QString &message, unsigned int style);
     /** Encryption status of wallet changed */
-    void encryptionStatusChanged(int status);
+    void encryptionStatusChanged();
     /** HD-Enabled status of wallet changed (only possible during startup) */
-    void hdEnabledStatusChanged(int hdEnabled);
+    void hdEnabledStatusChanged();
     /** Notify that a new transaction appeared */
-    void incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label);
+    void incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& walletName);
     /** Notify that the out of sync warning icon has been pressed */
     void outOfSyncWarningClicked();
 };

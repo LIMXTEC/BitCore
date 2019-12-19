@@ -1,19 +1,20 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin Core developers
-// Copyright (c) 2009-2019 The Litecoin Core developers
-// Copyright (c) 2017-2019 The Bitcore Core developers
+// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2019 Limxtec developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCORE_POLICYESTIMATOR_H
-#define BITCORE_POLICYESTIMATOR_H
+#ifndef BITCORE_POLICY_FEES_H
+#define BITCORE_POLICY_FEES_H
 
-#include "amount.h"
-#include "feerate.h"
-#include "uint256.h"
-#include "random.h"
-#include "sync.h"
+#include <amount.h>
+#include <policy/feerate.h>
+#include <uint256.h>
+#include <random.h>
+#include <sync.h>
 
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -70,7 +71,7 @@ class TxConfirmStats;
 
 /* Identifier for each of the 3 different TxConfirmStats which will track
  * history over different time horizons. */
-enum FeeEstimateHorizon {
+enum class FeeEstimateHorizon {
     SHORT_HALFLIFE = 0,
     MED_HALFLIFE = 1,
     LONG_HALFLIFE = 2
@@ -158,6 +159,11 @@ private:
     /** Decay of .9995 is a half-life of 1008 blocks or about 1 week */
     static constexpr double LONG_DECAY = .99931;
 
+    // Dash
+    /** Require greater than 95% of X fee transactions to be confirmed within Y blocks for X to be big enough */
+    static constexpr double MIN_SUCCESS_PCT = .95;
+    //-//static const double UNLIKELY_PCT = .5;
+    //
     /** Require greater than 60% of X feerate transactions to be confirmed within Y/2 blocks*/
     static constexpr double HALF_SUCCESS_PCT = .6;
     /** Require greater than 85% of X feerate transactions to be confirmed within Y blocks*/
@@ -167,6 +173,10 @@ private:
 
     /** Require an avg of 0.1 tx in the combined feerate bucket per block to have stat significance */
     static constexpr double SUFFICIENT_FEETXS = 0.1;
+    // Dash
+    /** Require only an avg of 1 tx every 5 blocks in the combined pri bucket (way less pri txs) */
+    static constexpr double SUFFICIENT_PRITXS = .2;
+    //
     /** Require an avg of 0.5 tx when using short decay since there are fewer blocks considered*/
     static constexpr double SUFFICIENT_TXS_SHORT = 0.5;
 
@@ -179,6 +189,15 @@ private:
      */
     static constexpr double MIN_BUCKET_FEERATE = 1000;
     static constexpr double MAX_BUCKET_FEERATE = 1e7;
+    // Dash
+    // Minimum and Maximum values for tracking fees and priorities
+    //-//static constexpr double MIN_FEERATE = 10;
+    //-//static constexpr double MAX_FEERATE = 1e7;
+    //-//static constexpr double INF_FEERATE = MAX_MONEY;
+    //-//static constexpr double MIN_PRIORITY = 10;
+    //-//static constexpr double MAX_PRIORITY = 1e16;
+    static constexpr double INF_PRIORITY = 1e9 * MAX_MONEY;
+    //
 
     /** Spacing of FeeRate buckets
      * We have to lump transactions into buckets based on feerate, but we want to be able
@@ -218,6 +237,17 @@ public:
      */
     CFeeRate estimateRawFee(int confTarget, double successThreshold, FeeEstimateHorizon horizon, EstimationResult *result = nullptr) const;
 
+    // Dash
+    /** Return a priority estimate */
+    //-//double estimatePriority(int confTarget);
+
+    /** Estimate priority needed to get be included in a block within
+     *  confTarget blocks. If no answer can be given at confTarget, return an
+     *  estimate at the lowest target where one can be given.
+     */
+    double estimateSmartPriority(int confTarget, int *answerFoundAtTarget, const CTxMemPool& pool);
+    //
+
     /** Write estimation data to a file */
     bool Write(CAutoFile& fileout) const;
 
@@ -225,7 +255,7 @@ public:
     bool Read(CAutoFile& filein);
 
     /** Empty mempool transactions on shutdown to record failure to confirm for txs still in mempool */
-    void FlushUnconfirmed(CTxMemPool& pool);
+    void FlushUnconfirmed();
 
     /** Calculation of highest target that estimates are tracked for */
     unsigned int HighestTargetTracked(FeeEstimateHorizon horizon) const;
@@ -247,9 +277,13 @@ private:
     std::map<uint256, TxStatsInfo> mapMemPoolTxs;
 
     /** Classes to track historical data on transaction confirmations */
-    TxConfirmStats* feeStats;
-    TxConfirmStats* shortStats;
-    TxConfirmStats* longStats;
+    std::unique_ptr<TxConfirmStats> feeStats;
+    std::unique_ptr<TxConfirmStats> shortStats;
+    std::unique_ptr<TxConfirmStats> longStats;
+
+    // Dash
+    std::unique_ptr<TxConfirmStats> priStats;
+    //
 
     unsigned int trackedTxs;
     unsigned int untrackedTxs;
@@ -286,7 +320,7 @@ private:
 
 public:
     /** Create new FeeFilterRounder */
-    FeeFilterRounder(const CFeeRate& minIncrementalFee);
+    explicit FeeFilterRounder(const CFeeRate& minIncrementalFee);
 
     /** Quantize a minimum fee for privacy purpose before broadcast **/
     CAmount round(CAmount currentMinFee);
@@ -296,4 +330,4 @@ private:
     FastRandomContext insecure_rand;
 };
 
-#endif /*BITCORE_POLICYESTIMATOR_H */
+#endif // BITCORE_POLICY_FEES_H

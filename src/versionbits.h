@@ -1,11 +1,13 @@
-// Copyright (c) 2016 The Bitcoin Core developers
+// Copyright (c) 2016-2018 The Bitcoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2019 Limxtec developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCORE_CONSENSUS_VERSIONBITS
-#define BITCORE_CONSENSUS_VERSIONBITS
+#ifndef BITCORE_VERSIONBITS_H
+#define BITCORE_VERSIONBITS_H
 
-#include "chain.h"
+#include <chain.h>
 #include <map>
 
 /** What block version to use for new blocks (pre versionbits) */
@@ -17,12 +19,12 @@ static const int32_t VERSIONBITS_TOP_MASK = 0xE0000000UL;
 /** Total bits available for versionbits */
 static const int32_t VERSIONBITS_NUM_BITS = 29;
 
-enum ThresholdState {
-    THRESHOLD_DEFINED,
-    THRESHOLD_STARTED,
-    THRESHOLD_LOCKED_IN,
-    THRESHOLD_ACTIVE,
-    THRESHOLD_FAILED,
+enum class ThresholdState {
+    DEFINED,
+    STARTED,
+    LOCKED_IN,
+    ACTIVE,
+    FAILED,
 };
 
 // A map that gives the state for blocks whose height is a multiple of Period().
@@ -35,6 +37,10 @@ struct VBDeploymentInfo {
     const char *name;
     /** Whether GBT clients can safely ignore this rule in simplified usage */
     bool gbt_force;
+    // Dash
+    /** Whether to check current MN protocol or not */
+    bool check_mn_protocol;
+    //
 };
 
 struct BIP9Stats {
@@ -77,4 +83,4 @@ BIP9Stats VersionBitsStatistics(const CBlockIndex* pindexPrev, const Consensus::
 int VersionBitsStateSinceHeight(const CBlockIndex* pindexPrev, const Consensus::Params& params, Consensus::DeploymentPos pos, VersionBitsCache& cache);
 uint32_t VersionBitsMask(const Consensus::Params& params, Consensus::DeploymentPos pos);
 
-#endif
+#endif // BITCORE_VERSIONBITS_H

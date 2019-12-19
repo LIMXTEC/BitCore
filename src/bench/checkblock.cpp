@@ -1,24 +1,21 @@
-// Copyright (c) 2016 The Bitcoin Core developers
+// Copyright (c) 2016-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "bench.h"
+#include <bench/bench.h>
 
-#include "chainparams.h"
-#include "validation.h"
-#include "streams.h"
-#include "consensus/validation.h"
+#include <chainparams.h>
+#include <validation.h>
+#include <streams.h>
+#include <consensus/validation.h>
 
 namespace block_bench {
-#include "bench/data/block413567.raw.h"
+#include <bench/data/block413567.raw.h>
 } // namespace block_bench
 
 // These are the two major time-sinks which happen after we have fully received
 // a block off the wire, but before we can relay the block on to peers using
 // compact block relay.
-
-// BitCore uses block height 878439, hash 0babe680f55a55d54339511226755f0837261da89a4e78eba4d6436a63026df8
-// which contains 3808 transactions.
 
 static void DeserializeBlockTest(benchmark::State& state)
 {
@@ -55,5 +52,5 @@ static void DeserializeAndCheckBlockTest(benchmark::State& state)
     }
 }
 
-BENCHMARK(DeserializeBlockTest);
-BENCHMARK(DeserializeAndCheckBlockTest);
+BENCHMARK(DeserializeBlockTest, 130);
+BENCHMARK(DeserializeAndCheckBlockTest, 160);

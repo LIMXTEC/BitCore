@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2014-2016 The Bitcoin Core developers
+# Copyright (c) 2014-2018 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,9 +7,9 @@
     ZMQ example using python3's asyncio
 
     Bitcoin should be started with the command line arguments:
-        bitcored -testnet -daemon \
-                -zmqpubhashblock=tcp://127.0.0.1:28332 \
+        bitcoind -testnet -daemon \
                 -zmqpubrawtx=tcp://127.0.0.1:28332 \
+                -zmqpubrawblock=tcp://127.0.0.1:28332 \
                 -zmqpubhashtx=tcp://127.0.0.1:28332 \
                 -zmqpubhashblock=tcp://127.0.0.1:28332
 
@@ -23,7 +23,7 @@
     and `await` keywords respectively.
 
     A blocking example using python 2.7 can be obtained from the git history:
-    https://github.com/bitcore/bitcore/blob/37a7fe9e440b83e2364d5498931253937abe9294/contrib/zmq/zmq_sub.py
+    https://github.com/bitcoin/bitcoin/blob/37a7fe9e440b83e2364d5498931253937abe9294/contrib/zmq/zmq_sub.py
 """
 
 import binascii
@@ -34,15 +34,15 @@ import signal
 import struct
 import sys
 
-if not (sys.version_info.major >= 3 and sys.version_info.minor >= 4):
+if (sys.version_info.major, sys.version_info.minor) < (3, 4):
     print("This example only works with Python 3.4 and greater")
-    exit(1)
+    sys.exit(1)
 
 port = 28332
 
 class ZMQHandler():
     def __init__(self):
-        self.loop = zmq.asyncio.install()
+        self.loop = asyncio.get_event_loop()
         self.zmqContext = zmq.asyncio.Context()
 
         self.zmqSubSocket = self.zmqContext.socket(zmq.SUB)

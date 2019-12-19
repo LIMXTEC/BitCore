@@ -1,16 +1,34 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin Core developers
-// Copyright (c) 2009-2019 The Litecoin Core developers
-// Copyright (c) 2017-2019 The Bitcore Core developers
+// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2019 Limxtec developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCORE_PRIMITIVES_BLOCK_H
 #define BITCORE_PRIMITIVES_BLOCK_H
 
-#include "primitives/transaction.h"
-#include "serialize.h"
-#include "uint256.h"
+#include <primitives/transaction.h>
+#include <serialize.h>
+#include <uint256.h>
+
+/*
+// Algo number in nVersion
+enum {
+    ALGO_VERSION_MASK    = (255 << 8),
+
+    ALGO_SHA256D         = (  0 << 8),
+    ALGO_SCRYPT          = (  1 << 8),
+    ALGO_NIST5           = (  2 << 8),
+    ALGO_LYRA2Z          = (  3 << 8),
+    ALGO_X11             = (  4 << 8),
+    ALGO_X16R            = (  5 << 8),
+
+    ALGO_NULL
+};
+
+const unsigned int ALGO_ACTIVE_COUNT = 5;
+*/
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
@@ -66,6 +84,8 @@ public:
 
     uint256 GetPoWHash() const;
 
+    unsigned int GetAlgoEfficiency(int nBlockHeight) const;
+
     int64_t GetBlockTime() const
     {
         return (int64_t)nTime;
@@ -80,6 +100,10 @@ public:
     std::vector<CTransactionRef> vtx;
 
     // memory only
+    // Dash
+    mutable CTxOut txoutMasternode; // masternode payment
+    mutable std::vector<CTxOut> voutSuperblock; // superblock payment
+    //
     mutable bool fChecked;
 
     CBlock()
@@ -90,14 +114,14 @@ public:
     CBlock(const CBlockHeader &header)
     {
         SetNull();
-        *((CBlockHeader*)this) = header;
+        *(static_cast<CBlockHeader*>(this)) = header;
     }
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action) {
-        READWRITE(*(CBlockHeader*)this);
+        READWRITEAS(CBlockHeader, *this);
         READWRITE(vtx);
     }
 
@@ -105,6 +129,8 @@ public:
     {
         CBlockHeader::SetNull();
         vtx.clear();
+        txoutMasternode = CTxOut();
+        voutSuperblock.clear();
         fChecked = false;
     }
 
@@ -133,7 +159,7 @@ struct CBlockLocator
 
     CBlockLocator() {}
 
-    CBlockLocator(const std::vector<uint256>& vHaveIn) : vHave(vHaveIn) {}
+    explicit CBlockLocator(const std::vector<uint256>& vHaveIn) : vHave(vHaveIn) {}
 
     ADD_SERIALIZE_METHODS;
 

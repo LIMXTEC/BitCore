@@ -1,16 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Copyright (c) 2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 ###   This script attempts to download the signature file SHA256SUMS.asc from
-###   bitcorecore.org and bitcore.cc and compares them.
+###   bitcoincore.org and bitcoin.org and compares them.
 ###   It first checks if the signature passes, and then downloads the files specified in
 ###   the file, and checks if the hashes of these files match those that are specified
 ###   in the signature file.
 ###   The script returns 0 if everything passes the checks. It returns 1 if either the
 ###   signature check or the hash check doesn't pass. If an error occurs the return value is 2
 
+export LC_ALL=C
 function clean_up {
    for file in $*
    do
@@ -18,26 +19,26 @@ function clean_up {
    done
 }
 
-WORKINGDIR="/tmp/bitcore_verify_binaries"
+WORKINGDIR="/tmp/bitcoin_verify_binaries"
 TMPFILE="hashes.tmp"
 
 SIGNATUREFILENAME="SHA256SUMS.asc"
 RCSUBDIR="test"
-HOST1="https://bitcorecore.org"
-HOST2="https://bitcore.cc"
+HOST1="https://bitcoincore.org"
+HOST2="https://bitcoin.org"
 BASEDIR="/bin/"
-VERSIONPREFIX="bitcore-core-"
+VERSIONPREFIX="bitcoin-core-"
 RCVERSIONSTRING="rc"
 
 if [ ! -d "$WORKINGDIR" ]; then
    mkdir "$WORKINGDIR"
 fi
 
-cd "$WORKINGDIR"
+cd "$WORKINGDIR" || exit 1
 
 #test if a version number has been passed as an argument
 if [ -n "$1" ]; then
-   #let's also check if the version number includes the prefix 'bitcore-',
+   #let's also check if the version number includes the prefix 'bitcoin-',
    #  and add this prefix if it doesn't
    if [[ $1 == "$VERSIONPREFIX"* ]]; then
       VERSION="$1"
@@ -76,8 +77,6 @@ if [ -n "$1" ]; then
          BASEDIR="$BASEDIR$RCSUBDIR.$RCVERSION/"
       fi
    fi
-
-   SIGNATUREFILE="$BASEDIR$SIGNATUREFILENAME"
 else
    echo "Error: need to specify a version on the command line"
    exit 2
@@ -89,7 +88,7 @@ WGETOUT=$(wget -N "$HOST1$BASEDIR$SIGNATUREFILENAME" 2>&1)
 #and then see if wget completed successfully
 if [ $? -ne 0 ]; then
    echo "Error: couldn't fetch signature file. Have you specified the version number in the following format?"
-   echo "[$VERSIONPREFIX]<version>-[$RCVERSIONSTRING[0-9]] (example: "$VERSIONPREFIX"0.10.4-"$RCVERSIONSTRING"1)"
+   echo "[$VERSIONPREFIX]<version>-[$RCVERSIONSTRING[0-9]] (example: ${VERSIONPREFIX}0.10.4-${RCVERSIONSTRING}1)"
    echo "wget output:"
    echo "$WGETOUT"|sed 's/^/\t/g'
    exit 2
@@ -97,7 +96,7 @@ fi
 
 WGETOUT=$(wget -N -O "$SIGNATUREFILENAME.2" "$HOST2$BASEDIR$SIGNATUREFILENAME" 2>&1)
 if [ $? -ne 0 ]; then
-   echo "bitcore.cc failed to provide signature file, but bitcorecore.org did?"
+   echo "bitcoin.org failed to provide signature file, but bitcoincore.org did?"
    echo "wget output:"
    echo "$WGETOUT"|sed 's/^/\t/g'
    clean_up $SIGNATUREFILENAME
@@ -106,7 +105,7 @@ fi
 
 SIGFILEDIFFS="$(diff $SIGNATUREFILENAME $SIGNATUREFILENAME.2)"
 if [ "$SIGFILEDIFFS" != "" ]; then
-   echo "bitcore.cc and bitcorecore.org signature files were not equal?"
+   echo "bitcoin.org and bitcoincore.org signature files were not equal?"
    clean_up $SIGNATUREFILENAME $SIGNATUREFILENAME.2
    exit 4
 fi

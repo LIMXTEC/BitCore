@@ -4,6 +4,7 @@
     "version": 1,
     "size": 42,
     "vsize": 42,
+    "weight": 168,
     "locktime": 0,
     "vin": [
     ],
@@ -17,7 +18,7 @@
                 "reqSigs": 1,
                 "type": "scripthash",
                 "addresses": [
-                    "MHaYuXfcFR7myUVrVpVjjVCngZLKDuRbn3"
+                    "3BNQbeFeJJGMAyDxPwWPuqxPMrjsFLjk3f"
                 ]
             }
         }

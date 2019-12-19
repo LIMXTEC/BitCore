@@ -27,8 +27,8 @@
  * online backup system.
  */
 
-#include "crypto/scrypt.h"
-//#include "util.h"
+#include <crypto/scrypt.h>
+//#include <util.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
@@ -59,6 +59,7 @@ static inline void be32enc(void *pp, uint32_t x)
 	p[1] = (x >> 16) & 0xff;
 	p[0] = (x >> 24) & 0xff;
 }
+
 #endif
 typedef struct HMAC_SHA256Context {
 	SHA256_CTX ictx;

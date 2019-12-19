@@ -1,4 +1,6 @@
 # Copyright (c) 2013-2016 The Bitcoin Core developers
+# Copyright (c) 2018 FXTC developers
+# Copyright (c) 2019 BitCore developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,27 +14,28 @@ TEST_QT_MOC_CPP = \
 
 if ENABLE_WALLET
 TEST_QT_MOC_CPP += \
+  qt/test/moc_addressbooktests.cpp \
   qt/test/moc_paymentservertests.cpp \
   qt/test/moc_wallettests.cpp
 endif
 
 TEST_QT_H = \
+  qt/test/addressbooktests.h \
   qt/test/compattests.h \
   qt/test/rpcnestedtests.h \
   qt/test/uritests.h \
+  qt/test/util.h \
   qt/test/paymentrequestdata.h \
   qt/test/paymentservertests.h \
   qt/test/wallettests.h
 
-TEST_BITCORE_CPP = \
-  test/test_bitcore.cpp \
-  test/testutil.cpp
+TEST_BITCOIN_CPP = \
+  test/test_bitcoin.cpp
 
-TEST_BITCORE_H = \
-  test/test_bitcore.h \
-  test/testutil.h
+TEST_BITCOIN_H = \
+  test/test_bitcoin.h
 
-qt_test_test_bitcore_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCORE_INCLUDES) $(BITCORE_QT_INCLUDES) \
+qt_test_test_bitcore_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_TEST_INCLUDES) $(PROTOBUF_CFLAGS)
 
 qt_test_test_bitcore_qt_SOURCES = \
@@ -40,11 +43,13 @@ qt_test_test_bitcore_qt_SOURCES = \
   qt/test/rpcnestedtests.cpp \
   qt/test/test_main.cpp \
   qt/test/uritests.cpp \
+  qt/test/util.cpp \
   $(TEST_QT_H) \
-  $(TEST_BITCORE_CPP) \
-  $(TEST_BITCORE_H)
+  $(TEST_BITCOIN_CPP) \
+  $(TEST_BITCOIN_H)
 if ENABLE_WALLET
 qt_test_test_bitcore_qt_SOURCES += \
+  qt/test/addressbooktests.cpp \
   qt/test/paymentservertests.cpp \
   qt/test/wallettests.cpp \
   wallet/test/wallet_test_fixture.cpp
@@ -52,28 +57,28 @@ endif
 
 nodist_qt_test_test_bitcore_qt_SOURCES = $(TEST_QT_MOC_CPP)
 
-qt_test_test_bitcore_qt_LDADD = $(LIBBITCOREQT) $(LIBBITCORE_SERVER)
+qt_test_test_bitcore_qt_LDADD = $(LIBBITCOINQT) $(LIBBITCOIN_SERVER)
 if ENABLE_WALLET
-qt_test_test_bitcore_qt_LDADD += $(LIBBITCORE_WALLET)
+qt_test_test_bitcore_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
 endif
 if ENABLE_ZMQ
-qt_test_test_bitcore_qt_LDADD += $(LIBBITCORE_ZMQ) $(ZMQ_LIBS)
+qt_test_test_bitcore_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
-qt_test_test_bitcore_qt_LDADD += $(LIBBITCORE_CLI) $(LIBBITCORE_COMMON) $(LIBBITCORE_UTIL) $(LIBBITCORE_CONSENSUS) $(LIBBITCORE_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) \
+qt_test_test_bitcore_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) \
   $(LIBLEVELDB_SSE42) $(LIBMEMENV) $(BOOST_LIBS) $(QT_DBUS_LIBS) $(QT_TEST_LIBS) $(QT_LIBS) \
   $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 qt_test_test_bitcore_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 qt_test_test_bitcore_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-CLEAN_BITCORE_QT_TEST = $(TEST_QT_MOC_CPP) qt/test/*.gcda qt/test/*.gcno
+CLEAN_BITCOIN_QT_TEST = $(TEST_QT_MOC_CPP) qt/test/*.gcda qt/test/*.gcno
 
-CLEANFILES += $(CLEAN_BITCORE_QT_TEST)
+CLEANFILES += $(CLEAN_BITCOIN_QT_TEST)
 
-test_bitcore_qt : qt/test/test_bitcore-qt$(EXEEXT)
+test_bitcoin_qt : qt/test/test_bitcore-qt$(EXEEXT)
 
-test_bitcore_qt_check : qt/test/test_bitcore-qt$(EXEEXT) FORCE
+test_bitcoin_qt_check : qt/test/test_bitcore-qt$(EXEEXT) FORCE
 	$(MAKE) check-TESTS TESTS=$^
 
-test_bitcore_qt_clean: FORCE
-	rm -f $(CLEAN_BITCORE_QT_TEST) $(qt_test_test_bitcore_qt_OBJECTS)
+test_bitcoin_qt_clean: FORCE
+	rm -f $(CLEAN_BITCOIN_QT_TEST) $(qt_test_test_bitcoin_qt_OBJECTS)
