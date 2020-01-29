@@ -1630,7 +1630,7 @@ static void ThreadMapPort()
             }
         }
 
-        std::string strDesc = "FxTC " + FormatFullVersion();
+        std::string strDesc = "BitCore " + FormatFullVersion();
 
         do {
 #ifndef UPNPDISCOVER_SUCCESS

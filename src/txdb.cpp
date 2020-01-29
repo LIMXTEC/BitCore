@@ -274,7 +274,7 @@ bool CBlockTreeDB::LoadBlockIndexGuts(const Consensus::Params& consensusParams, 
                 pindexNew->nStatus        = diskindex.nStatus;
                 pindexNew->nTx            = diskindex.nTx;
 
-                // FxTC BEGIN
+                // BitCore BEGIN
                 if (pindexNew->nHeight > consensusParams.nlastValidPowHashHeight)
                 // FXTC END
                 if (!CheckProofOfWork(pindexNew->GetBlockPoWHash(), pindexNew->nBits, consensusParams))

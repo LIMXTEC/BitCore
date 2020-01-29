@@ -56,7 +56,7 @@
 #include <boost/thread.hpp>
 
 #if defined(NDEBUG)
-# error "FxTC cannot be compiled without assertions."
+# error "BitCore cannot be compiled without assertions."
 #endif
 
 #define MICRO 0.000001
@@ -269,7 +269,7 @@ map<uint256, int64_t> mapRejectedBlocks GUARDED_BY(cs_main);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const std::string strMessageMagic = "FxTC Signed Message:\n";
+const std::string strMessageMagic = "BitCore Signed Message:\n";
 
 // Internal stuff
 namespace {

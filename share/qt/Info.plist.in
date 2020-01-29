@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>FxTC-Qt</string>
+  <string>BitCore-Qt</string>
   
   <key>CFBundleName</key>
-  <string>FxTC-Qt</string>
+  <string>BitCore-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.bitcoreoinfoundation.FxTC-Qt</string>
+  <string>org.bitcoreoinfoundation.BitCore-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>

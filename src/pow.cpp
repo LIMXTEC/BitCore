@@ -503,7 +503,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     /*
     unsigned int nBits = DarkGravityWave(pindexLast, pblock, params);
 
-    // Dead lock protection will halve work every block spacing when no block for 2 * number of active algos * block spacing (FxTC: every two minutes if no block for 10 minutes)
+    // Dead lock protection will halve work every block spacing when no block for 2 * number of active algos * block spacing (BitCore: every two minutes if no block for 10 minutes)
     int nHalvings = (pblock->GetBlockTime() - pindexLast->GetBlockTime()) / (params.nPowTargetSpacing * 2) - ALGO_ACTIVE_COUNT + 1;
     if (nHalvings > 0)
     {
@@ -649,7 +649,7 @@ unsigned int GetNextWorkRequiredFXTC(const CBlockIndex* pindexLast, const CBlock
 {
     unsigned int nBits = DarkGravityWave(pindexLast, pblock, params);
 
-    // Dead lock protection will halve work every block spacing when no block for 2 * number of active algos * block spacing (FxTC: every two minutes if no block for 10 minutes)
+    // Dead lock protection will halve work every block spacing when no block for 2 * number of active algos * block spacing (BitCore: every two minutes if no block for 10 minutes)
     int nHalvings = (pblock->GetBlockTime() - pindexLast->GetBlockTime()) / (params.nPowTargetSpacing * 2) - ALGO_ACTIVE_COUNT + 1;
     if (nHalvings > 0)
     {
