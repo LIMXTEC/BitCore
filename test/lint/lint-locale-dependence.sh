@@ -41,6 +41,11 @@ KNOWN_VIOLATIONS=(
     "src/spork.cpp:.*ctime*"
     "src/governance-validators.cpp:.*tolower*"
     "src/init.cpp:.*tolower*"
+    
+    # Bitcore
+    "src/bignum.h:.*isspace"
+    "src/bignum.h:.*isxdigit"
+    "src/bignum.h:.*tolower"
 )
 
 REGEXP_IGNORE_EXTERNAL_DEPENDENCIES="^src/(crypto/ctaes/|leveldb/|secp256k1/|tinyformat.h|univalue/)"
