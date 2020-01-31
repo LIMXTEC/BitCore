@@ -21,7 +21,7 @@
 
 // BTX BEGINN
 #include <crypto/hashblock.h> // BitCore TimeTravel
-#include "crypto/scrypt.h"
+#include <crypto/scrypt.h>
 // BTX END
 
 uint256 CBlockHeader::GetHash() const

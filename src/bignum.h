@@ -6,9 +6,9 @@
 #ifndef BITCORE_BIGNUM_H
 #define BITCORE_BIGNUM_H
 
-#include "serialize.h"
-#include "arith_uint256.h"
-#include "version.h"
+#include <serialize.h>
+#include <arith_uint256.h>
+#include <version.h>
 
 #include <stdexcept>
 #include <stdint.h>
