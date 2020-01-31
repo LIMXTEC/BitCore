@@ -482,7 +482,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
     {
     LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
     LogPrintf("Vordiff %d \n", nLongTimeLimit);
-    LogPrintf(" %d Block", BlockReading->nHeight );
+    LogPrintf(" %d Block \n", BlockReading->nHeight );
     }
     
     if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime 
