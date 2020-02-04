@@ -10,7 +10,7 @@
 // FXTC END
 
 // Megacoin
-#include <bignum.h>
+#include <../bignum.h>
 
 #include <arith_uint256.h>
 #include <chain.h>
