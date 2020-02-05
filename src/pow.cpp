@@ -10,8 +10,7 @@
 // FXTC END
 
 // Megacoin
-#include <../bignum.h>
-
+//#include <bignum.h>
 #include <arith_uint256.h>
 #include <chain.h>
 #include <primitives/block.h>
@@ -335,8 +334,9 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 */
 
 // Megacoin
+/*
 unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
-    /* current difficulty formula, megacoin - kimoto gravity well */
+    // current difficulty formula, megacoin - kimoto gravity well 
     const CBlockIndex *BlockLastSolved = pindexLast;
     const CBlockIndex *BlockReading = pindexLast;
     
@@ -398,7 +398,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
         }
     return bnNew.GetCompact();
     
-    /*
+  
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) {  return bnPowLimit.GetCompact(); }
@@ -495,9 +495,9 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
         bnNew = bnPowLimit;
     }
     return bnNew.GetCompact();
-    */
+    
 }
-
+*/
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     /*
