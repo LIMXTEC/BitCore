@@ -48,7 +48,6 @@ before_script:
     - if [ -n "$OSX_SDK" -a -f depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz ]; then tar -C depends/SDKs -xf depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz; fi
     - if [[ $HOST = *-mingw32 ]]; then DOCKER_EXEC update-alternatives --set $HOST-g++ \$\(which $HOST-g++-posix\); fi
     - if [ -z "$NO_DEPENDS" ]; then DOCKER_EXEC CONFIG_SHELL= make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS; fi
-    - touch src/qt/bitcoin.qrc
 script:
     - export TRAVIS_COMMIT_LOG=`git log --format=fuller -1`
     - OUTDIR=$BASE_OUTDIR/$TRAVIS_PULL_REQUEST/$TRAVIS_JOB_NUMBER-$HOST
@@ -59,6 +58,7 @@ script:
     - BEGIN_FOLD configure; DOCKER_EXEC ../configure --cache-file=config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false); END_FOLD
     - BEGIN_FOLD distdir; DOCKER_EXEC make distdir VERSION=$HOST; END_FOLD
     - cd bitcore-$HOST
+    - touch src/qt/bitcoin.qrc
     - BEGIN_FOLD configure; DOCKER_EXEC ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false); END_FOLD
     - BEGIN_FOLD build; DOCKER_EXEC make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && DOCKER_EXEC make $GOAL V=1 ; false ); END_FOLD
     - if [ "$RUN_TESTS" = "true" ]; then BEGIN_FOLD unit-tests; DOCKER_EXEC LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib make $MAKEJOBS check VERBOSE=1; END_FOLD; fi
