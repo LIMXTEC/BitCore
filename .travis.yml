@@ -110,12 +110,23 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-unknown-linux-gnu
-        PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev"
+        PACKAGES="python3-zmq qtbase4-dev qttools4-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev"
         DEP_OPTS="NO_QT=1 NO_UPNP=1 DEBUG=1 ALLOW_HOST_PACKAGES=1"
         RUN_TESTS=false
         RUN_BENCH=false
         GOAL="install"
-        BITCOIN_CONFIG="--enable-zmq --without-test --disable-tests --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
+        BITCOIN_CONFIG="--enable-zmq --without-test --disable-tests --with-gui=qt4 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
+#        BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
+# x86_64 Linux (Qt5 & system libs)
+# x86_64 Linux (uses qt5 dev package instead of depends Qt to speed up build and avoid timeout)
+#    - stage: test
+#      env: >-
+#        HOST=x86_64-unknown-linux-gnu
+#        PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev"
+#        DEP_OPTS="NO_QT=1 NO_UPNP=1 DEBUG=1 ALLOW_HOST_PACKAGES=1"
+#        RUN_TESTS=false
+#        RUN_BENCH=false
+#        GOAL="install"
 #        BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
 # x86_64 Linux (Qt5 & system libs)
     - stage: test
