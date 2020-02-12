@@ -115,8 +115,7 @@ jobs:
         RUN_TESTS=false
         RUN_BENCH=false
         GOAL="install"
-        BITCOIN_CONFIG="--enable-zmq --without-test --disable-tests --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
-#        BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
+        BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
 # x86_64 Linux (Qt5 & system libs)
     - stage: test
       env: >-
@@ -134,7 +133,7 @@ jobs:
         DEP_OPTS="NO_WALLET=1"
         RUN_TESTS=false
         GOAL="install"
-       BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
+        BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
 # Cross-Mac
     - stage: test
       env: >-
