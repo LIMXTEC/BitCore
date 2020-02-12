@@ -110,39 +110,39 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-unknown-linux-gnu
-        PACKAGES="python3-zmq qtbase4-dev qttools4-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev"
+        PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev"
         DEP_OPTS="NO_QT=1 NO_UPNP=1 DEBUG=1 ALLOW_HOST_PACKAGES=1"
         RUN_TESTS=false
         RUN_BENCH=false
         GOAL="install"
-        BITCOIN_CONFIG="--enable-zmq --without-test --disable-tests --with-gui=qt4 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
+        BITCOIN_CONFIG="--enable-zmq --without-test --disable-tests --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
 #        BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
 # x86_64 Linux (Qt5 & system libs)
-#    - stage: test
-#      env: >-
-#        HOST=x86_64-unknown-linux-gnu
-#        PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools libssl1.0-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev libdb5.3++-dev libminiupnpc-dev libzmq3-dev libprotobuf-dev protobuf-compiler libqrencode-dev"
-#        NO_DEPENDS=1
-#        RUN_TESTS=false
-#        GOAL="install"
-#        BITCOIN_CONFIG="--enable-zmq --with-incompatible-bdb --enable-glibc-back-compat --enable-reduce-exports --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
+    - stage: test
+      env: >-
+        HOST=x86_64-unknown-linux-gnu
+        PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools libssl1.0-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev libdb5.3++-dev libminiupnpc-dev libzmq3-dev libprotobuf-dev protobuf-compiler libqrencode-dev"
+        NO_DEPENDS=1
+        RUN_TESTS=false
+        GOAL="install"
+        BITCOIN_CONFIG="--enable-zmq --with-incompatible-bdb --enable-glibc-back-compat --enable-reduce-exports --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
 # x86_64 Linux, No wallet
-#    - stage: test
-#      env: >-
-#        HOST=x86_64-unknown-linux-gnu
-#        PACKAGES="python3"
-#        DEP_OPTS="NO_WALLET=1"
-#        RUN_TESTS=false
-#        GOAL="install"
-#       BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
+    - stage: test
+      env: >-
+        HOST=x86_64-unknown-linux-gnu
+        PACKAGES="python3"
+        DEP_OPTS="NO_WALLET=1"
+        RUN_TESTS=false
+        GOAL="install"
+       BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
 # Cross-Mac
-#    - stage: test
-#      env: >-
-#        HOST=x86_64-apple-darwin14
-#        PACKAGES="cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools python-dev python3-setuptools-git"
-#        OSX_SDK=10.11
-#        GOAL="all deploy"
-#        BITCOIN_CONFIG="--enable-gui --enable-reduce-exports --enable-werror"
+    - stage: test
+      env: >-
+        HOST=x86_64-apple-darwin14
+        PACKAGES="cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools python-dev python3-setuptools-git"
+        OSX_SDK=10.11
+        GOAL="all deploy"
+        BITCOIN_CONFIG="--enable-gui --enable-reduce-exports --enable-werror"
     - stage: lint
       env:
       cache: false
