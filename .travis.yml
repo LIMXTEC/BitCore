@@ -64,22 +64,6 @@ script:
     - if [ "$RUN_BENCH" = "true" ]; then BEGIN_FOLD bench; DOCKER_EXEC LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib $OUTDIR/bin/bench_bitcoin -scaling=0.001 ; END_FOLD; fi
     - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then extended="--extended --exclude feature_pruning,feature_dbcrash"; fi
     - if [ "$RUN_TESTS" = "true" ]; then BEGIN_FOLD functional-tests; DOCKER_EXEC test/functional/test_runner.py --combinedlogslen=4000 --coverage --quiet --failfast ${extended}; END_FOLD; fi
-# ARM    
-    - if [ "$NAME" = "arm-linux-gnueabihf" ]; then cd $OUTDIR; tar -czf bitcore-$TRAVIS_TAG-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$TRAVIS_TAG-$NAME.tar.gz > bitcore-$TRAVIS_TAG-$NAME.tar.gz.sha256.txt; fi
-# Win32
-    - if [ "$NAME" = "win32" ]; then mkdir -p $OUTDIR; zip -r bitcore-$NAME-$TRAVIS_TAG-$NAME.zip ./src/*.exe; cp bitcore-$NAME-$TRAVIS_TAG-$NAME.zip $OUTDIR; sha256sum bitcore-$TRAVIS_TAG-$NAME.zip > bitcore-$TRAVIS_TAG-$NAME.zip.sha256.txt; fi
-# Win64
-    - if [ "$NAME" = "win64" ]; then mkdir -p $OUTDIR; zip -r bitcore-$NAME-$TRAVIS_TAG-$NAME.zip ./src/*.exe; cp bitcore-$NAME-$TRAVIS_TAG-$NAME.zip $OUTDIR; sha256sum bitcore-$TRAVIS_TAG-$NAME.zip > bitcore-$TRAVIS_TAG-$NAME.zip.sha256.txt; fi
-# 32-bit + dash   
-    - if [ "$NAME" = "i686-pc-linux-gnu" ]; then cd $OUTDIR; tar -czf bitcore-$TRAVIS_TAG-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$TRAVIS_TAG-$NAME.tar.gz > bitcore-$TRAVIS_TAG-$NAME.tar.gz.sha256.txt; fi
-# x86_64 Linux (uses qt5 dev package instead of depends Qt to speed up build and avoid timeout)
-    - if [ "$NAME" = "x86_64-linux-gnu_qt5-dev" ]; then cd $OUTDIR; tar -czf bitcore-$TRAVIS_TAG-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$TRAVIS_TAG-$NAME.tar.gz > bitcore-$TRAVIS_TAG-$NAME.tar.gz.sha256.txt; fi
-# Qt5 & system libs
-    - if [ "$NAME" = "x86_64-linux-gnu_qt5_with-libs" ]; then cd $OUTDIR; tar -czf bitcore-$TRAVIS_TAG-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$TRAVIS_TAG-$NAME.tar.gz > bitcore-$TRAVIS_TAG-$NAME.tar.gz.sha256.txt; fi
-# x86_64 Linux, No wallet
-    - if [ "$NAME" = "x86_64-linux-gnu_no-wallet" ]; then cd $OUTDIR; tar -czf bitcore-$TRAVIS_TAG-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$TRAVIS_TAG-$NAME.tar.gz > bitcore-$TRAVIS_TAG-$NAME.tar.gz.sha256.txt; fi
-# Cross-Mac
-    - if [ "$NAME" = "osx64" ]; then mkdir -p $OUTDIR; cp BitCore-BTX.dmg $OUTDIR/bitcore-$TRAVIS_TAG-$NAME.dmg; sha256sum bitcore-$TRAVIS_TAG-$NAME.dmg > bitcore-$TRAVIS_TAG-$NAME.dmg.sha256.txt; fi
 after_script:
     - echo $TRAVIS_COMMIT_RANGE
     - echo $TRAVIS_COMMIT_LOG
@@ -89,7 +73,6 @@ jobs:
     - stage: test
       env: >-
         HOST=arm-linux-gnueabihf
-        NAME=arm-linux-gnueabihf
         PACKAGES="g++-arm-linux-gnueabihf"
         DEP_OPTS="NO_QT=1"
         GOAL="install"
@@ -98,7 +81,6 @@ jobs:
     - stage: test
       env: >-
         HOST=i686-w64-mingw32
-        NAME=win32
         DPKG_ADD_ARCH="i386"
         DEP_OPTS="NO_QT=1"
         PACKAGES="python3 nsis g++-mingw-w64-i686 wine-binfmt wine32"
@@ -109,7 +91,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-w64-mingw32
-        NAME=win64
         DEP_OPTS="NO_QT=1"
         PACKAGES="python3 nsis g++-mingw-w64-x86-64 wine-binfmt wine64"
         RUN_TESTS=false
@@ -119,7 +100,6 @@ jobs:
     - stage: test
       env: >-
         HOST=i686-pc-linux-gnu
-        NAME=i686-pc-linux-gnu
         PACKAGES="g++-multilib python3-zmq"
         DEP_OPTS="NO_QT=1"
         RUN_TESTS=false
@@ -130,7 +110,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-unknown-linux-gnu
-        NAME=x86_64-linux-gnu_qt5-dev
         PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev"
         DEP_OPTS="NO_QT=1 NO_UPNP=1 DEBUG=1 ALLOW_HOST_PACKAGES=1"
         RUN_TESTS=false
@@ -141,7 +120,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-unknown-linux-gnu
-        NAME=x86_64-linux-gnu_qt5_with-libs
         PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools libssl1.0-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev libdb5.3++-dev libminiupnpc-dev libzmq3-dev libprotobuf-dev protobuf-compiler libqrencode-dev"
         NO_DEPENDS=1
         RUN_TESTS=false
@@ -151,7 +129,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-unknown-linux-gnu
-        NAME=x86_64-linux-gnu_no-wallet
         PACKAGES="python3"
         DEP_OPTS="NO_WALLET=1"
         RUN_TESTS=false
@@ -161,7 +138,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-apple-darwin14
-        NAME=osx64
         PACKAGES="cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools python-dev python3-setuptools-git"
         OSX_SDK=10.11
         GOAL="all deploy"
@@ -174,20 +150,18 @@ jobs:
       install:
         - travis_retry pip install flake8==3.5.0
       before_script:
+#        - git fetch --unshallow
         - git fetch --depth=10000
       script:
-deploy:
-  provider: releases
-  api_key:
-    secure: 4f:cb:e6:2b:7f:c6:a8:62:b3:e0:38:bd:00:c6:2e:08 #TODO
-  file_glob: true
-  file:
-    - $OUTDIR/*.tar.gz
-    - $OUTDIR/*.tar.gz.sha256.txt
-    - $OUTDIR/*.zip
-    - $OUTDIR/*.zip.sha256.txt
-    - $OUTDIR/*.dmg
-    - $OUTDIR/*.dmg.sha256.txt
-  skip_cleanup: true 
-  on:
-    tags: true
+#        - if [ "$TRAVIS_EVENT_TYPE" = "pull_request" ]; then test/lint/commit-script-check.sh $TRAVIS_COMMIT_RANGE; fi
+#        - test/lint/git-subtree-check.sh src/crypto/ctaes
+#        - test/lint/git-subtree-check.sh src/secp256k1
+#        - test/lint/git-subtree-check.sh src/univalue
+#        - test/lint/git-subtree-check.sh src/leveldb
+        - test/lint/check-doc.py
+        - test/lint/check-rpc-mappings.py .
+        - test/lint/lint-all.sh
+#       - if [ "$TRAVIS_REPO_SLUG" = "limxdev/core17base" -a "$TRAVIS_EVENT_TYPE" = "cron" ]; then
+#             while read LINE; do travis_retry gpg --keyserver hkp://subset.pool.sks-keyservers.net --recv-keys $LINE; done < contrib/verify-commits/trusted-keys &&
+#              travis_wait 50 contrib/verify-commits/verify-commits.py;
+#          fi
