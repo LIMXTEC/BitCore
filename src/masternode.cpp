@@ -124,7 +124,6 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
     nHeightRet = coin.nHeight;
 
     CMasternode cm;
-    
     //if(coin.out.nValue != 1000 * COIN) {
     if(!cm.CollateralValueCheck(coin.nHeight,coin.out.nValue)) {
     // FXTC END
