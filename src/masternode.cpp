@@ -124,6 +124,7 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
     nHeightRet = coin.nHeight;
 
     CMasternode cm;
+    
     //if(coin.out.nValue != 1000 * COIN) {
     if(!cm.CollateralValueCheck(coin.nHeight,coin.out.nValue)) {
     // FXTC END
@@ -137,12 +138,14 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
 // FXTC BEGIN
 bool CMasternode::CollateralValueCheck(int nHeight, CAmount TxValue)
 {
-    CAmount MNCollateral = CollateralValue(nHeight);
+    //CAmount MNCollateral = CollateralValue(nHeight); // not used BTX
 
     CAmount MinCollateral = Params().GetConsensus().nMasternodeCollateralMinimum * COIN;
-    CAmount MaxCollateral = Params().GetConsensus().nMasternodeCollateralMaximum * COIN;
-
-    return (TxValue >= MinCollateral && TxValue >= 0.999 * MNCollateral && TxValue <= 1.001 * MNCollateral && TxValue <= MaxCollateral);
+    //CAmount MaxCollateral = Params().GetConsensus().nMasternodeCollateralMaximum * COIN;
+    // BTX Begin
+    //return (TxValue >= MinCollateral && TxValue >= 0.999 * MNCollateral && TxValue <= 1.001 * MNCollateral && TxValue <= MaxCollateral);
+    return MinCollateral;
+    // BTX Begin
 }
 
 CAmount CMasternode::CollateralValue(int nHeight)

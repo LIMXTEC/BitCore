@@ -83,15 +83,15 @@ public:
 
         consensus.nMasternodeMinimumConfirmations = 15;
         consensus.nMasternodePaymentsStartBlock = 50;
-        consensus.nMasternodePaymentsIncreaseBlock = 50;
-        consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year
-        consensus.nMasternodeCollateralMinimum = 10000; // starting MN collateral
-        consensus.nMasternodeCollateralMaximum = 21000; // MN collateral at infinity
+        consensus.nMasternodePaymentsIncreaseBlock = 50; //- not used 03-2020 in this build
+        consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year - not used 03-2020 in this build
+        consensus.nMasternodeCollateralMinimum = 2100; // starting MN collateral
+        consensus.nMasternodeCollateralMaximum = 21000; // MN collateral at infinity - not used 03-2020 in this build
 
         consensus.nInstantSendKeepLock = 24;
         
         // We need a seperate Update for that!! Limxdev 2019
-        consensus.nBudgetPaymentsStartBlock = 99999999; // 1 common year
+        consensus.nBudgetPaymentsStartBlock = 99999999; // 1 common year // tested 03-2020
         consensus.nBudgetPaymentsCycleBlocks = 10958; // weekly
         consensus.nBudgetPaymentsWindowBlocks = 100;
         consensus.nBudgetProposalEstablishingTime = 86400; // 1 day
@@ -250,18 +250,18 @@ public:
         consensus.nMasternodeMinimumConfirmations = 15;
         consensus.nMasternodePaymentsStartBlock = 10; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
         consensus.nMasternodePaymentsIncreaseBlock = 10;
-        consensus.nMasternodePaymentsIncreasePeriod = 25;
+        consensus.nMasternodePaymentsIncreasePeriod = 25; //- not used 03-2020 in this build
         consensus.nMasternodeCollateralMinimum = 10; // starting MN collateral
-        consensus.nMasternodeCollateralMaximum = 1000; // MN collateral at infinity
+        consensus.nMasternodeCollateralMaximum = 1000; // MN collateral at infinity - not used 03-2020 in this build
 
         consensus.nInstantSendKeepLock = 6;
 
-        consensus.nBudgetPaymentsStartBlock = 4100;
+        consensus.nBudgetPaymentsStartBlock = 4200;
         consensus.nBudgetPaymentsCycleBlocks = 50;
         consensus.nBudgetPaymentsWindowBlocks = 10;
         consensus.nBudgetProposalEstablishingTime = 60*20;
 
-        consensus.nSuperblockStartBlock = 4200;
+        consensus.nSuperblockStartBlock = 92000;
         consensus.nSuperblockCycle = 24;
 
         consensus.nGovernanceMinQuorum = 1;
