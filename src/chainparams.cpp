@@ -256,12 +256,12 @@ public:
 
         consensus.nInstantSendKeepLock = 6;
 
-        consensus.nBudgetPaymentsStartBlock = 4200;
+        consensus.nBudgetPaymentsStartBlock = 92000; // zusammen mit BudgetPaymentsStartBlock SuperblockStartBlock
         consensus.nBudgetPaymentsCycleBlocks = 50;
         consensus.nBudgetPaymentsWindowBlocks = 10;
         consensus.nBudgetProposalEstablishingTime = 60*20;
 
-        consensus.nSuperblockStartBlock = 92000;
+        consensus.nSuperblockStartBlock = 92000;  // zusammen mit BudgetPaymentsStartBlock SuperblockStartBlock
         consensus.nSuperblockCycle = 24;
 
         consensus.nGovernanceMinQuorum = 1;
