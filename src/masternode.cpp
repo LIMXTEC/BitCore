@@ -157,7 +157,7 @@ CAmount CMasternode::CollateralValue(int nHeight)
 
     //CAmount MnCollateral = (MaxCollateral - (MaxCollateral - MinCollateral) * (100.00 * nMNPIPeriod / (1.00 * nHeight + 100.00 * nMNPIPeriod ))) * COIN;
 
-    return MnCollateral;
+    return MinCollateral;
 }
 //
 
