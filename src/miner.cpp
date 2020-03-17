@@ -235,7 +235,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
             coinbaseTx.vout[0].nValue -= nFounderReward;
             coinbaseTx.vout.push_back(CTxOut(nFounderReward, CScript(FOUNDER_SCRIPT.begin(), FOUNDER_SCRIPT.end())));
         } else {
-            LogPrintf("CreateNewBlock(): invalid founder reward destination\n");
+            LogPrintf("CreateNewBlock(): invalid extra reward destination\n");
         }
     }
     //
@@ -245,7 +245,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     pblocktemplate->vTxFees[0] = -nFees;
 
     LogPrintf("CreateNewBlock(): block weight: %u txs: %u fees: %ld sigops %d\n", GetBlockWeight(*pblock), nBlockTx, nFees, nBlockSigOpsCost);
-    LogPrintf("CreateNewBlock(): block height: %ld pow reward: %ld pos reward: %ld founder reward: %ld masternode reward: %ld\n", nHeight, nBlockReward, 0, nFounderReward, GetMasternodePayment(nHeight, nFees + nBlockReward));
+    LogPrintf("CreateNewBlock(): block height: %ld pow reward: %ld pos reward: %ld extra reward: %ld masternode reward: %ld\n", nHeight, nBlockReward, 0, nFounderReward, GetMasternodePayment(nHeight, nFees + nBlockReward));
 
     // Fill in header
     pblock->hashPrevBlock  = pindexPrev->GetBlockHash();

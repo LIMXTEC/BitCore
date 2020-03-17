@@ -104,7 +104,7 @@ public:
         consensus.nGovernanceFilterElements = 20000;
 
         // FXTC TODO: BIP16Exception is valid for BTC blockchain only
-        consensus.BIP16Exception = uint256();
+        consensus.BIP16Exception = uint256("0x88");
         consensus.BIP34Height = 2; // BTX
         consensus.BIP34Hash = uint256S("604148281e5c4b7f2487e5d03cd60d8e6f69411d613f6448034508cea52e9574"); // BTX
         consensus.BIP65Height = 2; // BTX
