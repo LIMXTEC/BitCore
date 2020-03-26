@@ -23,18 +23,54 @@ bool CMasternodeConfig::read(std::string& strErr) {
     int linenumber = 1;
     boost::filesystem::path pathMasternodeConfigFile = GetConfigFile(gArgs.GetArg(MASTERNODE_CONF_FILENAME_ARG, MASTERNODE_CONF_FILENAME));
     boost::filesystem::ifstream streamConfig(pathMasternodeConfigFile);
+    //Bitcore Begin
+    //We add a bitcore.conf by default
+    boost::filesystem::path pathConfigFile = GetConfigFile(gArgs.GetArg(MASTERNODE_CONF_FILENAME_ARG, BITCOIN_CONF_FILENAME));
+    boost::filesystem::ifstream streamConfig2(pathConfigFile);
 
+    if (!streamConfig2.good()) {
+        FILE* configFile = fopen(pathConfigFile.string().c_str(), "a");
+        if (configFile != NULL) {
+                        std::string strHeader = "# Bitcore config file v 1.0\n"
+                        "# Network Nodes\n"
+                        "addnode=seed.bitcore.biz\n"
+                        "addnode=37.120.190.76\n"
+                        "addnode=37.120.186.85\n"
+                        "addnode=188.68.39.1\n"
+                        "addnode=85.235.64.57\n"
+                        "# Masternode preparation (optional) - Note - You have to remove #\n"
+                        "#masternodeaddr=1.2.3.4:8555\n"
+                        "#externalip=1.2.3.4:8555\n"
+                        "#masternode=1\n"
+                        "#masternodeprivkey=yourkey\n"
+                        "# Server preparation (optional) - Note - You have to remove #\n"
+                        "#rpcuser=BitCorean\n"
+                        "#rpcpassword=mystrongpassword\n"
+                        "#rpcport=8556\n"
+                        "# Miscellaneous #\n"
+                        "daemon=1\n"
+                        "listen=1\n"
+                        "logtimestamps=1\n"
+                        "maxconnections=64\n";
+            fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
+            fclose(configFile);
+            //Bitcore End
+        }
+                return true; // Nothing to read, so just return
+    }
     if (!streamConfig.good()) {
         FILE* configFile = fopen(pathMasternodeConfigFile.string().c_str(), "a");
         if (configFile != NULL) {
-            std::string strHeader = "# Masternode config file\n"
+            std::string strHeader2 = "# Masternode config file\n"
                           "# Format: alias IP:port masternodeprivkey collateral_output_txid collateral_output_index\n"
-                          "# Example: mn1 127.0.0.2:9468 7y9mBodVbq5nytRyZNg169ABTeKffDNqekCPiXKWGP2ZYDRHYbk ddaa0ebeed10aef980adbf9579718aed85b533eb5816adde661221f656382dd6 0\n";
-            fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
+                          "# Example: mn1 127.0.0.2:9468 7y9mBodVbq5nytRyZNg169ABTeKffDNqekCPiXKWGP2ZYDRHYbk ddaa0ebeed10aef980adbf9579718aed85b533eb5816adde661221f656382dd60\n";
+            fwrite(strHeader2.c_str(), std::strlen(strHeader2.c_str()), 1, configFile);
             fclose(configFile);
         }
-        return true; // Nothing to read, so just return
+                return true; // Nothing to read, so just return
     }
+
+
 
     for(std::string line; std::getline(streamConfig, line); linenumber++)
     {
