@@ -1,7 +1,7 @@
 Masternode config
 =======================
 
-BitCore Core allows controlling multiple remote masternodes from a single wallet. The wallet needs to have a valid collateral output of 2000 coins for each masternode and uses a configuration file named `masternode.conf` which can be found in the following data directory (depending on your operating system):
+BitCore Core allows controlling multiple remote masternodes from a single wallet. The wallet needs to have a valid collateral output of 2100 coins for each masternode and uses a configuration file named `masternode.conf` which can be found in the following data directory (depending on your operating system):
  * Windows: %APPDATA%\Roaming\BitCore\
  * Mac OS: ~/Library/Application Support/BitCore/
  * Unix/Linux: ~/.bitcore/
@@ -10,8 +10,8 @@ BitCore Core allows controlling multiple remote masternodes from a single wallet
 
 Example:
 ```
-mn1 127.0.0.2:9468 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 7603c20a05258c208b58b0a0d77603b9fc93d47cfa403035f87f3ce0af814566 0
-mn2 127.0.0.4:9468 92Da1aYg6sbenP6uwskJgEY2XWB5LwJ7bXRqc3UPeShtHWJDjDv 5d898e78244f3206e0105f421cdb071d95d111a51cd88eb5511fc0dbf4bfd95f 1
+mn1 127.0.0.2:8555 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 7603c20a05258c208b58b0a0d77603b9fc93d47cfa403035f87f3ce0af814566 0
+mn2 127.0.0.4:8555 92Da1aYg6sbenP6uwskJgEY2XWB5LwJ7bXRqc3UPeShtHWJDjDv 5d898e78244f3206e0105f421cdb071d95d111a51cd88eb5511fc0dbf4bfd95f 1
 ```
 
 In the example above:

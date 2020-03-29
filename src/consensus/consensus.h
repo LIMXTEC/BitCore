@@ -17,6 +17,7 @@ static const unsigned int MAX_BLOCK_WEIGHT = 20000000; // BTX: 4000000
 static const int64_t MAX_BLOCK_SIGOPS_COST = 500000; // BTX: 80000
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
 static const int COINBASE_MATURITY = 100;
+static const int COINBASE_MATURITY_2 = 576;
 
 static const int WITNESS_SCALE_FACTOR = 4;
 
