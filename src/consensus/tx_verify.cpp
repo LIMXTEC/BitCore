@@ -8,6 +8,9 @@
 #include <primitives/transaction.h>
 #include <script/interpreter.h>
 #include <consensus/validation.h>
+// BTX BEGIN
+#include <spork.h>
+// BTX END
 
 // TODO remove the following dependencies
 #include <chain.h>
@@ -220,12 +223,14 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
         assert(!coin.IsSpent());
 
         // If prev is coinbase, check that it's matured
-        if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY) {
+        // if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY) {
+        // BTX BEGIN
+        if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_BTX_15_COINBASE_MATURITY_STAGE_2)? COINBASE_MATURITY : COINBASE_MATURITY_2 )) {
             return state.Invalid(false,
                 REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
                 strprintf("tried to spend coinbase at depth %d", nSpendHeight - coin.nHeight));
         }
-
+        // BTX END
         // Check for negative or overflow input values
         nValueIn += coin.out.nValue;
         if (!MoneyRange(coin.out.nValue) || !MoneyRange(nValueIn)) {
