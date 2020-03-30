@@ -91,6 +91,9 @@ EXPECTED_CIRCULAR_DEPENDENCIES=(
     "pow -> spork -> validation -> txdb -> pow"
     "activemasternode -> masternode -> masternode-payments -> net_processing -> instantx -> activemasternode"
     "activemasternode -> masternode -> masternode-payments -> net_processing -> privatesend-server -> activemasternode"
+    # Bitcore
+    "consensus/tx_verify -> spork -> validation -> consensus/tx_verify"
+    "net -> privatesend -> txmempool -> spork -> net"
 )
 
 EXIT_CODE=0
