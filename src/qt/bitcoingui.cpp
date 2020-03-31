@@ -1422,7 +1422,7 @@ void BitcoinGUI::setEncryptionStatus(int status)
         changePassphraseAction->setEnabled(false);
         // Dash
         // FXTC TODO: menu items
-        unlockWalletAction->setEnabled(true);
+        //unlockWalletAction->setEnabled(true);
         //-//lockWalletAction->setVisible(false);
         //
         encryptWalletAction->setEnabled(true);
