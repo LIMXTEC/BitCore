@@ -100,6 +100,8 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
 
 WalletView::~WalletView()
 {
+        if(unlockContext)
+        delete (WalletModel::UnlockContext*)(unlockContext);
 }
 
 void WalletView::setBitcoinGUI(BitcoinGUI *gui)
@@ -139,6 +141,15 @@ void WalletView::setClientModel(ClientModel *_clientModel)
         masternodeListPage->setClientModel(clientModel);
     }
     //
+}
+
+void WalletView::requestUnlockWallet()
+{
+    if(walletModel)
+    {
+        unlockContext = (void*)(new WalletModel::UnlockContext(walletModel->requestUnlock()));
+    }
+    unlockContext = 0;
 }
 
 void WalletView::setWalletModel(WalletModel *_walletModel)

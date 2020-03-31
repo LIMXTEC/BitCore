@@ -204,6 +204,15 @@ void WalletFrame::unlockWallet()
         walletView->unlockWallet();
 }
 
+//Bitcore BEGIN
+void WalletFrame::unlockWalletAndKeepUnlocked()
+{
+    WalletView *walletView = currentWalletView();
+    if (walletView)
+        walletView->requestUnlockWallet();
+}
+//Bitcore END
+
 void WalletFrame::usedSendingAddresses()
 {
     WalletView *walletView = currentWalletView();

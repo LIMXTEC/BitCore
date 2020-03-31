@@ -28,11 +28,13 @@ public:
 };
 
 /**
- * Default setting for nMaxDatacarrierBytes. 80 bytes of data, +1 for OP_RETURN,
+ * Default setting for nMaxDatacarrierBytes. 220 bytes of data, +1 for OP_RETURN,
  * +2 for the pushdata opcodes.
  */
+ 
+ //Bitcore BEGINN
 static const unsigned int MAX_OP_RETURN_RELAY = 223;
-
+ //Bitcore END
 /**
  * A data carrying output is an unspendable output containing data. The script
  * type is designated as TX_NULL_DATA.
