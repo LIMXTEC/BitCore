@@ -47,7 +47,7 @@ QString BitcoinUnits::longName(int unit)
     case BTC: return QString("BTX");
     case mBTC: return QString("mBTX");
     case uBTC: return QString::fromUtf8("µBTX (bits)");
-    case SAT: return QString("Satoshi (sat)");
+    case SAT: return QString("Xatoshi (sat)");
     default: return QString("???");
     }
 }
@@ -69,7 +69,7 @@ QString BitcoinUnits::description(int unit)
     case BTC: return QString("BTX");
     case mBTC: return QString("mBTX (1 / 1" THIN_SP_UTF8 "000)");
     case uBTC: return QString::fromUtf8("µBTX (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
-    case SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case SAT: return QString("Xatoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
