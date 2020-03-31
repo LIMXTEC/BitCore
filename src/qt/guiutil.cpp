@@ -456,6 +456,26 @@ void openMNConfigfile()
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
 //
+// Dash
+
+//BTX BEGIN
+void openBTXConfigfile()
+{
+    boost::filesystem::path pathConfig2 = GetConfigFile(BITCOIN_CONF_FILENAME);
+
+    /* Create the file */
+    boost::filesystem::ofstream configFile(pathConfig2, std::ios_base::app);
+
+    if (!configFile.good())
+        return;
+
+    configFile.close();
+
+    /* Open masternode.conf with the associated application */
+    if (fs::exists(pathConfig2))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig2)));
+}
+////BTX END
 
 ToolTipToRichTextFilter::ToolTipToRichTextFilter(int _size_threshold, QObject *parent) :
     QObject(parent),

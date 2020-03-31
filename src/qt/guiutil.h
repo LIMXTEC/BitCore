@@ -154,6 +154,8 @@ namespace GUIUtil
     // Dash
     // Open masternode.conf
     void openMNConfigfile();
+    // Open bitcore.conf
+    void openBTXConfigfile();
     //
 
     /** Qt event filter that intercepts ToolTipChange events, and replaces the tooltip with a rich text
