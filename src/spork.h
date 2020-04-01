@@ -28,7 +28,7 @@ static const int SPORK_START                                            = 10001;
 static const int SPORK_END                                              = 10013;
 // FXTC BEGIN
 static const int SPORK_BTX_START                                    = 94680010;
-static const int SPORK_BTX_END                                      = 94680031;
+static const int SPORK_BTX_END                                      = 94680033;
 // FXTC END
 
 static const int SPORK_2_INSTANTSEND_ENABLED                            = 10001;
@@ -55,8 +55,11 @@ static const int SPORK_BTX_02_IGNORE_EXTRA_REWARD_VALUE           = 94680023;
 static const int SPORK_BTX_16_UNKNOW        = 94680024;
 static const int SPORK_BTX_17_UNKNOW        = 94680025;
 
-static const int SPORK_BTX_03_BLOCK_REWARD_PERCENT_START     = 94680031;
-static const int SPORK_BTX_03_FUNDRAISING_START     = 94680032;
+static const int SPORK_BTX_18_MIN_PEER_PROTO_VERSION     = 94680031;
+static const int SPORK_BTX_19_SHOW_UPDATE_MESSAGE     = 94680032;
+static const int SPORK_BTX_20_UNKNOW        = 94680026;
+static const int SPORK_BTX_21_UNKNOW        = 94680027;
+static const int SPORK_BTX_22_UNKNOW        = 94680028;
 // FXTC END
 
 static const int64_t SPORK_2_INSTANTSEND_ENABLED_DEFAULT                = 0;            // ON
@@ -83,9 +86,13 @@ static const int64_t SPORK_BTX_02_IGNORE_EXTRA_REWARD_VALUE_DEFAULT      = 40709
 static const int64_t SPORK_BTX_16_UNKNOW_DEFAULT   = 4070908800ULL;// OFF
 static const int64_t SPORK_BTX_17_UNKNOW_DEFAULT   = 4070908800ULL;// OFF
 
-static const int64_t SPORK_BTX_03_BLOCK_REWARD_PERCENT_START_DEFAULT  = 4070908800ULL;// OFF
-static const int64_t SPORK_BTX_03_FUNDRAISING_START_DEFAULT  = 4070908800ULL;// OFF
-// FXTC END
+static const int64_t SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT  = 70016;// OFF
+static const int64_t SPORK_BTX_19_SHOW_UPDATE_MESSAGE_DEFAULT  = 4070908800ULL;// OFF
+static const int64_t SPORK_BTX_20_UNKNOW_DEFAULT   = 4070908800ULL;// OFF
+static const int64_t SPORK_BTX_21_UNKNOW_DEFAULT   = 4070908800ULL;// OFF
+static const int64_t SPORK_BTX_22_UNKNOW_DEFAULT   = 4070908800ULL;// OFF
+
+
 
 extern std::map<uint256, CSporkMessage> mapSporks;
 extern CSporkManager sporkManager;
