@@ -4,11 +4,9 @@ language: minimal
 cache:
   ccache: true
   directories:
-  - "$HOME/.ccache"
-  - "$TRAVIS_BUILD_DIR/depends/built"
-  - "$TRAVIS_BUILD_DIR/depends/sdk-sources"
-  - "$TRAVIS_BUILD_DIR/ci/scratch/.ccache"
-  - "$TRAVIS_BUILD_DIR/releases/$HOST"
+  - depends/built
+  - depends/sdk-sources
+  - $HOME/.ccache
 git:
   depth: false  # full clone for git subtree check, this works around issue #12388
 stages:
@@ -26,7 +24,7 @@ env:
     - CCACHE_TEMPDIR=/tmp/.ccache-temp
     - CCACHE_COMPRESS=1
     - CCACHE_DIR=$HOME/.ccache
-    - BASE_OUTDIR=$TRAVIS_BUILD_DIR/releases/$HOST
+    - BASE_OUTDIR=$TRAVIS_BUILD_DIR/out
     - SDK_URL=https://bitcoincore.org/depends-sources/sdks
     - WINEDEBUG=fixme-all
     - DOCKER_PACKAGES="build-essential libtool autotools-dev automake pkg-config bsdmainutils curl git ca-certificates ccache"
@@ -40,7 +38,7 @@ install:
     - if [[ $HOST = *-mingw32 ]]; then DOCKER_ADMIN="--cap-add SYS_ADMIN"; fi
     - DOCKER_ID=$(docker run $DOCKER_ADMIN -idt --mount type=bind,src=$TRAVIS_BUILD_DIR,dst=$TRAVIS_BUILD_DIR --mount type=bind,src=$CCACHE_DIR,dst=$CCACHE_DIR -w $TRAVIS_BUILD_DIR --env-file /tmp/env $DOCKER_NAME_TAG)
     - DOCKER_EXEC () { docker exec $DOCKER_ID bash -c "cd $PWD && $*"; }
-    - if [ -n "$DPKG_ADD_ARCH" ]; then DOCKER_EXEC dpkg --add-architecture "$DPKG_ADD_ARCH"; fi
+    - if [ -n "$DPKG_ADD_ARCH" ]; then DOCKER_EXEC dpkg --add-architecture "$DPKG_ADD_ARCH" ; fi
     - travis_retry DOCKER_EXEC apt-get update
     - travis_retry DOCKER_EXEC apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES $DOCKER_PACKAGES
 before_script:
@@ -52,7 +50,7 @@ before_script:
     - if [ -z "$NO_DEPENDS" ]; then DOCKER_EXEC CONFIG_SHELL= make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS; fi
 script:
     - export TRAVIS_COMMIT_LOG=`git log --format=fuller -1`
-    - OUTDIR=$BASE_OUTDIR
+    - OUTDIR=$BASE_OUTDIR/$TRAVIS_PULL_REQUEST/$TRAVIS_JOB_NUMBER-$HOST
     - BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=$TRAVIS_BUILD_DIR/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
     - if [ -z "$NO_DEPENDS" ]; then DOCKER_EXEC ccache --max-size=$CCACHE_SIZE; fi
     - BEGIN_FOLD autogen; test -n "$CONFIG_SHELL" && DOCKER_EXEC "$CONFIG_SHELL" -c "./autogen.sh" || DOCKER_EXEC ./autogen.sh; END_FOLD
@@ -66,15 +64,6 @@ script:
     - if [ "$RUN_BENCH" = "true" ]; then BEGIN_FOLD bench; DOCKER_EXEC LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib $OUTDIR/bin/bench_bitcoin -scaling=0.001 ; END_FOLD; fi
     - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then extended="--extended --exclude feature_pruning,feature_dbcrash"; fi
     - if [ "$RUN_TESTS" = "true" ]; then BEGIN_FOLD functional-tests; DOCKER_EXEC test/functional/test_runner.py --combinedlogslen=4000 --coverage --quiet --failfast ${extended}; END_FOLD; fi
-    - if [ "$NAME" = "arm-linux-gnueabihf" ]; then cd $OUTDIR; pwd; tar -czf bitcore-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$NAME.tar.gz > bitcore-$NAME.tar.gz.sha256.txt; ls $OUTDIR; fi
-    - if [ "$NAME" = "win32" ]; then cp ./src/*.exe $OUTDIR; cd $OUTDIR; pwd; zip -r bitcore-$NAME.zip ./*.exe; sha256sum bitcore-$NAME.zip > bitcore-$NAME.zip.sha256.txt; ls $OUTDIR; fi
-    - if [ "$NAME" = "win32-qt" ]; then ls; pwd; ls ./src; cp ./src/*.exe $OUTDIR; cd $OUTDIR; pwd; zip -r bitcore-$NAME.zip ./*.exe; sha256sum bitcore-$NAME.zip > bitcore-$NAME.zip.sha256.txt; ls $OUTDIR; fi
-    - if [ "$NAME" = "win64" ]; then cp ./src/*.exe $OUTDIR; cd $OUTDIR; pwd; zip -r bitcore-$NAME.zip ./*.exe; sha256sum bitcore-$NAME.zip > bitcore-$NAME.zip.sha256.txt; ls $OUTDIR; fi
-    - if [ "$NAME" = "i686-pc-linux-gnu" ]; then cd $OUTDIR; pwd; tar -czf bitcore-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$NAME.tar.gz > bitcore-$NAME.tar.gz.sha256.txt; ls $OUTDIR; fi
-    - if [ "$NAME" = "x86_64-linux-gnu_qt5-dev" ]; then cd $OUTDIR; pwd; tar -czf bitcore-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$NAME.tar.gz > bitcore-$NAME.tar.gz.sha256.txt; ls $OUTDIR; fi
-    - if [ "$NAME" = "x86_64-linux-gnu_qt5_with-libs" ]; then cd $OUTDIR; pwd; tar -czf bitcore-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$NAME.tar.gz > bitcore-$NAME.tar.gz.sha256.txt; ls $OUTDIR; fi
-    - if [ "$NAME" = "x86_64-linux-gnu_no-wallet" ]; then cd $OUTDIR; pwd; tar -czf bitcore-$NAME.tar.gz -C $OUTDIR bin lib; sha256sum bitcore-$NAME.tar.gz > bitcore-$NAME.tar.gz.sha256.txt; ls $OUTDIR; fi
-    - if [ "$NAME" = "osx64" ]; then cp BitCore-BTX.dmg $OUTDIR/bitcore-$NAME.dmg; cd $OUTDIR; pwd; sha256sum bitcore-$NAME.dmg > bitcore-$NAME.dmg.sha256.txt; ls $OUTDIR; fi
 after_script:
     - echo $TRAVIS_COMMIT_RANGE
     - echo $TRAVIS_COMMIT_LOG
@@ -84,7 +73,6 @@ jobs:
     - stage: test
       env: >-
         HOST=arm-linux-gnueabihf
-        NAME="arm-linux-gnueabihf"
         PACKAGES="g++-arm-linux-gnueabihf"
         DEP_OPTS="NO_QT=1"
         GOAL="install"
@@ -93,7 +81,6 @@ jobs:
     - stage: test
       env: >-
         HOST=i686-w64-mingw32
-        NAME="win32"
         DPKG_ADD_ARCH="i386"
         DEP_OPTS="NO_QT=1"
         PACKAGES="python3 nsis g++-mingw-w64-i686 wine-binfmt wine32"
@@ -104,7 +91,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-w64-mingw32
-        NAME="win64"
         DEP_OPTS="NO_QT=1"
         PACKAGES="python3 nsis g++-mingw-w64-x86-64 wine-binfmt wine64"
         RUN_TESTS=false
@@ -114,7 +100,6 @@ jobs:
     - stage: test
       env: >-
         HOST=i686-pc-linux-gnu
-        NAME="i686-pc-linux-gnu"
         PACKAGES="g++-multilib python3-zmq"
         DEP_OPTS="NO_QT=1"
         RUN_TESTS=false
@@ -125,7 +110,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-unknown-linux-gnu
-        NAME="x86_64-linux-gnu_qt5-dev"
         PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev"
         DEP_OPTS="NO_QT=1 NO_UPNP=1 DEBUG=1 ALLOW_HOST_PACKAGES=1"
         RUN_TESTS=false
@@ -136,7 +120,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-unknown-linux-gnu
-        NAME="x86_64-linux-gnu_qt5_with-libs"
         PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools libssl1.0-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev libdb5.3++-dev libminiupnpc-dev libzmq3-dev libprotobuf-dev protobuf-compiler libqrencode-dev"
         NO_DEPENDS=1
         RUN_TESTS=false
@@ -146,7 +129,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-unknown-linux-gnu
-        NAME="x86_64-linux-gnu_no-wallet"
         PACKAGES="python3"
         DEP_OPTS="NO_WALLET=1"
         RUN_TESTS=false
@@ -156,7 +138,6 @@ jobs:
     - stage: test
       env: >-
         HOST=x86_64-apple-darwin14
-        NAME="osx64"
         PACKAGES="cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools python-dev python3-setuptools-git"
         OSX_SDK=10.11
         GOAL="all deploy"
@@ -172,37 +153,11 @@ jobs:
 #        - git fetch --unshallow
         - git fetch --depth=10000
       script:
-        - test/lint/check-doc.py
-        - test/lint/check-rpc-mappings.py .
-        - test/lint/lint-all.sh
-deploy:
-  provider: releases
-  api_key:
-    secure: "E+nmagHZ4CJ+PujEAtFoKtnUPFU0I0znQX+mKNRuTbqYwO0zKn+VfUA3EbIKieIOs/lwcLFCubs+TxTWkJ3STSGpZyiXOF32oAnp831f5enCgiaXGk+pM58rYn/u9xrIyvUP+6hQTAeqLscZJe5AuXdNQVacBpFnf/qQLkabh7NQJXo/fruZI7vgGhXHyurHMELvSOkfCxGzVI6sJFCsPuuC5tC0fFcnehBov2Ly31GywLAfotJo9r6yiL4J4aBmn1HcCHqiDaUP1U16/z3KmibJobtAPeXdppY7igDjpWtt2nky55sEsBQjdhaEjo4nFUpLvxHuxWM3kvRxm/VNGtFWQYPwOYZnWMPOqNHHw3agg94ErwCkExyewOjD5RyrkWL1ohi50rHzaHbaeCfrm2zAQap4ZvHZv7LkU12JvNcLYCUHCT1vXVD4XSJr1Zs1ekvCqPp5ZYSpEsaN/bZ6dvW3LXf9qqNwPHclsKETlekMOKjz8T2h9SMJTSg4zEv42NE3PDGgCMbPvNvEd5LPiqorAnszFIyVg9+1a7mKeoDgTqyESgurMVlmb40C3x9uoBuN84C98v9NqwkX6QiQaDLCimLUayISa/YOnUD49DpWVBZ3X6obJqJxmtb+uGQ6U+Gt6lIEc1gec3H+S2myWIvM83ekbIdAtcNUeAPtQJk="
-  file_glob: true
-  file:
-    - "$OUTDIR/*.tar.gz"
-    - "$OUTDIR/*.tar.gz.sha256.txt"
-    - "$OUTDIR/*.zip"
-    - "$OUTDIR/*.zip.sha256.txt"
-    - "$OUTDIR/*.dmg"
-    - "$OUTDIR/*.dmg.sha256.txt"
-  skip_cleanup: true
-  on:
-    tags: true
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-
+#        - if [ "$TRAVIS_EVENT_TYPE" = "pull_request" ]; then test/lint/commit-script-check.sh $TRAVIS_COMMIT_RANGE; fi
+#        - test/lint/git-subtree-check.sh src/crypto/ctaes
+#        - test/lint/git-subtree-check.sh src/secp256k1
+#        - test/lint/git-subtree-check.sh src/univalue
+#        - test/lint/git-subtree-check.sh src/leveldb
         - test/lint/check-doc.py
         - test/lint/check-rpc-mappings.py .
         - test/lint/lint-all.sh
