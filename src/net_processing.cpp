@@ -1932,7 +1932,35 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             pfrom->fDisconnect = true;
             return false;
         }
-
+        
+        // BTX BEGIN
+        // It must not be possible that the client separates from its own PROTO_VERSION!
+        if ((nVersion < sporkManager.GetSporkValue(SPORK_BTX_18_MIN_PEER_PROTO_VERSION))&& (sporkManager.GetSporkValue(SPORK_BTX_18_MIN_PEER_PROTO_VERSION) < PROTOCOL_VERSION))
+        {
+            // disconnect from peers older than this proto version
+            LogPrint(BCLog::NET, "SPORK_BTX_18_MIN_PEER_PROTO_VERSION peer=%d using obsolete version %i; disconnecting\n", pfrom->GetId(), nVersion);
+            if (enable_bip61) {
+                connman->PushMessage(pfrom, CNetMsgMaker(INIT_PROTO_VERSION).Make(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE,
+                                   strprintf("SPORK_BTX_18_MIN_PEER_PROTO_VERSION Version must be %d or greater", MIN_PEER_PROTO_VERSION)));
+                // FXTC BEGIN
+                // obsolete peers are very annoying
+                connman->Ban(pfrom->addr, BanReasonNodeMisbehaving);
+                // FXTC END
+            }
+            pfrom->fDisconnect = true;
+            return false;
+        }
+        /*
+        else
+        {
+            LogPrint(BCLog::NET,"SPORK_BTX_18_MIN_PEER_PROTO_VERSION Disable!\n");
+        }
+        LogPrint(BCLog::NET, "SPORK_BTX_18_MIN_PEER_PROTO_VERSION = %d\n", sporkManager.GetSporkValue(SPORK_BTX_18_MIN_PEER_PROTO_VERSION));
+        
+        if (sporkManager.GetSporkValue(SPORK_BTX_18_MIN_PEER_PROTO_VERSION) < PROTOCOL_VERSION)
+        LogPrint(BCLog::NET, "SPORK_BTX_18_MIN_PEER_PROTO_VERSION < PROTOCOL_VERSION n");
+        */
+        // BTX END
         if (nVersion == 10300)
             nVersion = 300;
         if (!vRecv.empty())
