@@ -1958,7 +1958,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         LogPrint(BCLog::NET, "SPORK_BTX_18_MIN_PEER_PROTO_VERSION = %d\n", sporkManager.GetSporkValue(SPORK_BTX_18_MIN_PEER_PROTO_VERSION));
         
         if (sporkManager.GetSporkValue(SPORK_BTX_18_MIN_PEER_PROTO_VERSION) < PROTOCOL_VERSION)
-        LogPrint(BCLog::NET, "SPORK_BTX_18_MIN_PEER_PROTO_VERSION < PROTOCOL_VERSION n");
+        LogPrint(BCLog::NET, "SPORK_BTX_18_MIN_PEER_PROTO_VERSION < PROTOCOL_VERSION \n");
         */
         // BTX END
         if (nVersion == 10300)
