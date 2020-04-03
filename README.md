@@ -2,6 +2,7 @@ elcome to Bitcore BTX
 =====================================
 
 ![GitHub Logo](https://i.imgur.com/jnpy4Me.jpg)
+
 [ Release-Notes ](https://www.reddit.com/r/bitcore_btx/comments/fsbzog/odarhom_release_notes_short_overview_first_draft/) - [ FAQ ](https://www.reddit.com/r/bitcore_btx/wiki/index/odarhom_faq) - [ Website ](https://www.bitcore.cc) - [ Bitcointalk ](https://bitcointalk.org/index.php?topic=1883902.0) 
 
 [![Build Status](https://travis-ci.org/LIMXTEC/BitCore.svg?branch=0.15)](https://travis-ci.org/LIMXTEC/BitCore)
