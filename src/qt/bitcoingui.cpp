@@ -581,7 +581,7 @@ void BitcoinGUI::createMenuBar()
         hyperlinks->addAction(openWebsite1);
         hyperlinks->addSeparator();
         hyperlinks->addAction(openWebsite2);
-        hyperlinks->addAction(openWebsite3);
+        //hyperlinks->addAction(openWebsite3);
         hyperlinks->addAction(openWebsite4);
         hyperlinks->addAction(openWebsite5);
         //hyperlinks->addAction(openWebsite6);
