@@ -31,13 +31,17 @@ bool CMasternodeConfig::read(std::string& strErr) {
     if (!streamConfig2.good()) {
         FILE* configFile = fopen(pathConfigFile.string().c_str(), "a");
         if (configFile != NULL) {
-                        std::string strHeader = "# Bitcore config file v 1.0\n"
+                        std::string strHeader = "# Bitcore config file v 1.0.1\n"
                         "# Network Nodes\n"
                         "addnode=seed.bitcore.biz\n"
                         "addnode=37.120.190.76\n"
                         "addnode=37.120.186.85\n"
                         "addnode=188.68.39.1\n"
                         "addnode=85.235.64.57\n"
+                        "addnode=46.38.243.55\n"
+                        "addnode=87.178.216.36\n"
+                        "addnode=93.192.188.220\n"
+                        "addnode=185.194.142.125\n"
                         "# Masternode preparation (optional) - Note - You have to remove #\n"
                         "#masternodeaddr=1.2.3.4:8555\n"
                         "#externalip=1.2.3.4:8555\n"
