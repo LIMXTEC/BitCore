@@ -31,7 +31,7 @@ bool CMasternodeConfig::read(std::string& strErr) {
     if (!streamConfig2.good()) {
         FILE* configFile = fopen(pathConfigFile.string().c_str(), "a");
         if (configFile != NULL) {
-                        std::string strHeader = "# Bitcore config file v 1.0.1\n"
+                        std::string strHeader = "# BitCore Config File v. 1.0.1\n"
                         "# Network Nodes\n"
                         "addnode=seed.bitcore.biz\n"
                         "addnode=37.120.190.76\n"
@@ -42,12 +42,12 @@ bool CMasternodeConfig::read(std::string& strErr) {
                         "addnode=87.178.216.36\n"
                         "addnode=93.192.188.220\n"
                         "addnode=185.194.142.125\n"
-                        "# Masternode preparation (optional) - Note - You have to remove #\n"
+                        "# Optional: Masternode preparation (Note: Remove the # to make the Options useable)#\n"
                         "#masternodeaddr=1.2.3.4:8555\n"
                         "#externalip=1.2.3.4:8555\n"
                         "#masternode=1\n"
                         "#masternodeprivkey=yourkey\n"
-                        "# Server preparation (optional) - Note - You have to remove #\n"
+                        "# Optional: Server preparation (Note: Remove the # to make the Options useable) #\n"
                         "#rpcuser=BitCorean\n"
                         "#rpcpassword=mystrongpassword\n"
                         "#rpcport=8556\n"
