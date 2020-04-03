@@ -1,27 +1,33 @@
-BitCore integration/staging tree
+elcome to Bitcore BTX 
 =====================================
 
-[![Build Status](https://travis-ci.org/LIMXTEC/BitCore.svg?branch=0.15)](https://travis-ci.org/LIMXTEC/BitCore)
+![GitHub Logo](https://i.imgur.com/jnpy4Me.jpg)
+[ Release-Notes ](https://www.reddit.com/r/bitcore_btx/comments/fsbzog/odarhom_release_notes_short_overview_first_draft/) - [ FAQ ](https://www.reddit.com/r/bitcore_btx/wiki/index/odarhom_faq) - [ Website ](https://www.bitcore.cc) - [ Bitcointalk ](https://bitcointalk.org/index.php?topic=1883902.0) 
 
-https://bitcore.cc
+[![Build Status](https://travis-ci.org/LIMXTEC/BitCore.svg?branch=0.15)](https://travis-ci.org/LIMXTEC/BitCore)
 
 What is BitCore?
 ----------------
 
-BitCore is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. BitCore uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. BitCore is also the name of open source
-software which enables the use of this currency.
+Established on 24th of April 2017, BitCore from the community for the community. BitCore has one of the lowest transaction fees on the market while possibly providing the best on-chain scaling solution in the  entire crypto-sphere. Take a look at our [comparison chart](https://bitcore.cc/wp-content/uploads/2019/11/BitCoreVsAgosto2019.jpg).
+
+Bitcore BTX preserves and implements Bitcoin features such as SegWit, which enables advanced scaling technologies like Lightning Network. Significant differences at launch time included:
+
+- Unique wallet addresses (prefixes of 2 and S and btx (BIP 173 bench32)
+- Command Fork System
+- Masternode System Dash Core
+- 220 Byte Datacarriersize (OP_RETURN)
+- Hashalgorythm Timetravel10
+- Bitcore Diffshield
+- Travis CI support
 
 For more information, as well as an immediately useable, binary version of
 the BitCore software, see [https://bitcore.cc](https://bitcore.cc).
 
-License
--------
+Claiming for Bitcoin holders
+--
+Claiming for the first snapshot (Bitcoin block #463604) ended 30th of October 2017. We made a new snapshot of the Bitcoin network on 2nd of November 2017 (Bitcoin block #492820). These ~5 million addresses are able to claim BitCore BTX for free, right now! Read how to [here](https://steemit.com/crypto-news/@xwerk/bitcore-btx-guide-the-2nd-snapshot-for-btc-hodlers-free-btx-or-how-it-works).
 
-BitCore is released under the terms of the MIT license. See [COPYING](COPYING) for more
-information or see https://opensource.org/licenses/MIT.
 
 
 
@@ -29,7 +35,7 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/LIMXTEC/bitcore/tags) are created
+completely stable. [Release](https://github.com/LIMXTEC/bitcore/release) are created
 regularly to indicate new official, stable release versions of BitCore.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
@@ -61,21 +67,11 @@ These tests can be run (if the [test dependencies](/test) are installed) with: `
 
 The Travis CI system makes sure that every pull request is built for Windows, Linux, and OS X, and that unit/sanity tests are run automatically.
 
-### Manual Quality Assurance (QA) Testing
+License
+-------
 
-Changes should be tested by somebody other than the developer who wrote the
-code. This is especially important for large or high-risk changes. It is useful
-to add a test plan to the pull request description if testing the changes is
-not straightforward.
-
-Translations
-------------
-
-We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcore/).
-Translations are converted to BitCore periodically.
-
-Translations are periodically pulled from Transifex and merged into the git repository. See the
-[translation process](doc/translation_process.md) for details on how this works.
+BitCore is released under the terms of the MIT license. See [COPYING](COPYING) for more
+information or see https://opensource.org/licenses/MIT.
 
 **Important**: We do not accept translation changes as GitHub pull requests because the next
 pull from Transifex would automatically overwrite them again.
