@@ -1,4 +1,4 @@
-elcome to Bitcore BTX 
+Welcome to Bitcore BTX 
 =====================================
 
 ![GitHub Logo](https://i.imgur.com/jnpy4Me.jpg)
