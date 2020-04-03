@@ -1,11 +1,11 @@
-Welcome to Bitcore BTX 
+Welcome to Bitcore BTX
 =====================================
 
 ![GitHub Logo](https://i.imgur.com/jnpy4Me.jpg)
 
-[ Release-Notes ](https://www.reddit.com/r/bitcore_btx/comments/fsbzog/odarhom_release_notes_short_overview_first_draft/) - [ FAQ ](https://www.reddit.com/r/bitcore_btx/wiki/index/odarhom_faq) - [ Website ](https://www.bitcore.cc) - [ Bitcointalk ](https://bitcointalk.org/index.php?topic=1883902.0) 
+[ Release-Notes ](https://www.reddit.com/r/bitcore_btx/comments/fsbzog/odarhom_release_notes_short_overview_first_draft/) - [ FAQ ](https://www.reddit.com/r/bitcore_btx/wiki/index/odarhom_faq) - [ Website ](https://www.bitcore.cc) - [ Bitcointalk ](https://bitcointalk.org/index.php?topic=1883902.0)
 
-[![Build Status](https://travis-ci.org/LIMXTEC/BitCore.svg?branch=0.15)](https://travis-ci.org/LIMXTEC/BitCore)
+[![Build Status](https://travis-ci.org/LIMXTEC/BitCore.svg?branch=0.9.8.x)](https://travis-ci.org/LIMXTEC/BitCore)
 
 What is BitCore?
 ----------------
@@ -26,7 +26,8 @@ For more information, as well as an immediately useable, binary version of
 the BitCore software, see [https://bitcore.cc](https://bitcore.cc).
 
 Claiming for Bitcoin holders
---
+---
+
 Claiming for the first snapshot (Bitcoin block #463604) ended 30th of October 2017. We made a new snapshot of the Bitcoin network on 2nd of November 2017 (Bitcoin block #492820). These ~5 million addresses are able to claim BitCore BTX for free, right now! Read how to [here](https://steemit.com/crypto-news/@xwerk/bitcore-btx-guide-the-2nd-snapshot-for-btc-hodlers-free-btx-or-how-it-works).
 
 
