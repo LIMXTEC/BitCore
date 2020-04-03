@@ -208,11 +208,11 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     // BitCore
     connect(openWebsite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
     connect(openWebsite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
-    connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
+    //connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
     connect(openWebsite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot4()));
     connect(openWebsite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot5()));
-    connect(openWebsite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot6()));
-    connect(openWebsite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot7()));
+    //connect(openWebsite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot6()));
+    //connect(openWebsite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot7()));
     connect(openWebsite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot8()));
     connect(openWebsite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot9()));
     connect(openWebsite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot10()));
@@ -224,7 +224,7 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     //connect(Exchangesite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot5()));
     //connect(Exchangesite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot6()));
     connect(Exchangesite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot7()));
-    connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot8()));
+    //connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot8()));
     //connect(Exchangesite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot9()));
     //connect(Exchangesite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot10()));
 
@@ -466,11 +466,11 @@ void BitcoinGUI::createActions()
     // BitCore
     openWebsite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Bitcore.cc"), this);
     openWebsite2 = new QAction(QIcon(":/icons/telegram"), tr("&Telegram"), this);
-    openWebsite3 = new QAction(QIcon(":/icons/twitter"), tr("&Twitter"), this);
+    //openWebsite3 = new QAction(QIcon(":/icons/twitter"), tr("&Twitter"), this);
     openWebsite4 = new QAction(QIcon(":/icons/bitcointalk"), tr("&Bitcointalk"), this);
     openWebsite5 = new QAction(QIcon(":/icons/reddit"), tr("&Reddit"), this);
-    openWebsite6 = new QAction(QIcon(":/icons/facebook"), tr("&Facebook"), this);
-    openWebsite7 = new QAction(QIcon(":/icons/coinomi"), tr("&Coinomi"), this);
+    //openWebsite6 = new QAction(QIcon(":/icons/facebook"), tr("&Facebook"), this);
+    //openWebsite7 = new QAction(QIcon(":/icons/coinomi"), tr("&Coinomi"), this);
     openWebsite8 = new QAction(QIcon(":/icons/github"), tr("&Github"), this);
     openWebsite9 = new QAction(QIcon(":/icons/insightapi"), tr("&Explorer 1"), this);
     openWebsite10 = new QAction(QIcon(":/icons/cryptoid"), tr("&Explorer 2"), this);
@@ -482,7 +482,7 @@ void BitcoinGUI::createActions()
     //Exchangesite5 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
     //Exchangesite6 = new QAction(QIcon(":/icons/info"), tr("&Bitexlive"), this);
     Exchangesite7 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
-    Exchangesite8 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
+    //Exchangesite8 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
     //Exchangesite9 = new QAction(QIcon(":/icons/info"), tr("&Mylocalcoin"), this);
     //Exchangesite10 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
     //Exchangesite10 = new QAction(QIcon(":/icons/info"), tr("&Novaexchange"), this);
@@ -584,9 +584,9 @@ void BitcoinGUI::createMenuBar()
         hyperlinks->addAction(openWebsite3);
         hyperlinks->addAction(openWebsite4);
         hyperlinks->addAction(openWebsite5);
-        hyperlinks->addAction(openWebsite6);
+        //hyperlinks->addAction(openWebsite6);
         hyperlinks->addSeparator();
-        hyperlinks->addAction(openWebsite7);
+        //hyperlinks->addAction(openWebsite7);
         hyperlinks->addAction(openWebsite8);
         hyperlinks->addAction(openWebsite9);
         hyperlinks->addAction(openWebsite10);
@@ -602,7 +602,7 @@ void BitcoinGUI::createMenuBar()
         //hyperlinks2->addAction(Exchangesite5);
         //hyperlinks2->addAction(Exchangesite6);
         hyperlinks2->addAction(Exchangesite7);
-        hyperlinks2->addAction(Exchangesite8);
+        //hyperlinks2->addAction(Exchangesite8);
         //hyperlinks2->addAction(Exchangesite9);
         //hyperlinks2->addAction(Exchangesite10);
     }

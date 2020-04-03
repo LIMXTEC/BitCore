@@ -140,11 +140,11 @@ private:
     // BitCore
     QAction* openWebsite1 = nullptr;
     QAction* openWebsite2 = nullptr;
-    QAction* openWebsite3 = nullptr;
+    //QAction* openWebsite3 = nullptr;
     QAction* openWebsite4 = nullptr;
     QAction* openWebsite5 = nullptr;
-    QAction* openWebsite6 = nullptr;
-    QAction* openWebsite7 = nullptr;
+    //QAction* openWebsite6 = nullptr;
+    //QAction* openWebsite7 = nullptr;
     QAction* openWebsite8 = nullptr;
     QAction* openWebsite9 = nullptr;
     QAction* openWebsite10 = nullptr;
@@ -156,7 +156,7 @@ private:
     //QAction* Exchangesite5 = nullptr;
     //QAction* Exchangesite6 = nullptr;
     QAction* Exchangesite7 = nullptr;
-    QAction* Exchangesite8 = nullptr;
+    //QAction* Exchangesite8 = nullptr;
     //QAction* Exchangesite9 = nullptr;
     //QAction* Exchangesite10 = nullptr;
 
