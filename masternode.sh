@@ -276,7 +276,7 @@ Group=${user}
 
 Type=forking
 PIDFile=${data_dir}/${name}/testnet/${name}.pid
-ExecStart=${daemon_dir}/${daemon} -daemon -testnet -port=9468 -pid=${data_dir}/${name}/testnet/${name}.pid -conf=${conf_dir}/${name}.conf -datadir=${data_dir}/${name}
+ExecStart=${daemon_dir}/${daemon} -daemon -testnet -port=8555 -pid=${data_dir}/${name}/testnet/${name}.pid -conf=${conf_dir}/${name}.conf -datadir=${data_dir}/${name}
 ExecStop=${cli_dir}/${cli} stop -conf=${conf_dir}/${name}.conf -datadir=${data_dir}/${name}
 
 Restart=always
@@ -456,7 +456,7 @@ if [[ "$testnet" -eq 1  ]]; then
     sleep 30
     systemctl enable ${name}.testnet.service
     systemctl start ${name}.testnet.service
-    sudo -u ${user} -- bash -c "${daemon_dir}/${daemon} -testnet -port=9468 -conf=${conf_dir}/${name}.conf -datadir=${data_dir}/${name}"
+    sudo -u ${user} -- bash -c "${daemon_dir}/${daemon} -testnet -port=8555 -conf=${conf_dir}/${name}.conf -datadir=${data_dir}/${name}"
 else
     systemctl daemon-reload
     sleep 30
