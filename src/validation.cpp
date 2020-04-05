@@ -2259,12 +2259,12 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     std::string strError = "";
     //if (!sporkManager.IsSporkActive(SPORK_BTX_99_IGNORE_MASTERNODE_REWARD_VALUE) && !IsBlockValueValid(block, pindex->nHeight, block.vtx[0]->GetValueOut(), strError)) {
     if (!IsBlockValueValid(block, pindex->nHeight, block.vtx[0]->GetValueOut(), strError)) {
-        return state.DoS(0, error("ConnectBlock(DASH): %s", strError), REJECT_INVALID, "bad-cb-amount");
+        return state.DoS(0, error("ConnectBlock(BTX): %s", strError), REJECT_INVALID, "bad-cb-amount");
     }
    //if (!sporkManager.IsSporkActive(SPORK_BTX_99_IGNORE_MASTERNODE_REWARD_PAYEE) && !IsBlockPayeeValid(block.vtx[0], pindex->nHeight, block.vtx[0]->GetValueOut(), pindex->GetBlockHeader())) {
     if (!IsBlockPayeeValid(block.vtx[0], pindex->nHeight, block.vtx[0]->GetValueOut(), pindex->GetBlockHeader())) {
         mapRejectedBlocks.insert(make_pair(block.GetHash(), GetTime()));
-        return state.DoS(0, error("ConnectBlock(DASH): couldn't find masternode or superblock payments"),
+        return state.DoS(0, error("ConnectBlock(BTX): couldn't find masternode or superblock payments"),
                                 REJECT_INVALID, "bad-cb-payee");
     }
     // END DASH
