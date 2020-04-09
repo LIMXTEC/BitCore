@@ -42,10 +42,6 @@ regularly to indicate new official, stable release versions of BitCore.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The developer [mailing list](https://groups.google.com/forum/#!forum/bitcore-dev)
-should be used to discuss complicated or controversial changes before working
-on a patch set.
-
 Testing
 -------
 
