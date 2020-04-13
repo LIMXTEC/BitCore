@@ -107,8 +107,7 @@ arith_uint256 CMasternode::CalculateScore(const uint256& blockHash)
 
 CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint)
 {
-    int nHeight;
-    return CheckCollateral(outpoint, nHeight);
+    return CheckCollateral(outpoint);
 }
 
 CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint)
