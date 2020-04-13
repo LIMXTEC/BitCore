@@ -100,8 +100,10 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
 
 WalletView::~WalletView()
 {
+    /* This creates SIGSEGV, Segmentation fault Errors (mem=0x82a11aca2ac93867) at malloc.c:3103
         if(unlockContext)
         delete (WalletModel::UnlockContext*)(unlockContext);
+    */
 }
 
 void WalletView::setBitcoinGUI(BitcoinGUI *gui)
