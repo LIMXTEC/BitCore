@@ -364,7 +364,7 @@ void BitcoinGUI::createActions()
     // FXTC TODO: menu items
     //-//unlockWalletAction = new QAction(tr("&Unlock Wallet..."), this);
     //-//unlockWalletAction->setToolTip(tr("Unlock wallet"));
-    //-//lockWalletAction = new QAction(tr("&Lock Wallet"), this);
+    lockWalletAction = new QAction(tr("&Lock Wallet"), this);
     //
 
     // Megacoin
@@ -497,7 +497,7 @@ void BitcoinGUI::createActions()
         // Dash
         // FXTC TODO: menu items
         connect(unlockWalletAction, SIGNAL(triggered()), walletFrame, SLOT(unlockWallet()));
-        //connect(lockWalletAction, SIGNAL(triggered()), walletFrame, SLOT(lockWallet()));
+        connect(lockWalletAction, SIGNAL(triggered()), walletFrame, SLOT(lockWallet()));
         //
 
         connect(signMessageAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
@@ -565,7 +565,7 @@ void BitcoinGUI::createMenuBar()
         // Dash
         // FXTC TODO: menu items
         settings->addAction(unlockWalletAction);
-        //-//settings->addAction(lockWalletAction);
+        settings->addAction(lockWalletAction);
         //
 
         // BitCore
@@ -1425,11 +1425,8 @@ void BitcoinGUI::setEncryptionStatus(int status)
         labelWalletEncryptionIcon->hide();
         encryptWalletAction->setChecked(false);
         changePassphraseAction->setEnabled(false);
-        // Dash
-        // FXTC TODO: menu items
-        //unlockWalletAction->setEnabled(true);
-        //-//lockWalletAction->setVisible(false);
-        //
+        unlockWalletAction->setVisible(false);
+        lockWalletAction->setVisible(false);
         encryptWalletAction->setEnabled(true);
         break;
     case WalletModel::Unlocked:
@@ -1438,11 +1435,8 @@ void BitcoinGUI::setEncryptionStatus(int status)
         labelWalletEncryptionIcon->setToolTip(tr("Wallet is <b>encrypted</b> and currently <b>unlocked</b>"));
         encryptWalletAction->setChecked(true);
         changePassphraseAction->setEnabled(true);
-        // Dash
-        // FXTC TODO: menu items
-        unlockWalletAction->setEnabled(true);
-        //-//lockWalletAction->setVisible(true);
-        //
+        unlockWalletAction->setEnabled(false);
+        lockWalletAction->setVisible(true);
         encryptWalletAction->setEnabled(false); // TODO: decrypt currently not supported
         break;
     // Dash
@@ -1466,12 +1460,11 @@ void BitcoinGUI::setEncryptionStatus(int status)
         labelWalletEncryptionIcon->setToolTip(tr("Wallet is <b>encrypted</b> and currently <b>locked</b>"));
         encryptWalletAction->setChecked(true);
         changePassphraseAction->setEnabled(true);
-        // Dash
-        // FXTC TODO: menu items
-        unlockWalletAction->setEnabled(true);
-        //-//lockWalletAction->setVisible(false);
-        //
-        encryptWalletAction->setEnabled(false); // TODO: decrypt currently not supported
+        unlockWalletAction->setVisible(true);
+        //unlockWalletAction->setEnabled(true);
+        lockWalletAction->setVisible(false);
+        encryptWalletAction->setEnabled(false);
+        encryptWalletAction->setVisible(false);
         break;
     }
 }

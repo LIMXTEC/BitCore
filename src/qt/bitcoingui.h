@@ -127,6 +127,7 @@ private:
     QAction* changePassphraseAction = nullptr;
     // Dash
     QAction *unlockWalletAction = nullptr;
+    QAction *lockWalletAction = nullptr; 
     //
     QAction* aboutQtAction = nullptr;
     QAction* openRPCConsoleAction = nullptr;
