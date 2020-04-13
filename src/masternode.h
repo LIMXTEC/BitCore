@@ -205,7 +205,6 @@ public:
     bool UpdateFromNewBroadcast(CMasternodeBroadcast& mnb, CConnman& connman);
 
     static CollateralStatus CheckCollateral(const COutPoint& outpoint);
-    static CollateralStatus CheckCollateral(const COutPoint& outpoint);
 
     // FXTC BEGIN
     bool CollateralValueCheck(int nHeight, CAmount TxValue);
