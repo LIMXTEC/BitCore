@@ -2825,10 +2825,7 @@ void CWallet::AvailableCoins(std::vector<COutput> &vCoins, bool fOnlySafe, const
                 if (CPrivateSend::IsCollateralAmount(pcoin->tx->vout[i].nValue)) continue; // do not use collateral amounts
                 found = !CPrivateSend::IsDenominatedAmount(pcoin->tx->vout[i].nValue);
             } else if(nCoinType == ONLY_MASTERNODE_COLLATERAL) {
-                // FXTC BEGIN
-                //found = pcoin->tx->vout[i].nValue == 1000*COIN;
-                found = CMasternode::CheckCollateral(COutPoint(pcoin->GetHash(),i)) == CMasternode::COLLATERAL_OK;
-                // FXTC END
+                found = pcoin->tx->vout[i].nValue == Params().GetConsensus().nMasternodeCollateralMinimum * COIN;
             } else if(nCoinType == ONLY_PRIVATESEND_COLLATERAL) {
                 found = CPrivateSend::IsCollateralAmount(pcoin->tx->vout[i].nValue);
             } else {

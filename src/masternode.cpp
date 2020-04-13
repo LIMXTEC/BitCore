@@ -111,7 +111,7 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
     return CheckCollateral(outpoint, nHeight);
 }
 
-CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint, int& nHeightRet)
+CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint)
 {
     AssertLockHeld(cs_main);
 
@@ -120,17 +120,12 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
         return COLLATERAL_UTXO_NOT_FOUND;
     }
 
-    // FXTC BEGIN
-    nHeightRet = coin.nHeight;
-
     CMasternode cm;
-    //if(coin.out.nValue != 1000 * COIN) {
-    if(!cm.CollateralValueCheck(coin.nHeight,coin.out.nValue)) {
-    // FXTC END
+    if(coin.out.nValue != Params().GetConsensus().nMasternodeCollateralMinimum * COIN) 
+    {
         return COLLATERAL_INVALID_AMOUNT;
     }
-
-    nHeightRet = coin.nHeight;
+    
     return COLLATERAL_OK;
 }
 
