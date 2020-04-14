@@ -125,7 +125,7 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
     {
         return COLLATERAL_INVALID_AMOUNT;
     }
-    
+
     return COLLATERAL_OK;
 }
 
