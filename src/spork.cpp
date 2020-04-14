@@ -202,9 +202,9 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_BTX_17_UNKNOW:                              r = SPORK_BTX_17_UNKNOW_DEFAULT; break;
 
             case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:              r = SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT; break;
-            case SPORK_BTX_19_SHOW_UPDATE_MESSAGE:                 r = SPORK_BTX_19_SHOW_UPDATE_MESSAGE_DEFAULT; break;
-            case SPORK_BTX_20_UNKNOW:                              r = SPORK_BTX_20_UNKNOW_DEFAULT; break;
-            case SPORK_BTX_21_UNKNOW:                              r = SPORK_BTX_21_UNKNOW_DEFAULT; break;
+            case SPORK_BTX_19_MIN_VERSION_COUNT:                   r = SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT; break;
+            case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:          r = SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT; break;
+            case SPORK_BTX_21_MAX_VERSION_COUNT:                   r = SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT; break;
             case SPORK_BTX_22_UNKNOW:                              r = SPORK_BTX_22_UNKNOW_DEFAULT; break;
             // FXTC END
             default:
@@ -249,9 +249,9 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_BTX_17_UNKNOW:                              return SPORK_BTX_17_UNKNOW_DEFAULT;
 
         case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:              return SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT;
-        case SPORK_BTX_19_SHOW_UPDATE_MESSAGE:                 return SPORK_BTX_19_SHOW_UPDATE_MESSAGE_DEFAULT;
-        case SPORK_BTX_20_UNKNOW:                              return SPORK_BTX_20_UNKNOW_DEFAULT;
-        case SPORK_BTX_21_UNKNOW:                              return SPORK_BTX_21_UNKNOW_DEFAULT;
+        case SPORK_BTX_19_MIN_VERSION_COUNT:                 return SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT;
+        case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:                              return SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT;
+        case SPORK_BTX_21_MAX_VERSION_COUNT:                              return SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT;
         case SPORK_BTX_22_UNKNOW:                              return SPORK_BTX_22_UNKNOW_DEFAULT;
 
         default:
@@ -288,9 +288,9 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_BTX_17_UNKNOW")                       return SPORK_BTX_17_UNKNOW;
 
     if (strName == "SPORK_BTX_18_MIN_PEER_PROTO_VERSION")       return SPORK_BTX_18_MIN_PEER_PROTO_VERSION;
-    if (strName == "SPORK_BTX_19_SHOW_UPDATE_MESSAGE")          return SPORK_BTX_19_SHOW_UPDATE_MESSAGE;
-    if (strName == "SPORK_BTX_20_UNKNOW")                       return SPORK_BTX_20_UNKNOW;
-    if (strName == "SPORK_BTX_21_UNKNOW")                       return SPORK_BTX_21_UNKNOW;
+    if (strName == "SPORK_BTX_19_MIN_VERSION_COUNT")          return SPORK_BTX_19_MIN_VERSION_COUNT;
+    if (strName == "SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT")                       return SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT;
+    if (strName == "SPORK_BTX_21_MAX_VERSION_COUNT")                       return SPORK_BTX_21_MAX_VERSION_COUNT;
     if (strName == "SPORK_BTX_22_UNKNOW")                       return SPORK_BTX_22_UNKNOW;
 
     LogPrint(BCLog::SPORK, "CSporkManager::GetSporkIDByName -- Unknown Spork name '%s'\n", strName);
@@ -325,9 +325,9 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_BTX_17_UNKNOW:                       return "SPORK_BTX_17_UNKNOW";
 
         case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:       return "SPORK_BTX_18_MIN_PEER_PROTO_VERSION";
-        case SPORK_BTX_19_SHOW_UPDATE_MESSAGE:          return "SPORK_BTX_19_SHOW_UPDATE_MESSAGE";
-        case SPORK_BTX_20_UNKNOW:                       return "SPORK_BTX_20_UNKNOW";
-        case SPORK_BTX_21_UNKNOW:                       return "SPORK_BTX_21_UNKNOW";
+        case SPORK_BTX_19_MIN_VERSION_COUNT:          return "SPORK_BTX_19_MIN_VERSION_COUNT";
+        case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:                       return "SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT";
+        case SPORK_BTX_21_MAX_VERSION_COUNT:                       return "SPORK_BTX_21_MAX_VERSION_COUNT";
         case SPORK_BTX_22_UNKNOW:                       return "SPORK_BTX_22_UNKNOW";
 
         default:
