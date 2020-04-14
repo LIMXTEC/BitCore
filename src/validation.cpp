@@ -3585,7 +3585,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     //   {0xaa, 0x21, 0xa9, 0xed}, and the following 32 bytes are SHA256^2(witness root, witness reserved value). In case there are
     //   multiple, the last one is used.
     bool fHaveWitness = false;
-    if (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_SEGWIT, versionbitscache) == ThresholdState::ACTIVE) {
+    //if (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_SEGWIT, versionbitscache) == ThresholdState::ACTIVE) {
         int commitpos = GetWitnessCommitmentIndex(block);
         if (commitpos != -1) {
             bool malleated = false;
@@ -3604,7 +3604,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
                 fHaveWitness = true;
             }
         }
-    }
+    //}
 
     // No witness data is allowed in blocks that don't commit to witness data, as this would otherwise leave room for spam
     if(nHeight > 25000) {

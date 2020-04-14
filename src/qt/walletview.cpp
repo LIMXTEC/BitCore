@@ -100,8 +100,10 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
 
 WalletView::~WalletView()
 {
+    /* This creates SIGSEGV, Segmentation fault Errors (mem=0x82a11aca2ac93867) at malloc.c:3103
         if(unlockContext)
         delete (WalletModel::UnlockContext*)(unlockContext);
+    */
 }
 
 void WalletView::setBitcoinGUI(BitcoinGUI *gui)
@@ -331,12 +333,12 @@ void WalletView::unlockWallet(bool fForMixingOnly)
         return;
     // Unlock wallet when requested by wallet model
     // Dash
-    //if (walletModel->getEncryptionStatus() == WalletModel::Locked)
-    if (walletModel->getEncryptionStatus() == WalletModel::Locked || walletModel->getEncryptionStatus() == WalletModel::UnlockedForMixingOnly)
+    //if (walletModel->getEncryptionStatus() == WalletModel::Locked || walletModel->getEncryptionStatus() == WalletModel::UnlockedForMixingOnly)
+    if (walletModel->getEncryptionStatus() == WalletModel::Locked)
     {
-        //AskPassphraseDialog dlg(AskPassphraseDialog::Unlock, this);
-        AskPassphraseDialog dlg(fForMixingOnly ? AskPassphraseDialog::UnlockMixing : AskPassphraseDialog::Unlock, this);
-    //
+        AskPassphraseDialog dlg(AskPassphraseDialog::Unlock, this);
+        //AskPassphraseDialog dlg(fForMixingOnly ? AskPassphraseDialog::UnlockMixing : AskPassphraseDialog::Unlock, this);
+
         dlg.setModel(walletModel);
         dlg.exec();
     }

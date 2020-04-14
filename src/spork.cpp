@@ -185,7 +185,7 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_10_MASTERNODE_PAY_UPDATED_NODES:            r = SPORK_10_MASTERNODE_PAY_UPDATED_NODES_DEFAULT; break;
             case SPORK_12_RECONSIDER_BLOCKS:                       r = SPORK_12_RECONSIDER_BLOCKS_DEFAULT; break;
             case SPORK_13_OLD_SUPERBLOCK_FLAG:                     r = SPORK_13_OLD_SUPERBLOCK_FLAG_DEFAULT; break;
-            case SPORK_14_REQUIRE_SENTINEL_FLAG:                   r = SPORK_14_REQUIRE_SENTINEL_FLAG_DEFAULT; break;
+            case SPORK_14_UNKNOW:                                  r = SPORK_14_UNKNOW_DEFAULT; break;
             // FXTC BEGIN
             case SPORK_BTX_01_HANDBRAKE_HEIGHT :                   r = SPORK_BTX_01_HANDBRAKE_HEIGHT_DEFAULT; break;
             case SPORK_BTX_01_HANDBRAKE_FORCE_SHA256D:             r = SPORK_BTX_01_HANDBRAKE_FORCE_SHA256D_DEFAULT; break;
@@ -202,9 +202,9 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_BTX_17_UNKNOW:                              r = SPORK_BTX_17_UNKNOW_DEFAULT; break;
 
             case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:              r = SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT; break;
-            case SPORK_BTX_19_SHOW_UPDATE_MESSAGE:                 r = SPORK_BTX_19_SHOW_UPDATE_MESSAGE_DEFAULT; break;
-            case SPORK_BTX_20_UNKNOW:                              r = SPORK_BTX_20_UNKNOW_DEFAULT; break;
-            case SPORK_BTX_21_UNKNOW:                              r = SPORK_BTX_21_UNKNOW_DEFAULT; break;
+            case SPORK_BTX_19_MIN_VERSION_COUNT:                   r = SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT; break;
+            case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:          r = SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT; break;
+            case SPORK_BTX_21_MAX_VERSION_COUNT:                   r = SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT; break;
             case SPORK_BTX_22_UNKNOW:                              r = SPORK_BTX_22_UNKNOW_DEFAULT; break;
             // FXTC END
             default:
@@ -232,7 +232,7 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_10_MASTERNODE_PAY_UPDATED_NODES:            return SPORK_10_MASTERNODE_PAY_UPDATED_NODES_DEFAULT;
         case SPORK_12_RECONSIDER_BLOCKS:                       return SPORK_12_RECONSIDER_BLOCKS_DEFAULT;
         case SPORK_13_OLD_SUPERBLOCK_FLAG:                     return SPORK_13_OLD_SUPERBLOCK_FLAG_DEFAULT;
-        case SPORK_14_REQUIRE_SENTINEL_FLAG:                   return SPORK_14_REQUIRE_SENTINEL_FLAG_DEFAULT;
+        case SPORK_14_UNKNOW:                                  return SPORK_14_UNKNOW_DEFAULT;
         // FXTC BEGIN
         case SPORK_BTX_01_HANDBRAKE_HEIGHT:                    return SPORK_BTX_01_HANDBRAKE_HEIGHT_DEFAULT;
         case SPORK_BTX_01_HANDBRAKE_FORCE_SHA256D:             return SPORK_BTX_01_HANDBRAKE_FORCE_SHA256D_DEFAULT;
@@ -249,9 +249,9 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_BTX_17_UNKNOW:                              return SPORK_BTX_17_UNKNOW_DEFAULT;
 
         case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:              return SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT;
-        case SPORK_BTX_19_SHOW_UPDATE_MESSAGE:                 return SPORK_BTX_19_SHOW_UPDATE_MESSAGE_DEFAULT;
-        case SPORK_BTX_20_UNKNOW:                              return SPORK_BTX_20_UNKNOW_DEFAULT;
-        case SPORK_BTX_21_UNKNOW:                              return SPORK_BTX_21_UNKNOW_DEFAULT;
+        case SPORK_BTX_19_MIN_VERSION_COUNT:                 return SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT;
+        case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:                              return SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT;
+        case SPORK_BTX_21_MAX_VERSION_COUNT:                              return SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT;
         case SPORK_BTX_22_UNKNOW:                              return SPORK_BTX_22_UNKNOW_DEFAULT;
 
         default:
@@ -271,7 +271,7 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_10_MASTERNODE_PAY_UPDATED_NODES")     return SPORK_10_MASTERNODE_PAY_UPDATED_NODES;
     if (strName == "SPORK_12_RECONSIDER_BLOCKS")                return SPORK_12_RECONSIDER_BLOCKS;
     if (strName == "SPORK_13_OLD_SUPERBLOCK_FLAG")              return SPORK_13_OLD_SUPERBLOCK_FLAG;
-    if (strName == "SPORK_14_REQUIRE_SENTINEL_FLAG")            return SPORK_14_REQUIRE_SENTINEL_FLAG;
+    if (strName == "SPORK_14_UNKNOW")                           return SPORK_14_UNKNOW;
 
     if (strName == "SPORK_BTX_01_HANDBRAKE_HEIGHT")             return SPORK_BTX_01_HANDBRAKE_HEIGHT;
     if (strName == "SPORK_BTX_01_HANDBRAKE_FORCE_SHA256D")      return SPORK_BTX_01_HANDBRAKE_FORCE_SHA256D;
@@ -288,9 +288,9 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_BTX_17_UNKNOW")                       return SPORK_BTX_17_UNKNOW;
 
     if (strName == "SPORK_BTX_18_MIN_PEER_PROTO_VERSION")       return SPORK_BTX_18_MIN_PEER_PROTO_VERSION;
-    if (strName == "SPORK_BTX_19_SHOW_UPDATE_MESSAGE")          return SPORK_BTX_19_SHOW_UPDATE_MESSAGE;
-    if (strName == "SPORK_BTX_20_UNKNOW")                       return SPORK_BTX_20_UNKNOW;
-    if (strName == "SPORK_BTX_21_UNKNOW")                       return SPORK_BTX_21_UNKNOW;
+    if (strName == "SPORK_BTX_19_MIN_VERSION_COUNT")          return SPORK_BTX_19_MIN_VERSION_COUNT;
+    if (strName == "SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT")                       return SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT;
+    if (strName == "SPORK_BTX_21_MAX_VERSION_COUNT")                       return SPORK_BTX_21_MAX_VERSION_COUNT;
     if (strName == "SPORK_BTX_22_UNKNOW")                       return SPORK_BTX_22_UNKNOW;
 
     LogPrint(BCLog::SPORK, "CSporkManager::GetSporkIDByName -- Unknown Spork name '%s'\n", strName);
@@ -308,7 +308,7 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_10_MASTERNODE_PAY_UPDATED_NODES:     return "SPORK_10_MASTERNODE_PAY_UPDATED_NODES";
         case SPORK_12_RECONSIDER_BLOCKS:                return "SPORK_12_RECONSIDER_BLOCKS";
         case SPORK_13_OLD_SUPERBLOCK_FLAG:              return "SPORK_13_OLD_SUPERBLOCK_FLAG";
-        case SPORK_14_REQUIRE_SENTINEL_FLAG:            return "SPORK_14_REQUIRE_SENTINEL_FLAG";
+        case SPORK_14_UNKNOW:                           return "SPORK_14_UNKNOW";
 
         case SPORK_BTX_01_HANDBRAKE_HEIGHT:             return "SPORK_BTX_01_HANDBRAKE_HEIGHT";
         case SPORK_BTX_01_HANDBRAKE_FORCE_SHA256D:      return "SPORK_BTX_01_HANDBRAKE_FORCE_SHA256D";
@@ -325,9 +325,9 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_BTX_17_UNKNOW:                       return "SPORK_BTX_17_UNKNOW";
 
         case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:       return "SPORK_BTX_18_MIN_PEER_PROTO_VERSION";
-        case SPORK_BTX_19_SHOW_UPDATE_MESSAGE:          return "SPORK_BTX_19_SHOW_UPDATE_MESSAGE";
-        case SPORK_BTX_20_UNKNOW:                       return "SPORK_BTX_20_UNKNOW";
-        case SPORK_BTX_21_UNKNOW:                       return "SPORK_BTX_21_UNKNOW";
+        case SPORK_BTX_19_MIN_VERSION_COUNT:          return "SPORK_BTX_19_MIN_VERSION_COUNT";
+        case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:                       return "SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT";
+        case SPORK_BTX_21_MAX_VERSION_COUNT:                       return "SPORK_BTX_21_MAX_VERSION_COUNT";
         case SPORK_BTX_22_UNKNOW:                       return "SPORK_BTX_22_UNKNOW";
 
         default:

@@ -142,7 +142,6 @@ public:
         MASTERNODE_EXPIRED,
         MASTERNODE_OUTPOINT_SPENT,
         MASTERNODE_UPDATE_REQUIRED,
-        MASTERNODE_WATCHDOG_EXPIRED,
         MASTERNODE_NEW_START_REQUIRED,
         MASTERNODE_POSE_BAN
     };
@@ -205,7 +204,6 @@ public:
     bool UpdateFromNewBroadcast(CMasternodeBroadcast& mnb, CConnman& connman);
 
     static CollateralStatus CheckCollateral(const COutPoint& outpoint);
-    static CollateralStatus CheckCollateral(const COutPoint& outpoint, int& nHeightRet);
 
     // FXTC BEGIN
     bool CollateralValueCheck(int nHeight, CAmount TxValue);
@@ -234,15 +232,13 @@ public:
     bool IsExpired() { return nActiveState == MASTERNODE_EXPIRED; }
     bool IsOutpointSpent() { return nActiveState == MASTERNODE_OUTPOINT_SPENT; }
     bool IsUpdateRequired() { return nActiveState == MASTERNODE_UPDATE_REQUIRED; }
-    bool IsWatchdogExpired() { return nActiveState == MASTERNODE_WATCHDOG_EXPIRED; }
     bool IsNewStartRequired() { return nActiveState == MASTERNODE_NEW_START_REQUIRED; }
 
     static bool IsValidStateForAutoStart(int nActiveStateIn)
     {
         return  nActiveStateIn == MASTERNODE_ENABLED ||
                 nActiveStateIn == MASTERNODE_PRE_ENABLED ||
-                nActiveStateIn == MASTERNODE_EXPIRED ||
-                nActiveStateIn == MASTERNODE_WATCHDOG_EXPIRED;
+                nActiveStateIn == MASTERNODE_EXPIRED;
     }
 
     bool IsValidForPayment()
@@ -250,11 +246,6 @@ public:
         if(nActiveState == MASTERNODE_ENABLED) {
             return true;
         }
-        if(!sporkManager.IsSporkActive(SPORK_14_REQUIRE_SENTINEL_FLAG) &&
-           (nActiveState == MASTERNODE_WATCHDOG_EXPIRED)) {
-            return true;
-        }
-
         return false;
     }
 

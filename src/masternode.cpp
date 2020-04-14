@@ -105,13 +105,13 @@ arith_uint256 CMasternode::CalculateScore(const uint256& blockHash)
     return UintToArith256(ss.GetHash());
 }
 
+/*
 CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint)
 {
-    int nHeight;
-    return CheckCollateral(outpoint, nHeight);
+    return CheckCollateral(outpoint);
 }
-
-CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint, int& nHeightRet)
+*/
+CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint)
 {
     AssertLockHeld(cs_main);
 
@@ -120,17 +120,12 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
         return COLLATERAL_UTXO_NOT_FOUND;
     }
 
-    // FXTC BEGIN
-    nHeightRet = coin.nHeight;
-
     CMasternode cm;
-    //if(coin.out.nValue != 1000 * COIN) {
-    if(!cm.CollateralValueCheck(coin.nHeight,coin.out.nValue)) {
-    // FXTC END
+    if(coin.out.nValue != Params().GetConsensus().nMasternodeCollateralMinimum * COIN)
+    {
         return COLLATERAL_INVALID_AMOUNT;
     }
-
-    nHeightRet = coin.nHeight;
+    
     return COLLATERAL_OK;
 }
 
@@ -226,7 +221,7 @@ void CMasternode::Check(bool fForce)
 
     if(fWaitForPing && !fOurMasternode) {
         // ...but if it was already expired before the initial check - return right away
-        if(IsExpired() || IsWatchdogExpired() || IsNewStartRequired()) {
+        if(IsExpired() || IsNewStartRequired()) {
             LogPrint(BCLog::MASTERNODE, "CMasternode::Check -- Masternode %s is in %s state, waiting for ping\n", vin.prevout.ToStringShort(), GetStateString());
             return;
         }
@@ -242,22 +237,6 @@ void CMasternode::Check(bool fForce)
             }
             return;
         }
-
-        bool fWatchdogActive = masternodeSync.IsSynced() && mnodeman.IsWatchdogActive();
-        //bool fWatchdogExpired = (fWatchdogActive && ((GetAdjustedTime() - nTimeLastWatchdogVote) > MASTERNODE_WATCHDOG_MAX_SECONDS));
-        bool fWatchdogExpired = false;
-
-        //LogPrint(BCLog::MASTERNODE, "CMasternode::Check -- outpoint=%s, nTimeLastWatchdogVote=%d, GetAdjustedTime()=%d, fWatchdogExpired=%d\n", vin.prevout.ToStringShort(), nTimeLastWatchdogVote, GetAdjustedTime(), fWatchdogExpired);
-
-        
-        if(fWatchdogExpired) {
-            nActiveState = MASTERNODE_WATCHDOG_EXPIRED;
-            if(nActiveStatePrev != nActiveState) {
-                LogPrint(BCLog::MASTERNODE, "CMasternode::Check -- Masternode %s is in %s state now\n", vin.prevout.ToStringShort(), GetStateString());
-            }
-            return;
-        }
-        
 
         if(!IsPingedWithin(MASTERNODE_EXPIRATION_SECONDS)) {
             nActiveState = MASTERNODE_EXPIRED;
@@ -330,7 +309,6 @@ std::string CMasternode::StateToString(int nStateIn)
         case MASTERNODE_EXPIRED:                return "EXPIRED";
         case MASTERNODE_OUTPOINT_SPENT:         return "OUTPOINT_SPENT";
         case MASTERNODE_UPDATE_REQUIRED:        return "UPDATE_REQUIRED";
-        case MASTERNODE_WATCHDOG_EXPIRED:       return "WATCHDOG_EXPIRED";
         case MASTERNODE_NEW_START_REQUIRED:     return "NEW_START_REQUIRED";
         case MASTERNODE_POSE_BAN:               return "POSE_BAN";
         default:                                return "UNKNOWN";
@@ -599,7 +577,7 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
         }
 
         int nHeight;
-        CollateralStatus err = CheckCollateral(vin.prevout, nHeight);
+        CollateralStatus err = CheckCollateral(vin.prevout);
         if (err == COLLATERAL_UTXO_NOT_FOUND) {
             LogPrint(BCLog::MASTERNODE, "CMasternodeBroadcast::CheckOutpoint -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
@@ -609,7 +587,7 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
             LogPrint(BCLog::MASTERNODE, "CMasternodeBroadcast::CheckOutpoint -- Masternode UTXO should have masternode collateral, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
         }
-
+// BTX ToDo
         if(chainActive.Height() - nHeight + 1 < Params().GetConsensus().nMasternodeMinimumConfirmations) {
             LogPrintf("CMasternodeBroadcast::CheckOutpoint -- Masternode UTXO must have at least %d confirmations, masternode=%s\n",
                     Params().GetConsensus().nMasternodeMinimumConfirmations, vin.prevout.ToStringShort());
@@ -854,8 +832,8 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
 
     // force update, ignoring cache
     pmn->Check(true);
-    // relay ping for nodes in ENABLED/EXPIRED/WATCHDOG_EXPIRED state only, skip everyone else
-    if (!pmn->IsEnabled() && !pmn->IsExpired() && !pmn->IsWatchdogExpired()) return false;
+    // relay ping for nodes in ENABLED/EXPIRED state only, skip everyone else
+    if (!pmn->IsEnabled() && !pmn->IsExpired()) return false;
 
     LogPrint(BCLog::MASTERNODE, "CMasternodePing::CheckAndUpdate -- Masternode ping acceepted and relayed, masternode=%s\n", vin.prevout.ToStringShort());
     Relay(connman);
