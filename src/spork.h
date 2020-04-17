@@ -52,7 +52,7 @@ static const int SPORK_BTX_01_HANDBRAKE_FORCE_X16R                  = 94680016;
 static const int SPORK_BTX_15_COINBASE_MATURITY_STAGE_2             = 94680021;
 static const int SPORK_BTX_02_IGNORE_EXTRA_REWARD_CHECK             = 94680022;
 static const int SPORK_BTX_02_IGNORE_EXTRA_REWARD_VALUE             = 94680023;
-static const int SPORK_BTX_16_UNKNOW                                = 94680024;
+static const int SPORK_22_MASTERNODE_PAYMENT_ENFORCEMENT                                = 94680024;
 static const int SPORK_BTX_17_UNKNOW                                = 94680025;
 
 static const int SPORK_BTX_18_MIN_PEER_PROTO_VERSION                = 94680031;
@@ -83,7 +83,7 @@ static const int64_t SPORK_BTX_01_HANDBRAKE_FORCE_X16R_DEFAULT         = 1;     
 static const int64_t SPORK_BTX_15_COINBASE_MATURITY_STAGE_2_DEFAULT      = 4070908800ULL;// OFF
 static const int64_t SPORK_BTX_02_IGNORE_EXTRA_REWARD_CHECK_DEFAULT      = 4070908800ULL;// OFF
 static const int64_t SPORK_BTX_02_IGNORE_EXTRA_REWARD_VALUE_DEFAULT      = 4070908800ULL;// OFF
-static const int64_t SPORK_BTX_16_UNKNOW_DEFAULT   = 4070908800ULL;// OFF
+static const int64_t SPORK_22_MASTERNODE_PAYMENT_ENFORCEMENT_DEFAULT   = 4070908800ULL;// OFF
 static const int64_t SPORK_BTX_17_UNKNOW_DEFAULT   = 4070908800ULL;// OFF
 
 static const int64_t SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT  = 70016;// OFF

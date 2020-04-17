@@ -143,6 +143,12 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
     // we can only check masternode payments
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
+    
+    if(sporkManager.IsSporkActive(SPORK_22_MASTERNODE_PAYMENT_ENFORCEMENT)) 
+    {
+        LogPrintf("IsBlockPayeeValid SPORK_22 -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
+        return false;
+    }
 
     if(nBlockHeight < consensusParams.nSuperblockStartBlock) {
         if(mnpayments.IsTransactionValid(txNew, nBlockHeight)) {
@@ -165,7 +171,7 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
         }
 
         if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
-            //if (!sporkManager.IsSporkActive(SPORK_BTX_16_UNKNOW) && !sporkManager.IsSporkActive(SPORK_BTX_17_UNKNOW)) {
+            //if (!sporkManager.IsSporkActive(SPORK_22_MASTERNODE_PAYMENT_ENFORCEMENT) && !sporkManager.IsSporkActive(SPORK_BTX_17_UNKNOW)) {
                 LogPrintf("IsBlockPayeeValid -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
                 return false;
             } else {
