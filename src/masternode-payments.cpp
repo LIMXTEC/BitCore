@@ -143,7 +143,7 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
     // we can only check masternode payments
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
-    
+
     if(sporkManager.IsSporkActive(SPORK_22_MASTERNODE_PAYMENT_ENFORCEMENT))
     {
         LogPrintf("IsBlockPayeeValid SPORK_22 -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
