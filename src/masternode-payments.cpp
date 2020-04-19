@@ -328,6 +328,7 @@ int CMasternodePayments::GetFactorEnforcement() {
         return FACTOR_ENFORCEMENT;
     }
     return sporkManager.GetSporkValue(SPORK_22_FACTOR_ENFORCEMENT);
+}
 
 void CMasternodePayments::ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStream& vRecv, CConnman& connman)
 {
