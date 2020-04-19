@@ -205,7 +205,7 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_BTX_19_MIN_VERSION_COUNT:                   r = SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT; break;
             case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:          r = SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT; break;
             case SPORK_BTX_21_MAX_VERSION_COUNT:                   r = SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT; break;
-            case SPORK_BTX_22_UNKNOW:                              r = SPORK_BTX_22_UNKNOW_DEFAULT; break;
+            case SPORK_22_FACTOR_ENFORCEMENT:                              r = SPORK_22_FACTOR_ENFORCEMENT_DEFAULT; break;
             // FXTC END
             default:
                 LogPrint(BCLog::SPORK, "CSporkManager::IsSporkActive -- Unknown Spork ID %d\n", nSporkID);
@@ -252,7 +252,7 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_BTX_19_MIN_VERSION_COUNT:                   return SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT;
         case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:          return SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT;
         case SPORK_BTX_21_MAX_VERSION_COUNT:                   return SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT;
-        case SPORK_BTX_22_UNKNOW:                              return SPORK_BTX_22_UNKNOW_DEFAULT;
+        case SPORK_22_FACTOR_ENFORCEMENT:                              return SPORK_22_FACTOR_ENFORCEMENT_DEFAULT;
 
         default:
             LogPrint(BCLog::SPORK, "CSporkManager::GetSporkValue -- Unknown Spork ID %d\n", nSporkID);
@@ -291,7 +291,7 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_BTX_19_MIN_VERSION_COUNT")          return SPORK_BTX_19_MIN_VERSION_COUNT;
     if (strName == "SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT")                       return SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT;
     if (strName == "SPORK_BTX_21_MAX_VERSION_COUNT")                       return SPORK_BTX_21_MAX_VERSION_COUNT;
-    if (strName == "SPORK_BTX_22_UNKNOW")                       return SPORK_BTX_22_UNKNOW;
+    if (strName == "SPORK_22_FACTOR_ENFORCEMENT")                       return SPORK_22_FACTOR_ENFORCEMENT;
 
     LogPrint(BCLog::SPORK, "CSporkManager::GetSporkIDByName -- Unknown Spork name '%s'\n", strName);
     return -1;
@@ -328,7 +328,7 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_BTX_19_MIN_VERSION_COUNT:          return "SPORK_BTX_19_MIN_VERSION_COUNT";
         case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:                       return "SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT";
         case SPORK_BTX_21_MAX_VERSION_COUNT:                       return "SPORK_BTX_21_MAX_VERSION_COUNT";
-        case SPORK_BTX_22_UNKNOW:                       return "SPORK_BTX_22_UNKNOW";
+        case SPORK_22_FACTOR_ENFORCEMENT:                       return "SPORK_22_FACTOR_ENFORCEMENT";
 
         default:
             LogPrint(BCLog::SPORK, "CSporkManager::GetSporkNameByID -- Unknown Spork ID %d\n", nSporkID);

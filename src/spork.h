@@ -59,7 +59,7 @@ static const int SPORK_BTX_18_MIN_PEER_PROTO_VERSION                = 94680031;
 static const int SPORK_BTX_19_MIN_VERSION_COUNT                   = 94680032;
 static const int SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT                                = 94680026;
 static const int SPORK_BTX_21_MAX_VERSION_COUNT                                = 94680027;
-static const int SPORK_BTX_22_UNKNOW                                = 94680028;
+static const int SPORK_22_FACTOR_ENFORCEMENT                                = 94680028;
 // FXTC END
 
 static const int64_t SPORK_2_INSTANTSEND_ENABLED_DEFAULT                = 0;            // ON
@@ -90,7 +90,7 @@ static const int64_t SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT  = 70016;// OFF
 static const int64_t SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT     = 4070908800ULL;// OFF
 static const int64_t SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT   = 4070908800ULL;// OFF
 static const int64_t SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT   = 4070908800ULL;// OFF
-static const int64_t SPORK_BTX_22_UNKNOW_DEFAULT   = 4070908800ULL;// OFF
+static const int64_t SPORK_22_FACTOR_ENFORCEMENT_DEFAULT   = 4070908800ULL;// OFF
 
 
 
