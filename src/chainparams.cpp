@@ -215,11 +215,9 @@ public:
                 { 200000, uint256S("0x65c89c662dbdad4aeeb4215076884be736a7512984741b353bbdef47478305e5")},
                 { 215000, uint256S("0x18accc496518e6f3008eeaab7e04123939d66eb7f8a02f2fcb3d69093c1df38c")},
                 { 356548, uint256S("0xf62b6c5645997d078d9cb130cfe96d64ec2c047bbceca3ae8ffc373eef80b866")},
+                { 550000, uint256S("0xa901848fe9d22814dbb3e0f62892d3bd7a1e70f6a48a459e68ebaf24ea5d5867")},
             }
         };
-        // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 999999999;
-        // FXTC
 
         chainTxData = ChainTxData{
             // BTX: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
@@ -364,9 +362,7 @@ public:
                 {0, uint256S("0xe02c5d66e8edb49984eb743c798bca069466ce457b7febfa3c3a01b33353b7bc6")},
             }
         };
-        // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 99999999;;
-        // FXTC
+
 
         chainTxData = ChainTxData{
             // BTX: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
@@ -482,9 +478,7 @@ public:
                 {0, uint256S("0x604148281e5c4b7f2487e5d03cd60d8e6f69411d613f6448034508cea52e9574")},
             }
         };
-        // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 99999999;;
-        // FXTC
+
 
         chainTxData = ChainTxData{
             0,

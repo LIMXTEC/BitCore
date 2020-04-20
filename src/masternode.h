@@ -53,14 +53,14 @@ public:
         READWRITE(blockHash);
         READWRITE(sigTime);
         READWRITE(vchSig);
-        if(ser_action.ForRead() && (s.size() == 0))
-        {
-            fSentinelIsCurrent = false;
-            nSentinelVersion = DEFAULT_SENTINEL_VERSION;
-            return;
-        }
-        READWRITE(fSentinelIsCurrent);
-        READWRITE(nSentinelVersion);
+        //if(ser_action.ForRead() && (s.size() == 0))
+        //{
+        //    fSentinelIsCurrent = false;
+        //    nSentinelVersion = DEFAULT_SENTINEL_VERSION;
+        //    return;
+        //}
+        //READWRITE(fSentinelIsCurrent);
+        //READWRITE(nSentinelVersion);
     }
 
     uint256 GetHash() const

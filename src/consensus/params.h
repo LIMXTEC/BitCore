@@ -115,9 +115,6 @@ struct Params {
 	int64_t DifficultyAdjustmentIntervalV2() const { return nPowTargetTimespanV2 / nPowTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
-    // FXTC BEGIN
-    int nlastValidPowHashHeight;
-    // FXTC EMD
 };
 } // namespace Consensus
 

@@ -156,7 +156,7 @@ void CMasternodeMan::Check()
     LOCK2(cs_main, cs);
     // FXTC END
 
-    LogPrint(BCLog::MASTERNODE, "CMasternodeMan::Check -- nLastWatchdogVoteTime=%d, IsWatchdogActive()=%d\n", nLastWatchdogVoteTime, IsWatchdogActive());
+    //LogPrint(BCLog::MASTERNODE, "CMasternodeMan::Check -- nLastWatchdogVoteTime=%d, IsWatchdogActive()=%d\n", nLastWatchdogVoteTime, IsWatchdogActive());
 
     for (auto& mnpair : mapMasternodes) {
         mnpair.second.Check();
@@ -802,8 +802,8 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, const std::string& strCommand,
         // if masternode uses sentinel ping instead of watchdog
         // we shoud update nTimeLastWatchdogVote here if sentinel
         // ping flag is actual
-        if(pmn && mnp.fSentinelIsCurrent)
-            UpdateWatchdogVoteTime(mnp.vin.prevout, mnp.sigTime);
+        //if(pmn && mnp.fSentinelIsCurrent)
+        //    UpdateWatchdogVoteTime(mnp.vin.prevout, mnp.sigTime);
 
         // too late, new MNANNOUNCE is required
         if(pmn && pmn->IsNewStartRequired()) return;
@@ -1495,12 +1495,6 @@ void CMasternodeMan::UpdateWatchdogVoteTime(const COutPoint& outpoint, uint64_t 
     nLastWatchdogVoteTime = GetTime();
 }
 
-bool CMasternodeMan::IsWatchdogActive()
-{
-    LOCK(cs);
-    // Check if any masternodes have voted recently, otherwise return false
-    return (GetTime() - nLastWatchdogVoteTime) <= MASTERNODE_WATCHDOG_MAX_SECONDS;
-}
 
 bool CMasternodeMan::AddGovernanceVote(const COutPoint& outpoint, uint256 nGovernanceObjectHash)
 {
@@ -1553,9 +1547,9 @@ void CMasternodeMan::SetMasternodeLastPing(const COutPoint& outpoint, const CMas
     // if masternode uses sentinel ping instead of watchdog
     // we shoud update nTimeLastWatchdogVote here if sentinel
     // ping flag is actual
-    if(mnp.fSentinelIsCurrent) {
-        UpdateWatchdogVoteTime(mnp.vin.prevout, mnp.sigTime);
-    }
+    //if(mnp.fSentinelIsCurrent) {
+    //    UpdateWatchdogVoteTime(mnp.vin.prevout, mnp.sigTime);
+    //}
     mapSeenMasternodePing.insert(std::make_pair(mnp.GetHash(), mnp));
 
     CMasternodeBroadcast mnb(*pmn);
