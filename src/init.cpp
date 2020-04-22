@@ -430,6 +430,8 @@ void SetupServerArgs()
     gArgs.AddArg("-par=<n>", strprintf("Set the number of script verification threads (%u to %d, 0 = auto, <0 = leave that many cores free, default: %d)",
         -GetNumCores(), MAX_SCRIPTCHECK_THREADS, DEFAULT_SCRIPTCHECK_THREADS), false, OptionsCategory::OPTIONS);
     gArgs.AddArg("-persistmempool", strprintf("Whether to save the mempool on shutdown and load on restart (default: %u)", DEFAULT_PERSIST_MEMPOOL), false, OptionsCategory::OPTIONS);
+    gArgs.AddArg("-masternodeprivkey=<n>", "Set the masternode private key", false, OptionsCategory::OPTIONS);
+    gArgs.AddArg("-masternodeaddr=<n>", "Set external address:port to get to this masternode.", false, OptionsCategory::OPTIONS);
 #ifndef WIN32
     gArgs.AddArg("-pid=<file>", strprintf("Specify pid file. Relative paths will be prefixed by a net-specific datadir location. (default: %s)", BITCOIN_PID_FILENAME), false, OptionsCategory::OPTIONS);
 #else

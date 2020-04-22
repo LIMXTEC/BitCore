@@ -512,6 +512,8 @@ UniValue masternodelist(const JSONRPCRequest& request)
                 "  addr           - Print ip address associated with a masternode (can be additionally filtered, partial match)\n"
                 "  full           - Print info in format 'status protocol payee lastseen activeseconds lastpaidtime lastpaidblock IP'\n"
                 "                   (can be additionally filtered, partial match)\n"
+                "  info           - Print info in format 'status protocol payee lastseen activeseconds IP'\n"
+                "                   (can be additionally filtered, partial match)\n"
                 "  lastpaidblock  - Print the last block height a node was paid on the network\n"
                 "  lastpaidtime   - Print the last time a node was paid on the network\n"
                 "  lastseen       - Print timestamp of when a masternode was last seen on the network\n"
