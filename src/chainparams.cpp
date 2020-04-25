@@ -172,12 +172,13 @@ public:
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
         // BTX
-        vSeeds.emplace_back("seed.bitcore.biz", true);
-        vSeeds.emplace_back("37.120.190.76", false);
-        vSeeds.emplace_back("37.120.186.85", false);
-        vSeeds.emplace_back("185.194.140.60", false);
-        vSeeds.emplace_back("188.71.223.206", false);
-        vSeeds.emplace_back("185.194.142.122", false);
+        vSeeds.emplace_back("seed.bitcore.biz");
+        vSeeds.emplace_back("37.120.190.76");
+        vSeeds.emplace_back("37.120.186.85");
+        vSeeds.emplace_back("185.194.140.60");
+        vSeeds.emplace_back("188.71.223.206");
+        vSeeds.emplace_back("185.194.142.122");
+        //vSeeds.emplace_back("185.194.142.122", false);
 
         // BTX prefix '2'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,3);
@@ -328,12 +329,12 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         */
-        vSeeds.emplace_back("188.68.52.172", true);
-        vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("188.71.223.206", true);
-        vSeeds.emplace_back("185.194.142.122", false);
-        vSeeds.emplace_back("51.15.84.165", true);
+        vSeeds.emplace_back("188.68.52.172");
+        vSeeds.emplace_back("37.120.186.85");
+        vSeeds.emplace_back("37.120.186.85");
+        vSeeds.emplace_back("188.71.223.206");
+        vSeeds.emplace_back("185.194.142.122");
+        vSeeds.emplace_back("51.15.84.165");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
