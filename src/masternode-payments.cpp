@@ -143,12 +143,6 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
     // we can only check masternode payments
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
-    //We should leave that here until we start the Superblocksystem. The second stage is the Spork 8 only if Superblock are online - Chris 2020
-    if(sporkManager.IsSporkActive(SPORK_22_MASTERNODE_PAYMENT_ENFORCEMENT))
-    {
-        LogPrintf("IsBlockPayeeValid SPORK_22 -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
-        return false;
-    }
 
     if(nBlockHeight < consensusParams.nSuperblockStartBlock) {
         if(mnpayments.IsTransactionValid(txNew, nBlockHeight)) {
@@ -171,7 +165,7 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
         }
 
         if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
-            //if (!sporkManager.IsSporkActive(SPORK_22_MASTERNODE_PAYMENT_ENFORCEMENT) && !sporkManager.IsSporkActive(SPORK_BTX_17_UNKNOW)) {
+            //if (!sporkManager.IsSporkActive(SPORK_22_MASTERNODE_PAYMENT_ENFORCEMENT) && !sporkManager.IsSporkActive(SPORK_BTX_23_MASTERNODE_PAYMENT_LOW_VOTING)) {
                 LogPrintf("IsBlockPayeeValid -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
                 return false;
             } else {
@@ -589,7 +583,14 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransactionRef txNew)
     }
 
     // if we don't have at least MNPAYMENTS_SIGNATURES_REQUIRED signatures on a payee, approve whichever is the longest chain
-    if(nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED) return true;
+    if(sporkManager.IsSporkActive(SPORK_BTX_23_MASTERNODE_PAYMENT_LOW_VOTING))
+        {
+            if(nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED/3) return true;
+        }
+        else
+        {
+            if(nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED) return true;
+        }
 
     for (auto& payee : vecPayees) {
         if (payee.GetVoteCount() >= MNPAYMENTS_SIGNATURES_REQUIRED) {
