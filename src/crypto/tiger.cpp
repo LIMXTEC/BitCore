@@ -684,7 +684,7 @@ sph_tiger_comp(const sph_u64 msg[8], sph_u64 val[3])
 #define HASH   tiger2
 #undef PW01
 #define CLOSE_ONLY   1
-#include <md_helper.c>
+//#include <md_helper.c>
 
 /* see sph_tiger.h */
 void
