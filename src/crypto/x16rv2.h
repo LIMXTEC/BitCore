@@ -27,7 +27,7 @@
 #include <crypto/sph_whirlpool.h>
 extern "C"{
 #include <crypto/sph_sha2.h>
-#include "sph_tiger.h"
+#include <sph_tiger.h>
 }
 
 inline int GetHashSelection(const uint256 PrevBlockHash, int index) {
@@ -81,7 +81,7 @@ inline uint256 HashX16RV2(const T1 pbegin, const T1 pend, const uint256 PrevBloc
             lenToHash = (pend - pbegin) * sizeof(pbegin[0]);
         } else {
             toHash = static_cast<const void*>(&hash[i-1]);
-            lenToHash = 64;
+            lenToHash = 64;  // Hashsize
         }
 
         hashSelection = GetHashSelection(PrevBlockHash, i);

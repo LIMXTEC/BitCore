@@ -436,7 +436,8 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/tiger.cpp \
   crypto/sph_tiger.h \
   crypto/x11.h \
-  crypto/x16r.h
+  crypto/x16r.h \
+  crypto/x16rv2.h
 
 
 if USE_ASM
