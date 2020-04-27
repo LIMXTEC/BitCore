@@ -41,8 +41,8 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef SPH_TIGER_H__
-#define SPH_TIGER_H__
+#ifndef BITCORE_CRYPTO_SPH_TIGER_H
+#define BITCORE_CRYPTO_SPH_TIGER_H
 
 #include <stddef.h>
 #include "sph_types.h"
@@ -188,4 +188,4 @@ void sph_tiger2_comp(const sph_u64 msg[8], sph_u64 val[3]);
 
 #endif
 
-#endif
+#endif // BITCORE_CRYPTO_SPH_TIGER_H
