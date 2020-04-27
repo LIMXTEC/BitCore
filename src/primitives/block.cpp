@@ -15,7 +15,7 @@
 #include <crypto/lyra2z.h>
 #include <crypto/nist5.h>
 #include <crypto/x11.h>
-#include <crypto/x16r.h>
+include <crypto/x16rv2.h>
 */
 
 // BTX BEGINN
