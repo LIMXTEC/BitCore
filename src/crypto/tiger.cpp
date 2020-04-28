@@ -34,7 +34,7 @@
 #include <string.h>
 
 #include <crypto/sph_tiger.h>
-#include <crypto/md_helper.c>
+
 
 #if SPH_64
 
@@ -662,7 +662,7 @@ sph_tiger_init(void *cc)
 #define BLEN   64U
 #define PW01   1
 #define PLW1   1
-//#include <crypto/md_helper.c>
+#include <crypto/md_helper.c>
 
 /* see sph_tiger.h */
 void
@@ -685,7 +685,7 @@ sph_tiger_comp(const sph_u64 msg[8], sph_u64 val[3])
 #define HASH   tiger2
 #undef PW01
 #define CLOSE_ONLY   1
-//#include <md_helper.c>
+#include <crypto/md_helper.c>
 
 /* see sph_tiger.h */
 void
