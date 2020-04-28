@@ -83,6 +83,9 @@ EXPECTED_BOOST_INCLUDES=(
     boost/filesystem/path.hpp
     boost/lexical_cast.hpp
     boost/shared_ptr.hpp
+    
+    #Bitcore
+    src/crypto/tiger.cpp
 )
 
 for BOOST_INCLUDE in $(git grep '^#include <boost/' -- "*.cpp" "*.h" | cut -f2 -d: | cut -f2 -d'<' | cut -f1 -d'>' | sort -u); do
