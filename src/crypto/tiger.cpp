@@ -661,7 +661,7 @@ sph_tiger_init(void *cc)
 #define BLEN   64U
 #define PW01   1
 #define PLW1   1
-#include <md_helper.c>
+#include <crypto/md_helper.c>
 
 /* see sph_tiger.h */
 void
