@@ -84,7 +84,7 @@ EXPECTED_BOOST_INCLUDES=(
     boost/lexical_cast.hpp
     boost/shared_ptr.hpp
     
-    #Bitcore
+    # Bitcore
     src/crypto/tiger.cpp
 )
 
@@ -105,7 +105,8 @@ for BOOST_INCLUDE in $(git grep '^#include <boost/' -- "*.cpp" "*.h" | cut -f2 -
 done
 
 for EXPECTED_BOOST_INCLUDE in "${EXPECTED_BOOST_INCLUDES[@]}"; do
-    if ! git grep -q "^#include <${EXPECTED_BOOST_INCLUDE}>" -- "*.cpp" "*.h"; then
+#    if ! git grep -q "^#include <${EXPECTED_BOOST_INCLUDE}>" -- "*.cpp" "*.h"; then
+        if ! git grep -q "^#include <${EXPECTED_BOOST_INCLUDE}>" -- "*.h"; then
         echo "Good job! The Boost dependency \"${EXPECTED_BOOST_INCLUDE}\" is no longer used."
         echo "Please remove it from EXPECTED_BOOST_INCLUDES in $0"
         echo "to make sure this dependency is not accidentally reintroduced."
