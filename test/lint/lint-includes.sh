@@ -110,7 +110,7 @@ for EXPECTED_BOOST_INCLUDE in "${EXPECTED_BOOST_INCLUDES[@]}"; do
         echo "Please remove it from EXPECTED_BOOST_INCLUDES in $0"
         echo "to make sure this dependency is not accidentally reintroduced."
         echo
-        # EXIT_CODE=1
+        EXIT_CODE=0
     fi
 done
 
