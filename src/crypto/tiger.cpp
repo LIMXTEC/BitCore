@@ -33,7 +33,7 @@
 #include <stddef.h>
 #include <string.h>
 
-#include <sph_tiger.h>
+#include <crypto/sph_tiger.h>
 
 #if SPH_64
 
