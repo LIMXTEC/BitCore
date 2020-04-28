@@ -45,7 +45,7 @@
 #define BITCORE_CRYPTO_SPH_TIGER_H
 
 #include <stddef.h>
-#include <sph_types.h>
+#include <crypto/sph_types.h>
 
 #if SPH_64
 
