@@ -210,6 +210,7 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fChe
 
 bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, CAmount& txfee)
 {
+    int AHeight = chainActive.Height();
     // are the actual inputs available?
     if (!inputs.HaveInputs(tx)) {
         return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-missingorspent", false,
@@ -225,17 +226,32 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
         // If prev is coinbase, check that it's matured
         // if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY) {
         // BTX BEGIN
-        if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_BTX_15_COINBASE_MATURITY_STAGE_2)? COINBASE_MATURITY : COINBASE_MATURITY_2 )) {
+        if (AHeight < 590000)
+            {
+            if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY) 
+                {
+                return state.Invalid(false,
+                    REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
+                    strprintf("tried to spend coinbase at depth %d", nSpendHeight - coin.nHeight));
+                }
+            }
+        else
+            {
+                if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_BTX_16_COINBASE_MATURITY_STAGE_3)? COINBASE_MATURITY_2 : COINBASE_MATURITY_3 )) 
+                    {
+                    return state.Invalid(false,
+                        REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
+                        strprintf("tried to spend coinbase at depth %d", nSpendHeight - coin.nHeight));
+                    }
+            }
+        /*
+        if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_BTX_16_COINBASE_MATURITY_STAGE_3)? COINBASE_MATURITY_2 : COINBASE_MATURITY_3 )) {
             return state.Invalid(false,
                 REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
                 strprintf("tried to spend coinbase at depth %d", nSpendHeight - coin.nHeight));
         }
+        */
         // BTX END
-        // Check for negative or overflow input values
-        nValueIn += coin.out.nValue;
-        if (!MoneyRange(coin.out.nValue) || !MoneyRange(nValueIn)) {
-            return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputvalues-outofrange");
-        }
     }
 
     const CAmount value_out = tx.GetValueOut();
