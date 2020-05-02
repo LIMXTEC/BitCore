@@ -92,8 +92,8 @@ EXPECTED_CIRCULAR_DEPENDENCIES=(
     "activemasternode -> masternode -> masternode-payments -> net_processing -> instantx -> activemasternode"
     "activemasternode -> masternode -> masternode-payments -> net_processing -> privatesend-server -> activemasternode"
     # Bitcore
-    "consensus/tx_verify -> spork -> validation -> consensus/tx_verify"
     "net -> privatesend -> txmempool -> spork -> net"
+    "consensus/tx_verify -> validation -> consensus/tx_verify
 )
 
 EXIT_CODE=0
