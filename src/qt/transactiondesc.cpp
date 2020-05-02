@@ -281,7 +281,7 @@ QString TransactionDesc::toHTML(interfaces::Node& node, interfaces::Wallet& wall
         
         //quint32 numBlocksToMaturity = COINBASE_MATURITY +  1;
         // BTX BEGIN
-        quint32 numBlocksToMaturity = (!sporkManager.IsSporkActive(SPORK_BTX_15_COINBASE_MATURITY_STAGE_2)? COINBASE_MATURITY : COINBASE_MATURITY_2 ) +  1;
+        quint32 numBlocksToMaturity = (!sporkManager.IsSporkActive(SPORK_BTX_16_COINBASE_MATURITY_STAGE_3)? COINBASE_MATURITY_2 : COINBASE_MATURITY_3 ) +  1;
         // BTX END
         strHTML += "<br>" + tr("Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to \"not accepted\" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.").arg(QString::number(numBlocksToMaturity)) + "<br>";
     }
