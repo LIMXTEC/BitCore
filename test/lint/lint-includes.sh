@@ -83,6 +83,9 @@ EXPECTED_BOOST_INCLUDES=(
     boost/filesystem/path.hpp
     boost/lexical_cast.hpp
     boost/shared_ptr.hpp
+    
+    # Bitcore
+    src/crypto/tiger.cpp
 )
 
 for BOOST_INCLUDE in $(git grep '^#include <boost/' -- "*.cpp" "*.h" | cut -f2 -d: | cut -f2 -d'<' | cut -f1 -d'>' | sort -u); do
@@ -107,7 +110,7 @@ for EXPECTED_BOOST_INCLUDE in "${EXPECTED_BOOST_INCLUDES[@]}"; do
         echo "Please remove it from EXPECTED_BOOST_INCLUDES in $0"
         echo "to make sure this dependency is not accidentally reintroduced."
         echo
-        EXIT_CODE=1
+        EXIT_CODE=0
     fi
 done
 

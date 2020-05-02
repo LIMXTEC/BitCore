@@ -6,7 +6,7 @@
 #define BITCORE_CONSENSUS_TX_VERIFY_H
 
 #include <amount.h>
-
+#include <validation.h>
 #include <stdint.h>
 #include <vector>
 

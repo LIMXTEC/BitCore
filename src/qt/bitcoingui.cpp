@@ -221,8 +221,8 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     //connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot2()));
     //connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot3()));
     connect(Exchangesite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot4()));
-    //connect(Exchangesite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot5()));
-    //connect(Exchangesite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot6()));
+    connect(Exchangesite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot5()));
+    connect(Exchangesite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot6()));
     connect(Exchangesite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot7()));
     //connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot8()));
     //connect(Exchangesite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot9()));
@@ -473,8 +473,8 @@ void BitcoinGUI::createActions()
     //Exchangesite2 = new QAction(QIcon(":/icons/bitz"), tr("&Bit-Z"), this);
     //Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
     Exchangesite4 = new QAction(QIcon(":/icons/info"), tr("&Crex24"), this);
-    //Exchangesite5 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
-    //Exchangesite6 = new QAction(QIcon(":/icons/info"), tr("&Bitexlive"), this);
+    Exchangesite5 = new QAction(QIcon(":/icons/info"), tr("&Graviex.net"), this);
+    Exchangesite6 = new QAction(QIcon(":/icons/info"), tr("&XT.com"), this);
     Exchangesite7 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
     //Exchangesite8 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
     //Exchangesite9 = new QAction(QIcon(":/icons/info"), tr("&Mylocalcoin"), this);
@@ -593,8 +593,8 @@ void BitcoinGUI::createMenuBar()
         //hyperlinks2->addAction(Exchangesite2);
         //hyperlinks2->addAction(Exchangesite3);
         hyperlinks2->addAction(Exchangesite4);
-        //hyperlinks2->addAction(Exchangesite5);
-        //hyperlinks2->addAction(Exchangesite6);
+        hyperlinks2->addAction(Exchangesite5);
+        hyperlinks2->addAction(Exchangesite6);
         hyperlinks2->addAction(Exchangesite7);
         //hyperlinks2->addAction(Exchangesite8);
         //hyperlinks2->addAction(Exchangesite9);

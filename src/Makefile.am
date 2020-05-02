@@ -433,8 +433,11 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/sph_whirlpool.h \
   crypto/sponge.c \
   crypto/sponge.h \
+  crypto/tiger.cpp \
+  crypto/sph_tiger.h \
   crypto/x11.h \
-  crypto/x16r.h
+  crypto/x16r.h \
+  crypto/x16rv2.h
 
 
 if USE_ASM

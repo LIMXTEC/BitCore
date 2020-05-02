@@ -204,7 +204,7 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:              r = SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT; break;
             case SPORK_BTX_19_MIN_VERSION_COUNT:                   r = SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT; break;
             case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:          r = SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT; break;
-            case SPORK_BTX_21_MAX_VERSION_COUNT:                   r = SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT; break;
+            case SPORK_BTX_16_COINBASE_MATURITY_STAGE_3:                   r = SPORK_BTX_16_COINBASE_MATURITY_STAGE_3_DEFAULT; break;
             case SPORK_22_FACTOR_ENFORCEMENT:                      r = SPORK_22_FACTOR_ENFORCEMENT_DEFAULT; break;
             // FXTC END
             default:
@@ -251,7 +251,7 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:              return SPORK_BTX_18_MIN_PEER_PROTO_VERSION_DEFAULT;
         case SPORK_BTX_19_MIN_VERSION_COUNT:                   return SPORK_BTX_19_MIN_VERSION_COUNT_DEFAULT;
         case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:          return SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT_DEFAULT;
-        case SPORK_BTX_21_MAX_VERSION_COUNT:                   return SPORK_BTX_21_MAX_VERSION_COUNT_DEFAULT;
+        case SPORK_BTX_16_COINBASE_MATURITY_STAGE_3:                   return SPORK_BTX_16_COINBASE_MATURITY_STAGE_3_DEFAULT;
         case SPORK_22_FACTOR_ENFORCEMENT:                      return SPORK_22_FACTOR_ENFORCEMENT_DEFAULT;
 
         default:
@@ -290,7 +290,7 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_BTX_18_MIN_PEER_PROTO_VERSION")       return SPORK_BTX_18_MIN_PEER_PROTO_VERSION;
     if (strName == "SPORK_BTX_19_MIN_VERSION_COUNT")            return SPORK_BTX_19_MIN_VERSION_COUNT;
     if (strName == "SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT")   return SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT;
-    if (strName == "SPORK_BTX_21_MAX_VERSION_COUNT")            return SPORK_BTX_21_MAX_VERSION_COUNT;
+    if (strName == "SPORK_BTX_16_COINBASE_MATURITY_STAGE_3")            return SPORK_BTX_16_COINBASE_MATURITY_STAGE_3;
     if (strName == "SPORK_22_FACTOR_ENFORCEMENT")               return SPORK_22_FACTOR_ENFORCEMENT;
 
     LogPrint(BCLog::SPORK, "CSporkManager::GetSporkIDByName -- Unknown Spork name '%s'\n", strName);
@@ -327,7 +327,7 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_BTX_18_MIN_PEER_PROTO_VERSION:         return "SPORK_BTX_18_MIN_PEER_PROTO_VERSION";
         case SPORK_BTX_19_MIN_VERSION_COUNT:              return "SPORK_BTX_19_MIN_VERSION_COUNT";
         case SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT:     return "SPORK_BTX_20_MIN_FOR_WORK_VERSION_COUNT";
-        case SPORK_BTX_21_MAX_VERSION_COUNT:              return "SPORK_BTX_21_MAX_VERSION_COUNT";
+        case SPORK_BTX_16_COINBASE_MATURITY_STAGE_3:              return "SPORK_BTX_16_COINBASE_MATURITY_STAGE_3";
         case SPORK_22_FACTOR_ENFORCEMENT:                 return "SPORK_22_FACTOR_ENFORCEMENT";
 
         default:
