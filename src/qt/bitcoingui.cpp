@@ -473,7 +473,7 @@ void BitcoinGUI::createActions()
     //Exchangesite2 = new QAction(QIcon(":/icons/bitz"), tr("&Bit-Z"), this);
     //Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
     Exchangesite4 = new QAction(QIcon(":/icons/info"), tr("&Crex24"), this);
-    Exchangesite5 = new QAction(QIcon(":/:/icons/info"), tr("&Graviex.net"), this);
+    Exchangesite5 = new QAction(QIcon(":/icons/info"), tr("&Graviex.net"), this);
     Exchangesite6 = new QAction(QIcon(":/icons/info"), tr("&XT.com"), this);
     Exchangesite7 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
     //Exchangesite8 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
