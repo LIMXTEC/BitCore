@@ -5,8 +5,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCORE_CRYPTO_X16RV2_H
-#define BITCORE_CRYPTO_X16RV2_H
+#ifndef BITCORE_CRYPTO_MEGA_BTX_H
+#define BITCORE_CRYPTO_MEGA_BTX_H
 
 #include <uint256.h>
 
@@ -185,4 +185,4 @@ inline uint256 HashX16RV2(const T1 pbegin, const T1 pend, const uint256 PrevBloc
     return hash[15].trim256();
 }
 
-#endif // BITCORE_CRYPTO_X16RV2_H
+#endif // BITCORE_CRYPTO_MEGA_BTX_H
