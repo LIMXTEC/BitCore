@@ -217,12 +217,15 @@ public:
                 { 215000, uint256S("0x18accc496518e6f3008eeaab7e04123939d66eb7f8a02f2fcb3d69093c1df38c")},
                 { 356548, uint256S("0xf62b6c5645997d078d9cb130cfe96d64ec2c047bbceca3ae8ffc373eef80b866")},
                 { 550000, uint256S("0xa901848fe9d22814dbb3e0f62892d3bd7a1e70f6a48a459e68ebaf24ea5d5867")},
+                { 590000, uint256S("0x81dc076e3b07fbc50a691ddbbe0b53ece5fe95562e54b289c589cd333f7a282a")},
             }
         };
 
+        // BTX for faster loading
+        consensus.nlastValidPowHashHeight = 590000;
         chainTxData = ChainTxData{
             // BTX: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
-            1552581801, // * UNIX timestamp of last known number of transactions
+            1588381219, // * UNIX timestamp of last known number of transactions
             1736197,          // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0           // * estimated number of transactions per second after that timestamp
