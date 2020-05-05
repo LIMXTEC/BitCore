@@ -367,7 +367,8 @@ public:
             }
         };
 
-
+        consensus.nlastValidPowHashHeight = 0;
+        
         chainTxData = ChainTxData{
             // BTX: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
             1490495580, // * UNIX timestamp of last known number of transactions
@@ -483,7 +484,8 @@ public:
             }
         };
 
-
+        consensus.nlastValidPowHashHeight = 0;
+        
         chainTxData = ChainTxData{
             0,
             0,

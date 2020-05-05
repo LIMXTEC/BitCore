@@ -19,6 +19,7 @@ static const int64_t MAX_BLOCK_SIGOPS_COST = 500000; // BTX: 80000
 static const int COINBASE_MATURITY = 100;
 static const int COINBASE_MATURITY_2 = 576;
 static const int COINBASE_MATURITY_3 = 4032;
+static const unsigned int HASH_FORK_TIME_1 = 1687409200;
 
 static const int WITNESS_SCALE_FACTOR = 4;
 
