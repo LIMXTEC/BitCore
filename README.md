@@ -17,6 +17,7 @@ BitCore BTX preserves and implements Bitcoin features such as SegWit, which enab
 - Unique wallet addresses (prefixes of 2 and S and btx (BIP 173 bench32)
 - Command Fork System
 - Masternode System Dash Core
+- 2,100 BTX for one Masternode
 - 220 Byte Datacarriersize (OP_RETURN)
 - Hashalgorythm Timetravel10
 - Bitcore Diffshield

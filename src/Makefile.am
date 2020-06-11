@@ -392,6 +392,7 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/cubehash.c \
   crypto/echo.c \
   crypto/groestl.c \
+  crypto/gost_streebog.h \
   crypto/hashblock.h \
   crypto/jh.c \
   crypto/keccak.c \
@@ -426,6 +427,8 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/sph_shabal.c \
   crypto/sph_shabal.h \
   crypto/sph_shavite.h \
+  crypto/sph_haval.h \
+  crypto/haval.c \
   crypto/sph_simd.h \
   crypto/sph_skein.h \
   crypto/sph_types.h \
@@ -433,6 +436,7 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/sph_whirlpool.h \
   crypto/sponge.c \
   crypto/sponge.h \
+  crypto/gost_streebog.c \
   crypto/mega-btx.h
 
 
