@@ -155,13 +155,13 @@ extern "C"{
  */
 typedef struct {
 #ifndef DOXYGEN_IGNORE
-	unsigned char buf[128];    /* first field, for alignment */
-	sph_u32 s0, s1, s2, s3, s4, s5, s6, s7;
-	unsigned olen, passes;
+    unsigned char buf[128];    /* first field, for alignment */
+    sph_u32 s0, s1, s2, s3, s4, s5, s6, s7;
+    unsigned olen, passes;
 #if SPH_64
-	sph_u64 count;
+    sph_u64 count;
 #else
-	sph_u32 count_high, count_low;
+    sph_u32 count_high, count_low;
 #endif
 #endif
 } sph_haval_context;
@@ -285,7 +285,7 @@ void sph_haval128_3_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval128_3_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-128/4.
@@ -331,7 +331,7 @@ void sph_haval128_4_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval128_4_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-128/5.
@@ -377,7 +377,7 @@ void sph_haval128_5_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval128_5_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-160/3.
@@ -423,7 +423,7 @@ void sph_haval160_3_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval160_3_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-160/4.
@@ -469,7 +469,7 @@ void sph_haval160_4_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval160_3_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-160/5.
@@ -515,7 +515,7 @@ void sph_haval160_5_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval160_5_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-192/3.
@@ -561,7 +561,7 @@ void sph_haval192_3_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval192_3_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-192/4.
@@ -607,7 +607,7 @@ void sph_haval192_4_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval192_4_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-192/5.
@@ -653,7 +653,7 @@ void sph_haval192_5_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval192_5_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-224/3.
@@ -699,7 +699,7 @@ void sph_haval224_3_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval224_3_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-224/4.
@@ -745,7 +745,7 @@ void sph_haval224_4_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval224_4_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-224/5.
@@ -791,7 +791,7 @@ void sph_haval224_5_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval224_5_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-256/3.
@@ -837,7 +837,7 @@ void sph_haval256_3_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval256_3_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-256/4.
@@ -883,7 +883,7 @@ void sph_haval256_4_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval256_4_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize the context for HAVAL-256/5.
@@ -929,7 +929,7 @@ void sph_haval256_5_close(void *cc, void *dst);
  * @param dst   the output buffer
  */
 void sph_haval256_5_addbits_and_close(void *cc,
-	unsigned ub, unsigned n, void *dst);
+    unsigned ub, unsigned n, void *dst);
 
 /**
  * Apply the HAVAL compression function on the provided data. The

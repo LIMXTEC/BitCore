@@ -70,9 +70,9 @@ extern "C"{
 
 typedef struct {
 #ifndef DOXYGEN_IGNORE
-	unsigned char buf[32];    /* first field, for alignment */
-	size_t ptr;
-	sph_u32 V[3][8];
+    unsigned char buf[32];    /* first field, for alignment */
+    size_t ptr;
+    sph_u32 V[3][8];
 #endif
 } sph_gost256_context;
 
@@ -81,9 +81,9 @@ typedef struct {
  */
 typedef struct {
 #ifndef DOXYGEN_IGNORE
-	unsigned char buf[64];    /* first field, for alignment */
-	size_t ptr;
-	sph_u32 V[5][8];
+    unsigned char buf[64];    /* first field, for alignment */
+    size_t ptr;
+    sph_u32 V[5][8];
 #endif
 } sph_gost512_context;
 
@@ -131,7 +131,7 @@ void sph_gost256_close(void *cc, void *dst);
  * @param dst   the destination buffer
  */
 void sph_gost256_addbits_and_close(
-	void *cc, unsigned ub, unsigned n, void *dst);
+    void *cc, unsigned ub, unsigned n, void *dst);
 
 /**
  * Initialize a Gost-512 context. This process performs no memory allocation.
@@ -176,7 +176,7 @@ void sph_gost512_close(void *cc, void *dst);
  * @param dst   the destination buffer
  */
 void sph_gost512_addbits_and_close(
-	void *cc, unsigned ub, unsigned n, void *dst);
+    void *cc, unsigned ub, unsigned n, void *dst);
 
 #ifdef __cplusplus
 }

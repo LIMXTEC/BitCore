@@ -67,13 +67,12 @@ inline uint256 Mega_Btx(const T1 pbegin, const T1 pend,uint32_t timestamp)
     sph_gost512_context      ctx_gost;
     sph_haval256_5_context    ctx_haval;
     //sph_tiger_context         ctx_tiger;
-//	static std::chrono::duration<double>[16];
+    //static std::chrono::duration<double>[16];
     static unsigned char pblank[1];
     arith_uint512 hash[23];
     uint32_t permutation_1[HASH_FUNC_COUNT_1];
     uint32_t permutation_2[HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1];
     uint32_t permutation_3[HASH_FUNC_COUNT_3 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1];
-    
             //Init1
             for (uint32_t i = 1; i < HASH_FUNC_COUNT_1; i++) {
                 permutation_1[i] = i;
