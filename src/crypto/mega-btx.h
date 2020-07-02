@@ -10,6 +10,7 @@
 
 #include <uint256.h>
 #include <algorithm>    // std::next_permutation
+#include <arith_uint256.h>
 
 #include <crypto/sph_blake.h>
 #include <crypto/sph_bmw.h>
