@@ -187,7 +187,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     }
 
     // Bitcore Miningalgo switch
-	// please check also block.cpp:L62
+    // please check also block.cpp:L62
     // We have a timerange from 24 hours  to find a new block
     if(pblock->GetBlockTime() >= HASH_FORK_TIME_1 && pindexLast->GetBlockTime() <= HASH_FORK_TIME_1 + 86400)    
     {
