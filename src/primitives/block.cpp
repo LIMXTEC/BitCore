@@ -15,8 +15,9 @@
 #include <crypto/lyra2z.h>
 #include <crypto/nist5.h>
 #include <crypto/x11.h>
-#include <crypto/mega-btx.h>
 */
+#include <crypto/mega-btx.h>
+
 
 // BTX BEGINN
 #include <crypto/hashblock.h> // BitCore TimeTravel
