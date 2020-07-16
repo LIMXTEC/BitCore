@@ -112,9 +112,10 @@ struct Params {
     int64_t nPowTargetTimespan;
     int64_t nPowTargetTimespanV2; // BTX
     int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
-	int64_t DifficultyAdjustmentIntervalV2() const { return nPowTargetTimespanV2 / nPowTargetSpacing; }
+    int64_t DifficultyAdjustmentIntervalV2() const { return nPowTargetTimespanV2 / nPowTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
+    int nlastValidPowHashHeight; // BTX for faster loading
 };
 } // namespace Consensus
 

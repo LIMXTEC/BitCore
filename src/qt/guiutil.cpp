@@ -434,7 +434,7 @@ void hyperlinks2_slot4(){QString link1 = "https://crex24.com/es/exchange/BTX-BTC
 void hyperlinks2_slot5(){QString link1 = "https://graviex.net/markets/btxbtc"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot6(){QString link1 = "https://www.xt.com/trade/btx_btc"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot7(){QString link1 = "https://hitbtc.com/exchange/BTX-to-BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
-void hyperlinks2_slot8(){QString link1 = "https://tradesatoshi.com/Exchange?market=BTX_BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot8(){QString link1 = "https://www.hotbit.io/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot9(){QString link1 = "https://mylocalcoin.com/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot10(){QString link1 = "https://novaexchange.com/market/BTC_BTX/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 

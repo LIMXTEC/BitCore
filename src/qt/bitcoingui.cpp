@@ -224,7 +224,7 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     connect(Exchangesite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot5()));
     connect(Exchangesite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot6()));
     connect(Exchangesite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot7()));
-    //connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot8()));
+    connect(Exchangesite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot8()));
     //connect(Exchangesite9, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot9()));
     //connect(Exchangesite10, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot10()));
 
@@ -476,7 +476,7 @@ void BitcoinGUI::createActions()
     Exchangesite5 = new QAction(QIcon(":/icons/info"), tr("&Graviex.net"), this);
     Exchangesite6 = new QAction(QIcon(":/icons/info"), tr("&XT.com"), this);
     Exchangesite7 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
-    //Exchangesite8 = new QAction(QIcon(":/icons/tradesat"), tr("&Trade Satoshi"), this);
+    Exchangesite8 = new QAction(QIcon(":/icons/info"), tr("&Hotbit.io"), this);
     //Exchangesite9 = new QAction(QIcon(":/icons/info"), tr("&Mylocalcoin"), this);
     //Exchangesite10 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
     //Exchangesite10 = new QAction(QIcon(":/icons/info"), tr("&Novaexchange"), this);
@@ -596,7 +596,7 @@ void BitcoinGUI::createMenuBar()
         hyperlinks2->addAction(Exchangesite5);
         hyperlinks2->addAction(Exchangesite6);
         hyperlinks2->addAction(Exchangesite7);
-        //hyperlinks2->addAction(Exchangesite8);
+        hyperlinks2->addAction(Exchangesite8);
         //hyperlinks2->addAction(Exchangesite9);
         //hyperlinks2->addAction(Exchangesite10);
     }

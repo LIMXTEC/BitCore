@@ -15,6 +15,7 @@
 #include <chain.h>
 #include <primitives/block.h>
 #include <uint256.h>
+#include <consensus/consensus.h> // For HASH_FORK_TIME_1
 #include <util.h>
 #include <math.h>
 
@@ -184,21 +185,21 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     {
     return DUAL_KGW3(pindexLast, pblock, params);
     }
-/*
-    // Megacoin Miningalgo switch
-	// 1571832146 Wednesday, 23. October 2019 12:02:26
-	// please check also block.cpp:L62
-    if(pblock->GetBlockTime() >= 1571832146 && pindexLast->GetBlockTime() <= 1571832146 + 86400) // We have a timerange from 24 hours  to find a new block
+
+    // Bitcore Miningalgo switch
+    // please check also block.cpp:L62
+    // We have a timerange from 24 hours  to find a new block
+    if(pblock->GetBlockTime() >= HASH_FORK_TIME_1 && pindexLast->GetBlockTime() <= HASH_FORK_TIME_1 + 86400)    
     {
         if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*24) 
             {
-        //consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin	
-        //This should be one hour then is this function possible
-    LogPrintf("Megacoin Hashalgoupdate HashX16R \n");
-    return nProofOfWorkLimit;
+                //consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin	
+                //This should be one hour then is this function possible
+                LogPrintf("Megacoin Hashalgoupdate MEGA BTX!!! \n");
+                return nProofOfWorkLimit;
             }
     }
-*/
+
 
 
     if (pindexLast->nHeight+1 <= fork2)

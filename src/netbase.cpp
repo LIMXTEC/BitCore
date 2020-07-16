@@ -520,11 +520,13 @@ bool ConnectSocketDirectly(const CService &addrConnect, const SOCKET& hSocket, i
                 LogPrintf("getsockopt() for %s failed: %s\n", addrConnect.ToString(), NetworkErrorString(WSAGetLastError()));
                 return false;
             }
+            /*
             if (nRet != 0)
             {
                 LogConnectFailure(manual_connection, "connect() to %s failed after select(): %s", addrConnect.ToString(), NetworkErrorString(nRet));
                 return false;
             }
+            */
         }
 #ifdef WIN32
         else if (WSAGetLastError() != WSAEISCONN)
