@@ -157,7 +157,7 @@ private:
     QAction* Exchangesite5 = nullptr;
     QAction* Exchangesite6 = nullptr;
     QAction* Exchangesite7 = nullptr;
-    //QAction* Exchangesite8 = nullptr;
+    QAction* Exchangesite8 = nullptr;
     //QAction* Exchangesite9 = nullptr;
     //QAction* Exchangesite10 = nullptr;
 
