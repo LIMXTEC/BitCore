@@ -218,11 +218,12 @@ public:
                 { 356548, uint256S("0xf62b6c5645997d078d9cb130cfe96d64ec2c047bbceca3ae8ffc373eef80b866")},
                 { 550000, uint256S("0xa901848fe9d22814dbb3e0f62892d3bd7a1e70f6a48a459e68ebaf24ea5d5867")},
                 { 590000, uint256S("0x81dc076e3b07fbc50a691ddbbe0b53ece5fe95562e54b289c589cd333f7a282a")},
+                { 659006, uint256S("0xdb16bdb35d197193c18ab42259b55f0b91c4c84da94e2a49e681c4eb43d96ddb")},
             }
         };
 
         // BTX for faster loading
-        consensus.nlastValidPowHashHeight = 590000;
+        consensus.nlastValidPowHashHeight = 659006;
         chainTxData = ChainTxData{
             // BTX: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
             1588381219, // * UNIX timestamp of last known number of transactions

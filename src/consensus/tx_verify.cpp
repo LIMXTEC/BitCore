@@ -237,12 +237,33 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
             }
         else
             {
+                /*
                 if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_BTX_16_COINBASE_MATURITY_STAGE_3)? COINBASE_MATURITY_2 : COINBASE_MATURITY_3 )) 
                     {
                     return state.Invalid(false,
                         REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
                         strprintf("tried to spend coinbase at depth %d", nSpendHeight - coin.nHeight));
                     }
+                */
+                if (AHeight < 659003)
+                    {
+                        if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY_2 ) 
+                        {
+                            return state.Invalid(false,
+                            REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
+                            strprintf("tried to spend coinbase at depth %d", nSpendHeight - coin.nHeight)); 
+                        }
+                    }
+                else
+                {
+                    if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY_3 ) 
+                        {
+                            return state.Invalid(false,
+                            REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
+                            strprintf("tried to spend coinbase at depth %d", nSpendHeight - coin.nHeight)); 
+                        }
+                }
+                    
             }
         /*
         if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_BTX_16_COINBASE_MATURITY_STAGE_3)? COINBASE_MATURITY_2 : COINBASE_MATURITY_3 )) {
