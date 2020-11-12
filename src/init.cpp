@@ -437,9 +437,11 @@ void SetupServerArgs()
 #else
     hidden_args.emplace_back("-pid");
 #endif
+/*
     gArgs.AddArg("-prune=<n>", strprintf("Reduce storage requirements by enabling pruning (deleting) of old blocks. This allows the pruneblockchain RPC to be called to delete specific blocks, and enables automatic pruning of old blocks if a target size in MiB is provided. This mode is incompatible with -txindex and -rescan. "
             "Warning: Reverting this setting requires re-downloading the entire blockchain. "
             "(default: 0 = disable pruning blocks, 1 = allow manual pruning via RPC, >=%u = automatically prune block files to stay under the specified target size in MiB)", MIN_DISK_SPACE_FOR_BLOCK_FILES / 1024 / 1024), false, OptionsCategory::OPTIONS);
+            */
     gArgs.AddArg("-reindex", "Rebuild chain state and block index from the blk*.dat files on disk", false, OptionsCategory::OPTIONS);
     gArgs.AddArg("-reindex-chainstate", "Rebuild chain state from the currently indexed blocks", false, OptionsCategory::OPTIONS);
 #ifndef WIN32
@@ -1113,10 +1115,11 @@ bool AppInitParameterInteraction()
 
     // block pruning; get the amount of disk space (in MiB) to allot for block & undo files
     int64_t nPruneArg = gArgs.GetArg("-prune", 0);
-    if (nPruneArg < 0) {
-        return InitError(_("Prune cannot be configured with a negative value."));
+    if (nPruneArg < 0 && nPruneArg >= 0) {
+        return InitError(_("Prunemode isn't possible, because Bitcore is a Masternodecoin."));
     }
     nPruneTarget = (uint64_t) nPruneArg * 1024 * 1024;
+    /*
     if (nPruneArg == 1) {  // manual pruning: -prune=1
         LogPrintf("Block pruning enabled.  Use RPC call pruneblockchain(height) to manually prune block and undo files.\n");
         nPruneTarget = std::numeric_limits<uint64_t>::max();
@@ -1128,7 +1131,7 @@ bool AppInitParameterInteraction()
         LogPrintf("Prune configured to target %uMiB on disk for block and undo files.\n", nPruneTarget / 1024 / 1024);
         fPruneMode = true;
     }
-
+*/
     nConnectTimeout = gArgs.GetArg("-timeout", DEFAULT_CONNECT_TIMEOUT);
     if (nConnectTimeout <= 0)
         nConnectTimeout = DEFAULT_CONNECT_TIMEOUT;
