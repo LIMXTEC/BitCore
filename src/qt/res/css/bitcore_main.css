@@ -21,9 +21,9 @@ background-color:#ffffff;
 background-color:transparent;
 border:0px solid #fff;
 }
-
+/*********************#f4b61a (hell), stop:1 #f49a1a (dunkel)*********/
 QMenuBar {
-background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ff53ba, stop:1 #ff007f);
+background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4b61a, stop:1 #f49a1a);
 }
 
 QMenuBar::item {
@@ -35,13 +35,13 @@ border-radius: 4px;
 }
 
 QMenuBar::item:selected {
-background:#ff53b9;
+background:#ff8ed1;
 }
 QMenuBar::item:pressed{
 background: #ff7ac9;
 }
 QMenu {
-background-color:qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ff007f, stop:1 #ff8ed1);
+background-color:qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #f4b61a, stop:1 #ff8ed1);
 margin: 2px;
 }
 
@@ -52,12 +52,12 @@ color:#fff;
 }
 
 QMenu::item:selected {
-background-color:#ff53b9;
+background-color:##ff8ed1;
 color:#fff;
 }
-
+/*********************#f4b61a (hell), stop:1 #f49a1a (dunkel)*********/
 QToolBar {
-background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ff53ba, stop:1 #ff007f);
+background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4b61a, stop:1 #f49a1a);
 border:0px solid #000;
 padding:0;
 margin:0;
