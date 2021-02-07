@@ -85,6 +85,7 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
                         }
                 }
             }
+            }
 
             // FXTC TODO: add superblocks support
 
