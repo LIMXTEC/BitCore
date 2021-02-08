@@ -77,14 +77,14 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
                 if (IsValidDestination(destination)) {
                     CScript FOUNDER_SCRIPT = GetScriptForDestination(destination);
 
-                    for (auto output : coinbaseTx.vout) {
-                        if (output.scriptPubKey == FOUNDER_SCRIPT) {
+                    for (unsigned int i = 0; i < coinbaseTx.vout.size(); i++) {
+                        if (coinbaseTx.vout[i].scriptPubKey == FOUNDER_SCRIPT) {
                             coinbaseTx.vout[0].nValue -= nFounderReward;
-                            output.nValue = nFounderReward;
+                            coinbaseTx.vout[i].nValue = nFounderReward;
                             break;
                         }
-                    }
                 }
+            }
             }
 
             // FXTC TODO: add superblocks support
@@ -92,10 +92,10 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
             // Update masternode reward to new value
             CScript cMasternodePayee;
             if(mnpayments.GetBlockPayee(pindexPrev->nHeight + 1, cMasternodePayee)) {
-                for (auto output : coinbaseTx.vout) {
-                    if (output.scriptPubKey == cMasternodePayee) {
+                for (unsigned int i = 0; i < coinbaseTx.vout.size(); i++) {
+                    if (coinbaseTx.vout[i].scriptPubKey == cMasternodePayee) {
                         coinbaseTx.vout[0].nValue -= nMasternodePayment;
-                        output.nValue = nMasternodePayment;
+                        coinbaseTx.vout[i].nValue = nMasternodePayment;
                         break;
                     }
                 }
@@ -104,6 +104,10 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
             pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
         }
     }
+
+    // Updating time can change work required on testnet:
+    //if (consensusParams.fPowAllowMinDifficultyBlocks)
+     //   pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, consensusParams);
 
     return nNewTime - nOldTime;
 }
