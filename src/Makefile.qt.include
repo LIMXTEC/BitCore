@@ -333,7 +333,7 @@ RES_ICONS += \
   qt/res/icons/Facebook.png \
   qt/res/icons/InsightAPI.png \
   qt/res/icons/Reddit.png \
-  qt/res/icons/Hitbtc.png 
+  qt/res/icons/Hitbtc.png
 #
 
 BITCOIN_QT_BASE_CPP = \
