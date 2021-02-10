@@ -44,7 +44,7 @@ SplashScreen::SplashScreen(interfaces::Node& node, Qt::WindowFlags f, const Netw
     QString titleText       = tr("BitCore");
     QString versionText     = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
     versionText = versionText.rightJustified(25, '.', true);
-    QString copyrightText   = "Welcome to Odarhom\nBitcore-Qt Wallet\n\nOfficial website\nbitcore.cc";
+    QString copyrightText   = "Welcome to Odarhom\nBitCore-Qt Wallet\n\nOfficial website\nbitcore.cc";
     QString titleAddText    = networkStyle->getTitleAddText();
 
 //QString versionText     = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
