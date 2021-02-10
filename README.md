@@ -1,7 +1,7 @@
 Welcome to BitCore BTX
 =====================================
 
-![GitHub Logo](https://i.imgur.com/X3tduasm.jpg)
+![GitHub Logo](https://i.imgur.com/X3tduas.png)
 
 [ Release Notes ](https://www.reddit.com/r/bitcore_btx/comments/fsbzog/odarhom_release_notes_short_overview_first_draft/) - [ FAQ ](https://www.reddit.com/r/bitcore_btx/wiki/index/odarhom_faq) - [ Website ](https://www.bitcore.cc) - [ BitcoinTalk ](https://bitcointalk.org/index.php?topic=1883902.0)
 
