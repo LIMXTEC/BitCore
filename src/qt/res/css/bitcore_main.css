@@ -35,7 +35,7 @@ border-radius: 4px;
 }
 
 QMenuBar::item:selected {
-background:#ffa20f;
+background:#e5910d;
 }
 QMenuBar::item:pressed{
 background: #ff7ac9;
