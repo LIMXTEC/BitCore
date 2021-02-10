@@ -62,7 +62,6 @@
         <file alias="crex24">res/icons/crex24.png</file>
         <file alias="hotbit">res/icons/hotbit.png</file>
         <file alias="graviex">res/icons/graviex.png</file>
-        <file alias="bitcointalk">res/icons/Bitcointalk.png</file>
         <file alias="bitcorecc">res/icons/BitcoreCC.png</file>
         <file alias="cryptoid">res/icons/cryptoID.png</file>
         <file alias="github">res/icons/GitHub.png</file>

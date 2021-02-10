@@ -472,11 +472,11 @@ void BitcoinGUI::createActions()
     Exchangesite1 = new QAction(QIcon(":/icons/bitcorecc"), tr("&Ecosystem"), this);
     //Exchangesite2 = new QAction(QIcon(":/icons/bitz"), tr("&Bit-Z"), this);
     //Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
-    Exchangesite4 = new QAction(QIcon(":/icons/info"), tr("&Crex24"), this);
-    Exchangesite5 = new QAction(QIcon(":/icons/info"), tr("&Graviex.net"), this);
+    Exchangesite4 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
+    Exchangesite5 = new QAction(QIcon(":/icons/graviex"), tr("&Graviex.net"), this);
     Exchangesite6 = new QAction(QIcon(":/icons/info"), tr("&XT.com"), this);
     Exchangesite7 = new QAction(QIcon(":/icons/hitbtc"), tr("&HitBTC"), this);
-    Exchangesite8 = new QAction(QIcon(":/icons/info"), tr("&Hotbit.io"), this);
+    Exchangesite8 = new QAction(QIcon(":/icons/hotbit"), tr("&Hotbit.io"), this);
     //Exchangesite9 = new QAction(QIcon(":/icons/info"), tr("&Mylocalcoin"), this);
     //Exchangesite10 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&CryptoBridge"), this);
     //Exchangesite10 = new QAction(QIcon(":/icons/info"), tr("&Novaexchange"), this);
