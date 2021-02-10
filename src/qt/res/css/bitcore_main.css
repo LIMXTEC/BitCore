@@ -38,7 +38,7 @@ QMenuBar::item:selected {
 background:#e5910d;
 }
 QMenuBar::item:pressed{
-background: #ff7ac9;
+background: #e5910d;
 }
 QMenu {
 background-color:qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #f4b61a, stop:1 #ffa20f);
@@ -52,7 +52,7 @@ color:#fff;
 }
 
 QMenu::item:selected {
-background-color:#ff8ed1;
+background-color:#e5910d;
 color:#fff;
 }
 
@@ -73,7 +73,7 @@ color:#fff;
 }
 
 QToolBar > QToolButton:checked {
-background: #ff7ac9;
+background: #e5910d;
 font-weight:bold;
 }
 
