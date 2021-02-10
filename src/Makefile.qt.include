@@ -405,10 +405,7 @@ endif
 
 RES_IMAGES = \
   qt/res/images/bitcore_logo_horizontal.png \
-  qt/res/images/bitcore_main_hgB_flower.png \
-  qt/res/images/bitcore_main_hgB_machine.png \
-  qt/res/images/bitcore_main_hgB.png \
-  qt/res/images/bitcore_main_hgB_white.png
+  qt/res/images/bitcore_main_hgB.png
 
 RES_CSS = qt/res/css/bitcore_main.css
 

@@ -79,9 +79,6 @@
     <qresource prefix="/images">
         <file alias="bitcore_main_hgB">res/images/bitcore_main_hgB.png</file>
         <file alias="bitcore_logo_horizontal">res/images/bitcore_logo_horizontal.png</file>
-        <file alias="bitcore_main_hgB_machine">res/images/bitcore_main_hgB_machine.png</file>
-        <file alias="bitcore_main_hgB_white">res/images/bitcore_main_hgB_white.png</file>
-        <file alias="bitcore_main_hgB_flower">res/images/bitcore_main_hgB_flower.png</file>
     </qresource>
     <qresource prefix="/movies">
         <file alias="spinner-000">res/movies/spinner-000.png</file>
