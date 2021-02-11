@@ -422,7 +422,7 @@ void hyperlinks_slot4(){QString link1 = "https://bitcointalk.org/index.php?topic
 void hyperlinks_slot5(){QString link1 = "https://www.reddit.com/r/bitcore_btx/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot6(){QString link1 = "https://www.facebook.com/Bitcore.Coin/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot7(){QString link1 = "https://coinomi.com/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
-void hyperlinks_slot8(){QString link1 = "https://github.com/LIMXTEC/BitCore"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot8(){QString link1 = "https://github.com/bitcore-btx/BitCore/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot9(){QString link1 = "https://explorer.bitcore.cc/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot10(){QString link1 = "https://chainz.cryptoid.info/btx/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 
