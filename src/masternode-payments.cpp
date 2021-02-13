@@ -17,6 +17,10 @@
 #include <boost/lexical_cast.hpp>
 
 /** Object for who's going to get paid on which blocks */
+extern void Misbehaving(NodeId nodeid, int howmuch, const std::string& message="");
+// FXTC END
+
+/** Object for who's going to get paid on which blocks */
 CMasternodePayments mnpayments;
 
 CCriticalSection cs_vecPayees;

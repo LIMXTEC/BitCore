@@ -268,7 +268,7 @@ bool CMasternode::IsInputAssociatedWithPubkey()
 
     CTransactionRef tx;
     uint256 hash;
-    if(GetTransaction(vin.prevout.hash, tx, Params().GetConsensus(), hash, true)) {
+    if(GetTransaction(vin.prevout.hash, tx, Params().GetConsensus(), hash)) {
         // FXTC BEGIN
         //for (auto out : tx->vout)
         //    if(out.nValue == 1000*COIN && out.scriptPubKey == payee) return true;
@@ -386,23 +386,23 @@ bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMast
         return Log("Sync in progress. Must wait until sync is complete to start Masternode");
 
     if (!CMessageSigner::GetKeysFromSecret(strKeyMasternode, keyMasternodeNew, pubKeyMasternodeNew))
-        return Log(strprintf("Invalid masternode key %s", strKeyMasternode));
+        return Log(strprintf("Invalid masternode key %s\n", strKeyMasternode));
 
     // FXTC TODO: always using first wallet with MN
     std::vector<std::shared_ptr<CWallet>> wallets = GetWallets();
     CWallet * const pwallet = (wallets.size() > 0) ? wallets[0].get() : nullptr;
     if (!pwallet->GetMasternodeOutpointAndKeys(outpoint, pubKeyCollateralAddressNew, keyCollateralAddressNew, strTxHash, strOutputIndex))
-        return Log(strprintf("Could not allocate outpoint %s:%s for masternode %s", strTxHash, strOutputIndex, strService));
+        return Log(strprintf("Could not allocate outpoint %s:%s for masternode %s\n", strTxHash, strOutputIndex, strService));
 
     CService service;
     if (!Lookup(strService.c_str(), service, 0, false))
-        return Log(strprintf("Invalid address %s for masternode.", strService));
+        return Log(strprintf("Invalid address %s for masternode.\n", strService));
     int nDefaultPort = Params().GetDefaultPort();
     if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
         if (service.GetPort() != nDefaultPort)
-            return Log(strprintf("Invalid port %u for masternode %s, only %d is supported on mainnet.", service.GetPort(), strService, nDefaultPort));
+            return Log(strprintf("Invalid port %u for masternode %s, only %d is supported on mainnet.\n", service.GetPort(), strService, nDefaultPort));
     } else if (service.GetPort() == nDefaultPort)
-        return Log(strprintf("Invalid port %u for masternode %s, %d is the only supported on mainnet.", service.GetPort(), strService, nDefaultPort));
+        return Log(strprintf("Invalid port %u for masternode %s, %d is the only supported on mainnet.\n", service.GetPort(), strService, nDefaultPort));
 
     return Create(outpoint, service, keyCollateralAddressNew, pubKeyCollateralAddressNew, keyMasternodeNew, pubKeyMasternodeNew, strErrorRet, mnbRet);
 }
@@ -426,16 +426,16 @@ bool CMasternodeBroadcast::Create(const COutPoint& outpoint, const CService& ser
 
     CMasternodePing mnp(outpoint);
     if (!mnp.Sign(keyMasternodeNew, pubKeyMasternodeNew))
-        return Log(strprintf("Failed to sign ping, masternode=%s", outpoint.ToStringShort()));
+        return Log(strprintf("Failed to sign ping, masternode=%s\n", outpoint.ToStringShort()));
 
     mnbRet = CMasternodeBroadcast(service, outpoint, pubKeyCollateralAddressNew, pubKeyMasternodeNew, PROTOCOL_VERSION);
 
     if (!mnbRet.IsValidNetAddr())
-        return Log(strprintf("Invalid IP address, masternode=%s", outpoint.ToStringShort()));
+        return Log(strprintf("Invalid IP address, masternode=%s\n", outpoint.ToStringShort()));
 
     mnbRet.lastPing = mnp;
     if (!mnbRet.Sign(keyCollateralAddressNew))
-        return Log(strprintf("Failed to sign broadcast, masternode=%s", outpoint.ToStringShort()));
+        return Log(strprintf("Failed to sign broadcast, masternode=%s\n", outpoint.ToStringShort()));
 
     return true;
 }
@@ -613,7 +613,7 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
     // should be at least not earlier than block when masternode collateral tx got nMasternodeMinimumConfirmations
     uint256 hashBlock = uint256();
     CTransactionRef tx2;
-    GetTransaction(vin.prevout.hash, tx2, Params().GetConsensus(), hashBlock, true);
+    GetTransaction(vin.prevout.hash, tx2, Params().GetConsensus(), hashBlock);
     {
         LOCK(cs_main);
         BlockMap::iterator mi = mapBlockIndex.find(hashBlock);
@@ -780,7 +780,10 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
             return false;
         }
 
-        if (pmn->IsNewStartRequired()) {
+        // BTX BEGIN
+        //if (pmn->IsNewStartRequired()) {
+        if (pmn->IsExpired()) {
+        // BTX END
             LogPrint(BCLog::MASTERNODE, "CMasternodePing::CheckAndUpdate -- masternode is completely expired, new start is required, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
         }
@@ -789,7 +792,10 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
     {
         LOCK(cs_main);
         BlockMap::iterator mi = mapBlockIndex.find(blockHash);
-        if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - 24) {
+        // BTX BEGIN
+        //if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - 24) {
+        if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - (MASTERNODE_NEW_START_REQUIRED_SECONDS / Params().GetConsensus().nPowTargetSpacing)) {
+        // BTX END
             LogPrintf("CMasternodePing::CheckAndUpdate -- Masternode ping is invalid, block hash is too old: masternode=%s  blockHash=%s\n", vin.prevout.ToStringShort(), blockHash.ToString());
             // nDos = 1;
             return false;
