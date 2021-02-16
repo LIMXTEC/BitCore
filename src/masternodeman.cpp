@@ -18,6 +18,10 @@
 #include <script/standard.h>
 #include <util.h>
 
+// FXTC BEGIN
+//extern void Misbehaving(NodeId nodeid, int howmuch, const std::string& message="");
+// FXTC END
+
 /** Masternode manager */
 CMasternodeMan mnodeman;
 
@@ -802,7 +806,9 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, const std::string& strCommand,
         //    UpdateWatchdogVoteTime(mnp.vin.prevout, mnp.sigTime);
 
         // too late, new MNANNOUNCE is required
-        if(pmn && pmn->IsNewStartRequired()) return;
+        //if(pmn && pmn->IsNewStartRequired()) return;
+        if(pmn && pmn->IsExpired()) return;
+        // FXTC END
 
         int nDos = 0;
         if(mnp.CheckAndUpdate(pmn, false, nDos, connman)) return;
