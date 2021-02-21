@@ -105,13 +105,14 @@ arith_uint256 CMasternode::CalculateScore(const uint256& blockHash)
     return UintToArith256(ss.GetHash());
 }
 
-/*
+
 CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint)
 {
-    return CheckCollateral(outpoint);
+    int nHeight;
+    return CheckCollateral(outpoint, nHeight);
 }
-*/
-CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint)
+
+CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outpoint, int& nHeightRet)
 {
     AssertLockHeld(cs_main);
 
@@ -126,6 +127,7 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
         return COLLATERAL_INVALID_AMOUNT;
     }
 
+    nHeightRet = coin.nHeight;
     return COLLATERAL_OK;
 }
 
@@ -577,7 +579,7 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
         }
 
         int nHeight;
-        CollateralStatus err = CheckCollateral(vin.prevout);
+        CollateralStatus err = CheckCollateral(vin.prevout, nHeight);
         if (err == COLLATERAL_UTXO_NOT_FOUND) {
             LogPrint(BCLog::MASTERNODE, "CMasternodeBroadcast::CheckOutpoint -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
