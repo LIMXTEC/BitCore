@@ -5,7 +5,7 @@ Welcome to BitCore BTX
 
 [ Release Notes ](https://www.reddit.com/r/bitcore_btx/comments/fsbzog/odarhom_release_notes_short_overview_first_draft/) - [ FAQ ](https://www.reddit.com/r/bitcore_btx/wiki/index/odarhom_faq) - [ Website ](https://www.bitcore.cc) - [ BitcoinTalk ](https://bitcointalk.org/index.php?topic=1883902.0)
 
-[![Build Status](https://travis-ci.org/bitcore-btx/BitCore.svg?branch=master)](https://travis-ci.org/bitcore-btx/BitCore)
+[![Build Status](https://travis-ci.com/bitcore-btx/BitCore.svg?branch=master)](https://travis-ci.com/bitcore-btx/BitCore)
 
 What is BitCore?
 ----------------
