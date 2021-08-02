@@ -71,37 +71,35 @@ inline uint256 Mega_Btx(const T1 pbegin, const T1 pend,uint32_t timestamp)
     //static std::chrono::duration<double>[16];
     static unsigned char pblank[1];
     arith_uint512 hash[23];
-    uint32_t permutation_1[HASH_FUNC_COUNT_1];
-    uint32_t permutation_2[HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1];
-    uint32_t permutation_3[HASH_FUNC_COUNT_3 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1];
+    uint32_t permutation_X[HASH_FUNC_COUNT_3 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1];
             //Init1
             for (uint32_t i = 1; i < HASH_FUNC_COUNT_1; i++) {
-                permutation_1[i] = i;
+                permutation_X[i] = i;
             }
 
             //Init2
             for (uint32_t i = HASH_FUNC_COUNT_1; i < HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1; i++) {
-                permutation_2[i] = i;
+                permutation_X[i] = i;
             }
 
             //Init3
             for (uint32_t i = HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2; i < HASH_FUNC_COUNT_3 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1; i++) {
-                permutation_3[i] = i;
+                permutation_X[i] = i;
             }
 
             uint32_t steps_1 = (timestamp - HASH_FUNC_BASE_TIMESTAMP_1) % HASH_FUNC_COUNT_PERMUTATIONS_7;
             for (uint32_t i = 0; i < steps_1; i++) {
-                std::next_permutation(permutation_1, permutation_1 + HASH_FUNC_COUNT_1);
+                std::next_permutation(permutation_X, permutation_X + HASH_FUNC_COUNT_1);
             }
 
             uint32_t steps_2 = (timestamp+ HASH_FUNC_VAR_1 - HASH_FUNC_BASE_TIMESTAMP_1) % HASH_FUNC_COUNT_PERMUTATIONS;
             for (uint32_t i = 0; i < steps_2; i++) {
-                std::next_permutation(permutation_2 + HASH_FUNC_COUNT_1, permutation_2 + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2);
+                std::next_permutation(permutation_X + HASH_FUNC_COUNT_1, permutation_X + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2);
             }
 
             uint32_t steps_3 = (timestamp+ HASH_FUNC_VAR_2 - HASH_FUNC_BASE_TIMESTAMP_1) % HASH_FUNC_COUNT_PERMUTATIONS_7;
             for (uint32_t i = 0; i < steps_3; i++) {
-                std::next_permutation(permutation_3 + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2, permutation_3 + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_3);
+                std::next_permutation(permutation_X + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2, permutation_X + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_3);
             }
 
             int lenToHash = 64;
@@ -116,7 +114,7 @@ inline uint256 Mega_Btx(const T1 pbegin, const T1 pend,uint32_t timestamp)
 
             for (int i = 1; i < HASH_FUNC_COUNT_1; i++) {
             toHash = static_cast<const void*>(&hash[i-1]);;
-                switch (permutation_1[i]) {
+                switch (permutation_X[i]) {
                 case 1:
                     // 3000 + 700
                     sph_echo512_init(&ctx_echo);
@@ -187,7 +185,7 @@ inline uint256 Mega_Btx(const T1 pbegin, const T1 pend,uint32_t timestamp)
             }
             for (int i = HASH_FUNC_COUNT_1; i < HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2; i++) {
             toHash = static_cast<const void*>(&hash[i-1]);;
-                switch (permutation_2[i]) {
+                switch (permutation_X[i]) {
                 case 8:
                     // 2100 +2000
                     sph_whirlpool_init(&ctx_whirlpool);
@@ -266,9 +264,9 @@ inline uint256 Mega_Btx(const T1 pbegin, const T1 pend,uint32_t timestamp)
                     break;
                 }
             }
-            for (int i = HASH_FUNC_COUNT_2; i < HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_3; i++) {
+            for (int i = HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2; i < HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_3; i++) {
                 toHash = static_cast<const void*>(&hash[i-1]);;
-                switch (permutation_3[i]) {
+                switch (permutation_X[i]) {
                 case 16:
                     // 700 + 2000
                     sph_sha512_init(&ctx_sha512);
