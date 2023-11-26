@@ -19,7 +19,7 @@ BitCore BTX preserves and implements Bitcoin features such as SegWit, which enab
 - Masternode System Dash Core
 - 2,100 BTX for one Masternode
 - 220 Byte Datacarriersize (OP_RETURN)
-- Hashalgorithm Timetravel10
+- Hashalgorithm MagaBTX ( a unique solution for Bitcore)
 - Bitcore Diffshield
 - Travis CI support
 
