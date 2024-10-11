@@ -575,7 +575,6 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransactionRef txNew)
 
     int nMaxSignatures = 0;
     std::string strPayeesPossible = "";
-
     CAmount nMasternodePayment = GetMasternodePayment(nBlockHeight, txNew->GetValueOut());
 
     //require at least MNPAYMENTS_SIGNATURES_REQUIRED signatures
@@ -585,16 +584,45 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransactionRef txNew)
             nMaxSignatures = payee.GetVoteCount();
         }
     }
+// BTX Start
+// BTX If we have minimum one sign so we can check here or we skip that. Always to use 6 sign isn't perfect. 2024-10 
+    for (auto& payee : vecPayees) 
+        {
+            if (payee.GetVoteCount() >= MNPAYMENTS_SIGNATURES_REQUIRED/3 && SPORK_BTX_23_MASTERNODE_PAYMENT_LOW_VOTING)
+            {
+                for (auto txout : txNew->vout) 
+                    {
+                        if (payee.GetPayee() == txout.scriptPubKey && nMasternodePayment == txout.nValue) 
+                        {
+                            LogPrint(BCLog::MNPAYMENTS, "CMasternodeBlockPayees::IsTransactionValid Spork -- Found required payment\n");
+                            return true;
+                        }
 
-    // if we don't have at least MNPAYMENTS_SIGNATURES_REQUIRED signatures on a payee, approve whichever is the longest chain
-    if(sporkManager.IsSporkActive(SPORK_BTX_23_MASTERNODE_PAYMENT_LOW_VOTING))
-        {
-            if(nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED/3) return true;
+                CTxDestination address1;
+                ExtractDestination(payee.GetPayee(), address1);
+                std::string address2 = EncodeDestination(address1);
+
+                    if(strPayeesPossible == "") 
+                        {
+                            strPayeesPossible = address2;
+                        } 
+                        else 
+                        {
+                            strPayeesPossible += "," + address2;
+                        }
+
+                    }
+                LogPrintf("CMasternodeBlockPayees::IsTransactionValid -- ERROR: Missing required payment, possible payees: '%s', amount: %f BTX\n", strPayeesPossible, (float)nMasternodePayment/COIN);
+                return false;
+            }
         }
-        else
+            // if we don't have at least MNPAYMENTS_SIGNATURES_REQUIRED signatures on a payee, approve whichever is the longest chain
+    if(nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED)  
         {
-            if(nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED) return true;
-        }
+            LogPrint(BCLog::MNPAYMENTS, "Default: Not enough nMaxSignatures = %s \n", nMaxSignatures);
+            return true;
+        } 
+/// BTX END
 
     for (auto& payee : vecPayees) {
         if (payee.GetVoteCount() >= MNPAYMENTS_SIGNATURES_REQUIRED) {
