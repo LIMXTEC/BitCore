@@ -427,8 +427,8 @@ void hyperlinks_slot10(){QString link1 = "https://chainz.cryptoid.info/btx/"; QD
 
 // BitCore exchanges
 void hyperlinks2_slot1(){QString link1 = "https://bitcore.cc/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
-void hyperlinks2_slot2(){QString link1 = "https://www.bit-z.com/trade/btx_btc"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
-void hyperlinks2_slot3(){QString link1 = "https://www.coinexchange.io/market/BTX/BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot2(){QString link1 = "https://swap.bitcore.cc/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot3(){QString link1 = "https://pancakeswap.finance/swap?outputCurrency=0x000000089fb24237da101020ff8e2afd14624687"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot4(){QString link1 = "https://crex24.com/es/exchange/BTX-BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot5(){QString link1 = "https://graviex.net/markets/btxbtc"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot6(){QString link1 = "https://www.xt.com/trade/btx_btc"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
