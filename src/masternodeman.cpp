@@ -189,7 +189,8 @@ void CMasternodeMan::CheckAndRemove(CConnman& connman)
             CMasternodeBroadcast mnb = CMasternodeBroadcast(it->second);
             uint256 hash = mnb.GetHash();
             // If collateral was spent ...
-            if (it->second.IsOutpointSpent()) {
+            // BTX 2024-10 - To remove the trash nodes, we add a rule here. old without "it->second.IsNewStartRequired()"
+            if (it->second.IsOutpointSpent() || it->second.IsNewStartRequired()) {
                 LogPrint(BCLog::MASTERNODE, "CMasternodeMan::CheckAndRemove -- Removing Masternode: %s  addr=%s  %i now\n", it->second.GetStateString(), it->second.addr.ToString(), size() - 1);
 
                 // erase all of the broadcasts we've seen from this txin, ...
