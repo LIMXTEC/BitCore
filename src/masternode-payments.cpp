@@ -759,7 +759,8 @@ bool CMasternodePaymentVote::IsValid(CNode* pnode, int nValidationHeight, std::s
             LOCK(cs_main);
             strError = strprintf("Masternode is not in the top %d (%d)", MNPAYMENTS_SIGNATURES_TOTAL * vCount, nRank);
             LogPrintf("CMasternodePaymentVote::IsValid -- Error: %s\n", strError);
-            Misbehaving(pnode->GetId(), 20);
+            //BTX invalid is enough 2024-10
+            //Misbehaving(pnode->GetId(), 20);
         }
         // Still invalid however
         return false;
