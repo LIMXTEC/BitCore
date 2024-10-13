@@ -221,7 +221,6 @@ bool AddLocal(const CService& addr, int nScore)
 {
     if (!addr.IsRoutable())
         return false;
-git clone -b dev_7 https://github.com/bitcore-btx/BitCore.git cd BitCore ./autogen.sh ./configure make -j 20 cd src/qt ./bitcore-qt -choosedatadir
     if (!fDiscover && nScore < LOCAL_MANUAL)
         return false;
 
