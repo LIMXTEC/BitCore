@@ -1271,7 +1271,7 @@ void CConnman::ThreadSocketHandler()
             {
                 if (pnode->fDisconnect)
                 {
-                    LogPrintf("ThreadSocketHandler -- removing node: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
+                    LogPrintf(BCLog::NET, "ThreadSocketHandler -- removing node: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
                               pnode->id, pnode->addr.ToString(), pnode->fNetworkNode, pnode->fInbound, pnode->fMasternode);
 
                     // remove from vNodes
