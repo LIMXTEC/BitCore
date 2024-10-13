@@ -697,7 +697,7 @@ void CConnman::SweepBanned()
         {
             CSubNet subNet = (*it).first;
             CBanEntry banEntry = (*it).second;
-            if(now > banEntry.nBanUntil)
+            if(now > bgit clone -b dev_7 https://github.com/bitcore-btx/BitCore.git cd BitCore ./autogen.sh ./configure make -j 20 cd src/qt ./bitcore-qt -choosedatadiranEntry.nBanUntil)
             {
                 setBanned.erase(it++);
                 setBannedIsDirty = true;
@@ -1270,8 +1270,8 @@ void CConnman::ThreadSocketHandler()
             {
                 if (pnode->fDisconnect)
                 {
-                    LogPrintf(BCLog::NET, "ThreadSocketHandler -- removing node: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
-                              pnode->id, pnode->addr.ToString(), pnode->fNetworkNode, pnode->fInbound, pnode->fMasternode);
+                    //LogPrintf("ThreadSocketHandler -- removing node: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
+                    //         pnode->id, pnode->addr.ToString(), pnode->fNetworkNode, pnode->fInbound, pnode->fMasternode);
 
                     // remove from vNodes
                     vNodes.erase(remove(vNodes.begin(), vNodes.end(), pnode), vNodes.end());
