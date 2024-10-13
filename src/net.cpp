@@ -697,7 +697,7 @@ void CConnman::SweepBanned()
         {
             CSubNet subNet = (*it).first;
             CBanEntry banEntry = (*it).second;
-            if(now > bgit clone -b dev_7 https://github.com/bitcore-btx/BitCore.git cd BitCore ./autogen.sh ./configure make -j 20 cd src/qt ./bitcore-qt -choosedatadiranEntry.nBanUntil)
+            if(now > banEntry.nBanUntil)
             {
                 setBanned.erase(it++);
                 setBannedIsDirty = true;
