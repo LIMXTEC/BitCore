@@ -171,7 +171,7 @@ void CMasternodeMan::CheckAndRemove(CConnman& connman)
 {
     if(!masternodeSync.IsMasternodeListSynced()) return;
 
-    LogPrintf("CMasternodeMan::CheckAndRemove\n");
+    LogPrintf(BCLog::MASTERNODE, "CMasternodeMan::CheckAndRemove entry\n");
 
     {
         // Need LOCK2 here to ensure consistent locking order because code below locks cs_main
@@ -343,7 +343,7 @@ void CMasternodeMan::CheckAndRemove(CConnman& connman)
             }
         }
 
-        LogPrintf("CMasternodeMan::CheckAndRemove -- %s\n", ToString());
+        LogPrintf(BCLog::MASTERNODE, "CMasternodeMan::CheckAndRemove -- %s\n", ToString());
     }
 
     if(fMasternodesRemoved) {
