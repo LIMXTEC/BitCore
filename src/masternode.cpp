@@ -794,11 +794,13 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
     {
         LOCK(cs_main);
         BlockMap::iterator mi = mapBlockIndex.find(blockHash);
-        // BTX BEGIN
-        //if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - 24) {
-        if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - (MASTERNODE_NEW_START_REQUIRED_SECONDS / Params().GetConsensus().nPowTargetSpacing)) {
-        // BTX END
-            LogPrintf("CMasternodePing::CheckAndUpdate -- Masternode ping is invalid, block hash is too old: masternode=%s  blockHash=%s\n", vin.prevout.ToStringShort(), blockHash.ToString());
+        // BTX 2024-10
+        //if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - (MASTERNODE_NEW_START_REQUIRED_SECONDS / Params().GetConsensus().nPowTargetSpacing)) {
+        if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - 24) {             
+            //LogPrintf("CMasternodePing::CheckAndUpdate -- Masternode ping is invalid, block hash is too old: masternode=%s  blockHash=%s\n", vin.prevout.ToStringShort(), blockHash.ToString());
+            LogPrint(BCLog::MASTERNODE, "CMasternodePing::CheckAndUpdate -- Masternode ping is invalid, block hash is too old: masternode=%s  blockHash=%s\n", vin.prevout.ToStringShort(), blockHash.ToString());
+            // Do nothing here ( no Masternode update, no mnping relay)
+            // Let this node to be visible but fail to accept mnping
             // nDos = 1;
             return false;
         }
