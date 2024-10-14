@@ -783,7 +783,7 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
         }
 
         // BTX BEGIN
-        //if (pmn->IsNewStartRequired()) {
+        if (pmn->IsNewStartRequired()) {
         if (pmn->IsExpired()) {
         // BTX END
             LogPrint(BCLog::MASTERNODE, "CMasternodePing::CheckAndUpdate -- masternode is completely expired, new start is required, masternode=%s\n", vin.prevout.ToStringShort());
@@ -795,8 +795,8 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
         LOCK(cs_main);
         BlockMap::iterator mi = mapBlockIndex.find(blockHash);
         // BTX 2024-10
-        //if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - (MASTERNODE_NEW_START_REQUIRED_SECONDS / Params().GetConsensus().nPowTargetSpacing)) {
-        if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - 24) {             
+        if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - (MASTERNODE_NEW_START_REQUIRED_SECONDS / Params().GetConsensus().nPowTargetSpacing)) {
+        //if ((*mi).second && (*mi).second->nHeight < chainActive.Height() - 24) {             
             //LogPrintf("CMasternodePing::CheckAndUpdate -- Masternode ping is invalid, block hash is too old: masternode=%s  blockHash=%s\n", vin.prevout.ToStringShort(), blockHash.ToString());
             LogPrint(BCLog::MASTERNODE, "CMasternodePing::CheckAndUpdate -- Masternode ping is invalid, block hash is too old: masternode=%s  blockHash=%s\n", vin.prevout.ToStringShort(), blockHash.ToString());
             // Do nothing here ( no Masternode update, no mnping relay)
