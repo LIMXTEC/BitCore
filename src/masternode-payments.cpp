@@ -586,7 +586,8 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransactionRef txNew)
     }
 // BTX Start
 // BTX If we have minimum one sign so we can check here or we skip that. Always to use 6 sign isn't perfect. 2024-10 
-    for (auto& payee : vecPayees) 
+
+     for (auto& payee : vecPayees) 
         {
             if (payee.GetVoteCount() >= MNPAYMENTS_SIGNATURES_REQUIRED/3 && SPORK_BTX_23_MASTERNODE_PAYMENT_LOW_VOTING)
             {
@@ -617,6 +618,9 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransactionRef txNew)
             }
         }
             // if we don't have at least MNPAYMENTS_SIGNATURES_REQUIRED signatures on a payee, approve whichever is the longest chain
+
+    LogPrintf("nMaxSignatures: %s \n", nMaxSignatures);
+                
     if(nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED)  
         {
             LogPrint(BCLog::MNPAYMENTS, "Default: Not enough nMaxSignatures = %s \n", nMaxSignatures);
