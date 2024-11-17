@@ -784,7 +784,7 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
 
         // BTX BEGIN
         //if (pmn->IsNewStartRequired()) {
-        if (pmn->IsExpired()) || pmn->IsNewStartRequired(){
+        if (pmn->IsExpired() || pmn->IsNewStartRequired()){
         // BTX END
             LogPrint(BCLog::MASTERNODE, "CMasternodePing::CheckAndUpdate -- masternode is completely expired, new start is required, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
