@@ -71,8 +71,10 @@ static fs::detail::utf8_codecvt_facet utf8;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-#include <objc/objc-runtime.h>
 #include <CoreServices/CoreServices.h>
+#include <QProcess>
+
+void ForceActivation();
 #endif
 
 namespace GUIUtil {
@@ -371,10 +373,7 @@ bool isObscured(QWidget *w)
 void bringToFront(QWidget* w)
 {
 #ifdef Q_OS_MAC
-    // Force application activation on macOS. With Qt 5.4 this is required when
-    // an action in the dock menu is triggered.
-    id app = objc_msgSend((id) objc_getClass("NSApplication"), sel_registerName("sharedApplication"));
-    objc_msgSend(app, sel_registerName("activateIgnoringOtherApps:"), YES);
+    ForceActivation();
 #endif
 
     if (w) {
@@ -422,14 +421,14 @@ void hyperlinks_slot4(){QString link1 = "https://bitcointalk.org/index.php?topic
 void hyperlinks_slot5(){QString link1 = "https://www.reddit.com/r/bitcore_btx/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot6(){QString link1 = "https://www.facebook.com/Bitcore.Coin/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot7(){QString link1 = "https://coinomi.com/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
-void hyperlinks_slot8(){QString link1 = "https://github.com/LIMXTEC/BitCore"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot8(){QString link1 = "https://github.com/bitcore-btx/BitCore/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot9(){QString link1 = "https://explorer.bitcore.cc/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot10(){QString link1 = "https://chainz.cryptoid.info/btx/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 
 // BitCore exchanges
 void hyperlinks2_slot1(){QString link1 = "https://bitcore.cc/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
-void hyperlinks2_slot2(){QString link1 = "https://www.bit-z.com/trade/btx_btc"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
-void hyperlinks2_slot3(){QString link1 = "https://www.coinexchange.io/market/BTX/BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot2(){QString link1 = "https://swap.bitcore.cc/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot3(){QString link1 = "https://pancakeswap.finance/swap?outputCurrency=0x000000089fb24237da101020ff8e2afd14624687"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot4(){QString link1 = "https://crex24.com/es/exchange/BTX-BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot5(){QString link1 = "https://graviex.net/markets/btxbtc"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks2_slot6(){QString link1 = "https://www.xt.com/trade/btx_btc"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}

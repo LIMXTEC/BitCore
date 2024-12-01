@@ -17,7 +17,7 @@
 export LC_ALL=C
 scriptversion="v0.1.2"
 release=""
-git="https://github.com/LIMXTEC/BitCore.git"
+git="https://github.com/bitcore-btx/BitCore.git"
 date="$(date +%y-%m-%d-%s)"
 script=$( cd $(dirname ${BASH_SOURCE[0]}) || exit > /dev/null; pwd -P )
 logfile="/tmp/install_${date}_out.log"
@@ -57,7 +57,7 @@ function get_confirmation() {
 
 function current_release () {
 latest_release="$( bash <<EOF
-curl --silent "https://api.github.com/repos/LIMXTEC/BitCore/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'
+curl --silent "https://api.github.com/repos/bitcore-btx/BitCore/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'
 EOF
 )"
 }
@@ -137,7 +137,7 @@ function create_sentinel() {
     apt-get -qqy -o=Dpkg::Use-Pty=0 -o=Acquire::ForceIPv4=true install virtualenv python-virtualenv &>> ${logfile}
     # if code directory does not exists, we create it clone the src
     if [ ! -d ${sent_dir} ]; then
-        { cd ${data_dir} || exit; git clone https://github.com/LIMXTEC/sentinel.git sentinel; cd sentinel || exit; } >> ${logfile}
+        { cd ${data_dir} || exit; git clone https://github.com/bitcore-btx/sentinel.git sentinel; cd sentinel || exit; } >> ${logfile}
     else
         echo "* Updating the existing sentinel GIT repo"
         cd ${sent_dir} ||exit    &>> ${logfile}
@@ -357,7 +357,7 @@ function cleanup_after() {
 
 function print_logo() {
     cd ~/ || exit
-    wget -q https://raw.githubusercontent.com/LIMXTEC/BitCore/0.15/src/qt/res/icons/bitcore_logo_horizontal.png 2>&1
+    wget -q https://raw.githubusercontent.com/bitcore-btx/BitCore/0.15/src/qt/res/icons/bitcore_logo_horizontal.png 2>&1
     convert bitcore_logo_horizontal.png bitcore_logo_horizontal.jpg 2>&1
     rm bitcore_logo_horizontal.png
     mv bitcore_logo_horizontal.jpg /usr/local/bin/bitcore_logo_horizontal.jpg 2>&1
@@ -546,7 +546,7 @@ function create_script() {
 if [[ "$testnet" -eq 1  ]]; then
 (cat > ${data_dir}/${name}.menu.sh) << "EOF"     &> /dev/null
 #!/bin/bash
-latest_release=$(curl --silent "https://api.github.com/repos/LIMXTEC/BitCore/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+latest_release=$(curl --silent "https://api.github.com/repos/bitcore-btx/BitCore/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
 pause(){
   read -p "Press [Enter] key to continue..." fackEnterKey
     }
@@ -641,7 +641,7 @@ EOF
 else
 (cat > ${data_dir}/${name}.menu.sh) << "EOF"     &> /dev/null
 #!/bin/bash
-latest_release=$(curl --silent "https://api.github.com/repos/LIMXTEC/BitCore/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+latest_release=$(curl --silent "https://api.github.com/repos/bitcore-btx/BitCore/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
 pause(){
   read -p "Press [Enter] key to continue..." fackEnterKey
     }

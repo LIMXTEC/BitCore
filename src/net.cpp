@@ -221,7 +221,6 @@ bool AddLocal(const CService& addr, int nScore)
 {
     if (!addr.IsRoutable())
         return false;
-
     if (!fDiscover && nScore < LOCAL_MANUAL)
         return false;
 
@@ -1236,7 +1235,7 @@ void CConnman::AcceptConnection(const ListenSocket& hListenSocket) {
     pnode->fWhitelisted = whitelisted;
     m_msgproc->InitializeNode(pnode);
 
-    LogPrint(BCLog::NET, "connection from %s accepted\n", addr.ToString());
+    // LogPrint("connection from %s accepted\n", addr.ToString());
 
     {
         LOCK(cs_vNodes);
@@ -1271,8 +1270,8 @@ void CConnman::ThreadSocketHandler()
             {
                 if (pnode->fDisconnect)
                 {
-                    LogPrintf("ThreadSocketHandler -- removing node: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
-                              pnode->id, pnode->addr.ToString(), pnode->fNetworkNode, pnode->fInbound, pnode->fMasternode);
+                    //LogPrintf("ThreadSocketHandler -- removing node: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
+                    //         pnode->id, pnode->addr.ToString(), pnode->fNetworkNode, pnode->fInbound, pnode->fMasternode);
 
                     // remove from vNodes
                     vNodes.erase(remove(vNodes.begin(), vNodes.end(), pnode), vNodes.end());

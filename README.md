@@ -1,11 +1,11 @@
 Welcome to BitCore BTX
 =====================================
 
-![GitHub Logo](https://i.imgur.com/jnpy4Me.jpg)
+![GitHub Logo](https://i.imgur.com/X3tduas.png)
 
 [ Release Notes ](https://www.reddit.com/r/bitcore_btx/comments/fsbzog/odarhom_release_notes_short_overview_first_draft/) - [ FAQ ](https://www.reddit.com/r/bitcore_btx/wiki/index/odarhom_faq) - [ Website ](https://www.bitcore.cc) - [ BitcoinTalk ](https://bitcointalk.org/index.php?topic=1883902.0)
 
-[![Build Status](https://travis-ci.org/LIMXTEC/BitCore.svg?branch=0.9.8.x)](https://travis-ci.org/LIMXTEC/BitCore)
+[![Build Status](https://travis-ci.com/bitcore-btx/BitCore.svg?branch=master)](https://travis-ci.com/bitcore-btx/BitCore)
 
 What is BitCore?
 ----------------
@@ -19,7 +19,7 @@ BitCore BTX preserves and implements Bitcoin features such as SegWit, which enab
 - Masternode System Dash Core
 - 2,100 BTX for one Masternode
 - 220 Byte Datacarriersize (OP_RETURN)
-- Hashalgorythm Timetravel10
+- Hashalgorithm MagaBTX ( a unique solution for Bitcore)
 - Bitcore Diffshield
 - Travis CI support
 
@@ -38,7 +38,7 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Releases](https://github.com/LIMXTEC/bitcore/release) are created
+completely stable. [Releases](https://github.com/bitcore-btx/BitCore/release) are created
 regularly to indicate new official, stable release versions of BitCore.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).

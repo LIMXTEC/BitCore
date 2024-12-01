@@ -586,7 +586,7 @@ void SetupServerArgs()
 std::string LicenseInfo()
 {
     // Megacoin
-    const std::string URL_SOURCE_CODE = "<https://github.com/LIMXTEC/BITCORE>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/bitcore-btx/BitCore/>";
     const std::string URL_WEBSITE = "<https://bitcore.cc>";
 
     // FXTC BEGIN

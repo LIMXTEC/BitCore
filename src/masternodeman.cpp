@@ -18,6 +18,10 @@
 #include <script/standard.h>
 #include <util.h>
 
+// FXTC BEGIN
+//extern void Misbehaving(NodeId nodeid, int howmuch, const std::string& message="");
+// FXTC END
+
 /** Masternode manager */
 CMasternodeMan mnodeman;
 
@@ -167,7 +171,7 @@ void CMasternodeMan::CheckAndRemove(CConnman& connman)
 {
     if(!masternodeSync.IsMasternodeListSynced()) return;
 
-    LogPrintf("CMasternodeMan::CheckAndRemove\n");
+    //LogPrintf("CMasternodeMan::CheckAndRemove entry\n");
 
     {
         // Need LOCK2 here to ensure consistent locking order because code below locks cs_main
@@ -185,7 +189,8 @@ void CMasternodeMan::CheckAndRemove(CConnman& connman)
             CMasternodeBroadcast mnb = CMasternodeBroadcast(it->second);
             uint256 hash = mnb.GetHash();
             // If collateral was spent ...
-            if (it->second.IsOutpointSpent()) {
+            // BTX 2024-10 - To remove the trash nodes, we add a rule here. old without "it->second.IsNewStartRequired()"
+            if (it->second.IsOutpointSpent() || it->second.IsNewStartRequired()) {
                 LogPrint(BCLog::MASTERNODE, "CMasternodeMan::CheckAndRemove -- Removing Masternode: %s  addr=%s  %i now\n", it->second.GetStateString(), it->second.addr.ToString(), size() - 1);
 
                 // erase all of the broadcasts we've seen from this txin, ...
@@ -338,7 +343,7 @@ void CMasternodeMan::CheckAndRemove(CConnman& connman)
             }
         }
 
-        LogPrintf("CMasternodeMan::CheckAndRemove -- %s\n", ToString());
+        //LogPrintf("CMasternodeMan::CheckAndRemove -- %s\n", ToString());
     }
 
     if(fMasternodesRemoved) {
@@ -802,7 +807,11 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, const std::string& strCommand,
         //    UpdateWatchdogVoteTime(mnp.vin.prevout, mnp.sigTime);
 
         // too late, new MNANNOUNCE is required
+        // BTX 2024-10
         if(pmn && pmn->IsNewStartRequired()) return;
+        
+        if(pmn && pmn->IsExpired()) return;
+        // FXTC END
 
         int nDos = 0;
         if(mnp.CheckAndUpdate(pmn, false, nDos, connman)) return;
